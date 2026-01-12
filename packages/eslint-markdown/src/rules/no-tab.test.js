@@ -10,8 +10,6 @@
 import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './no-tab.js';
 
-// TODO
-
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
@@ -31,6 +29,30 @@ console.log(\t'Hello World');
     `\`console.log(\t'Hello World')\`
 
 \`console.log(\t'Hello World')\``,
+    {
+      code: `\`\`\`md
+Hello\tWorld
+\`\`\``,
+      options: [
+        {
+          skipCode: ['md'],
+        },
+      ],
+    },
+    {
+      code: `\`\`\`md
+Hello\tWorld
+\`\`\`
+
+\`\`\`txt
+Hello\tWorld
+\`\`\``,
+      options: [
+        {
+          skipCode: ['md', 'txt'],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -97,6 +119,54 @@ console.log(    'Hello World');
           column: 13,
           endLine: 3,
           endColumn: 14,
+        },
+      ],
+    },
+    {
+      code: `\`\`\`md
+Hello\tWorld
+\`\`\`
+
+\`\`\`txt
+Hello\tWorld
+\`\`\`
+
+    code block with\ttab`,
+      output: `\`\`\`md
+Hello    World
+\`\`\`
+
+\`\`\`txt
+Hello    World
+\`\`\`
+
+    code block with    tab`,
+      options: [
+        {
+          skipCode: ['js', 'ts'],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'noTab',
+          line: 2,
+          column: 6,
+          endLine: 2,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noTab',
+          line: 6,
+          column: 6,
+          endLine: 6,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noTab',
+          line: 9,
+          column: 20,
+          endLine: 9,
+          endColumn: 21,
         },
       ],
     },
