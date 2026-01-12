@@ -164,13 +164,13 @@ When specified, specific irregular dash characters are allowed if they match one
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any irregular dash in code blocks.
+`true` allows irregular dashes in all code blocks.
 
 ### `skipInlineCode`
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any irregular dash in inline code.
+`true` allows irregular dashes in all inline code.
 
 ## When Not To Use It
 

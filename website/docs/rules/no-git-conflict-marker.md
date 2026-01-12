@@ -105,4 +105,4 @@ Examples of **correct** code for this rule:
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any Git conflict markers in code blocks.
+`true` allows Git conflict markers in all code blocks.

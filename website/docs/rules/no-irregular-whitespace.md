@@ -192,13 +192,13 @@ When specified, specific irregular whitespaces are allowed if they match one of 
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any irregular whitespace in code blocks.
+`true` allows irregular whitespaces in all code blocks.
 
 ### `skipInlineCode`
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any irregular whitespace in inline code.
+`true` allows irregular whitespaces in all inline code.
 
 ## When Not To Use It
 
