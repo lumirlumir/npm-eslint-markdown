@@ -34,7 +34,7 @@ This section is currently under construction and will be updated soon.
 
 | `markdownlint` | `eslint-markdown` or `@eslint/markdown` | Fully Compatible? |
 | -------------- | --------------------------------------- | ----------------- |
-| [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) | [`md/no-tab`](../rules/no-tab.md) | :warning: Partially |
+| [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) | [`md/no-tab`](../rules/no-tab.md) | :white_check_mark: Fully |
 
 ## Migrating from [`remark-lint`](https://github.com/remarkjs/remark-lint#readme)
 
