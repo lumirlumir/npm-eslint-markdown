@@ -241,13 +241,13 @@ When specified, specific control characters are allowed if they match one of the
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any control characters in code blocks.
+`true` allows control characters in all code blocks.
 
 ### `skipInlineCode`
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any control characters in inline code.
+`true` allows control characters in all inline code.
 
 ## When Not To Use It
 

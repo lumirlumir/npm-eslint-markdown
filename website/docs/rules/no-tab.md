@@ -71,6 +71,26 @@ Examples of **incorrect** code for this rule:
 
 <!-- markdownlint-enable no-hard-tabs -->
 
+#### With `{ skipCode: ['js', 'ts'] }` Option
+
+<!-- markdownlint-disable no-hard-tabs -->
+
+````md eslint-check
+<!-- eslint md/no-tab: ['error', { skipCode: ['js', 'ts'] }] -->
+
+```md
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+```
+
+```txt
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+```
+
+    \u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+````
+
+<!-- markdownlint-enable no-hard-tabs -->
+
 #### With `{ skipInlineCode: false }` Option
 
 <!-- markdownlint-disable no-hard-tabs -->
@@ -119,6 +139,24 @@ Examples of **correct** code for this rule:
 
 <!-- markdownlint-enable no-hard-tabs -->
 
+#### With `{ skipCode: ['md', 'txt'] }` Option
+
+<!-- markdownlint-disable no-hard-tabs -->
+
+````md eslint-check
+<!-- eslint md/no-tab: ['error', { skipCode: ['md', 'txt'] }] -->
+
+```md
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+```
+
+```txt
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+```
+````
+
+<!-- markdownlint-enable no-hard-tabs -->
+
 #### With `{ skipInlineCode: true }` Option
 
 <!-- markdownlint-disable no-hard-tabs -->
@@ -143,15 +181,15 @@ Examples of **correct** code for this rule:
 
 ### `skipCode`
 
-> Type: `boolean` / Default: `true`
+> Type: `boolean | string[]` / Default: `true`
 
-`true` allows any tabs in code blocks.
+`true` allows tabs in all code blocks, while `string[]` allows tabs only in code blocks for the specified languages.
 
 ### `skipInlineCode`
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any tabs in inline code.
+`true` allows tabs in all inline code.
 
 ### `tabWidth`
 
