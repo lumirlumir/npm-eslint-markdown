@@ -101,7 +101,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: "`skipCode: ['txt']` option: code block with language 'md' should be skipped",
+      name: "`skipCode: ['txt']` option: code block with language 'txt' should be skipped",
       code: `\`\`\`txt
 <<<<<<< HEAD
 \`\`\``,
