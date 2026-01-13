@@ -59,6 +59,32 @@ Examples of **incorrect** code for this rule:
   ## Next Section
   ````
 
+#### With `{ skipCode: ['js', 'ts'] }` Option
+
+  ````md eslint-check
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipCode: ['js', 'ts'] }] -->
+
+  # My Document
+
+  ```md
+  <<<<<<< HEAD
+  This is my version of the content.
+  =======
+  This is someone else's version of the content.
+  >>>>>>> branch-name
+  ```
+
+  ```txt
+  <<<<<<< HEAD
+  This is my version of the content.
+  =======
+  This is someone else's version of the content.
+  >>>>>>> branch-name
+  ```
+
+  ## Next Section
+  ````
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
@@ -93,6 +119,32 @@ Examples of **correct** code for this rule:
   ## Next Section
   ````  
 
+#### With `{ skipCode: ['md', 'txt'] }` Option
+
+  ````md eslint-check
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipCode: ['md', 'txt'] }] -->
+
+  # My Document
+
+  ```md
+  <<<<<<< HEAD
+  This is my version of the content.
+  =======
+  This is someone else's version of the content.
+  >>>>>>> branch-name
+  ```
+
+  ```txt
+  <<<<<<< HEAD
+  This is my version of the content.
+  =======
+  This is someone else's version of the content.
+  >>>>>>> branch-name
+  ```
+
+  ## Next Section
+  ````  
+
 ## Options
 
 ```js
@@ -103,6 +155,6 @@ Examples of **correct** code for this rule:
 
 ### `skipCode`
 
-> Type: `boolean` / Default: `true`
+> Type: `boolean | string[]` / Default: `true`
 
-`true` allows Git conflict markers in all code blocks.
+`true` allows Git conflict markers in all code blocks, while `string[]` allows Git conflict markers only in code blocks for the specified languages.
