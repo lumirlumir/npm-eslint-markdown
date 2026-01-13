@@ -10,6 +10,8 @@
 import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './no-irregular-whitespace.js';
 
+// TODO
+
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------

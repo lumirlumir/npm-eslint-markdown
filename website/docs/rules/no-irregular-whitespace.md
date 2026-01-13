@@ -104,6 +104,8 @@ Examples of **incorrect** code for this rule:
     \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
 `````
 
+<!-- TODO -->
+
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
