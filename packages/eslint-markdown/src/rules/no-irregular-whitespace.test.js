@@ -398,7 +398,9 @@ console.log(\u200b'Hello World');
       name: "`skipCode: ['js', 'ts']`",
       code: `\`\`\`md
 Foo\u00a0Bar
-\`\`\``,
+\`\`\`
+
+    code block with\u2000NQSP`,
       errors: [
         {
           messageId: 'noIrregularWhitespace',
@@ -408,6 +410,16 @@ Foo\u00a0Bar
           endColumn: 5,
           data: {
             irregularWhitespace: 'U+00A0',
+          },
+        },
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 21,
+          data: {
+            irregularWhitespace: 'U+2000',
           },
         },
       ],
