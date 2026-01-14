@@ -56,6 +56,28 @@ console.log(\u200b'Hello World');
         },
       ],
     },
+    {
+      name: "`skipCode: ['md']`",
+      code: `\`\`\`md
+\f\v\u0085\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000\u2028\u2029
+\`\`\``,
+      options: [
+        {
+          skipCode: ['md'],
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['txt']`",
+      code: `\`\`\`txt
+\f\v\u0085\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000\u2028\u2029
+\`\`\``,
+      options: [
+        {
+          skipCode: ['txt'],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -369,6 +391,41 @@ console.log(\u200b'Hello World');
       options: [
         {
           skipCode: false,
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['js', 'ts']`",
+      code: `\`\`\`md
+Foo\u00a0Bar
+\`\`\`
+
+    code block with\u2000NQSP`,
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 2,
+          column: 4,
+          endLine: 2,
+          endColumn: 5,
+          data: {
+            irregularWhitespace: 'U+00A0',
+          },
+        },
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 21,
+          data: {
+            irregularWhitespace: 'U+2000',
+          },
+        },
+      ],
+      options: [
+        {
+          skipCode: ['js', 'ts'],
         },
       ],
     },

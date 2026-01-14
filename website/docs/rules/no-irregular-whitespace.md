@@ -104,6 +104,25 @@ Examples of **incorrect** code for this rule:
     \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
 `````
 
+#### With `{ skipCode: ['js', 'ts'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { skipCode: ['js', 'ts'] }] -->
+
+```md
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+```
+
+```txt
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
+```
+
+    \u2003 - Em Space - <EMSP>   <= Here
+    \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
+````
+
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
@@ -163,6 +182,22 @@ Examples of **correct** code for this rule:
     \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
 `````
 
+#### With `{ skipCode: ['md', 'txt'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { skipCode: ['md', 'txt'] }] -->
+
+```md
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+```
+
+```txt
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
+```
+````
+
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
@@ -190,9 +225,9 @@ When specified, specific irregular whitespaces are allowed if they match one of 
 
 ### `skipCode`
 
-> Type: `boolean` / Default: `true`
+> Type: `boolean | string[]` / Default: `true`
 
-`true` allows irregular whitespaces in all code blocks.
+`true` allows irregular whitespaces in all code blocks, while `string[]` allows irregular whitespaces only in code blocks for the specified languages.
 
 ### `skipInlineCode`
 
