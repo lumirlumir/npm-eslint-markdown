@@ -81,6 +81,25 @@ Examples of **incorrect** code for this rule:
     \u2212 - Minus Sign - <MINUS> − <= Here
 `````
 
+#### With `{ skipCode: ['js', 'ts'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipCode: ['js', 'ts'] }] -->
+
+```md
+\u2010 - Hyphen - <HYPH> ‐ <= Here
+\u2011 - Non-Breaking Hyphen - <NBHY> ‑ <= Here
+```
+
+```txt
+\u2012 - Figure Dash - <FIGDASH> ‒ <= Here
+\u2013 - En Dash - <ENDASH> – <= Here
+```
+
+    \u2043 - Hyphen Bullet - <HYPHBUL> ⁃ <= Here
+    \u2212 - Minus Sign - <MINUS> − <= Here
+````
+
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
@@ -135,6 +154,22 @@ Examples of **correct** code for this rule:
     \u2212 - Minus Sign - <MINUS> − <= Here
 `````
 
+#### With `{ skipCode: ['md', 'txt'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipCode: ['md', 'txt'] }] -->
+
+```md
+\u2010 - Hyphen - <HYPH> ‐ <= Here
+\u2011 - Non-Breaking Hyphen - <NBHY> ‑ <= Here
+```
+
+```txt
+\u2012 - Figure Dash - <FIGDASH> ‒ <= Here
+\u2013 - En Dash - <ENDASH> – <= Here
+```
+````
+
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
@@ -162,9 +197,9 @@ When specified, specific irregular dash characters are allowed if they match one
 
 ### `skipCode`
 
-> Type: `boolean` / Default: `true`
+> Type: `boolean | string[]` / Default: `true`
 
-`true` allows irregular dashes in all code blocks.
+`true` allows irregular dashes in all code blocks, while `string[]` allows irregular dashes only in code blocks for the specified languages.
 
 ### `skipInlineCode`
 
