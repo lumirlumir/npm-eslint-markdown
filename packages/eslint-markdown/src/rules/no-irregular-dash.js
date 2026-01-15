@@ -104,11 +104,11 @@ export default {
         if (
           Array.isArray(skipCode) ? node.lang && skipCode.includes(node.lang) : skipCode
         )
-          skipRanges.push(sourceCode.getRange(node)); // Store position information of `Code`.
+          skipRanges.push(sourceCode.getRange(node)); // Store range information of `Code`.
       },
 
       inlineCode(node) {
-        if (skipInlineCode) skipRanges.push(sourceCode.getRange(node)); // Store position information of `InlineCode`.
+        if (skipInlineCode) skipRanges.push(sourceCode.getRange(node)); // Store range information of `InlineCode`.
       },
 
       'root:exit'() {
