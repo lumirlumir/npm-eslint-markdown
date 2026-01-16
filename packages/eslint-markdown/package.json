@@ -1,6 +1,6 @@
 {
   "name": "eslint-markdown",
-  "version": "0.1.0-canary.12",
+  "version": "0.3.0",
   "type": "module",
   "description": "Lint your Markdown with ESLint.🛠️",
   "exports": {
@@ -58,13 +58,13 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "npx tsc && node ../../scripts/cp.mjs ../../LICENSE.md LICENSE.md ../../README.md README.md",
+    "build": "node ../../scripts/build-config.mjs && npx tsc && node ../../scripts/cp.mjs ../../LICENSE.md LICENSE.md ../../README.md README.md",
     "test": "npm run test:types && npm run test:unit",
     "test:types": "tsc -p ./tsconfig.test.json",
     "test:unit": "node --test"
   },
   "peerDependencies": {
-    "eslint": "^9.31.0 || ^10.0.0-beta.0"
+    "eslint": "^9.31.0 || ^10.0.0-rc.0"
   },
   "peerDependenciesMeta": {
     "eslint": {

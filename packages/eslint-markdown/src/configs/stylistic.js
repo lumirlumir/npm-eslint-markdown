@@ -42,6 +42,7 @@ export default function stylistic(plugin) {
       'md/consistent-emphasis-style': 'error',
       'md/consistent-strong-style': 'error',
       'md/consistent-thematic-break-style': 'error',
+      'md/no-tab': 'error',
     },
   });
 }

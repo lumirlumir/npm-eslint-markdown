@@ -45,6 +45,26 @@ describe(getFileName(import.meta.url), () => {
     });
   });
 
+  describe('Config rules should use `md/` prefix', () => {
+    it('`all` configuration', () => {
+      for (const allConfigRuleName of Object.keys(md.configs.all.rules)) {
+        strictEqual(allConfigRuleName.startsWith('md/'), true);
+      }
+    });
+
+    it('`recommended` configuration', () => {
+      for (const recommendedConfigRuleName of Object.keys(md.configs.recommended.rules)) {
+        strictEqual(recommendedConfigRuleName.startsWith('md/'), true);
+      }
+    });
+
+    it('`stylistic` configuration', () => {
+      for (const stylisticConfigRuleName of Object.keys(md.configs.stylistic.rules)) {
+        strictEqual(stylisticConfigRuleName.startsWith('md/'), true);
+      }
+    });
+  });
+
   describe('Extends style configuration should work correctly', () => {
     it('`all` configuration', () => {
       const linter = new Linter();

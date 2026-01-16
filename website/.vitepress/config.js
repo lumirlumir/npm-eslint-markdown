@@ -121,7 +121,6 @@ export default defineConfig({
     },
 
     nav: [
-      // TODO: From here
       {
         text: 'Get Started',
         activeMatch: '/docs/(?:get-started|community)',
@@ -287,7 +286,13 @@ export default defineConfig({
 
   transformPageData(pageData) {
     // Process only the files inside `docs/rules/`, excluding `index.md`.
-    if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
+    if (
+      /^docs\/rules\/(?!index).+/.test(pageData.relativePath) &&
+      !/(?:allow-heading|en-capitalization|heading-id|no-bold-paragraph)\.md$/.test(
+        // TODO: Remove this exclusion when the rules are stabilized.
+        pageData.relativePath,
+      )
+    ) {
       const ruleName = parse(pageData.relativePath).name;
       const rule = md.rules[ruleName];
 

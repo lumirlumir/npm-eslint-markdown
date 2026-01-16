@@ -81,6 +81,25 @@ Examples of **incorrect** code for this rule:
     \u2212 - Minus Sign - <MINUS> − <= Here
 `````
 
+#### With `{ skipCode: ['js', 'ts'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipCode: ['js', 'ts'] }] -->
+
+```md
+\u2010 - Hyphen - <HYPH> ‐ <= Here
+\u2011 - Non-Breaking Hyphen - <NBHY> ‑ <= Here
+```
+
+```txt
+\u2012 - Figure Dash - <FIGDASH> ‒ <= Here
+\u2013 - En Dash - <ENDASH> – <= Here
+```
+
+    \u2043 - Hyphen Bullet - <HYPHBUL> ⁃ <= Here
+    \u2212 - Minus Sign - <MINUS> − <= Here
+````
+
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
@@ -100,6 +119,15 @@ Examples of **correct** code for this rule:
 <!-- eslint md/no-irregular-dash: 'error' -->
 
 \u002D - Hyphen Minus - <HYPHMNUS> - <= Here
+```
+
+#### With `{ allow: ['\u2013', '\u2014'] }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { allow: ['\u2013', '\u2014'] }] -->
+
+\u2013 - En Dash - <ENDASH> – <= Here
+\u2014 - Em Dash - <EMDASH> — <= Here
 ```
 
 #### With `{ skipCode: true }` Option
@@ -126,6 +154,22 @@ Examples of **correct** code for this rule:
     \u2212 - Minus Sign - <MINUS> − <= Here
 `````
 
+#### With `{ skipCode: ['md', 'txt'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipCode: ['md', 'txt'] }] -->
+
+```md
+\u2010 - Hyphen - <HYPH> ‐ <= Here
+\u2011 - Non-Breaking Hyphen - <NBHY> ‑ <= Here
+```
+
+```txt
+\u2012 - Figure Dash - <FIGDASH> ‒ <= Here
+\u2013 - En Dash - <ENDASH> – <= Here
+```
+````
+
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
@@ -139,22 +183,29 @@ Examples of **correct** code for this rule:
 
 ```js
 'md/no-irregular-dash': ['error', {
+  allow: [],
   skipCode: true,
   skipInlineCode: true,
 }]
 ```
 
+### `allow`
+
+> Type: `string[]` / Default: `[]`
+
+When specified, specific irregular dash characters are allowed if they match one of the characters in this array. This is useful for ignoring certain irregular dashes that are intentionally used in the document.
+
 ### `skipCode`
 
-> Type: `boolean` / Default: `true`
+> Type: `boolean | string[]` / Default: `true`
 
-`true` allows any irregular dash in code blocks.
+`true` allows irregular dashes in all code blocks, while `string[]` allows irregular dashes only in code blocks for the specified languages.
 
 ### `skipInlineCode`
 
 > Type: `boolean` / Default: `true`
 
-`true` allows any irregular dash in inline code.
+`true` allows irregular dashes in all inline code.
 
 ## When Not To Use It
 

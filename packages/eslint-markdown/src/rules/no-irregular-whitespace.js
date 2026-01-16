@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
+ * @typedef {[{ allow: string[], skipCode: boolean | string[], skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularWhitespace'} MessageIds
  */
 
@@ -47,8 +47,26 @@ export default {
       {
         type: 'object',
         properties: {
+          allow: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            uniqueItems: true,
+          },
           skipCode: {
-            type: 'boolean',
+            oneOf: [
+              {
+                type: 'boolean',
+              },
+              {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+                uniqueItems: true,
+              },
+            ],
           },
           skipInlineCode: {
             type: 'boolean',
@@ -60,6 +78,7 @@ export default {
 
     defaultOptions: [
       {
+        allow: [],
         skipCode: true,
         skipInlineCode: true,
       },
@@ -77,13 +96,16 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ skipCode, skipInlineCode }] = context.options;
+    const [{ allow, skipCode, skipInlineCode }] = context.options;
 
     const skipRanges = new SkipRanges();
 
     return {
       code(node) {
-        if (skipCode) skipRanges.push(sourceCode.getRange(node)); // Store range information of `Code`.
+        if (
+          Array.isArray(skipCode) ? node.lang && skipCode.includes(node.lang) : skipCode
+        )
+          skipRanges.push(sourceCode.getRange(node)); // Store range information of `Code`.
       },
 
       inlineCode(node) {
@@ -95,6 +117,8 @@ export default {
 
         for (const match of matches) {
           const irregularWhitespace = match[0];
+
+          if (allow.includes(irregularWhitespace)) continue;
 
           const startOffset = match.index;
           const endOffset = startOffset + irregularWhitespace.length;

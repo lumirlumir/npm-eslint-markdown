@@ -11,7 +11,7 @@
     "@codecov/vite-plugin": "^1.9.1",
     "@shikijs/transformers": "^3.20.0",
     "@shikijs/vitepress-twoslash": "^3.20.0",
-    "eslint-markdown": "^0.1.0-canary.12",
+    "eslint-markdown": "^0.3.0",
     "twoslash-eslint": "^0.3.4",
     "vitepress": "^2.0.0-alpha.15",
     "vitepress-plugin-group-icons": "^1.6.5"

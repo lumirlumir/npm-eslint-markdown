@@ -7,7 +7,7 @@ description: "Installation instructions for `eslint-markdown` npm package with s
 ## Prerequisites
 
 - Node.js: `^20.19.0 || ^22.13.0 || >=24.0.0`
-- ESLint: `^9.31.0 || ^10.0.0-beta.0` & Flat Config Only
+- ESLint: `^9.31.0 || ^10.0.0-rc.0` & Flat Config Only
 - Module Support: ECMAScript Modules (ESM) Only
 
 ::: tip NOTE

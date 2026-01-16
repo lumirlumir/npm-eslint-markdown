@@ -72,22 +72,44 @@ ruleTester(getFileName(import.meta.url), rule, {
 
     // Options
     {
-      name: '`skipCode` option: code block should be skipped (`>`)',
+      name: '`skipCode: true` option: code block should be skipped (`>`)',
       code: `\`\`\`md
 >>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
 \`\`\``,
     },
     {
-      name: '`skipCode` option: code block should be skipped (`=`)',
+      name: '`skipCode: true` option: code block should be skipped (`=`)',
       code: `\`\`\`md
 =======
 \`\`\``,
     },
     {
-      name: '`skipCode` option: code block should be skipped (`<`)',
+      name: '`skipCode: true` option: code block should be skipped (`<`)',
       code: `\`\`\`md
 <<<<<<< HEAD
 \`\`\``,
+    },
+    {
+      name: "`skipCode: ['md']` option: code block with language 'md' should be skipped",
+      code: `\`\`\`md
+<<<<<<< HEAD
+\`\`\``,
+      options: [
+        {
+          skipCode: ['md'],
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['txt']` option: code block with language 'txt' should be skipped",
+      code: `\`\`\`txt
+<<<<<<< HEAD
+\`\`\``,
+      options: [
+        {
+          skipCode: ['txt'],
+        },
+      ],
     },
   ],
 
@@ -333,6 +355,29 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [
         {
           skipCode: false,
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['js', 'ts']` option: code block with language `md` should not be skipped (`<`)",
+      code: `\`\`\`md
+<<<<<<< HEAD
+\`\`\``,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+      options: [
+        {
+          skipCode: ['js', 'ts'],
         },
       ],
     },

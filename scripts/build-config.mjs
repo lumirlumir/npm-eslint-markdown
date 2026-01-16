@@ -80,13 +80,9 @@ export default function ${configName}(plugin) {
 // Script
 // --------------------------------------------------------------------------------
 
-const allRules = {
-  'markdown/no-unused-definitions': 'error', // TODO: Remove this line once integrated with `@eslint/markdown`.
-};
+const allRules = {};
 const baseRules = {};
-const recommendedRules = {
-  'markdown/no-unused-definitions': 'error', // TODO: Remove this line once integrated with `@eslint/markdown`.
-};
+const recommendedRules = {};
 const stylisticRules = {};
 
 for (const [ruleName, rule] of Object.entries(markdown.rules)) {

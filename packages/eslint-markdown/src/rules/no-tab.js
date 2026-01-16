@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to disallow control character.
+ * @fileoverview Rule to disallow tab characters.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -16,16 +16,15 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ allow: string[], skipCode: boolean | string[], skipInlineCode: boolean }]} RuleOptions
- * @typedef {'noControlCharacter'} MessageIds
+ * @typedef {[{ skipCode: boolean | string[], skipInlineCode: boolean, tabWidth: number }]} RuleOptions
+ * @typedef {'noTab'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
 
-const controlCharacterRegex = // eslint-disable-next-line no-control-regex -- Needed for rule definition.
-  /[\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u000b\u000c\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f\u007f\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008a\u008b\u008c\u008d\u008e\u008f\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009a\u009b\u009c\u009d\u009e\u009f\u202c\u202d\u202e]/gu;
+const tabRegex = /\t/gu;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -37,23 +36,18 @@ export default {
     type: 'problem',
 
     docs: {
-      description: 'Disallow control character',
-      url: URL_RULE_DOCS('no-control-character'),
-      recommended: true,
-      stylistic: false,
+      description: 'Disallow tab characters',
+      url: URL_RULE_DOCS('no-tab'),
+      recommended: false,
+      stylistic: true,
     },
+
+    fixable: 'whitespace',
 
     schema: [
       {
         type: 'object',
         properties: {
-          allow: {
-            type: 'array',
-            items: {
-              type: 'string',
-            },
-            uniqueItems: true,
-          },
           skipCode: {
             oneOf: [
               {
@@ -71,6 +65,10 @@ export default {
           skipInlineCode: {
             type: 'boolean',
           },
+          tabWidth: {
+            type: 'integer',
+            minimum: 1,
+          },
         },
         additionalProperties: false,
       },
@@ -78,14 +76,14 @@ export default {
 
     defaultOptions: [
       {
-        allow: [],
         skipCode: true,
         skipInlineCode: true,
+        tabWidth: 4,
       },
     ],
 
     messages: {
-      noControlCharacter: 'Control character `{{ controlCharacter }}` is not allowed.',
+      noTab: 'Tab character is not allowed. Please use spaces instead.',
     },
 
     language: 'markdown',
@@ -95,7 +93,7 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ allow, skipCode, skipInlineCode }] = context.options;
+    const [{ skipCode, skipInlineCode, tabWidth }] = context.options;
 
     const skipRanges = new SkipRanges();
 
@@ -112,15 +110,13 @@ export default {
       },
 
       'root:exit'() {
-        const matches = sourceCode.text.matchAll(controlCharacterRegex);
+        const matches = sourceCode.text.matchAll(tabRegex);
 
         for (const match of matches) {
-          const controlCharacter = match[0];
-
-          if (allow.includes(controlCharacter)) continue;
+          const tab = match[0];
 
           const startOffset = match.index;
-          const endOffset = startOffset + controlCharacter.length;
+          const endOffset = startOffset + tab.length;
 
           if (skipRanges.includes(startOffset)) continue;
 
@@ -130,11 +126,14 @@ export default {
               end: sourceCode.getLocFromIndex(endOffset),
             },
 
-            data: {
-              controlCharacter: `U+${controlCharacter.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
-            },
+            messageId: 'noTab',
 
-            messageId: 'noControlCharacter',
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [startOffset, endOffset],
+                ' '.repeat(tabWidth),
+              );
+            },
           });
         }
       },

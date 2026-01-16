@@ -16,6 +16,7 @@ import rule from './no-irregular-dash.js';
 
 ruleTester(getFileName(import.meta.url), rule, {
   valid: [
+    // Basic
     {
       name: 'Empty',
       code: '',
@@ -43,6 +44,39 @@ console.log(\u2014'Hello World');
       code: `\`console.log(\u2013'Hello World')\`
 
 \`console.log(\u2014'Hello World')\``,
+    },
+
+    // Options
+    {
+      name: '`allow`',
+      code: `1\u20132\u2014`,
+      options: [
+        {
+          allow: ['\u2013', '\u2014'],
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['md']`",
+      code: `\`\`\`md
+\u2010\u2011\u2012\u2013\u2014\u2015\u2043\u2212\u23af\u2e3a\u2e3b\u30fc\ufe58\ufe63\uff0d
+\`\`\``,
+      options: [
+        {
+          skipCode: ['md'],
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['txt']`",
+      code: `\`\`\`txt
+\u2010\u2011\u2012\u2013\u2014\u2015\u2043\u2212\u23af\u2e3a\u2e3b\u30fc\ufe58\ufe63\uff0d
+\`\`\``,
+      options: [
+        {
+          skipCode: ['txt'],
+        },
+      ],
     },
   ],
 
@@ -225,6 +259,27 @@ console.log(\u2014'Hello World');
 
     // Options
     {
+      name: '`allow`',
+      code: `1\u20132\u20143\u2015`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 7,
+          data: {
+            irregularDash: 'U+2015',
+          },
+        },
+      ],
+      options: [
+        {
+          allow: ['\u2013', '\u2014'],
+        },
+      ],
+    },
+    {
       name: '`skipCode: false`',
       code: `
 \`\`\`js
@@ -245,6 +300,41 @@ console.log(\u2013'Hello World');
       options: [
         {
           skipCode: false,
+        },
+      ],
+    },
+    {
+      name: "`skipCode: ['js', 'ts']`",
+      code: `\`\`\`md
+Foo\u2010Bar
+\`\`\`
+
+    code block with\u2011NBHY`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 2,
+          column: 4,
+          endLine: 2,
+          endColumn: 5,
+          data: {
+            irregularDash: 'U+2010',
+          },
+        },
+        {
+          messageId: 'noIrregularDash',
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 21,
+          data: {
+            irregularDash: 'U+2011',
+          },
+        },
+      ],
+      options: [
+        {
+          skipCode: ['js', 'ts'],
         },
       ],
     },
