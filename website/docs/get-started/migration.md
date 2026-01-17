@@ -1,6 +1,12 @@
 # Migration Guide
 
-This chapter provides guidance for migrating to [`@eslint/markdown`](https://github.com/eslint/markdown) and [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown) from other Markdown linting tools like [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`remark-lint`](https://github.com/remarkjs/remark-lint#readme), and [`textlint`](https://github.com/textlint/textlint#readme).
+This chapter provides guidance for migrating to [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown) and [`@eslint/markdown`](https://github.com/eslint/markdown) from other Markdown linting tools like [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`remark-lint`](https://github.com/remarkjs/remark-lint#readme), and [`textlint`](https://github.com/textlint/textlint#readme).
+
+| Emoji              | Compatibility        |
+| :----------------: | :------------------: |
+| :white_check_mark: | Fully Compatible     |
+| :warning:          | Partially Compatible |
+| :x:                | Not Compatible       |
 
 ---
 
@@ -32,9 +38,10 @@ This section is currently under construction and will be updated soon.
 
 :::
 
-| `markdownlint` | `eslint-markdown` or `@eslint/markdown` | Fully Compatible? |
-| -------------- | --------------------------------------- | ----------------- |
-| [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) | [`md/no-tab`](../rules/no-tab.md) | :white_check_mark: Fully |
+| `markdownlint` | `eslint-markdown` or `@eslint/markdown` |
+| -------------- | --------------------------------------- |
+| [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
+| [`MD049` - Emphasis style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md049.md#md049---emphasis-style) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
 
 ## Migrating from [`remark-lint`](https://github.com/remarkjs/remark-lint#readme)
 
@@ -48,9 +55,11 @@ This section is currently under construction and will be updated soon.
 
 :::
 
-| `remark-lint` | `eslint-markdown` or `@eslint/markdown` | Fully Compatible? |
-| ------------- | --------------------------------------- | ----------------- |
-| [`remark-lint-no-tabs`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-tabs#remark-lint-no-tabs) | [`md/no-tab`](../rules/no-tab.md) | :white_check_mark: Fully |
+| `remark-lint` | `eslint-markdown` or `@eslint/markdown` |
+| ------------- | --------------------------------------- |
+| [`remark-lint-emphasis-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-emphasis-marker#remark-lint-emphasis-marker) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
+| [`remark-lint-no-tabs`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-tabs#remark-lint-no-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
+| [`remark-lint-strikethrough-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-strikethrough-marker#remark-lint-strikethrough-marker) :white_check_mark: | [`md/consistent-delete-style`](../rules/consistent-delete-style.md) |
 
 ## Migrating from [`textlint`](https://github.com/textlint/textlint#readme)
 
@@ -64,6 +73,7 @@ This section is currently under construction and will be updated soon.
 
 :::
 
-| `textlint` | `eslint-markdown` or `@eslint/markdown` | Fully Compatible? |
-| ---------- | --------------------------------------- | ----------------- |
-| [`textlint-rule-no-zero-width-spaces`](https://github.com/textlint-rule/textlint-rule-no-zero-width-spaces) | [`md/no-irregular-whitespace`](../rules/no-irregular-whitespace.md) | :white_check_mark: Fully |
+| `textlint` | `eslint-markdown` or `@eslint/markdown` |
+| :--------- | :-------------------------------------- |
+| [`textlint-rule-allowed-uris`](https://github.com/lumirlumir/npm-textlint-rule-allowed-uris#readme) :white_check_mark: | [`md/allow-image-url`](../rules/allow-image-url.md)<br>[`md/allow-link-url`](../rules/allow-link-url.md)<br>[`markdown/no-unused-definitions`](https://github.com/eslint/markdown/blob/main/docs/rules/no-unused-definitions.md#no-unused-definitions) |
+| [`textlint-rule-no-zero-width-spaces`](https://github.com/textlint-rule/textlint-rule-no-zero-width-spaces) :white_check_mark: | [`md/no-irregular-whitespace`](../rules/no-irregular-whitespace.md) |
