@@ -39,7 +39,7 @@ This section is currently under construction and will be updated soon.
 :::
 
 | `markdownlint` | `eslint-markdown` or `@eslint/markdown` |
-| -------------- | --------------------------------------- |
+| :------------- | :-------------------------------------- |
 | [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
 | [`MD035` - Horizontal rule style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md035.md#md035---horizontal-rule-style) :white_check_mark: | [`md/consistent-thematic-break-style`](../rules/consistent-thematic-break-style.md) |
 | [`MD049` - Emphasis style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md049.md#md049---emphasis-style) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
@@ -59,7 +59,7 @@ This section is currently under construction and will be updated soon.
 :::
 
 | `remark-lint` | `eslint-markdown` or `@eslint/markdown` |
-| ------------- | --------------------------------------- |
+| :------------ | :-------------------------------------- |
 | [`remark-lint-emphasis-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-emphasis-marker#remark-lint-emphasis-marker) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
 | [`remark-lint-no-tabs`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-tabs#remark-lint-no-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
 | [`remark-lint-no-url-trailing-slash`](https://github.com/vhf/remark-lint-no-url-trailing-slash) :white_check_mark: | [`md/no-url-trailing-slash`](../rules/no-url-trailing-slash.md) |
