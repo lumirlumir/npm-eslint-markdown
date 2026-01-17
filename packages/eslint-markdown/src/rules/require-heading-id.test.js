@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { getFileName, ruleTester } from '../core/tests/index.js';
-import rule from './heading-id.js';
+import rule from './require-heading-id.js';
 
 // --------------------------------------------------------------------------------
 // Test

@@ -33,7 +33,7 @@ export default {
 
     docs: {
       description: 'Enforce the use of heading IDs',
-      url: URL_RULE_DOCS('heading-id'),
+      url: URL_RULE_DOCS('require-heading-id'),
       recommended: false,
       stylistic: false,
     },
@@ -86,16 +86,17 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [mode, { leftDelimiter, rightDelimiter, ignoreDepth }] = context.options;
+
     return {
       heading(node) {
-        const [mode, { leftDelimiter, rightDelimiter, ignoreDepth }] = context.options;
-
         if (ignoreDepth.includes(node.depth)) return;
 
         const regex = new RegExp(
           `${leftDelimiter}#[^${rightDelimiter}]+${rightDelimiter}[ \t]*$`,
         );
-        const match = context.sourceCode.getText(node).match(regex);
+        const match = sourceCode.getText(node).match(regex);
 
         if (mode === 'always' && match === null) {
           context.report({

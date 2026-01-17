@@ -15,51 +15,33 @@ When building websites with internationalization in mind, it's recommended to us
 
 Examples of **incorrect** code for this rule:
 
-#### Default
+#### Default (With `'always'` Option)
 
-::: code-group
+```md eslint-check
+<!-- eslint md/require-heading-id: 'error' -->
 
-```md [incorrect.md] / ⁡/
-# Heading 1 ⁡
+# Heading 1
 
-## Heading 2 ⁡
+## Heading 2
 
-### Heading 3 ⁡
+### Heading 3
 
-#### Heading 4 ⁡
+#### Heading 4
 
-##### Heading 5 ⁡
+##### Heading 5
 
-###### Heading 6 ⁡
+###### Heading 6
 
-# Heading {#} ⁡
+# Heading {#}
 
-# Heading { #id} ⁡
+# Heading { #id}
 ```
 
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'md/heading-id': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
+#### With `'never'` Option
 
-:::
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'never'] -->
 
-### :white_check_mark: Correct
-
-Examples of **correct** code for this rule:
-
-#### Default
-
-::: code-group
-
-```md [correct.md]
 # Heading 1 {#heading-1}
 
 ## Heading 2 {#heading-2}
@@ -73,26 +55,53 @@ Examples of **correct** code for this rule:
 ###### Heading 6 {#heading-6}
 ```
 
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'md/heading-id': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
+### :white_check_mark: Correct
+
+Examples of **correct** code for this rule:
+
+#### Default (With `'always'` Option)
+
+```md eslint-check
+<!-- eslint md/require-heading-id: 'error' -->
+
+# Heading 1 {#heading-1}
+
+## Heading 2 {#heading-2}
+
+### Heading 3 {#heading-3}
+
+#### Heading 4 {#heading-4}
+
+##### Heading 5 {#heading-5}
+
+###### Heading 6 {#heading-6}
 ```
 
-:::
+#### With `'never'` Option
+
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'never'] -->
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+```
 
 ## Options
 
 ```js
-'md/heading-id': [
-  'error',
+'md/require-heading-id': ['error',
+  // First Option
   'always',
+  // Second Option
   {
     leftDelimiter: '{',
     rightDelimiter: '}',
@@ -105,7 +114,7 @@ export default [
 
 #### `'always'` | `'never'`
 
-> Default: `'always'`
+> Type: `'always' | 'never'` / Default: `'always'`
 
 `'always'` enforces the presence of heading IDs. `'never'` disallows heading IDs.
 
@@ -113,7 +122,7 @@ export default [
 
 #### `leftDelimiter`
 
-> Default: `'{'`
+> Type: `string` / Default: `'{'`
 
 ::: warning
 
@@ -125,7 +134,7 @@ The left delimiter to use for heading IDs.
 
 #### `rightDelimiter`
 
-> Default: `'}'`
+> Type: `string` / Default: `'}'`
 
 ::: warning
 
@@ -137,7 +146,7 @@ The right delimiter to use for heading IDs.
 
 #### `ignoreDepth`
 
-> Default: `[]`
+> Type: `Array<1 | 2 | 3 | 4 | 5 | 6>` / Default: `[]`
 
 An array of heading depths to ignore. For example, `[1, 2]` would ignore the first and second level headings.
 
