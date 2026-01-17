@@ -92,4 +92,4 @@ This rule fixes the curly quotes by replacing them with straight quotes.
 
 ## Prior Art
 
-- [textlint-rule-no-curly-quotes](https://github.com/aborazmeh/textlint-rule-no-curly-quotes#readme)
+- [`textlint-rule-no-curly-quotes`](https://github.com/aborazmeh/textlint-rule-no-curly-quotes#readme)
