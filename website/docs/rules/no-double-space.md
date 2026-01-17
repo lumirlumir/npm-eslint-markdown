@@ -91,4 +91,4 @@ This rule fixes the double or multiple consecutive spaces by replacing them with
 
 ## Prior Art
 
-- [`textlint-rule-doubled-spaces`](https://github.com/iwamatsu0430/textlint-rule-doubled-spaces)
+- [`textlint-rule-doubled-spaces`](https://github.com/iwamatsu0430/textlint-rule-doubled-spaces#readme)
