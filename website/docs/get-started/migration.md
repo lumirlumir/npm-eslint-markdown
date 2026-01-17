@@ -41,7 +41,9 @@ This section is currently under construction and will be updated soon.
 | `markdownlint` | `eslint-markdown` or `@eslint/markdown` |
 | -------------- | --------------------------------------- |
 | [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
+| [`MD035` - Horizontal rule style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md035.md#md035---horizontal-rule-style) :white_check_mark: | [`md/consistent-thematic-break-style`](../rules/consistent-thematic-break-style.md) |
 | [`MD049` - Emphasis style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md049.md#md049---emphasis-style) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
+| [`MD050` - Strong style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md050.md#md050---strong-style) :white_check_mark: | [`md/consistent-strong-style`](../rules/consistent-strong-style.md) |
 
 ## Migrating from [`remark-lint`](https://github.com/remarkjs/remark-lint#readme)
 
@@ -59,7 +61,9 @@ This section is currently under construction and will be updated soon.
 | ------------- | --------------------------------------- |
 | [`remark-lint-emphasis-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-emphasis-marker#remark-lint-emphasis-marker) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
 | [`remark-lint-no-tabs`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-tabs#remark-lint-no-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
+| [`remark-lint-rule-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-rule-style#remark-lint-rule-style) :white_check_mark: | [`md/consistent-thematic-break-style`](../rules/consistent-thematic-break-style.md) |
 | [`remark-lint-strikethrough-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-strikethrough-marker#remark-lint-strikethrough-marker) :white_check_mark: | [`md/consistent-delete-style`](../rules/consistent-delete-style.md) |
+| [`remark-lint-strong-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-strong-marker#remark-lint-strong-marker) :white_check_mark: | [`md/consistent-strong-style`](../rules/consistent-strong-style.md) |
 
 ## Migrating from [`textlint`](https://github.com/textlint/textlint#readme)
 
