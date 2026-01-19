@@ -14,6 +14,6 @@
     "eslint-markdown": "^0.3.0",
     "twoslash-eslint": "^0.3.4",
     "vitepress": "^2.0.0-alpha.15",
-    "vitepress-plugin-group-icons": "^1.6.5"
+    "vitepress-plugin-group-icons": "^1.7.1"
   }
 }
