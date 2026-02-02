@@ -9,8 +9,8 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^1.9.1",
-    "@shikijs/transformers": "^3.20.0",
-    "@shikijs/vitepress-twoslash": "^3.20.0",
+    "@shikijs/transformers": "^3.22.0",
+    "@shikijs/vitepress-twoslash": "^3.22.0",
     "eslint-markdown": "^0.3.0",
     "twoslash-eslint": "^0.3.4",
     "vitepress": "^2.0.0-alpha.15",
