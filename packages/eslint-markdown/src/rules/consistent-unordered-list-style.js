@@ -14,9 +14,10 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { List, ListItem, Node } from 'mdast';
+ * @import { ListItem } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ style: 'consistent' | 'sublist' | '*' | '+' | '-' }]} RuleOptions
+ * @typedef {'*' | '+' | '-'} UnorderedListMarker
+ * @typedef {[{ style: 'consistent' | 'sublist' | UnorderedListMarker }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
@@ -77,46 +78,25 @@ export default {
 
     /** @type {string | null} */
     let unorderedListStyle = style === 'consistent' ? null : style;
-
-    /**
-     * Get the depth of unordered list nesting for a list node.
-     * @param {List} listNode The list node to check.
-     * @returns {number} The depth of unordered list nesting (0 for top-level).
-     */
-    function getListDepth(listNode) {
-      let depth = 0;
-      /** @type {Node | undefined} */
-      let current = sourceCode.getParent(listNode);
-
-      while (current) {
-        if (current.type === 'list' && /** @type {List} */ (current).ordered === false) {
-          depth++;
-        }
-        current = sourceCode.getParent(current);
-      }
-
-      return depth;
-    }
+    let unorderedListDepth = -1;
 
     return {
-      // TODO: list[ordered=false] > listItem?
-      listItem(node) {
-        const parentList = /** @type {List} */ (sourceCode.getParent(node));
+      'list[ordered=false]'() {
+        // When entering an unordered list, increase depth.
+        unorderedListDepth++;
+      },
 
-        // Skip ordered lists
-        if (parentList.ordered) {
-          return;
-        }
-
+      'list[ordered=false] > listItem'(/** @type {ListItem} */ node) {
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const currentUnorderedListStyle = sourceCode.text[nodeStartOffset];
+        const currentUnorderedListStyle = /** @type {UnorderedListMarker} */ (
+          sourceCode.text[nodeStartOffset]
+        );
 
         /** @type {string} */
         let expectedMarker;
 
         if (style === 'sublist') {
-          const depth = getListDepth(parentList);
-          expectedMarker = SUBLIST_MARKERS[depth % 3];
+          expectedMarker = SUBLIST_MARKERS[unorderedListDepth % 3];
         } else if (style === 'consistent') {
           if (unorderedListStyle === null) {
             unorderedListStyle = currentUnorderedListStyle;
@@ -147,6 +127,11 @@ export default {
             },
           });
         }
+      },
+
+      'list[ordered=false]:exit'() {
+        // When exiting an unordered list, decrease depth.
+        unorderedListDepth--;
       },
     };
   },
