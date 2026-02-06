@@ -37,6 +37,19 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '+ item 1\n+ item 2\n+ item 3',
     },
     {
+      name: '`consistent` style - nested lists',
+      code: '- item 1\n  - nested 1\n  - nested 2\n- item 2',
+    },
+    {
+      name: '`consistent` style - mixed ordered and unordered lists',
+      code: '- item 1\n- item 2\n\n1. ordered 1\n2. ordered 2',
+    },
+    {
+      name: '`consistent` style - task lists',
+      code: '- [ ] task 1\n- [x] task 2\n- [ ] task 3',
+      language: 'markdown/gfm',
+    },
+    {
       name: '`-` style',
       code: '- item 1\n- item 2\n- item 3',
       options: [{ style: '-' }],
@@ -51,11 +64,21 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '+ item 1\n+ item 2\n+ item 3',
       options: [{ style: '+' }],
     },
+    // { // TODO: Make it pass
+    //   name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all dashes',
+    //   code: '- item 1\n- item 2',
+    //   options: [{ style: 'sublist' }],
+    // },
     {
-      name: '`sublist` style - depth 0 uses asterisk',
+      name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all asterisks',
       code: '* item 1\n* item 2',
       options: [{ style: 'sublist' }],
     },
+    // { // TODO: Make it pass
+    //   name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all plus signs',
+    //   code: '+ item 1\n+ item 2',
+    //   options: [{ style: 'sublist' }],
+    // },
     {
       name: '`sublist` style - nested lists',
       code: '* item 1\n  + nested 1\n    - deeply nested\n* item 2',
@@ -67,20 +90,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ style: 'sublist' }],
     },
     {
-      name: 'Ordered lists are ignored',
+      name: 'Ordered lists should be ignored',
       code: '1. item 1\n2. item 2\n3. item 3',
-    },
-    {
-      name: 'Mixed ordered and unordered - consistent',
-      code: '- item 1\n- item 2\n\n1. ordered 1\n2. ordered 2',
-    },
-    {
-      name: 'Task list with consistent markers',
-      code: '- [ ] task 1\n- [x] task 2\n- [ ] task 3',
-    },
-    {
-      name: 'Nested list with consistent markers',
-      code: '- item 1\n  - nested 1\n  - nested 2\n- item 2',
     },
   ],
 
@@ -128,6 +139,68 @@ ruleTester(getFileName(import.meta.url), rule, {
           endLine: 3,
           endColumn: 2,
           data: { style: '*' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - mixed markers (plus signs first)',
+      code: '+ item 1\n- item 2\n* item 3',
+      output: '+ item 1\n+ item 2\n+ item 3',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - nested list with inconsistent markers',
+      code: '- item 1\n  * nested 1\n  - nested 2\n- item 2',
+      output: '- item 1\n  - nested 1\n  - nested 2\n- item 2',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - task list with inconsistent markers',
+      code: '- [ ] task 1\n* [x] task 2\n+ [ ] task 3',
+      output: '- [ ] task 1\n- [x] task 2\n- [ ] task 3',
+      language: 'markdown/gfm',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2,
+          data: { style: '-' },
         },
       ],
     },
@@ -204,33 +277,9 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - wrong depth 0 marker',
-      code: '- item 1\n- item 2',
-      output: '* item 1\n* item 2',
-      options: [{ style: 'sublist' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 2,
-          data: { style: '*' },
-        },
-        {
-          messageId: 'style',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 2,
-          data: { style: '*' },
-        },
-      ],
-    },
-    {
       name: '`sublist` style - wrong nested markers',
       code: '* item 1\n  * nested 1\n    * deeply nested',
-      output: '* item 1\n  + nested 1\n    - deeply nested',
+      output: '* item 1\n  + nested 1\n    - deeply nested', // TODO: `*` can be transformed to `+` or `-`?
       options: [{ style: 'sublist' }],
       errors: [
         {
@@ -247,44 +296,6 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 5,
           endLine: 3,
           endColumn: 6,
-          data: { style: '-' },
-        },
-      ],
-    },
-    {
-      name: '`consistent` style - nested list with inconsistent markers',
-      code: '- item 1\n  * nested 1\n  - nested 2\n- item 2',
-      output: '- item 1\n  - nested 1\n  - nested 2\n- item 2',
-      errors: [
-        {
-          messageId: 'style',
-          line: 2,
-          column: 3,
-          endLine: 2,
-          endColumn: 4,
-          data: { style: '-' },
-        },
-      ],
-    },
-    {
-      name: 'Task list with inconsistent markers',
-      code: '- [ ] task 1\n* [x] task 2\n+ [ ] task 3',
-      output: '- [ ] task 1\n- [x] task 2\n- [ ] task 3',
-      errors: [
-        {
-          messageId: 'style',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 2,
-          data: { style: '-' },
-        },
-        {
-          messageId: 'style',
-          line: 3,
-          column: 1,
-          endLine: 3,
-          endColumn: 2,
           data: { style: '-' },
         },
       ],
