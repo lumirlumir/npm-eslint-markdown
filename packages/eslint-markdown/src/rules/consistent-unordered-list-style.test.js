@@ -64,21 +64,21 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '+ item 1\n+ item 2\n+ item 3',
       options: [{ style: '+' }],
     },
-    // { // TODO: Make it pass
-    //   name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all dashes',
-    //   code: '- item 1\n- item 2',
-    //   options: [{ style: 'sublist' }],
-    // },
+    {
+      name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all dashes',
+      code: '- item 1\n- item 2',
+      options: [{ style: 'sublist' }],
+    },
     {
       name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all asterisks',
       code: '* item 1\n* item 2',
       options: [{ style: 'sublist' }],
     },
-    // { // TODO: Make it pass
-    //   name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all plus signs',
-    //   code: '+ item 1\n+ item 2',
-    //   options: [{ style: 'sublist' }],
-    // },
+    {
+      name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all plus signs',
+      code: '+ item 1\n+ item 2',
+      options: [{ style: 'sublist' }],
+    },
     {
       name: '`sublist` style - nested lists',
       code: '* item 1\n  + nested 1\n    - deeply nested\n* item 2',
@@ -277,26 +277,86 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - wrong nested markers',
-      code: '* item 1\n  * nested 1\n    * deeply nested',
-      output: '* item 1\n  + nested 1\n    - deeply nested', // TODO: `*` can be transformed to `+` or `-`?
+      name: '`sublist` style - depth cycles after 3',
+      code: '* depth 0\n  + depth 1\n    - depth 2\n      - depth 3 (cycles back)',
+      output: '* depth 0\n  + depth 1\n    - depth 2\n      * depth 3 (cycles back)',
       options: [{ style: 'sublist' }],
       errors: [
         {
           messageId: 'style',
-          line: 2,
-          column: 3,
-          endLine: 2,
-          endColumn: 4,
-          data: { style: '+' },
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 8,
+          data: { style: '*' },
         },
+      ],
+    },
+    {
+      name: '`sublist` style - depth cycles after 3',
+      code: '- depth 0\n  + depth 1\n    * depth 2\n      + depth 3 (cycles back)',
+      output: '- depth 0\n  + depth 1\n    * depth 2\n      - depth 3 (cycles back)',
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 8,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 1',
+      code: `
+* depth 0
+  * depth 1
+    * depth 2`,
+      output: `
+* depth 0
+  - depth 1
+    * depth 2`,
+      options: [{ style: 'sublist' }],
+      errors: [
         {
           messageId: 'style',
           line: 3,
-          column: 5,
+          column: 3,
           endLine: 3,
-          endColumn: 6,
+          endColumn: 4,
           data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 2',
+      code: `
+* depth 0
+  * depth 1
+    - depth 2`,
+      output: `
+* depth 0
+  - depth 1
+    + depth 2`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 4,
+          column: 5,
+          endLine: 4,
+          endColumn: 6,
+          data: { style: '+' },
         },
       ],
     },

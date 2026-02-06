@@ -15,17 +15,31 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { ListItem } from 'mdast';
- * @import { RuleModule } from '../core/types.js';
+ * @import { RuleModule, Nullable } from '../core/types.js';
  * @typedef {'*' | '+' | '-'} UnorderedListMarker
  * @typedef {[{ style: 'consistent' | 'sublist' | UnorderedListMarker }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
-// Constant
+// Helper
 // --------------------------------------------------------------------------------
 
-const SUBLIST_MARKERS = ['*', '+', '-'];
+/**
+ * Get the next unordered list marker in sequence. Inspired by `markdownlint`.
+ * @param {UnorderedListMarker} currentUnorderedListMarker The current unordered list marker.
+ * @returns {UnorderedListMarker} The next unordered list marker.
+ * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md004.mjs#L9
+ */
+function getNextUnorderedListMarker(currentUnorderedListMarker) {
+  if (currentUnorderedListMarker === '-') {
+    return '+';
+  } else if (currentUnorderedListMarker === '+') {
+    return '*';
+  } else {
+    return '-';
+  }
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -76,8 +90,12 @@ export default {
     const { sourceCode } = context;
     const [{ style }] = context.options;
 
-    /** @type {string | null} */
-    let unorderedListStyle = style === 'consistent' ? null : style;
+    /** @type {[Nullable<UnorderedListMarker>, Nullable<UnorderedListMarker>, Nullable<UnorderedListMarker>]} */
+    const unorderedListStyle = [
+      style === 'consistent' || style === 'sublist' ? null : style,
+      null,
+      null,
+    ];
     let unorderedListDepth = -1;
 
     return {
@@ -91,22 +109,24 @@ export default {
         const currentUnorderedListStyle = /** @type {UnorderedListMarker} */ (
           sourceCode.text[nodeStartOffset]
         );
+        const currentUnorderedListDepth =
+          style === 'sublist' ? unorderedListDepth % 3 : 0;
 
-        /** @type {string} */
-        let expectedMarker;
-
-        if (style === 'sublist') {
-          expectedMarker = SUBLIST_MARKERS[unorderedListDepth % 3];
-        } else if (style === 'consistent') {
-          if (unorderedListStyle === null) {
-            unorderedListStyle = currentUnorderedListStyle;
+        if (unorderedListStyle[currentUnorderedListDepth] === null) {
+          // TODO: Simplify this logic.
+          if (
+            unorderedListStyle[(currentUnorderedListDepth + 2) % 3] ===
+            currentUnorderedListStyle
+          ) {
+            unorderedListStyle[currentUnorderedListDepth] = getNextUnorderedListMarker(
+              currentUnorderedListStyle,
+            );
+          } else {
+            unorderedListStyle[currentUnorderedListDepth] = currentUnorderedListStyle;
           }
-          expectedMarker = unorderedListStyle;
-        } else {
-          expectedMarker = style;
         }
 
-        if (expectedMarker !== currentUnorderedListStyle) {
+        if (unorderedListStyle[currentUnorderedListDepth] !== currentUnorderedListStyle) {
           context.report({
             loc: {
               start: sourceCode.getLocFromIndex(nodeStartOffset),
@@ -116,13 +136,14 @@ export default {
             messageId: 'style',
 
             data: {
-              style: expectedMarker,
+              style: unorderedListStyle[currentUnorderedListDepth],
             },
 
             fix(fixer) {
               return fixer.replaceTextRange(
                 [nodeStartOffset, nodeStartOffset + 1],
-                expectedMarker,
+                // @ts-expect-error -- TODO
+                unorderedListStyle[currentUnorderedListDepth],
               );
             },
           });
