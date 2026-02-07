@@ -86,7 +86,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`sublist` style - depth cycles after 3',
-      code: '* depth 0\n  + depth 1\n    - depth 2\n      * depth 3 (cycles back)',
+      code: '* depth 0\n  + depth 1\n    - depth 2\n      * depth 3',
       options: [{ style: 'sublist' }],
     },
     {
