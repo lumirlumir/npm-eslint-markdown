@@ -26,7 +26,8 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * Get the next unordered list marker in sequence. Inspired by [`markdownlint`](https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md004.mjs#L9).
+ * Get the next unordered list marker in sequence.
+ * Inspired by [`markdownlint`](https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md004.mjs#L9).
  * @param {UnorderedListMarker} currentUnorderedListMarker The current unordered list marker.
  * @returns {UnorderedListMarker} The next unordered list marker.
  */
@@ -97,7 +98,8 @@ export default {
 
     return {
       list() {
-        // When entering a list node, increase the depth.
+        // When entering a `list` node, increase the depth.
+        // Counts both ordered and unordered lists, which matches `markdownlint`'s behavior.
         listDepth++;
       },
 
@@ -144,7 +146,8 @@ export default {
       },
 
       'list:exit'() {
-        // When exiting a list node, decrease the depth.
+        // When exiting a `list` node, decrease the depth.
+        // Counts both ordered and unordered lists, which matches `markdownlint`'s behavior.
         listDepth--;
       },
     };
