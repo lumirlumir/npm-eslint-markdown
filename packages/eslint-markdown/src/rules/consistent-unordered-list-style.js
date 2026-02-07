@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { ListItem } from 'mdast';
- * @import { RuleModule, Nullable } from '../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {'*' | '+' | '-'} UnorderedListMarker
  * @typedef {[{ style: 'consistent' | 'sublist' | UnorderedListMarker }]} RuleOptions
  * @typedef {'style'} MessageIds
@@ -90,18 +90,16 @@ export default {
     const { sourceCode } = context;
     const [{ style }] = context.options;
 
-    /** @type {Array<Nullable<UnorderedListMarker>>} */
+    /** @type {Array<UnorderedListMarker | null | undefined>} */
     const unorderedListStyle = [
       style === 'consistent' || style === 'sublist' ? null : style,
     ];
-    let unorderedListDepth = -1;
+    let listDepth = -1;
 
     return {
       list() {
         // When entering a list node, increase the depth.
-        // `markdownlint` also increments depth for ordered lists,
-        // so `list[ordered=false]` shouldn't be used here.
-        unorderedListDepth++;
+        listDepth++;
       },
 
       'list[ordered=false] > listItem'(/** @type {ListItem} */ node) {
@@ -109,22 +107,20 @@ export default {
         const currentUnorderedListStyle = /** @type {UnorderedListMarker} */ (
           sourceCode.text[nodeStartOffset]
         );
-        const currentUnorderedListDepth = style === 'sublist' ? unorderedListDepth : 0;
+        const currentListDepth = style === 'sublist' ? listDepth : 0;
 
-        if (!unorderedListStyle[currentUnorderedListDepth]) {
-          if (
-            unorderedListStyle[currentUnorderedListDepth - 1] ===
-            currentUnorderedListStyle
-          ) {
-            unorderedListStyle[currentUnorderedListDepth] = getNextUnorderedListMarker(
-              currentUnorderedListStyle,
-            );
-          } else {
-            unorderedListStyle[currentUnorderedListDepth] = currentUnorderedListStyle;
-          }
+        if (!unorderedListStyle[currentListDepth]) {
+          unorderedListStyle[currentListDepth] =
+            unorderedListStyle[currentListDepth - 1] === currentUnorderedListStyle
+              ? getNextUnorderedListMarker(currentUnorderedListStyle)
+              : currentUnorderedListStyle;
         }
 
-        if (unorderedListStyle[currentUnorderedListDepth] !== currentUnorderedListStyle) {
+        if (unorderedListStyle[currentListDepth] !== currentUnorderedListStyle) {
+          const stringifiedUnorderedListStyle = String(
+            unorderedListStyle[currentListDepth],
+          );
+
           context.report({
             loc: {
               start: sourceCode.getLocFromIndex(nodeStartOffset),
@@ -134,14 +130,13 @@ export default {
             messageId: 'style',
 
             data: {
-              style: unorderedListStyle[currentUnorderedListDepth],
+              style: stringifiedUnorderedListStyle,
             },
 
             fix(fixer) {
               return fixer.replaceTextRange(
                 [nodeStartOffset, nodeStartOffset + 1],
-                // @ts-expect-error -- TODO
-                unorderedListStyle[currentUnorderedListDepth],
+                stringifiedUnorderedListStyle,
               );
             },
           });
@@ -150,9 +145,7 @@ export default {
 
       'list:exit'() {
         // When exiting a list node, decrease the depth.
-        // `markdownlint` also decrements depth for ordered lists,
-        // so `list[ordered=false]:exit` shouldn't be used here.
-        unorderedListDepth--;
+        listDepth--;
       },
     };
   },

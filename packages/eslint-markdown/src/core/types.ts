@@ -33,9 +33,3 @@ export type RuleModule<
     stylistic: boolean;
   }>;
 }>;
-
-/**
- * Represents a type that can either be of type `T` or `null`.
- * @template T The base type.
- */
-export type Nullable<T> = T | null;
