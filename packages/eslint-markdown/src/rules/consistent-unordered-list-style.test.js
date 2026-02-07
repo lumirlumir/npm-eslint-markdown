@@ -318,7 +318,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 1',
+      name: '`sublist` style - `markdownlint` example 2',
       code: `
 - depth 0 item
   - depth 1 item
@@ -364,7 +364,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 2',
+      name: '`sublist` style - `markdownlint` example 3',
       code: `
 * depth 0
   * depth 1
@@ -394,7 +394,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 3',
+      name: '`sublist` style - `markdownlint` example 4',
       code: `
 * depth 0
   - depth 1
@@ -418,7 +418,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 4',
+      name: '`sublist` style - `markdownlint` example 5',
       code: `
 - foo
     1. bar
@@ -456,7 +456,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 5',
+      name: '`sublist` style - `markdownlint` example 6',
       code: `
 - foo
     1. bar
@@ -534,7 +534,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 6',
+      name: '`sublist` style - `markdownlint` example 7',
       code: '* depth 0\n  + depth 1\n    - depth 2\n      - depth 3',
       output: '* depth 0\n  + depth 1\n    - depth 2\n      + depth 3',
       options: [{ style: 'sublist' }],
@@ -550,7 +550,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 7',
+      name: '`sublist` style - `markdownlint` example 8',
       code: '- depth 0\n  + depth 1\n    * depth 2\n      * depth 3',
       output: '- depth 0\n  + depth 1\n    * depth 2\n      - depth 3',
       options: [{ style: 'sublist' }],
@@ -566,7 +566,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 8',
+      name: '`sublist` style - `markdownlint` example 9',
       code: `
 - depth 0
   - depth 1`,
@@ -586,7 +586,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 9',
+      name: '`sublist` style - `markdownlint` example 10',
       code: `
 + depth 0
   + depth 1`,
@@ -606,7 +606,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 10',
+      name: '`sublist` style - `markdownlint` example 11',
       code: `
 * depth 0
   * depth 1`,
@@ -626,7 +626,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: '`sublist` style - `markdownlint` example 11',
+      name: '`sublist` style - `markdownlint` example 12',
       code: `
 > - depth 0 item
 >   + depth 1 item
