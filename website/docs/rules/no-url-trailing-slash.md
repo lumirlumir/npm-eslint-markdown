@@ -87,5 +87,5 @@ No options are available for this rule.
 
 ## Prior Art
 
-- [`remark-lint-no-url-trailing-slash`](https://github.com/vhf/remark-lint-no-url-trailing-slash)
-- [`markdownlint-rule-no-trailing-slash-in-links`](https://github.com/xiaogaozi/markdownlint-rule-no-trailing-slash-in-links)
+- [`remark-lint-no-url-trailing-slash`](https://github.com/vhf/remark-lint-no-url-trailing-slash#readme)
+- [`markdownlint-rule-no-trailing-slash-in-links`](https://github.com/xiaogaozi/markdownlint-rule-no-trailing-slash-in-links#readme)

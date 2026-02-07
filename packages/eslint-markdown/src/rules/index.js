@@ -10,6 +10,7 @@ import consistentDeleteStyle from './consistent-delete-style.js';
 import consistentEmphasisStyle from './consistent-emphasis-style.js';
 import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
+import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
 // import enCapitalization from './en-capitalization.js';
 // import noBoldParagraph from './no-bold-paragraph.js';
 import noControlCharacter from './no-control-character.js';
@@ -34,6 +35,7 @@ export default {
   'consistent-emphasis-style': consistentEmphasisStyle,
   'consistent-strong-style': consistentStrongStyle,
   'consistent-thematic-break-style': consistentThematicBreakStyle,
+  'consistent-unordered-list-style': consistentUnorderedListStyle,
   // 'en-capitalization': enCapitalization,
   // 'no-bold-paragraph': noBoldParagraph,
   'no-control-character': noControlCharacter,

@@ -1,0 +1,675 @@
+/**
+ * @fileoverview Test for `consistent-unordered-list-style.js`.
+ * @author hyoban
+ */
+
+// --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import { getFileName, ruleTester } from '../core/tests/index.js';
+import rule from './consistent-unordered-list-style.js';
+
+// --------------------------------------------------------------------------------
+// Test
+// --------------------------------------------------------------------------------
+
+ruleTester(getFileName(import.meta.url), rule, {
+  valid: [
+    {
+      name: 'Empty',
+      code: '',
+    },
+    {
+      name: 'Empty string',
+      code: '  ',
+    },
+    {
+      name: '`consistent` style - all dashes',
+      code: '- item 1\n- item 2\n- item 3',
+    },
+    {
+      name: '`consistent` style - all asterisks',
+      code: '* item 1\n* item 2\n* item 3',
+    },
+    {
+      name: '`consistent` style - all plus signs',
+      code: '+ item 1\n+ item 2\n+ item 3',
+    },
+    {
+      name: '`consistent` style - nested lists',
+      code: '- item 1\n  - nested 1\n  - nested 2\n- item 2',
+    },
+    {
+      name: '`consistent` style - mixed ordered and unordered lists',
+      code: '- item 1\n- item 2\n\n1. ordered 1\n2. ordered 2',
+    },
+    {
+      name: '`consistent` style - task lists',
+      code: '- [ ] task 1\n- [x] task 2\n- [ ] task 3',
+      language: 'markdown/gfm',
+    },
+    {
+      name: '`-` style',
+      code: '- item 1\n- item 2\n- item 3',
+      options: [{ style: '-' }],
+    },
+    {
+      name: '`*` style',
+      code: '* item 1\n* item 2\n* item 3',
+      options: [{ style: '*' }],
+    },
+    {
+      name: '`+` style',
+      code: '+ item 1\n+ item 2\n+ item 3',
+      options: [{ style: '+' }],
+    },
+    {
+      name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all dashes',
+      code: '- item 1\n- item 2',
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all asterisks',
+      code: '* item 1\n* item 2',
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: '`sublist` style - `sublist` basically behaves like `consistent` at depth 0 - all plus signs',
+      code: '+ item 1\n+ item 2',
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: '`sublist` style - nested lists',
+      code: '* item 1\n  + nested 1\n    - deeply nested\n* item 2',
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: '`sublist` style - depth cycles after 3',
+      code: '* depth 0\n  + depth 1\n    - depth 2\n      * depth 3',
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 1',
+      code: `
+- foo
+    1. bar
+        - baz`,
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 2',
+      code: `
+* Item 1
+  + Item 2
+    - Item 3
+  + Item 4
+* Item 5
+  + Item 6`,
+      options: [{ style: 'sublist' }],
+    },
+    {
+      name: 'Ordered lists should be ignored',
+      code: '1. item 1\n2. item 2\n3. item 3',
+    },
+  ],
+
+  invalid: [
+    {
+      name: '`consistent` style - mixed markers (dash first)',
+      code: '- item 1\n* item 2\n+ item 3',
+      output: '- item 1\n- item 2\n- item 3',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - mixed markers (asterisk first)',
+      code: '* item 1\n- item 2\n+ item 3',
+      output: '* item 1\n* item 2\n* item 3',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '*' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2,
+          data: { style: '*' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - mixed markers (plus signs first)',
+      code: '+ item 1\n- item 2\n* item 3',
+      output: '+ item 1\n+ item 2\n+ item 3',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - nested list with inconsistent markers',
+      code: '- item 1\n  * nested 1\n  - nested 2\n- item 2',
+      output: '- item 1\n  - nested 1\n  - nested 2\n- item 2',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`consistent` style - task list with inconsistent markers',
+      code: '- [ ] task 1\n* [x] task 2\n+ [ ] task 3',
+      output: '- [ ] task 1\n- [x] task 2\n- [ ] task 3',
+      language: 'markdown/gfm',
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`-` style - wrong markers',
+      code: '* item 1\n+ item 2\n- item 3',
+      output: '- item 1\n- item 2\n- item 3',
+      options: [{ style: '-' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`*` style - wrong markers',
+      code: '- item 1\n+ item 2\n* item 3',
+      output: '* item 1\n* item 2\n* item 3',
+      options: [{ style: '*' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { style: '*' },
+        },
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '*' },
+        },
+      ],
+    },
+    {
+      name: '`+` style - wrong markers',
+      code: '- item 1\n* item 2\n+ item 3',
+      output: '+ item 1\n+ item 2\n+ item 3',
+      options: [{ style: '+' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 1',
+      code: `
+* depth 0
+  * depth 1
+    * depth 2`,
+      output: `
+* depth 0
+  - depth 1
+    * depth 2`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 2',
+      code: `
+- depth 0 item
+  - depth 1 item
+    * depth 2 item
+
++ depth 0 item
+  + depth 1 item
+    - depth 2 item`,
+      output: `
+- depth 0 item
+  + depth 1 item
+    * depth 2 item
+
+- depth 0 item
+  + depth 1 item
+    * depth 2 item`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 6,
+          column: 1,
+          endLine: 6,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 8,
+          column: 5,
+          endLine: 8,
+          endColumn: 6,
+          data: { style: '*' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 3',
+      code: `
+* depth 0
+  * depth 1
+    - depth 2`,
+      output: `
+* depth 0
+  - depth 1
+    + depth 2`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 4,
+          column: 5,
+          endLine: 4,
+          endColumn: 6,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 4',
+      code: `
+* depth 0
+  - depth 1
+    1. depth 2 but ordered
+    - depth 2`,
+      output: `
+* depth 0
+  - depth 1
+    1. depth 2 but ordered
+    + depth 2`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 5,
+          column: 5,
+          endLine: 5,
+          endColumn: 6,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 5',
+      code: `
+- foo
+    1. bar
+        - baz
+
++ foo
+    1. bar
+        * baz`,
+      output: `
+- foo
+    1. bar
+        - baz
+
+- foo
+    1. bar
+        - baz`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 6,
+          column: 1,
+          endLine: 6,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 10,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 6',
+      code: `
+- foo
+    1. bar
+        - baz
+            + qux
+
+- foo
+    1. bar
+        - baz
+            * qux
+
+- foo
+    * bar
+        + baz
+            - qux
+
+- foo
+    - bar
+        - baz
+            + qux`,
+      output: `
+- foo
+    1. bar
+        - baz
+            + qux
+
+- foo
+    1. bar
+        - baz
+            + qux
+
+- foo
+    * bar
+        - baz
+            + qux
+
+- foo
+    * bar
+        - baz
+            + qux`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 14,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 14,
+          column: 9,
+          endLine: 14,
+          endColumn: 10,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 15,
+          column: 13,
+          endLine: 15,
+          endColumn: 14,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 18,
+          column: 5,
+          endLine: 18,
+          endColumn: 6,
+          data: { style: '*' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 7',
+      code: '* depth 0\n  + depth 1\n    - depth 2\n      - depth 3',
+      output: '* depth 0\n  + depth 1\n    - depth 2\n      + depth 3',
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 8,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 8',
+      code: '- depth 0\n  + depth 1\n    * depth 2\n      * depth 3',
+      output: '- depth 0\n  + depth 1\n    * depth 2\n      - depth 3',
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 8,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 9',
+      code: `
+- depth 0
+  - depth 1`,
+      output: `
+- depth 0
+  + depth 1`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '+' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 10',
+      code: `
++ depth 0
+  + depth 1`,
+      output: `
++ depth 0
+  * depth 1`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '*' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 11',
+      code: `
+* depth 0
+  * depth 1`,
+      output: `
+* depth 0
+  - depth 1`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 12',
+      code: `
+> - depth 0 item
+>   + depth 1 item
+>     + depth 2 item
+
+- depth 0 item
+  - depth 1 item
+    - depth 2 item`,
+      output: `
+> - depth 0 item
+>   + depth 1 item
+>     * depth 2 item
+
+- depth 0 item
+  + depth 1 item
+    * depth 2 item`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 8,
+          data: { style: '*' },
+        },
+        {
+          messageId: 'style',
+          line: 7,
+          column: 3,
+          endLine: 7,
+          endColumn: 4,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 8,
+          column: 5,
+          endLine: 8,
+          endColumn: 6,
+          data: { style: '*' },
+        },
+      ],
+    },
+  ],
+});

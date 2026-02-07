@@ -14,6 +14,10 @@ With the exception of [`all`](#all), every configuration is considered "stable".
 
 :::
 
+---
+
+[[TOC]]
+
 ## Configuration File
 
 Create an [`eslint.config.{js,mjs,cjs,ts,mts,cts}`](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-file) configuration file in the root of your project, and populate it with the following:
