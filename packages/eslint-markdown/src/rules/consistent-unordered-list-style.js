@@ -108,6 +108,7 @@ export default {
         );
         const currentListDepth = style === 'sublist' ? listDepth : 0;
 
+        // `unorderedListStyle[currentListDepth]` can be `null` or `undefined`.
         if (!unorderedListStyle[currentListDepth]) {
           unorderedListStyle[currentListDepth] =
             unorderedListStyle[currentListDepth - 1] === currentUnorderedListStyle
