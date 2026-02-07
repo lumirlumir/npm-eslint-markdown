@@ -3,7 +3,7 @@
 
 ## Rule Details
 
-This rule enforces a single, consistent style for unordered list markers in Markdown files. Consistent formatting makes it easier to understand a document, and mixing different list marker styles can reduce readability.
+This rule enforces a single, consistent style for unordered list markers in Markdown files. Consistent formatting makes it easier to understand a document, and mixing different unordered list styles can reduce readability.
 
 An unordered list marker can be `-` (dash), `*` (asterisk), or `+` (plus). While Markdown allows any of these styles, this rule ensures that only one is used throughout the document.
 
@@ -55,9 +55,13 @@ Examples of **incorrect** code for this rule:
 ```md eslint-check
 <!-- eslint md/consistent-unordered-list-style: ['error', { style: 'sublist' }] -->
 
-- item 1
-  - nested item
-    - deeply nested item
+- depth 0 item
+  - depth 1 item
+    * depth 2 item
+
++ depth 0 item
+  + depth 1 item
+    - depth 2 item
 ```
 
 ### :white_check_mark: Correct {#correct}
@@ -82,6 +86,14 @@ Examples of **correct** code for this rule:
 * item 3
 ```
 
+```md eslint-check
+<!-- eslint md/consistent-unordered-list-style: 'error' -->
+
++ item 1
++ item 2
++ item 3
+```
+
 #### With `{ style: '-' }` Option
 
 ```md eslint-check
@@ -89,7 +101,6 @@ Examples of **correct** code for this rule:
 
 - item 1
 - item 2
-- item 3
 ```
 
 #### With `{ style: '*' }` Option
@@ -99,7 +110,6 @@ Examples of **correct** code for this rule:
 
 * item 1
 * item 2
-* item 3
 ```
 
 #### With `{ style: '+' }` Option
@@ -109,7 +119,6 @@ Examples of **correct** code for this rule:
 
 + item 1
 + item 2
-+ item 3
 ```
 
 #### With `{ style: 'sublist' }` Option
@@ -117,10 +126,13 @@ Examples of **correct** code for this rule:
 ```md eslint-check
 <!-- eslint md/consistent-unordered-list-style: ['error', { style: 'sublist' }] -->
 
-* item 1
-  + nested item
-    - deeply nested item
-      * cycles back
+- depth 0 item
+  + depth 1 item
+    * depth 2 item
+
+- depth 0 item
+  + depth 1 item
+    * depth 2 item
 ```
 
 ## Options
@@ -133,22 +145,17 @@ Examples of **correct** code for this rule:
 
 ### `style`
 
-> Type: `'consistent' | '-' | '*' | '+' | 'sublist'` / Default: `'consistent'`
+> Type: `'consistent' | 'sublist' | '-' | '*' | '+'` / Default: `'consistent'`
 
 When `style` is set to `'consistent'`, the rule enforces that all unordered list markers in the document use the same style as the first one encountered.
 
+When `style` is set to `'sublist'`, the rule enforces that all unordered list markers in sublists use a consistent symbol that differs from that of their parent list, depending on the nesting depth.
+
 You can also specify a particular style by setting style to `'-'`, `'*'`, or `'+'`, which will enforce that all unordered list markers use the specified style.
-
-When `style` is set to `'sublist'`, the rule enforces different markers based on nesting depth:
-
-- Depth 0: `*` (asterisk)
-- Depth 1: `+` (plus)
-- Depth 2: `-` (dash)
-- Depth 3+: Cycles back (depth % 3)
 
 ## Fix
 
-This rule fixes the list markers by replacing them with the configured style.
+This rule fixes the unordered list markers by replacing them with the configured style.
 
 ## Prior Art
 

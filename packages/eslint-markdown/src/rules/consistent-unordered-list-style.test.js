@@ -98,6 +98,17 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ style: 'sublist' }],
     },
     {
+      name: '`sublist` style - `markdownlint` example 2',
+      code: `
+* Item 1
+  + Item 2
+    - Item 3
+  + Item 4
+* Item 5
+  + Item 6`,
+      options: [{ style: 'sublist' }],
+    },
+    {
       name: 'Ordered lists should be ignored',
       code: '1. item 1\n2. item 2\n3. item 3',
     },
@@ -303,6 +314,52 @@ ruleTester(getFileName(import.meta.url), rule, {
           endLine: 3,
           endColumn: 4,
           data: { style: '-' },
+        },
+      ],
+    },
+    {
+      name: '`sublist` style - `markdownlint` example 1',
+      code: `
+- depth 0 item
+  - depth 1 item
+    * depth 2 item
+
++ depth 0 item
+  + depth 1 item
+    - depth 2 item`,
+      output: `
+- depth 0 item
+  + depth 1 item
+    * depth 2 item
+
+- depth 0 item
+  + depth 1 item
+    * depth 2 item`,
+      options: [{ style: 'sublist' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '+' },
+        },
+        {
+          messageId: 'style',
+          line: 6,
+          column: 1,
+          endLine: 6,
+          endColumn: 2,
+          data: { style: '-' },
+        },
+        {
+          messageId: 'style',
+          line: 8,
+          column: 5,
+          endLine: 8,
+          endColumn: 6,
+          data: { style: '*' },
         },
       ],
     },
