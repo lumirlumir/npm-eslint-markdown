@@ -41,6 +41,7 @@ export default function all(plugin) {
       'md/allow-image-url': 'error',
       'md/allow-link-url': 'error',
       'md/code-lang-shorthand': 'error',
+      'md/consistent-code-style': 'error',
       'md/consistent-delete-style': 'error',
       'md/consistent-emphasis-style': 'error',
       'md/consistent-strong-style': 'error',
