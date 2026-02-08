@@ -45,6 +45,7 @@ export default function all(plugin) {
       'md/consistent-emphasis-style': 'error',
       'md/consistent-strong-style': 'error',
       'md/consistent-thematic-break-style': 'error',
+      'md/consistent-unordered-list-style': 'error',
       'md/no-control-character': 'error',
       'md/no-curly-quote': 'error',
       'md/no-double-space': 'error',
