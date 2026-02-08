@@ -64,7 +64,7 @@
     "test:unit": "node --test"
   },
   "peerDependencies": {
-    "eslint": "^9.31.0 || ^10.0.0-rc.0"
+    "eslint": "^9.31.0 || ^10.0.0"
   },
   "peerDependenciesMeta": {
     "eslint": {
