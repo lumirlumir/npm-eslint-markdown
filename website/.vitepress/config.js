@@ -317,11 +317,11 @@ export default defineConfig({
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')
-    .split(/(`[^`]+`)/)
-    .map(part =>
-      part.startsWith('`') && part.endsWith('`')
-        ? `<code>${part.slice(1, -1)}</code>`
-        : part,
+    .split(/(?<inlineCode>`[^`]+`)/)
+    .map(inlineCode =>
+      inlineCode.startsWith('`') && inlineCode.endsWith('`')
+        ? `<code>${inlineCode.slice(1, -1)}</code>`
+        : inlineCode,
     )
     .join('')}.
 </p>
