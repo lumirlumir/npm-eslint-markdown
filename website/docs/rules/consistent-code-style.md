@@ -15,6 +15,8 @@ Examples of **incorrect** code for this rule:
 
 #### Default
 
+<!-- TODO: The fenced code block span range is incorrect. This is a bug in `twoslash-eslint` -->
+
 ````md eslint-check
 <!-- eslint md/consistent-code-style: 'error' -->
 
