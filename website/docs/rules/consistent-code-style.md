@@ -108,6 +108,8 @@ Examples of **correct** code for this rule:
 
     code block 1
 
+---    
+
     code block 2
 ```
 
