@@ -16,8 +16,8 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { ListItem } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {'*' | '+' | '-'} UnorderedListMarker
- * @typedef {[{ style: 'consistent' | 'sublist' | UnorderedListMarker }]} RuleOptions
+ * @typedef {'*' | '+' | '-'} UnorderedListStyle
+ * @typedef {[{ style: 'consistent' | 'sublist' | UnorderedListStyle }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
@@ -26,15 +26,15 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * Get the next unordered list marker in sequence.
+ * Get the next unordered list style in sequence.
  * Inspired by [`markdownlint`](https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md004.mjs#L9).
- * @param {UnorderedListMarker} currentUnorderedListMarker The current unordered list marker.
- * @returns {UnorderedListMarker} The next unordered list marker.
+ * @param {UnorderedListStyle} currentUnorderedListStyle The current unordered list style.
+ * @returns {UnorderedListStyle} The next unordered list style.
  */
-function getNextUnorderedListMarker(currentUnorderedListMarker) {
-  if (currentUnorderedListMarker === '-') {
+function getNextUnorderedListStyle(currentUnorderedListStyle) {
+  if (currentUnorderedListStyle === '-') {
     return '+';
-  } else if (currentUnorderedListMarker === '+') {
+  } else if (currentUnorderedListStyle === '+') {
     return '*';
   } else {
     return '-';
@@ -90,7 +90,7 @@ export default {
     const { sourceCode } = context;
     const [{ style }] = context.options;
 
-    /** @type {Array<UnorderedListMarker | null | undefined>} */
+    /** @type {Array<UnorderedListStyle | null | undefined>} */
     const unorderedListStyle = [
       style === 'consistent' || style === 'sublist' ? null : style,
     ];
@@ -105,7 +105,7 @@ export default {
 
       'list[ordered=false] > listItem'(/** @type {ListItem} */ node) {
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const currentUnorderedListStyle = /** @type {UnorderedListMarker} */ (
+        const currentUnorderedListStyle = /** @type {UnorderedListStyle} */ (
           sourceCode.text[nodeStartOffset]
         );
         const currentListDepth = style === 'sublist' ? listDepth : 0;
@@ -115,7 +115,7 @@ export default {
           unorderedListStyle[currentListDepth] =
             // If the previous depth used the same style, use the next style in sequence.
             unorderedListStyle[currentListDepth - 1] === currentUnorderedListStyle
-              ? getNextUnorderedListMarker(currentUnorderedListStyle)
+              ? getNextUnorderedListStyle(currentUnorderedListStyle)
               : currentUnorderedListStyle;
         }
 

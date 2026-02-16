@@ -25,9 +25,29 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ style: 'consistent' | 'indent' | 'fence-backtick' | 'fence-tilde' }]} RuleOptions
+ * @typedef {'indent' | 'fence-backtick' | 'fence-tilde'} CodeStyle
+ * @typedef {[{ style: 'consistent' | CodeStyle }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
+
+// --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+/**
+ * Get the current code style based on the given text.
+ * @param {string} text The text to determine the code style from.
+ * @returns {CodeStyle} The current code style.
+ */
+function getCurrentCodeStyle(text) {
+  if (text === '`') {
+    return 'fence-backtick';
+  } else if (text === '~') {
+    return 'fence-tilde';
+  } else {
+    return 'indent';
+  }
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -54,7 +74,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: ['consistent', 'indent', 'fence-backtick', 'fence-tilde'], // TODO: Add `fence` option?
+            enum: ['consistent', 'indent', 'fence-backtick', 'fence-tilde'],
           },
         },
         additionalProperties: false,
@@ -80,49 +100,28 @@ export default {
     const { sourceCode } = context;
     const [{ style }] = context.options;
 
-    /** @type {string | null} */
-    let emphasisStyle = style === 'consistent' ? null : style;
-
-    /**
-     * @param {number} startOffset
-     * @param {number} endOffset
-     */
-    function reportStyle(startOffset, endOffset) {
-      const stringifiedEmphasisStyle = String(emphasisStyle);
-
-      context.report({
-        loc: {
-          start: sourceCode.getLocFromIndex(startOffset),
-          end: sourceCode.getLocFromIndex(endOffset),
-        },
-
-        messageId: 'style',
-
-        data: {
-          style: stringifiedEmphasisStyle,
-        },
-
-        fix(fixer) {
-          return fixer.replaceTextRange(
-            [startOffset, endOffset],
-            stringifiedEmphasisStyle,
-          );
-        },
-      });
-    }
+    /** @type {CodeStyle | null} */
+    let codeStyle = style === 'consistent' ? null : style;
 
     return {
-      emphasis(node) {
-        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const currentEmphasisStyle = sourceCode.text[nodeStartOffset];
+      code(node) {
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const currentCodeStyle = getCurrentCodeStyle(sourceCode.text[nodeStartOffset]);
 
-        if (emphasisStyle === null) {
-          emphasisStyle = currentEmphasisStyle;
+        if (codeStyle === null) {
+          codeStyle = currentCodeStyle;
         }
 
-        if (emphasisStyle !== currentEmphasisStyle) {
-          reportStyle(nodeStartOffset, nodeStartOffset + 1);
-          reportStyle(nodeEndOffset - 1, nodeEndOffset);
+        if (codeStyle !== currentCodeStyle) {
+          context.report({
+            node,
+
+            messageId: 'style',
+
+            data: {
+              style: codeStyle,
+            },
+          });
         }
       },
     };
