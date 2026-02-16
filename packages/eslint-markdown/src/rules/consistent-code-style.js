@@ -65,9 +65,9 @@ export default {
       stylistic: true,
     },
 
-    fixable: 'code',
+    // fixable: 'code', // TODO
 
-    hasSuggestions: true,
+    // hasSuggestions: true, // TODO
 
     schema: [
       {
