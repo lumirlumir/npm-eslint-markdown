@@ -76,7 +76,7 @@ export default function ruleTester(ruleName, rule, tests) {
 
       it('`meta.docs.description` should exist and follow the convention', () => {
         ok(meta?.docs?.description);
-        match(meta?.docs?.description, /^(Enforce|Require|Disallow) .+[^. ]$/);
+        match(meta?.docs?.description, /^(?:Enforce|Require|Disallow) .+[^. ]$/);
       });
 
       it('`meta.docs.url` should exist and end with the rule name', () => {

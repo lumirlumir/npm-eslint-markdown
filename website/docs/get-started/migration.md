@@ -43,6 +43,8 @@ This section is currently under construction and will be updated soon.
 | [`MD004` - Unordered list style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md004.md#md004---unordered-list-style) :white_check_mark: | [`md/consistent-unordered-list-style`](../rules/consistent-unordered-list-style.md) |
 | [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
 | [`MD035` - Horizontal rule style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md035.md#md035---horizontal-rule-style) :white_check_mark: | [`md/consistent-thematic-break-style`](../rules/consistent-thematic-break-style.md) |
+| [`MD046` - Code block style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md046.md#md046---code-block-style) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
+| [`MD048` - Code fence style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md048.md#md048---code-fence-style) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`MD049` - Emphasis style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md049.md#md049---emphasis-style) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
 | [`MD050` - Strong style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md050.md#md050---strong-style) :white_check_mark: | [`md/consistent-strong-style`](../rules/consistent-strong-style.md) |
 | [`markdownlint-rule-no-trailing-slash-in-links`](https://github.com/xiaogaozi/markdownlint-rule-no-trailing-slash-in-links) :white_check_mark: | [`md/no-url-trailing-slash`](../rules/no-url-trailing-slash.md) |
@@ -61,7 +63,9 @@ This section is currently under construction and will be updated soon.
 
 | `remark-lint` | `eslint-markdown` or `@eslint/markdown` |
 | :------------ | :-------------------------------------- |
+| [`remark-lint-code-block-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-code-block-style#remark-lint-code-block-style) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`remark-lint-emphasis-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-emphasis-marker#remark-lint-emphasis-marker) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
+| [`remark-lint-fenced-code-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-fenced-code-marker#remark-lint-fenced-code-marker) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`remark-lint-no-tabs`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-tabs#remark-lint-no-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
 | [`remark-lint-no-url-trailing-slash`](https://github.com/vhf/remark-lint-no-url-trailing-slash) :white_check_mark: | [`md/no-url-trailing-slash`](../rules/no-url-trailing-slash.md) |
 | [`remark-lint-rule-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-rule-style#remark-lint-rule-style) :white_check_mark: | [`md/consistent-thematic-break-style`](../rules/consistent-thematic-break-style.md) |
