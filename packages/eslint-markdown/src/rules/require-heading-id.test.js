@@ -95,8 +95,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [
         'always',
         {
-          leftDelimiter: '\\[',
-          rightDelimiter: '\\]',
+          leftDelimiter: '[',
+          rightDelimiter: ']',
         },
       ],
     },
@@ -106,8 +106,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [
         'always',
         {
-          leftDelimiter: '\\|',
-          rightDelimiter: '\\|',
+          leftDelimiter: '|',
+          rightDelimiter: '|',
         },
       ],
     },

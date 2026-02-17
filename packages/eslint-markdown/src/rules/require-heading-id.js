@@ -9,6 +9,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { escapeStringRegexp } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -94,7 +95,7 @@ export default {
         if (allowDepths.includes(node.depth)) return;
 
         const regex = new RegExp(
-          `${leftDelimiter}#[^${rightDelimiter}]+${rightDelimiter}[ \t]*$`,
+          `${escapeStringRegexp(leftDelimiter)}#[^${escapeStringRegexp(rightDelimiter)}]+${escapeStringRegexp(rightDelimiter)}[ \t]*$`,
         );
         const match = sourceCode.getText(node).match(regex);
 

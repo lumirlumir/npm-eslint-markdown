@@ -124,23 +124,11 @@ Examples of **correct** code for this rule:
 
 > Type: `string` / Default: `'{'`
 
-::: warning
-
-Please note that if you use a custom delimiter, it must be escaped since it is used in a regular expression. For example, if you want to use `'['`, you should pass `'\\['` to the option.
-
-:::
-
 The left delimiter to use for heading IDs.
 
 #### `rightDelimiter`
 
 > Type: `string` / Default: `'}'`
-
-::: warning
-
-Please note that if you use a custom delimiter, it must be escaped since it is used in a regular expression. For example, if you want to use `']'`, you should pass `'\\]'` to the option.
-
-:::
 
 The right delimiter to use for heading IDs.
 
