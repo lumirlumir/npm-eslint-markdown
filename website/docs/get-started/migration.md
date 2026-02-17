@@ -92,3 +92,4 @@ This section is currently under construction and will be updated soon.
 | [`textlint-rule-no-curly-quotes`](https://github.com/aborazmeh/textlint-rule-no-curly-quotes#readme) :white_check_mark: | [`md/no-curly-quote`](../rules/no-curly-quote.md) |
 | [`textlint-rule-no-invalid-control-character`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character) :warning: | [`md/no-control-character`](../rules/no-control-character.md) |
 | [`textlint-rule-no-zero-width-spaces`](https://github.com/textlint-rule/textlint-rule-no-zero-width-spaces) :white_check_mark: | [`md/no-irregular-whitespace`](../rules/no-irregular-whitespace.md) |
+| [`textlint-rule-require-header-id`](https://github.com/textlint-rule/textlint-rule-require-header-id) :white_check_mark: | [`md/require-heading-id`](../rules/require-heading-id.md) |

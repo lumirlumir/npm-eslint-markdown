@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `heading-id.js`.
+ * @fileoverview Test for `require-heading-id.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -112,14 +112,14 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
 
-    // `ignoreDepth` option
+    // `allowDepths` option
     {
       name: 'Ignore h1 heading ID',
       code: '# Heading',
       options: [
         'always',
         {
-          ignoreDepth: [1],
+          allowDepths: [1],
         },
       ],
     },
@@ -129,7 +129,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [
         'always',
         {
-          ignoreDepth: [1, 2, 3],
+          allowDepths: [1, 2, 3],
         },
       ],
     },

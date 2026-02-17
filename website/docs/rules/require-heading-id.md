@@ -105,7 +105,7 @@ Examples of **correct** code for this rule:
   {
     leftDelimiter: '{',
     rightDelimiter: '}',
-    ignoreDepth: [],
+    allowDepths: [],
   }
 ]
 ```
@@ -144,7 +144,7 @@ Please note that if you use a custom delimiter, it must be escaped since it is u
 
 The right delimiter to use for heading IDs.
 
-#### `ignoreDepth`
+#### `allowDepths`
 
 > Type: `Array<1 | 2 | 3 | 4 | 5 | 6>` / Default: `[]`
 
@@ -152,4 +152,4 @@ An array of heading depths to ignore. For example, `[1, 2]` would ignore the fir
 
 ## Prior Art
 
-- [textlint-rule-require-header-id](https://github.com/textlint-rule/textlint-rule-require-header-id)
+- [`textlint-rule-require-header-id`](https://github.com/textlint-rule/textlint-rule-require-header-id)

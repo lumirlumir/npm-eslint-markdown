@@ -18,7 +18,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { Heading } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: Heading['depth'][] }]} RuleOptions
+ * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, allowDepths: Heading['depth'][] }]} RuleOptions
  * @typedef {'headingIdAlways' | 'headingIdNever'} MessageIds
  */
 
@@ -53,7 +53,7 @@ export default {
           rightDelimiter: {
             type: 'string',
           },
-          ignoreDepth: {
+          allowDepths: {
             type: 'array',
             items: {
               enum: [1, 2, 3, 4, 5, 6],
@@ -70,7 +70,7 @@ export default {
       {
         leftDelimiter: '{',
         rightDelimiter: '}',
-        ignoreDepth: [],
+        allowDepths: [],
       },
     ],
 
@@ -87,11 +87,11 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [mode, { leftDelimiter, rightDelimiter, ignoreDepth }] = context.options;
+    const [mode, { leftDelimiter, rightDelimiter, allowDepths }] = context.options;
 
     return {
       heading(node) {
-        if (ignoreDepth.includes(node.depth)) return;
+        if (allowDepths.includes(node.depth)) return;
 
         const regex = new RegExp(
           `${leftDelimiter}#[^${rightDelimiter}]+${rightDelimiter}[ \t]*$`,
