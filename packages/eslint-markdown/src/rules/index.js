@@ -13,7 +13,6 @@ import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
 // import enCapitalization from './en-capitalization.js';
-// import headingId from './heading-id.js';
 // import noBoldParagraph from './no-bold-paragraph.js';
 import noControlCharacter from './no-control-character.js';
 import noCurlyQuote from './no-curly-quote.js';
@@ -24,6 +23,7 @@ import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
 import noTab from './no-tab.js';
 import noUrlTrailingSlash from './no-url-trailing-slash.js';
+import requireHeadingId from './require-heading-id.js';
 import requireImageTitle from './require-image-title.js';
 import requireLinkTitle from './require-link-title.js';
 
@@ -39,7 +39,6 @@ export default {
   'consistent-thematic-break-style': consistentThematicBreakStyle,
   'consistent-unordered-list-style': consistentUnorderedListStyle,
   // 'en-capitalization': enCapitalization,
-  // 'heading-id': headingId,
   // 'no-bold-paragraph': noBoldParagraph,
   'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
@@ -50,6 +49,7 @@ export default {
   'no-irregular-whitespace': noIrregularWhitespace,
   'no-tab': noTab,
   'no-url-trailing-slash': noUrlTrailingSlash,
+  'require-heading-id': requireHeadingId,
   'require-image-title': requireImageTitle,
   'require-link-title': requireLinkTitle,
 };

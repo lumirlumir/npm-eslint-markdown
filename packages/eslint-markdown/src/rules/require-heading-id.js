@@ -9,6 +9,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { escapeStringRegexp } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -18,7 +19,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { Heading } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: Heading['depth'][] }]} RuleOptions
+ * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, allowDepths: Heading['depth'][] }]} RuleOptions
  * @typedef {'headingIdAlways' | 'headingIdNever'} MessageIds
  */
 
@@ -33,7 +34,7 @@ export default {
 
     docs: {
       description: 'Enforce the use of heading IDs',
-      url: URL_RULE_DOCS('heading-id'),
+      url: URL_RULE_DOCS('require-heading-id'),
       recommended: false,
       stylistic: false,
     },
@@ -53,7 +54,7 @@ export default {
           rightDelimiter: {
             type: 'string',
           },
-          ignoreDepth: {
+          allowDepths: {
             type: 'array',
             items: {
               enum: [1, 2, 3, 4, 5, 6],
@@ -70,7 +71,7 @@ export default {
       {
         leftDelimiter: '{',
         rightDelimiter: '}',
-        ignoreDepth: [],
+        allowDepths: [],
       },
     ],
 
@@ -86,16 +87,17 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [mode, { leftDelimiter, rightDelimiter, allowDepths }] = context.options;
+
     return {
       heading(node) {
-        const [mode, { leftDelimiter, rightDelimiter, ignoreDepth }] = context.options;
-
-        if (ignoreDepth.includes(node.depth)) return;
+        if (allowDepths.includes(node.depth)) return;
 
         const regex = new RegExp(
-          `${leftDelimiter}#[^${rightDelimiter}]+${rightDelimiter}[ \t]*$`,
+          `${escapeStringRegexp(leftDelimiter)}#[^${escapeStringRegexp(rightDelimiter)}]+${escapeStringRegexp(rightDelimiter)}[ \t]*$`,
         );
-        const match = context.sourceCode.getText(node).match(regex);
+        const match = sourceCode.getText(node).match(regex);
 
         if (mode === 'always' && match === null) {
           context.report({

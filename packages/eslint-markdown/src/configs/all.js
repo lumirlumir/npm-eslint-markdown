@@ -56,6 +56,7 @@ export default function all(plugin) {
       'md/no-irregular-whitespace': 'error',
       'md/no-tab': 'error',
       'md/no-url-trailing-slash': 'error',
+      'md/require-heading-id': 'error',
       'md/require-image-title': 'error',
       'md/require-link-title': 'error',
     },
