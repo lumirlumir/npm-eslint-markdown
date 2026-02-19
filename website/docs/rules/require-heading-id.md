@@ -3,7 +3,7 @@
 
 ## Rule Details
 
-Some Markdown parsers or plugins, like [`@mdit/plugin-attrs`](https://mdit-plugins.github.io/attrs.html), support custom heading IDs which can be used to add IDs to headings.
+Some Markdown parsers or plugins, like [`@mdit/plugin-attrs`](https://mdit-plugins.github.io/attrs.html) or [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs), support custom heading IDs which can be used to add IDs to headings.
 
 Heading IDs are helpful for linking to specific sections within a document and are supported by some websites and markdown parsers through the `{#id}` syntax. These IDs not only provide improved accessibility, allowing screen readers to create a navigable table of contents, but also enhance SEO by helping search engines understand the structure of the document and deliver better search results.
 
@@ -15,7 +15,7 @@ When building websites with internationalization in mind, it's recommended to us
 
 Examples of **incorrect** code for this rule:
 
-#### Default (With `'always'` Option)
+#### Default (With `'always'` First Option)
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: 'error' -->
@@ -37,7 +37,7 @@ Examples of **incorrect** code for this rule:
 # Heading { #id}
 ```
 
-#### With `'never'` Option
+#### With `'never'` First Option
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: ['error', 'never'] -->
@@ -55,11 +55,19 @@ Examples of **incorrect** code for this rule:
 ###### Heading 6 {#heading-6}
 ```
 
+#### With `{ leftDelimiter: '[', rightDelimiter: ']' }` Second Option
+
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'always', { leftDelimiter: '[', rightDelimiter: ']' }] -->
+
+TODO
+```
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
 
-#### Default (With `'always'` Option)
+#### Default (With `'always'` First Option)
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: 'error' -->
@@ -77,7 +85,7 @@ Examples of **correct** code for this rule:
 ###### Heading 6 {#heading-6}
 ```
 
-#### With `'never'` Option
+#### With `'never'` First Option
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: ['error', 'never'] -->
