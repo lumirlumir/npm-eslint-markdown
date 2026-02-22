@@ -49,5 +49,6 @@
   "strong-style": {
     "style": "asterisk"
   },
-  "table-column-count": false
+  "table-column-count": false,
+  "descriptive-link-text": false
 }

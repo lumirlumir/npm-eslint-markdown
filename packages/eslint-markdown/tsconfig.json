@@ -9,7 +9,7 @@
     "src/**/*.cts",
     "src/**/*.tsx"
   ],
-  "exclude": ["src/**/*.test.js", "src/**/*.test.ts"],
+  "exclude": ["src/**/*.test.js", "src/**/*.test.ts", "**/fixtures/**"],
   "compilerOptions": {
     /* Type Checking */
     "allowUnreachableCode": false,
