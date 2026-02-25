@@ -12,7 +12,7 @@ import pkg from '../../package.json' with { type: 'json' };
 // Export
 // --------------------------------------------------------------------------------
 
-/** @satisfies {string} */
+/** @type {'eslint-markdown'} */
 export const PKG_NAME = /** @type {'eslint-markdown'} */ (pkg.name);
 /** @satisfies {string} */
 export const PKG_VERSION = pkg.version;
