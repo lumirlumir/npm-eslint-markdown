@@ -18,7 +18,7 @@
     "coverage": "npx c8 --reporter=lcov npm run test",
     "test": "npm run test -w packages/eslint-markdown",
     "build": "npm-run-all -c -l -p --aggregate-output build:**",
-    "build:pkg:epm": "npm run build -w packages/eslint-markdown",
+    "build:pkg:em": "npm run build -w packages/eslint-markdown",
     "build:website": "npm run build -w website",
     "dev": "npm run dev:website",
     "dev:website": "npm run dev -w website",

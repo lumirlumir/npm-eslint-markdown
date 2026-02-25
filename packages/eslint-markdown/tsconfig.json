@@ -36,6 +36,7 @@
     /* Modules */
     "module": "NodeNext",
     "moduleResolution": "nodenext",
+    "rootDir": "./src",
 
     /* Emit */
     "declaration": true,
