@@ -41,6 +41,7 @@ export default function stylistic(plugin) {
       'md/consistent-code-style': 'error',
       'md/consistent-delete-style': 'error',
       'md/consistent-emphasis-style': 'error',
+      'md/consistent-inline-code-style': 'error',
       'md/consistent-strong-style': 'error',
       'md/consistent-thematic-break-style': 'error',
       'md/consistent-unordered-list-style': 'error',
