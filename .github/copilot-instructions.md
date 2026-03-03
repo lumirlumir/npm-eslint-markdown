@@ -19,8 +19,8 @@
   - `feat(rules): add no-foo rule`
   - `fix(parser): handle empty code block`
   - `docs: update contributing guide`
-- 설명(`description`)은 간결하고 명령형으로 작성합니다.
+- Keep `description` concise and use the imperative mood.
 
-## 언어 규칙
+## Language Policy
 
-- 커밋 제목, PR 설명, 이슈/코드 리뷰 코멘트 등 모든 설명 문구는 영어로 작성합니다.
+- Write all descriptions in English, including commit titles, PR descriptions, issue comments, and code review comments.
