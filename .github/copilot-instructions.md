@@ -1,26 +1,49 @@
 # Copilot Instructions
 
-## 기본 작업 원칙
+## Repository Context
 
-- 이 저장소는 `npm workspaces` 기반 모노레포입니다.
-- 패키지 코드는 `packages` 디렉터리, 문서는 `website` 디렉터리에서 작업합니다.
-- 변경은 가능한 한 작고 명확하게 유지합니다.
-- 코드 변경 시 기존 스크립트(`npm run lint`, `npm run test`, 필요 시 `npm run build`)로 검증합니다.
+- This repository is a **monorepo managed with npm workspaces**.
+- Main code lives in `packages/`. Documentation and site content live in `website/`.
+- Follow repository standards from `CONTRIBUTING.md` when making changes.
 
-## 커밋 메시지 규칙
+## High-Value Working Rules for AI Agents
 
-- 커밋 메시지는 아래 형식을 사용합니다.
+- Keep changes **small, focused, and local** to the requested scope.
+- Refer to existing code and patterns in the repository for guidance.
+- Prefer editing existing files/patterns instead of introducing new abstractions.
+- When touching package code, check for related workspace dependencies in sibling packages under `packages/`.
 
-  ```text
-  <type>[optional scope]: <description>
-  ```
+## Test/Build/Lint Workflow (required before finalizing)
 
-- 예시:
-  - `feat(rules): add no-foo rule`
-  - `fix(parser): handle empty code block`
-  - `docs: update contributing guide`
-- Keep `description` concise and use the imperative mood.
+Run from repo root:
 
-## Language Policy
+- `npm run test`
+- `npm run build`
+- `npm run lint`
 
-- Write all descriptions in English, including commit titles, PR descriptions, issue comments, and code review comments.
+For faster iteration, use workspace-scoped commands when appropriate:
+
+- `npm run test -w <workspace-name>`
+- `npm run build -w <workspace-name>`
+
+## Monorepo Conventions
+
+- Treat each directory under `packages/` as an independently testable/buildable unit within the workspace graph.
+- Keep package-level changes aligned with root tooling and scripts (do not bypass root conventions).
+- If a change affects behavior documented on the site, update relevant docs in `website/` in the same PR.
+
+## Pull Request Workflow
+
+- When preparing or opening a PR, use the `/pull-request` prompt.
+
+## Documentation & Communication Policy
+
+- Public-facing GitHub content (PRs, issues, review comments, commit titles/descriptions) must be **English**.
+- Local/offline communication language is flexible.
+
+## Change Quality Bar
+
+- Include only discoverable, codebase-backed changes.
+- Avoid speculative refactors and broad formatting churn.
+- Call out any assumptions when code context is incomplete.
+- Prefer explicit file references in explanations (for example: `packages/...`, `website/...`, `CONTRIBUTING.md`).

@@ -39,7 +39,7 @@ All packages are located in the `packages` directory, and the documentation can 
 1. Commit your changes. (`husky` and `lint-staged` will lint your changed files!)
 
     ```sh
-    git commit -am "<type>[optional scope]: <description>"
+    git commit -am "<type>[scope]: <description>"
     ```
 
 1. Push them to your remote branch.
