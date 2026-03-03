@@ -20,3 +20,7 @@
   - `fix(parser): handle empty code block`
   - `docs: update contributing guide`
 - 설명(`description`)은 간결하고 명령형으로 작성합니다.
+
+## 언어 규칙
+
+- 커밋 제목, PR 설명, 이슈/코드 리뷰 코멘트 등 모든 설명 문구는 영어로 작성합니다.
