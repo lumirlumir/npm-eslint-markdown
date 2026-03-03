@@ -181,8 +181,21 @@ When `style` is set to `'consistent'`, the rule enforces that all code blocks in
 
 You can also specify a particular style by setting style to `'indent'`, `'fence-backtick'`, or `'fence-tilde'`, which will enforce that all code blocks use the specified style.
 
+### `blankLineAbove`
+
+> Type: `number` / Default: `1`
+
+Number of blank lines required above code blocks.
+
+::: warning Why is the default value `1`?
+
+TODO: <https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md022---headings-should-be-surrounded-by-blank-lines>
+
+:::
+
 ## Prior Art
 
+- [`MD031` - Fenced code blocks should be surrounded by blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md031.md#md031---fenced-code-blocks-should-be-surrounded-by-blank-lines)
 - [`MD046` - Code block style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md046.md#md046---code-block-style)
 - [`MD048` - Code fence style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md048.md#md048---code-fence-style)
 - [`remark-lint-code-block-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-code-block-style#remark-lint-code-block-style)

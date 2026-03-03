@@ -26,7 +26,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { RuleModule } from '../core/types.js';
  * @typedef {'indent' | 'fence-backtick' | 'fence-tilde'} CodeStyle
- * @typedef {[{ style: 'consistent' | CodeStyle }]} RuleOptions
+ * @typedef {[{ style: 'consistent' | CodeStyle, blankLineAbove: number, blankLineBelow: number }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
@@ -84,6 +84,8 @@ export default {
     defaultOptions: [
       {
         style: 'consistent',
+        blankLineAbove: 1,
+        blankLineBelow: 1,
       },
     ],
 
