@@ -19,4 +19,4 @@
   - `feat(rules): add no-foo rule`
   - `fix(parser): handle empty code block`
   - `docs: update contributing guide`
-- 설명(`description`)은 간결하고 현재형으로 작성합니다.
+- 설명(`description`)은 간결하고 명령형으로 작성합니다.
