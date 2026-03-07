@@ -35,7 +35,7 @@ For faster iteration, use workspace-scoped commands when appropriate:
 ## Testing Style
 
 - All tests should be DAMP (Descriptive And Meaningful Phrase).
-- Do not use `for` iteration to generate test cases; prefer individually named tests that clearly describe the scenario.
+- Do not use `for` iteration to generate test cases. Prefer individually named tests that clearly describe the scenario.
 
 ## Pull Request Workflow
 
