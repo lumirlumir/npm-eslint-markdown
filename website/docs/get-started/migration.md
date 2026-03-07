@@ -42,6 +42,7 @@ This section is currently under construction and will be updated soon.
 | :------------- | :-------------------------------------- |
 | [`MD004` - Unordered list style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md004.md#md004---unordered-list-style) :white_check_mark: | [`md/consistent-unordered-list-style`](../rules/consistent-unordered-list-style.md) |
 | [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
+| [`MD031` - Fenced code blocks should be surrounded by blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md031.md#md031---fenced-code-blocks-should-be-surrounded-by-blank-lines) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`MD035` - Horizontal rule style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md035.md#md035---horizontal-rule-style) :white_check_mark: | [`md/consistent-thematic-break-style`](../rules/consistent-thematic-break-style.md) |
 | [`MD046` - Code block style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md046.md#md046---code-block-style) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`MD048` - Code fence style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md048.md#md048---code-fence-style) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
