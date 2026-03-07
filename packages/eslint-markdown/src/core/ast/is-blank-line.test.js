@@ -8,7 +8,6 @@
 
 import { describe, it } from 'node:test';
 import { strictEqual } from 'node:assert';
-
 import { getFileName } from '../tests/index.js';
 import isBlankLine from './is-blank-line.js';
 
@@ -36,6 +35,10 @@ describe(getFileName(import.meta.url), () => {
 
     it('should return `true` for a string containing multiple tabs', () => {
       strictEqual(isBlankLine('\t\t\t'), true);
+    });
+
+    it('should return `true` for a string containing mixed spaces and tabs', () => {
+      strictEqual(isBlankLine(' \t    \t \t  '), true);
     });
   });
 

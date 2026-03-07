@@ -15,7 +15,7 @@
 ## High-Value Working Rules for AI Agents
 
 - Keep changes **small, focused, and local** to the requested scope.
-- Refer to at least three existing code examples and patterns in the repository for guidance.
+- Refer to at least three similar existing code examples and patterns in the repository for guidance.
 - Prefer editing existing files/patterns instead of introducing new abstractions.
 - When touching package code, check for related workspace dependencies in sibling packages under `packages/`.
 
@@ -86,7 +86,7 @@ Include:
 - Test/Build/Lint status is explicitly documented.
 - No unrelated or speculative changes are included.
 
-### Documentation & Communication Policy
+## Documentation & Communication Policy
 
 - Public-facing GitHub content (PRs, issues, review comments, commit titles/descriptions) must be **English**.
 - Local/offline communication language is flexible.
