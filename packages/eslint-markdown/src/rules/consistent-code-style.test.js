@@ -162,8 +162,85 @@ code block 1
     },
 
     // option: `blankLineBelow`
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\``, // End of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
+`,
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
 
-    // TODO
+`,
+      options: [{ blankLineBelow: 1 }],
+    },
+
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\``, // End of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
+`, // End of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+`,
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+
+`,
+      options: [{ blankLineBelow: 2 }],
+    },
+
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+Paragraph`,
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+
+Paragraph`,
+      options: [{ blankLineBelow: 2 }],
+    },
 
     // option: mixed
     {
