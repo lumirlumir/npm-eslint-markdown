@@ -17,19 +17,55 @@ import isBlankLine from './is-blank-line.js';
 // --------------------------------------------------------------------------------
 
 describe(getFileName(import.meta.url), () => {
-  describe('should return `true` for blank lines', () => {
-    for (const line of ['', ' ', '\t', ' \t ', '\t\t\t']) {
-      it(JSON.stringify(line), () => {
-        strictEqual(isBlankLine(line), true);
-      });
-    }
+  describe('blank line', () => {
+    it('should return `true` for an empty string', () => {
+      strictEqual(isBlankLine(''), true);
+    });
+
+    it('should return `true` for a string containing only a space', () => {
+      strictEqual(isBlankLine(' '), true);
+    });
+
+    it('should return `true` for a string containing only a tab', () => {
+      strictEqual(isBlankLine('\t'), true);
+    });
+
+    it('should return `true` for a string containing mixed spaces and tabs', () => {
+      strictEqual(isBlankLine(' \t '), true);
+    });
+
+    it('should return `true` for a string containing multiple tabs', () => {
+      strictEqual(isBlankLine('\t\t\t'), true);
+    });
   });
 
-  describe('should return `false` for non-blank lines', () => {
-    for (const line of ['a', ' \ta', 'a\t ', '\n', '\r', '\f', '\u00A0']) {
-      it(JSON.stringify(line), () => {
-        strictEqual(isBlankLine(line), false);
-      });
-    }
+  describe('non-blank line', () => {
+    it('should return `false` for a string containing a character', () => {
+      strictEqual(isBlankLine('a'), false);
+    });
+
+    it('should return `false` for a string containing whitespace before a character', () => {
+      strictEqual(isBlankLine(' \ta'), false);
+    });
+
+    it('should return `false` for a string containing whitespace after a character', () => {
+      strictEqual(isBlankLine('a\t '), false);
+    });
+
+    it('should return `false` for a newline character', () => {
+      strictEqual(isBlankLine('\n'), false);
+    });
+
+    it('should return `false` for a carriage return character', () => {
+      strictEqual(isBlankLine('\r'), false);
+    });
+
+    it('should return `false` for a form feed character', () => {
+      strictEqual(isBlankLine('\f'), false);
+    });
+
+    it('should return `false` for a non-breaking space', () => {
+      strictEqual(isBlankLine('\u00A0'), false);
+    });
   });
 });
