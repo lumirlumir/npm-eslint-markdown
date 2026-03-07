@@ -97,6 +97,28 @@ code block 2
 ```
 ````
 
+#### With `{ blankLineAbove: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
+
+Paragraph.
+```js
+console.log('missing blank line above');
+```
+````
+
+#### With `{ blankLineBelow: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
+
+```js
+console.log('missing blank line below');
+```
+Paragraph.
+````
+
 ### :white_check_mark: Correct {#correct}
 
 Examples of **correct** code for this rule:
@@ -165,6 +187,30 @@ code block 1
 ~~~
 ````
 
+#### With `{ blankLineAbove: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
+
+Paragraph.
+
+```js
+console.log('blank line above');
+```
+````
+
+#### With `{ blankLineBelow: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
+
+```js
+console.log('blank line below');
+```
+
+Paragraph.
+````
+
 ## Options
 
 ```js
@@ -191,25 +237,6 @@ Require a specific number of blank lines above each code block.
 
 Set this option to `false` to disable the blank line check above code blocks. Set it to a positive integer to require that many blank lines before every code block.
 
-#### With `{ blankLineAbove: 1 }` Option
-
-````md eslint-check
-<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
-Paragraph text.
-```js
-console.log('missing blank line above');
-```
-````
-
-`````md eslint-check
-<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
-Paragraph text.
-
-```js
-console.log('blank line above');
-```
-`````
-
 ### `blankLineBelow`
 
 > Type: `number | false` / Default: `false`
@@ -217,25 +244,6 @@ console.log('blank line above');
 Require a specific number of blank lines below each code block.
 
 Set this option to `false` to disable the blank line check below code blocks. Set it to a positive integer to require that many blank lines after every code block.
-
-#### With `{ blankLineBelow: 1 }` Option
-
-````md eslint-check
-<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
-```js
-console.log('missing blank line below');
-```
-Paragraph text.
-````
-
-`````md eslint-check
-<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
-```js
-console.log('blank line below');
-```
-
-Paragraph text.
-`````
 
 ## Prior Art
 
