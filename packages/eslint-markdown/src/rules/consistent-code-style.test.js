@@ -89,7 +89,7 @@ code block 1
     {
       name: '`blankLineAbove` option - whitespace-only line above code block',
       code: `Paragraph
- 
+
 \`\`\`
 code block 1
 \`\`\``,
