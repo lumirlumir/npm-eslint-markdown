@@ -188,14 +188,14 @@ code block 1
     },
 
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines with two-line requirement)',
+      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines when two lines are required)',
       code: `\`\`\`
 code block 1
 \`\`\``, // End of file is skipped for blank line check, so no error is reported.
       options: [{ blankLineBelow: 2 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (one trailing blank line with two-line requirement)',
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with one trailing blank line when two lines are required)',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -203,7 +203,7 @@ code block 1
       options: [{ blankLineBelow: 2 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (two trailing blank lines with two-line requirement)',
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with two trailing blank lines when two lines are required)',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -212,7 +212,7 @@ code block 1
       options: [{ blankLineBelow: 2 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (three trailing blank lines with two-line requirement)',
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with three trailing blank lines when two lines are required)',
       code: `\`\`\`
 code block 1
 \`\`\`
