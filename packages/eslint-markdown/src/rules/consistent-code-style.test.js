@@ -77,6 +77,63 @@ code block 1
 ~~~`,
       options: [{ style: 'fence-tilde' }],
     },
+    {
+      name: '`blankLineAbove` option - blank line above code block',
+      code: `Paragraph
+
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 1 }],
+    },
+    {
+      name: '`blankLineAbove` option - whitespace-only line above code block',
+      code: `Paragraph
+ 
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 1 }],
+    },
+    {
+      name: '`blankLineAbove` option - code block at the beginning of the file',
+      code: `\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - blank line below code block',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+Paragraph`,
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - code block at the end of the file',
+      code: `\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options',
+      code: `Paragraph
+
+\`\`\`
+code block 1
+\`\`\`
+
+Paragraph`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -288,6 +345,76 @@ code block 2
           endLine: 6,
           endColumn: 4,
           data: { style: 'fence-tilde' },
+        },
+      ],
+    },
+    {
+      name: '`blankLineAbove` option',
+      code: `Paragraph
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 1 }],
+      errors: [
+        {
+          messageId: 'blankLineAbove',
+          line: 2,
+          column: 1,
+          endLine: 4,
+          endColumn: 4,
+          data: { blankLineAbove: 1 },
+        },
+      ],
+    },
+    {
+      name: '`blankLineBelow` option',
+      code: `\`\`\`
+code block 1
+\`\`\`
+Paragraph`,
+      options: [{ blankLineBelow: 1 }],
+      errors: [
+        {
+          messageId: 'blankLineBelow',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+          data: { blankLineBelow: 1 },
+        },
+      ],
+    },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options',
+      code: `Paragraph
+
+\`\`\`
+code block 1
+\`\`\`
+
+Paragraph`,
+      options: [
+        {
+          blankLineAbove: 2,
+          blankLineBelow: 2,
+        },
+      ],
+      errors: [
+        {
+          messageId: 'blankLineAbove',
+          line: 3,
+          column: 1,
+          endLine: 5,
+          endColumn: 4,
+          data: { blankLineAbove: 2 },
+        },
+        {
+          messageId: 'blankLineBelow',
+          line: 3,
+          column: 1,
+          endLine: 5,
+          endColumn: 4,
+          data: { blankLineBelow: 2 },
         },
       ],
     },
