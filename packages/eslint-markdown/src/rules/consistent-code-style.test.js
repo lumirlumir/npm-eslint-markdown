@@ -24,6 +24,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: 'Empty string',
       code: '  ',
     },
+
+    // option: `style`
     {
       name: '`consistent` style - `indent`',
       code: `
@@ -77,8 +79,70 @@ code block 1
 ~~~`,
       options: [{ style: 'fence-tilde' }],
     },
+
+    // option: `blankLineAbove`
     {
-      name: '`blankLineAbove` option - blank line above code block',
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\``, // Start of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineAbove: 1 }],
+    },
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 1 }],
+    },
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `
+
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 1 }],
+    },
+
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `\`\`\`
+code block 1
+\`\`\``, // Start of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineAbove: 2 }],
+    },
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `
+\`\`\`
+code block 1
+\`\`\``, // Start of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineAbove: 2 }],
+    },
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `
+
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 2 }],
+    },
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `
+
+
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 2 }],
+    },
+
+    {
+      name: '`blankLineAbove` option - `markdownlint` example',
       code: `Paragraph
 
 \`\`\`
@@ -87,30 +151,23 @@ code block 1
       options: [{ blankLineAbove: 1 }],
     },
     {
-      name: '`blankLineAbove` option - code block at the beginning of the file',
-      code: `\`\`\`
+      name: '`blankLineAbove` option - `markdownlint` example',
+      code: `Paragraph
+
+
+\`\`\`
 code block 1
 \`\`\``,
       options: [{ blankLineAbove: 2 }],
     },
-    {
-      name: '`blankLineBelow` option - blank line below code block',
-      code: `\`\`\`
-code block 1
-\`\`\`
 
-Paragraph`,
-      options: [{ blankLineBelow: 1 }],
-    },
+    // option: `blankLineBelow`
+
+    // TODO
+
+    // option: mixed
     {
-      name: '`blankLineBelow` option - code block at the end of the file',
-      code: `\`\`\`
-code block 1
-\`\`\``,
-      options: [{ blankLineBelow: 2 }],
-    },
-    {
-      name: '`blankLineAbove` and `blankLineBelow` options',
+      name: '`blankLineAbove` and `blankLineBelow` options - `markdownlint` example',
       code: `Paragraph
 
 \`\`\`
@@ -125,10 +182,47 @@ Paragraph`,
         },
       ],
     },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - `markdownlint` example',
+      code: `Paragraph
+
+
+\`\`\`
+code block 1
+\`\`\`
+
+
+Paragraph`,
+      options: [
+        {
+          blankLineAbove: 2,
+          blankLineBelow: 2,
+        },
+      ],
+    },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - `markdownlint` example',
+      code: `Paragraph
+
+
+\`\`\`
+code block 1
+\`\`\`
+
+
+
+Paragraph`,
+      options: [
+        {
+          blankLineAbove: 2,
+          blankLineBelow: 3,
+        },
+      ],
+    },
   ],
 
   invalid: [
-    // `consistent` style
+    // option: `style` - `consistent` style
     {
       name: '`consistent` style - `indent` 1',
       code: `
@@ -248,7 +342,7 @@ code block 2
       ],
     },
 
-    // `indent` style
+    // option: `style` - `indent` style
     {
       name: '`indent` style',
       code: `
@@ -280,7 +374,7 @@ code block 2
       ],
     },
 
-    // `fence-backtick` style
+    // option: `style` - `fence-backtick` style
     {
       name: '`fence-backtick` style',
       code: `
@@ -310,7 +404,7 @@ code block 2
       ],
     },
 
-    // `fence-tilde` style
+    // option: `style` - `fence-tilde` style
     {
       name: '`fence-tilde` style',
       code: `
@@ -339,6 +433,8 @@ code block 2
         },
       ],
     },
+
+    // option: `blankLineAbove`
     {
       name: '`blankLineAbove` option',
       code: `Paragraph
@@ -357,6 +453,8 @@ code block 1
         },
       ],
     },
+
+    // option: `blankLineBelow`
     {
       name: '`blankLineBelow` option',
       code: `\`\`\`
@@ -375,6 +473,8 @@ Paragraph`,
         },
       ],
     },
+
+    // option: mixed
     {
       name: '`blankLineAbove` and `blankLineBelow` options',
       code: `Paragraph
