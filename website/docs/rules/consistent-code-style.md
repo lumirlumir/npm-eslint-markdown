@@ -170,6 +170,8 @@ code block 1
 ```js
 'md/consistent-code-style': ['error', {
   style: 'consistent',
+  blankLineAbove: false,
+  blankLineBelow: false,
 }]
 ```
 
@@ -183,15 +185,57 @@ You can also specify a particular style by setting style to `'indent'`, `'fence-
 
 ### `blankLineAbove`
 
-> Type: `number` / Default: `1`
+> Type: `number | false` / Default: `false`
 
-Number of blank lines required above code blocks.
+Require a specific number of blank lines above each code block.
 
-::: warning Why is the default value `1`?
+Set this option to `false` to disable the blank line check above code blocks. Set it to a positive integer to require that many blank lines before every code block.
 
-TODO: <https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md022---headings-should-be-surrounded-by-blank-lines>
+#### With `{ blankLineAbove: 1 }` Option
 
-:::
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
+Paragraph text.
+```js
+console.log('missing blank line above');
+```
+````
+
+`````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
+Paragraph text.
+
+```js
+console.log('blank line above');
+```
+`````
+
+### `blankLineBelow`
+
+> Type: `number | false` / Default: `false`
+
+Require a specific number of blank lines below each code block.
+
+Set this option to `false` to disable the blank line check below code blocks. Set it to a positive integer to require that many blank lines after every code block.
+
+#### With `{ blankLineBelow: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
+```js
+console.log('missing blank line below');
+```
+Paragraph text.
+````
+
+`````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
+```js
+console.log('blank line below');
+```
+
+Paragraph text.
+`````
 
 ## Prior Art
 
