@@ -163,7 +163,7 @@ code block 1
 
     // option: `blankLineBelow`
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file)',
+      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines)',
       code: `\`\`\`
 code block 1
 \`\`\``, // End of file is skipped for blank line check, so no error is reported.
@@ -188,7 +188,7 @@ code block 1
     },
 
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file with two-line requirement)',
+      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines with two-line requirement)',
       code: `\`\`\`
 code block 1
 \`\`\``, // End of file is skipped for blank line check, so no error is reported.
