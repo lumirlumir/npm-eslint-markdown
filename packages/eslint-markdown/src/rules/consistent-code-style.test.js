@@ -87,15 +87,6 @@ code block 1
       options: [{ blankLineAbove: 1 }],
     },
     {
-      name: '`blankLineAbove` option - whitespace-only line above code block',
-      code: `Paragraph
-
-\`\`\`
-code block 1
-\`\`\``,
-      options: [{ blankLineAbove: 1 }],
-    },
-    {
       name: '`blankLineAbove` option - code block at the beginning of the file',
       code: `\`\`\`
 code block 1

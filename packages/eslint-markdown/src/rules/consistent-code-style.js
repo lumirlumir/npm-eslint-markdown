@@ -135,16 +135,37 @@ export default {
 
     return {
       code(node) {
-        const {
-          start: { line: nodeStartLine },
-          end: { line: nodeEndLine },
-        } = sourceCode.getLoc(node);
+        // ------------------------------------------------------------------------
+        // 1. Check code style consistency.
+        // ------------------------------------------------------------------------
+
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const currentCodeStyle = getCurrentCodeStyle(sourceCode.text[nodeStartOffset]);
+
+        if (codeStyle === null) {
+          codeStyle = currentCodeStyle;
+        }
+
+        if (codeStyle !== currentCodeStyle) {
+          context.report({
+            node,
+
+            messageId: 'style',
+
+            data: {
+              style: codeStyle,
+            },
+          });
+        }
 
         // ------------------------------------------------------------------------
-        // 1. Check blank lines above the code block.
+        // 2. Check blank lines above the code block.
         // ------------------------------------------------------------------------
 
         if (blankLineAbove !== false) {
+          const {
+            start: { line: nodeStartLine },
+          } = sourceCode.getLoc(node);
           const nodeStartLineIndex = nodeStartLine - 1;
 
           for (
@@ -180,10 +201,13 @@ export default {
         }
 
         // ------------------------------------------------------------------------
-        // 2. Check blank lines below the code block.
+        // 3. Check blank lines below the code block.
         // ------------------------------------------------------------------------
 
         if (blankLineBelow !== false) {
+          const {
+            end: { line: nodeEndLine },
+          } = sourceCode.getLoc(node);
           const nodeEndLineIndex = nodeEndLine - 1;
 
           for (
@@ -216,29 +240,6 @@ export default {
             // No need to check further once we've found a non-blank line.
             break;
           }
-        }
-
-        // ------------------------------------------------------------------------
-        // 3. Check code style consistency.
-        // ------------------------------------------------------------------------
-
-        const [nodeStartOffset] = sourceCode.getRange(node);
-        const currentCodeStyle = getCurrentCodeStyle(sourceCode.text[nodeStartOffset]);
-
-        if (codeStyle === null) {
-          codeStyle = currentCodeStyle;
-        }
-
-        if (codeStyle !== currentCodeStyle) {
-          context.report({
-            node,
-
-            messageId: 'style',
-
-            data: {
-              style: codeStyle,
-            },
-          });
         }
       },
     };
