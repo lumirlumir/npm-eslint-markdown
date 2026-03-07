@@ -16,6 +16,9 @@ concurrency:
 
 jobs:
   test-cross-platform:
+    # Run the workflow for pushes to main and for pull requests that are not drafts.
+    if: ${{ !github.event.pull_request || github.event.pull_request.draft == false }}
+
     strategy:
       fail-fast: false
       matrix:
