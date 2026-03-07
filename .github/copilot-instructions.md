@@ -32,6 +32,11 @@ For faster iteration, use workspace-scoped commands when appropriate:
 - `npm run test -w <workspace-name>`
 - `npm run build -w <workspace-name>`
 
+## Testing Style
+
+- All tests should be DAMP (Descriptive And Meaningful Phrase).
+- Do not use `for` iteration to generate test cases. Prefer individually named tests that clearly describe the scenario.
+
 ## Pull Request Workflow
 
 Use this guide when preparing any PR in this repository.
