@@ -29,15 +29,15 @@ describe(getFileName(import.meta.url), () => {
       strictEqual(isBlankLine('\t'), true);
     });
 
-    it('should return `true` for a string containing mixed spaces and tabs', () => {
-      strictEqual(isBlankLine(' \t '), true);
-    });
-
     it('should return `true` for a string containing multiple tabs', () => {
       strictEqual(isBlankLine('\t\t\t'), true);
     });
 
-    it('should return `true` for a string containing mixed spaces and tabs', () => {
+    it('should return `true` for a string containing mixed spaces and tabs - 1', () => {
+      strictEqual(isBlankLine(' \t '), true);
+    });
+
+    it('should return `true` for a string containing mixed spaces and tabs - 2', () => {
       strictEqual(isBlankLine(' \t    \t \t  '), true);
     });
   });
