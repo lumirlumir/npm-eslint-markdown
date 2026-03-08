@@ -17,7 +17,7 @@ import markdown from '@eslint/markdown';
 
 /**
  * @import { MarkdownRuleDefinitionTypeOptions } from '@eslint/markdown';
- * @import { RuleModule } from '../types.js';
+ * @import { RuleModule } from './types.js';
  * @typedef {MarkdownRuleDefinitionTypeOptions['RuleOptions']} RuleOptions
  * @typedef {MarkdownRuleDefinitionTypeOptions['MessageIds']} MessageIds
  * @typedef {Parameters<RuleTester['run']>[2]} Tests

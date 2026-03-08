@@ -7,14 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../core/rule-tester.js';
 import rule from './heading-id.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('heading-id', rule, {
   valid: [
     // Default
     {

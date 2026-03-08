@@ -52,3 +52,5 @@ All packages are located in the `packages` directory, and the documentation can 
 - [`parse5` AST Explorer](https://astexplorer.net/#/1CHlCXc4n4)
 - [CommonMark Spec](https://spec.commonmark.org/0.31.2/)
 - [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
+- [`markdownlint` Rules](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#rules)
+- [`remark-lint` Rules](https://github.com/remarkjs/remark-lint?tab=readme-ov-file#rules)
