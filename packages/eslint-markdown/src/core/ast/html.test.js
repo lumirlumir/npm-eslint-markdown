@@ -8,7 +8,6 @@
 
 import { describe, it } from 'node:test';
 import { ok, strictEqual } from 'node:assert';
-import { getFileName } from '../tests/index.js';
 import getElementsByTagName from './html.js';
 
 // --------------------------------------------------------------------------------
@@ -21,7 +20,7 @@ const html = '<p>hello world</p>';
 // Test
 // --------------------------------------------------------------------------------
 
-describe(getFileName(import.meta.url), () => {
+describe('html', () => {
   it('should parse tag name case-insensitively', () => {
     const elements = getElementsByTagName(html, 'P');
 
