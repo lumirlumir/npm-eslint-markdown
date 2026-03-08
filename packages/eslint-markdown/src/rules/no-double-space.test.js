@@ -7,14 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import { ruleTester } from '../core/tests/index.js';
 import rule from './no-double-space.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('no-double-space', rule, {
   valid: [
     // Double spaces.
     '  ', // Empty string with double spaces.

@@ -14,14 +14,13 @@ import { defineConfig } from 'eslint/config';
 import { Linter } from 'eslint/universal';
 import markdown from '@eslint/markdown';
 
-import { getFileName } from './core/tests/index.js';
 import md from './index.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-describe(getFileName(import.meta.url), () => {
+describe('index', () => {
   describe('Basic', () => {
     it('should have correct meta information', () => {
       strictEqual(md.meta.name, 'eslint-markdown');

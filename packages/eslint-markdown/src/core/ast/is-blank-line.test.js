@@ -8,14 +8,13 @@
 
 import { describe, it } from 'node:test';
 import { strictEqual } from 'node:assert';
-import { getFileName } from '../tests/index.js';
 import isBlankLine from './is-blank-line.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-describe(getFileName(import.meta.url), () => {
+describe('is-blank-line', () => {
   describe('blank line', () => {
     it('should return `true` for an empty string', () => {
       strictEqual(isBlankLine(''), true);

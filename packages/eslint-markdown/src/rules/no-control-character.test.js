@@ -7,14 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import { ruleTester } from '../core/tests/index.js';
 import rule from './no-control-character.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('no-control-character', rule, {
   valid: [
     // Basic
     {
