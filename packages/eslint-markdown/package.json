@@ -26,7 +26,7 @@
     "LICENSE.md",
     "README.md",
     "!src/**/*.test.{js,ts}",
-    "!src/core/tests/rule-tester.js",
+    "!src/core/tests/**",
     "!**/fixtures/**"
   ],
   "keywords": [
