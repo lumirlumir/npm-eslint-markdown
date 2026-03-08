@@ -162,8 +162,85 @@ code block 1
     },
 
     // option: `blankLineBelow`
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines)',
+      code: `\`\`\`
+code block 1
+\`\`\``, // End of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with one trailing blank line)',
+      code: `\`\`\`
+code block 1
+\`\`\`
+`,
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with two trailing blank lines)',
+      code: `\`\`\`
+code block 1
+\`\`\`
 
-    // TODO
+`,
+      options: [{ blankLineBelow: 1 }],
+    },
+
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines when two lines are required)',
+      code: `\`\`\`
+code block 1
+\`\`\``, // End of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with one trailing blank line when two lines are required)',
+      code: `\`\`\`
+code block 1
+\`\`\`
+`, // End of file is skipped for blank line check, so no error is reported.
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with two trailing blank lines when two lines are required)',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+`,
+      options: [{ blankLineBelow: 2 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (end of file with three trailing blank lines when two lines are required)',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+
+`,
+      options: [{ blankLineBelow: 2 }],
+    },
+
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (paragraph after one blank line)',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+Paragraph`,
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - `markdownlint` example (paragraph after two blank lines)',
+      code: `\`\`\`
+code block 1
+\`\`\`
+
+
+Paragraph`,
+      options: [{ blankLineBelow: 2 }],
+    },
 
     // option: mixed
     {
