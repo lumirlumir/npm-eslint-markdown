@@ -162,7 +162,8 @@ export default {
         // 2. Check blank lines above the code block.
         // ------------------------------------------------------------------------
 
-        if (blankLineAbove !== false) {
+        // `markdownlint` doesn't check blank lines above indented code blocks, so we skip this check for the `indent` style.
+        if (blankLineAbove !== false && currentCodeStyle !== 'indent') {
           const {
             start: { line: nodeStartLine },
           } = sourceCode.getLoc(node);
@@ -204,7 +205,8 @@ export default {
         // 3. Check blank lines below the code block.
         // ------------------------------------------------------------------------
 
-        if (blankLineBelow !== false) {
+        // `markdownlint` doesn't check blank lines below indented code blocks, so we skip this check for the `indent` style.
+        if (blankLineBelow !== false && currentCodeStyle !== 'indent') {
           const {
             end: { line: nodeEndLine },
           } = sourceCode.getLoc(node);

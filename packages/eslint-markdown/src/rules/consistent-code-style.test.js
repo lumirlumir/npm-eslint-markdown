@@ -82,6 +82,13 @@ code block 1
 
     // option: `blankLineAbove`
     {
+      name: '`blankLineAbove` option - `markdownlint` `MD031` does not check indented code blocks, so no error is reported',
+      code: `# Heading
+    code block 1`,
+      options: [{ blankLineAbove: 1 }],
+    },
+
+    {
       name: '`blankLineAbove` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
@@ -162,6 +169,13 @@ code block 1
     },
 
     // option: `blankLineBelow`
+    {
+      name: '`blankLineBelow` option - `markdownlint` `MD031` does not check indented code blocks, so no error is reported',
+      code: `    code block 1
+# Heading`,
+      options: [{ blankLineBelow: 1 }],
+    },
+
     {
       name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
