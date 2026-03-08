@@ -7,15 +7,24 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../core/rule-tester.js';
 import rule from './consistent-inline-code-style.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
-  valid: ['', '  ', '`some text`', '`` `backticks` ``', '` code `'],
+ruleTester('consistent-inline-code-style', rule, {
+  valid: [
+    '',
+    '  ',
+    '`some text`',
+    '`` `backticks` ``',
+    '`` backtick` ``',
+    '` code `',
+    '` `',
+    '`   `',
+  ],
 
   invalid: [
     {

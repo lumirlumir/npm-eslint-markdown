@@ -18,6 +18,7 @@
 - Refer to at least three similar existing code examples and patterns in the repository for guidance.
 - Prefer editing existing files/patterns instead of introducing new abstractions.
 - When touching package code, check for related workspace dependencies in sibling packages under `packages/`.
+- When implementing a rule with no options, omit `meta.schema` and `meta.defaultOptions` fields.
 
 ## Test/Build/Lint Workflow (required before finalizing)
 

@@ -22,11 +22,9 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-const whitespaceRegex = /^[ \t]+|[ \t]+$/gu;
-const openingDelimiterRegex = /^`+/u;
-const closingDelimiterRegex = /`+$/u;
-const leadingWhitespaceRegex = /^[ \t]+/u;
-const trailingWhitespaceRegex = /[ \t]+$/u;
+const codeSpanRegex = /^(?<delimiter>`+)(?<content>[\s\S]*?)\k<delimiter>$/u;
+const contentPaddingRegex = /^(?<leading>[ \t]*)(?<value>[\s\S]*?)(?<trailing>[ \t]*)$/u;
+const trimPaddingRegex = /^[ \t]+|[ \t]+$/gu;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -46,10 +44,6 @@ export default {
 
     fixable: 'whitespace',
 
-    schema: [],
-
-    defaultOptions: [],
-
     messages: {
       style: 'Inline code should not have extra spaces or tabs next to backticks.',
     },
@@ -65,22 +59,25 @@ export default {
     return {
       inlineCode(node) {
         const text = sourceCode.getText(node);
+        const codeSpanMatch = text.match(codeSpanRegex);
 
-        const openingDelimiter = text.match(openingDelimiterRegex)?.[0] ?? '';
-        const closingDelimiter = text.match(closingDelimiterRegex)?.[0] ?? '';
-        const content = text.slice(openingDelimiter.length, -closingDelimiter.length);
+        if (!codeSpanMatch) return;
+        if (!codeSpanMatch.groups) return;
 
-        const leadingWhitespace = content.match(leadingWhitespaceRegex)?.[0] ?? '';
-        const trailingWhitespace = content.match(trailingWhitespaceRegex)?.[0] ?? '';
+        const { delimiter: openingDelimiter, content } = codeSpanMatch.groups;
+        const closingDelimiter = openingDelimiter;
+        const {
+          leading = '',
+          value = '',
+          trailing = '',
+        } = content.match(contentPaddingRegex)?.groups ?? {};
 
-        const isSingleSurroundingSpace =
-          leadingWhitespace === ' ' && trailingWhitespace === ' ';
+        const isNoSurroundingPadding = leading === '' && trailing === '';
+        const isSingleSurroundingSpace = leading === ' ' && trailing === ' ';
+        const isOnlySpaces =
+          value === '' && !leading.includes('\t') && !trailing.includes('\t');
 
-        if (
-          (leadingWhitespace === '' && trailingWhitespace === '') ||
-          isSingleSurroundingSpace
-        )
-          return;
+        if (isNoSurroundingPadding || isSingleSurroundingSpace || isOnlySpaces) return;
 
         context.report({
           node,
@@ -88,7 +85,7 @@ export default {
           fix(fixer) {
             return fixer.replaceText(
               node,
-              `${openingDelimiter}${content.replace(whitespaceRegex, '')}${closingDelimiter}`,
+              `${openingDelimiter}${content.replace(trimPaddingRegex, '')}${closingDelimiter}`,
             );
           },
         });
