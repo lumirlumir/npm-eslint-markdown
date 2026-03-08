@@ -97,6 +97,28 @@ code block 2
 ```
 ````
 
+#### With `{ blankLineAbove: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
+
+Paragraph
+```js
+console.log('missing blank line above');
+```
+````
+
+#### With `{ blankLineBelow: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
+
+```js
+console.log('missing blank line below');
+```
+Paragraph
+````
+
 ### :white_check_mark: Correct {#correct}
 
 Examples of **correct** code for this rule:
@@ -165,11 +187,37 @@ code block 1
 ~~~
 ````
 
+#### With `{ blankLineAbove: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineAbove: 1 }] -->
+
+Paragraph
+
+```js
+console.log('blank line above');
+```
+````
+
+#### With `{ blankLineBelow: 1 }` Option
+
+````md eslint-check
+<!-- eslint md/consistent-code-style: ['error', { blankLineBelow: 1 }] -->
+
+```js
+console.log('blank line below');
+```
+
+Paragraph
+````
+
 ## Options
 
 ```js
 'md/consistent-code-style': ['error', {
   style: 'consistent',
+  blankLineAbove: false,
+  blankLineBelow: false,
 }]
 ```
 
@@ -181,8 +229,37 @@ When `style` is set to `'consistent'`, the rule enforces that all code blocks in
 
 You can also specify a particular style by setting style to `'indent'`, `'fence-backtick'`, or `'fence-tilde'`, which will enforce that all code blocks use the specified style.
 
+### `blankLineAbove`
+
+> Type: `number | false` / Default: `false`
+
+Require a specific number of blank lines above each fenced code block.
+
+Set this option to `false` to disable the blank line check above fenced code blocks. Set it to a positive integer to require that many blank lines before every fenced code block.
+
+::: warning This option does not apply to indented code blocks
+
+For compatibility with `markdownlint`'s [`MD031` - Fenced code blocks should be surrounded by blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md031.md#md031---fenced-code-blocks-should-be-surrounded-by-blank-lines), this option applies only to fenced code blocks.
+
+:::
+
+### `blankLineBelow`
+
+> Type: `number | false` / Default: `false`
+
+Require a specific number of blank lines below each fenced code block.
+
+Set this option to `false` to disable the blank line check below fenced code blocks. Set it to a positive integer to require that many blank lines after every fenced code block.
+
+::: warning This option does not apply to indented code blocks
+
+For compatibility with `markdownlint`'s [`MD031` - Fenced code blocks should be surrounded by blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md031.md#md031---fenced-code-blocks-should-be-surrounded-by-blank-lines), this option applies only to fenced code blocks.
+
+:::
+
 ## Prior Art
 
+- [`MD031` - Fenced code blocks should be surrounded by blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md031.md#md031---fenced-code-blocks-should-be-surrounded-by-blank-lines)
 - [`MD046` - Code block style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md046.md#md046---code-block-style)
 - [`MD048` - Code fence style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md048.md#md048---code-fence-style)
 - [`remark-lint-code-block-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-code-block-style#remark-lint-code-block-style)
