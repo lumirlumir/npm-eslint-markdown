@@ -27,6 +27,10 @@ Run from repo root:
 - `npm run build`
 - `npm run lint`
 
+Sandbox note:
+
+- If `npm run lint` fails only because `editorconfig-checker` cannot download its binary due to the DNS proxy in this environment, treat that specific failure as ignorable and continue with the remaining validation results.
+
 For faster iteration, use workspace-scoped commands when appropriate:
 
 - `npm run test -w <workspace-name>`
