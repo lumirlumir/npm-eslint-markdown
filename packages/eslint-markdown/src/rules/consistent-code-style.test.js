@@ -163,14 +163,14 @@ code block 1
 
     // option: `blankLineBelow`
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\``, // End of file is skipped for blank line check, so no error is reported.
       options: [{ blankLineBelow: 1 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file with one trailing blank line)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -178,7 +178,7 @@ code block 1
       options: [{ blankLineBelow: 1 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file with two trailing blank lines)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -188,14 +188,14 @@ code block 1
     },
 
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file without trailing blank lines when two lines are required)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\``, // End of file is skipped for blank line check, so no error is reported.
       options: [{ blankLineBelow: 2 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file with one trailing blank line when two lines are required)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -203,7 +203,7 @@ code block 1
       options: [{ blankLineBelow: 2 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file with two trailing blank lines when two lines are required)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -212,7 +212,7 @@ code block 1
       options: [{ blankLineBelow: 2 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (end of file with three trailing blank lines when two lines are required)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -223,7 +223,7 @@ code block 1
     },
 
     {
-      name: '`blankLineBelow` option - `markdownlint` example (paragraph after one blank line)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -232,7 +232,7 @@ Paragraph`,
       options: [{ blankLineBelow: 1 }],
     },
     {
-      name: '`blankLineBelow` option - `markdownlint` example (paragraph after two blank lines)',
+      name: '`blankLineBelow` option - `markdownlint` example',
       code: `\`\`\`
 code block 1
 \`\`\`
@@ -530,6 +530,24 @@ code block 1
         },
       ],
     },
+    {
+      name: '`blankLineAbove` option',
+      code: `Paragraph
+\`\`\`
+code block 1
+\`\`\``,
+      options: [{ blankLineAbove: 3 }],
+      errors: [
+        {
+          messageId: 'blankLineAbove',
+          line: 2,
+          column: 1,
+          endLine: 4,
+          endColumn: 4,
+          data: { blankLineAbove: 3 },
+        },
+      ],
+    },
 
     // option: `blankLineBelow`
     {
@@ -550,8 +568,58 @@ Paragraph`,
         },
       ],
     },
+    {
+      name: '`blankLineBelow` option',
+      code: `\`\`\`
+code block 1
+\`\`\`
+Paragraph`,
+      options: [{ blankLineBelow: 3 }],
+      errors: [
+        {
+          messageId: 'blankLineBelow',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+          data: { blankLineBelow: 3 },
+        },
+      ],
+    },
 
     // option: mixed
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options',
+      code: `Paragraph
+\`\`\`
+code block 1
+\`\`\`
+Paragraph`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+      errors: [
+        {
+          messageId: 'blankLineAbove',
+          line: 2,
+          column: 1,
+          endLine: 4,
+          endColumn: 4,
+          data: { blankLineAbove: 1 },
+        },
+        {
+          messageId: 'blankLineBelow',
+          line: 2,
+          column: 1,
+          endLine: 4,
+          endColumn: 4,
+          data: { blankLineBelow: 1 },
+        },
+      ],
+    },
     {
       name: '`blankLineAbove` and `blankLineBelow` options',
       code: `Paragraph
