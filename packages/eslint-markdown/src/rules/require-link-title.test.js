@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { ruleTester } from '../core/rule-tester.js';
+import ruleTester from '../core/rule-tester.js';
 import rule from './require-link-title.js';
 
 // --------------------------------------------------------------------------------

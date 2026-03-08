@@ -55,4 +55,11 @@ export default defineConfig([
       */
     },
   },
+  {
+    name: 'md/eslint-markdown/rule-tests',
+    files: ['packages/eslint-markdown/src/rules/*.test.js'],
+    rules: {
+      'n/no-unpublished-import': 'off',
+    },
+  },
 ]);

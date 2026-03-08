@@ -57,7 +57,7 @@ const ruleTesterGfm = new RuleTester({
  * @param {RuleModule<RuleOptions, MessageIds>} rule Rule module.
  * @param {Tests} tests Tests.
  */
-function ruleTester(ruleName, rule, tests) {
+export default function ruleTester(ruleName, rule, tests) {
   const { meta } = rule;
 
   describe(ruleName, () => {
@@ -125,7 +125,3 @@ function ruleTester(ruleName, rule, tests) {
     });
   });
 }
-
-export { ruleTester };
-
-export default ruleTester;
