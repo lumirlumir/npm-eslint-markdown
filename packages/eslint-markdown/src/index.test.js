@@ -76,7 +76,7 @@ describe('index', () => {
           extends: ['md/all'],
         },
       ]);
-      const extendsStyleConfigResult = linter.verify('12  34', extendsStyleConfig, {
+      const extendsStyleConfigResult = linter.verify('12  34\n', extendsStyleConfig, {
         filename: 'test.md',
       });
 
@@ -102,7 +102,7 @@ describe('index', () => {
         },
       ]);
       const extendsStyleConfigResult = linter.verify(
-        '12  34\n\n[foo]: bar',
+        '12  34\n\n[foo]: bar\n',
         extendsStyleConfig,
         {
           filename: 'test.md',
@@ -259,7 +259,7 @@ describe('index', () => {
           extends: ['md/stylistic'],
         },
       ]);
-      const extendsStyleConfigResult = linter.verify('---\n\n___', extendsStyleConfig, {
+      const extendsStyleConfigResult = linter.verify('---\n\n___\n', extendsStyleConfig, {
         filename: 'test.md',
       });
 
@@ -288,7 +288,7 @@ describe('index', () => {
         },
       ]);
       const extendsStyleConfigResult = linter.verify(
-        '---\n\n___\n\n[foo]: bar',
+        '---\n\n___\n\n[foo]: bar\n',
         extendsStyleConfig,
         {
           filename: 'test.md',
@@ -326,7 +326,7 @@ describe('index', () => {
         },
       ]);
       const extendsStyleConfigResult = linter.verify(
-        '12  34\n\n---\n\n___\n\n[foo]: bar',
+        '12  34\n\n---\n\n___\n\n[foo]: bar\n',
         extendsStyleConfig,
         {
           filename: 'test.md',
@@ -362,7 +362,7 @@ describe('index', () => {
     it('`all` configuration', () => {
       const linter = new Linter();
       const cascadingStyleConfig = defineConfig([md.configs.all]);
-      const cascadingStyleConfigResult = linter.verify('12  34', cascadingStyleConfig, {
+      const cascadingStyleConfigResult = linter.verify('12  34\n', cascadingStyleConfig, {
         filename: 'test.md',
       });
 
@@ -382,7 +382,7 @@ describe('index', () => {
         md.configs.all,
       ]);
       const cascadingStyleConfigResult = linter.verify(
-        '12  34\n\n[foo]: bar',
+        '12  34\n\n[foo]: bar\n',
         cascadingStyleConfig,
         {
           filename: 'test.md',
@@ -502,7 +502,7 @@ describe('index', () => {
       const linter = new Linter();
       const cascadingStyleConfig = defineConfig([md.configs.stylistic]);
       const cascadingStyleConfigResult = linter.verify(
-        '---\n\n___',
+        '---\n\n___\n',
         cascadingStyleConfig,
         {
           filename: 'test.md',
@@ -528,7 +528,7 @@ describe('index', () => {
         md.configs.stylistic,
       ]);
       const cascadingStyleConfigResult = linter.verify(
-        '---\n\n___\n\n[foo]: bar',
+        '---\n\n___\n\n[foo]: bar\n',
         cascadingStyleConfig,
         {
           filename: 'test.md',
@@ -561,7 +561,7 @@ describe('index', () => {
         md.configs.stylistic,
       ]);
       const cascadingStyleConfigResult = linter.verify(
-        '12  34\n\n---\n\n___\n\n[foo]: bar',
+        '12  34\n\n---\n\n___\n\n[foo]: bar\n',
         cascadingStyleConfig,
         {
           filename: 'test.md',

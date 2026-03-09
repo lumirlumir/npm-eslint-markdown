@@ -45,6 +45,7 @@ export default function stylistic(plugin) {
       'md/consistent-thematic-break-style': 'error',
       'md/consistent-unordered-list-style': 'error',
       'md/no-tab': 'error',
+      'md/single-trailing-newline': 'error',
     },
   });
 }

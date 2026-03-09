@@ -53,6 +53,7 @@ type RuleName = keyof typeof plugin.rules;
 'no-url-trailing-slash' satisfies RuleName;
 'require-image-title' satisfies RuleName;
 'require-link-title' satisfies RuleName;
+'single-trailing-newline' satisfies RuleName;
 
 // #endregion rules
 // --------------------------------------------------------------------------------
@@ -68,6 +69,7 @@ plugin.configs.all.rules satisfies Linter.RulesRecord;
 'md/no-curly-quote' satisfies keyof typeof plugin.configs.all.rules;
 'md/no-double-space' satisfies keyof typeof plugin.configs.all.rules; // Recommended rule.
 'md/no-emoji' satisfies keyof typeof plugin.configs.all.rules;
+'md/single-trailing-newline' satisfies keyof typeof plugin.configs.all.rules;
 
 plugin.configs.base satisfies Linter.Config;
 plugin.configs.base.name satisfies 'md/base';
@@ -89,6 +91,7 @@ plugin.configs.stylistic.rules satisfies Linter.RulesRecord;
 'md/consistent-emphasis-style' satisfies keyof typeof plugin.configs.stylistic.rules;
 'md/consistent-strong-style' satisfies keyof typeof plugin.configs.stylistic.rules;
 'md/consistent-thematic-break-style' satisfies keyof typeof plugin.configs.stylistic.rules;
+'md/single-trailing-newline' satisfies keyof typeof plugin.configs.stylistic.rules;
 
 // #endregion configs
 // --------------------------------------------------------------------------------

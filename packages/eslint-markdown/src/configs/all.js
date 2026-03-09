@@ -58,6 +58,7 @@ export default function all(plugin) {
       'md/no-url-trailing-slash': 'error',
       'md/require-image-title': 'error',
       'md/require-link-title': 'error',
+      'md/single-trailing-newline': 'error',
     },
   });
 }
