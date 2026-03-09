@@ -22,9 +22,8 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-const codeSpanRegex = /^(?<delimiter>`+)(?<content>[\s\S]*?)\k<delimiter>$/u;
-const contentPaddingRegex = /^(?<leading>[ \t]*)(?<value>[\s\S]*?)(?<trailing>[ \t]*)$/u;
-const trimPaddingRegex = /^[ \t]+|[ \t]+$/gu;
+const codeSpanRegex =
+  /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?<value>[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/du;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -58,37 +57,47 @@ export default {
 
     return {
       inlineCode(node) {
-        const text = sourceCode.getText(node);
-        const codeSpanMatch = text.match(codeSpanRegex);
+        const match = sourceCode.getText(node).match(codeSpanRegex);
 
-        if (!codeSpanMatch) return;
-        if (!codeSpanMatch.groups) return;
+        // Protect against unexpected cases, even though they should not occur in theory.
+        if (!match || !match.groups || !match.indices || !match.indices.groups) return;
 
-        const { delimiter: openingDelimiter, content } = codeSpanMatch.groups;
-        const closingDelimiter = openingDelimiter;
-        const {
-          leading = '',
-          value = '',
-          trailing = '',
-        } = content.match(contentPaddingRegex)?.groups ?? {};
+        const { leadingSpaces, value, trailingSpaces } = match.groups;
+        // const { leadingSpaces, value, trailingSpaces } = match.indices.groups;
 
-        const isNoSurroundingPadding = leading === '' && trailing === '';
-        const isSingleSurroundingSpace = leading === ' ' && trailing === ' ';
-        const isOnlySpaces =
-          value === '' && !leading.includes('\t') && !trailing.includes('\t');
+        if (!value) return;
 
-        if (isNoSurroundingPadding || isSingleSurroundingSpace || isOnlySpaces) return;
+        if (leadingSpaces === ' ' && trailingSpaces === ' ') return;
 
-        context.report({
-          node,
-          messageId: 'style',
-          fix(fixer) {
-            return fixer.replaceText(
-              node,
-              `${openingDelimiter}${content.replace(trimPaddingRegex, '')}${closingDelimiter}`,
-            );
-          },
-        });
+        if (leadingSpaces !== '') {
+          const [startOffset, endOffset] = match.indices.groups.leadingSpaces;
+
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
+            messageId: 'style',
+            fix(fixer) {
+              return fixer.removeRange([startOffset, endOffset]);
+            },
+          });
+        }
+
+        if (trailingSpaces !== '') {
+          const [startOffset, endOffset] = match.indices.groups.trailingSpaces;
+
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
+            messageId: 'style',
+            fix(fixer) {
+              return fixer.removeRange([startOffset, endOffset]);
+            },
+          });
+        }
       },
     };
   },
