@@ -26,6 +26,7 @@ import noTab from './no-tab.js';
 import noUrlTrailingSlash from './no-url-trailing-slash.js';
 import requireImageTitle from './require-image-title.js';
 import requireLinkTitle from './require-link-title.js';
+import singleTrailingNewline from './single-trailing-newline.js';
 
 export default {
   // 'allow-heading': allowHeading,
@@ -52,4 +53,5 @@ export default {
   'no-url-trailing-slash': noUrlTrailingSlash,
   'require-image-title': requireImageTitle,
   'require-link-title': requireLinkTitle,
+  'single-trailing-newline': singleTrailingNewline,
 };
