@@ -20,6 +20,11 @@
 - When touching package code, check for related workspace dependencies in sibling packages under `packages/`.
 - When implementing a rule with no options, omit `meta.schema` and `meta.defaultOptions` fields.
 
+## Bootstrapping
+
+- In a fresh clone, run `npm install` from the repo root before attempting tests, builds, lint, or package changes.
+- Do not start validation or implementation work until the install has completed successfully, because the workspace dependencies are required across the monorepo.
+
 ## Test/Build/Lint Workflow (required before finalizing)
 
 Run from repo root:
