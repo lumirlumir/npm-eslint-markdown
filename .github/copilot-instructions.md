@@ -19,6 +19,11 @@
 - Prefer editing existing files/patterns instead of introducing new abstractions.
 - When touching package code, check for related workspace dependencies in sibling packages under `packages/`.
 
+## Bootstrapping
+
+- In a fresh clone, run `npm install` from the repo root before attempting tests, builds, lint, or package changes.
+- Do not start validation or implementation work until the install has completed successfully, because the workspace dependencies are required across the monorepo.
+
 ## Test/Build/Lint Workflow (required before finalizing)
 
 Run from repo root:
