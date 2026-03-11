@@ -25,6 +25,12 @@ For full documentation, see the [official documentation of the `eslint-markdown`
 - [Migration Guide](https://eslint-markdown.lumir.page/docs/get-started/migration)
 - [Rules](https://eslint-markdown.lumir.page/docs/rules)
 
+## Compatibility
+
+This [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown#readme) plugin does not include any rules that overlap with ESLint's built-in Markdown rules provided by [`@eslint/markdown`](https://github.com/eslint/markdown#readme).
+
+So, we **highly recommend** using the `eslint-markdown` plugin alongside ESLint's built-in Markdown support, `@eslint/markdown`.
+
 ## Code of Conduct
 
 See [Code of Conduct](https://github.com/lumirlumir/.github/blob/main/CODE_OF_CONDUCT.md#contributor-covenant-code-of-conduct).
