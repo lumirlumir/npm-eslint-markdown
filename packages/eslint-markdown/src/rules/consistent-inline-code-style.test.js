@@ -20,6 +20,8 @@ ruleTester('consistent-inline-code-style', rule, {
     '',
     '  ',
     '``', // This is not a `inlineCode`, but a `text`.
+    '```', // This is not a `inlineCode`, but a start of a `code`.
+    '` ` `', // This is `inlineCode` and `text`.
     '` `',
     '`   `',
     '`some text`',
@@ -44,6 +46,19 @@ ruleTester('consistent-inline-code-style', rule, {
       ],
     },
     {
+      code: 'hi ` some text`',
+      output: 'hi `some text`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 5,
+          endLine: 1,
+          endColumn: 6,
+        },
+      ],
+    },
+    {
       code: '`some text `',
       output: '`some text`',
       errors: [
@@ -56,7 +71,33 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
+    {
+      code: 'hi `some text `',
+      output: 'hi `some text`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 15,
+        },
+      ],
+    },
     /*
+    {
+      code: '`  some text `',
+      output: '` some text `',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+        },
+      ],
+    },
     {
       code: '` some text  `',
       output: '` some text `',

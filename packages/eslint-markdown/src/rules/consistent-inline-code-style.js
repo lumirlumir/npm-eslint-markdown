@@ -23,7 +23,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 const codeSpanRegex =
-  /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?<value>[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/du;
+  /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?<value>[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/u;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -60,41 +60,49 @@ export default {
         const match = sourceCode.getText(node).match(codeSpanRegex);
 
         // Protect against unexpected cases, even though they should not occur in theory.
-        if (!match || !match.groups || !match.indices || !match.indices.groups) return;
+        if (!match || !match.groups) return;
 
-        const { leadingSpaces, value, trailingSpaces } = match.groups;
-        // const { leadingSpaces, value, trailingSpaces } = match.indices.groups;
+        const { delimiter, leadingSpaces, value, trailingSpaces } = match.groups;
 
         if (!value) return;
 
         if (leadingSpaces === ' ' && trailingSpaces === ' ') return;
 
-        if (leadingSpaces !== '') {
-          const [startOffset, endOffset] = match.indices.groups.leadingSpaces;
+        const [nodeStartOffset] = sourceCode.getRange(node);
 
+        const leadingSpacesStartOffset = nodeStartOffset + delimiter.length;
+        const leadingSpacesEndOffset = leadingSpacesStartOffset + leadingSpaces.length;
+        const trailingSpacesStartOffset = leadingSpacesEndOffset + value.length;
+        const trailingSpacesEndOffset = trailingSpacesStartOffset + trailingSpaces.length;
+
+        if (leadingSpaces !== '') {
           context.report({
             loc: {
-              start: sourceCode.getLocFromIndex(startOffset),
-              end: sourceCode.getLocFromIndex(endOffset),
+              start: sourceCode.getLocFromIndex(leadingSpacesStartOffset),
+              end: sourceCode.getLocFromIndex(leadingSpacesEndOffset),
             },
             messageId: 'style',
             fix(fixer) {
-              return fixer.removeRange([startOffset, endOffset]);
+              return fixer.removeRange([
+                leadingSpacesStartOffset,
+                leadingSpacesEndOffset,
+              ]);
             },
           });
         }
 
         if (trailingSpaces !== '') {
-          const [startOffset, endOffset] = match.indices.groups.trailingSpaces;
-
           context.report({
             loc: {
-              start: sourceCode.getLocFromIndex(startOffset),
-              end: sourceCode.getLocFromIndex(endOffset),
+              start: sourceCode.getLocFromIndex(trailingSpacesStartOffset),
+              end: sourceCode.getLocFromIndex(trailingSpacesEndOffset),
             },
             messageId: 'style',
             fix(fixer) {
-              return fixer.removeRange([startOffset, endOffset]);
+              return fixer.removeRange([
+                trailingSpacesStartOffset,
+                trailingSpacesEndOffset,
+              ]);
             },
           });
         }
