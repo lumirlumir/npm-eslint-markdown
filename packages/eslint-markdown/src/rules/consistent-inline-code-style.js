@@ -1,6 +1,7 @@
 /**
  * @fileoverview Rule to enforce consistent inline code style.
  * @author 루밀LuMir(lumirlumir)
+ * @see https://github.com/DavidAnson/markdownlint/blob/main/lib/md038.mjs
  */
 
 // --------------------------------------------------------------------------------
