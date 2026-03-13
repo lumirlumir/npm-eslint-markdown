@@ -32,6 +32,7 @@ ruleTester('consistent-inline-code-style', rule, {
   ],
 
   invalid: [
+    // Space
     {
       code: '` some text`',
       output: '`some text`',
@@ -99,6 +100,19 @@ ruleTester('consistent-inline-code-style', rule, {
       ],
     },
     {
+      code: '`   some text `',
+      output: '` some text `',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 5,
+        },
+      ],
+    },
+    {
       code: '` some text  `',
       output: '` some text `',
       errors: [
@@ -108,6 +122,19 @@ ruleTester('consistent-inline-code-style', rule, {
           column: 12,
           endLine: 1,
           endColumn: 13,
+        },
+      ],
+    },
+    {
+      code: '` some text   `',
+      output: '` some text `',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 12,
+          endLine: 1,
+          endColumn: 14,
         },
       ],
     },
@@ -207,7 +234,8 @@ ruleTester('consistent-inline-code-style', rule, {
       ],
     },
     */ // TODO
-    /*
+
+    // Tab
     {
       code: '`\tsome text\t`',
       output: '`some text`',
@@ -217,10 +245,19 @@ ruleTester('consistent-inline-code-style', rule, {
           line: 1,
           column: 2,
           endLine: 1,
+          endColumn: 3,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 12,
+          endLine: 1,
           endColumn: 13,
         },
       ],
     },
+
+    // Space & Tab
     {
       code: '` \tsome text\t `',
       output: '`some text`',
@@ -230,10 +267,16 @@ ruleTester('consistent-inline-code-style', rule, {
           line: 1,
           column: 2,
           endLine: 1,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 13,
+          endLine: 1,
           endColumn: 15,
         },
       ],
     },
-    */
   ],
 });
