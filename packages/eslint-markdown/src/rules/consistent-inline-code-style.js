@@ -55,6 +55,23 @@ export default {
   create(context) {
     const { sourceCode } = context;
 
+    /**
+     * @param {number} startOffset
+     * @param {number} endOffset
+     */
+    function reportPadding(startOffset, endOffset) {
+      context.report({
+        loc: {
+          start: sourceCode.getLocFromIndex(startOffset),
+          end: sourceCode.getLocFromIndex(endOffset),
+        },
+        messageId: 'style',
+        fix(fixer) {
+          return fixer.removeRange([startOffset, endOffset]);
+        },
+      });
+    }
+
     return {
       inlineCode(node) {
         const match = sourceCode.getText(node).match(codeSpanRegex);
@@ -66,68 +83,42 @@ export default {
 
         if (!value) return;
 
-        const preservePadding =
+        const startsWithBacktick = value.startsWith('`');
+        const endsWithBacktick = value.endsWith('`');
+        const hasLeadingTab = leadingSpaces.includes('\t');
+        const hasTrailingTab = trailingSpaces.includes('\t');
+        const keepPadding =
           leadingSpaces.includes(' ') &&
           trailingSpaces.includes(' ') &&
-          !leadingSpaces.includes('\t') &&
-          !trailingSpaces.includes('\t') &&
+          !hasLeadingTab &&
+          !hasTrailingTab &&
           (leadingSpaces.length === 1 ||
             trailingSpaces.length === 1 ||
-            value.startsWith('`') ||
-            value.endsWith('`'));
+            startsWithBacktick ||
+            endsWithBacktick);
 
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
         const leadingKeep =
-          preservePadding ||
-          (trailingSpaces === '' &&
-            !leadingSpaces.includes('\t') &&
-            value.startsWith('`'))
+          keepPadding || (trailingSpaces === '' && !hasLeadingTab && startsWithBacktick)
             ? 1
             : 0;
         const trailingKeep =
-          preservePadding ||
-          (leadingSpaces === '' && !trailingSpaces.includes('\t') && value.endsWith('`'))
+          keepPadding || (leadingSpaces === '' && !hasTrailingTab && endsWithBacktick)
             ? 1
             : 0;
 
         if (leadingSpaces.length > leadingKeep) {
-          context.report({
-            loc: {
-              start: sourceCode.getLocFromIndex(
-                nodeStartOffset + delimiter.length + leadingKeep,
-              ),
-              end: sourceCode.getLocFromIndex(
-                nodeStartOffset + delimiter.length + leadingSpaces.length,
-              ),
-            },
-            messageId: 'style',
-            fix(fixer) {
-              return fixer.removeRange([
-                nodeStartOffset + delimiter.length + leadingKeep,
-                nodeStartOffset + delimiter.length + leadingSpaces.length,
-              ]);
-            },
-          });
+          reportPadding(
+            nodeStartOffset + delimiter.length + leadingKeep,
+            nodeStartOffset + delimiter.length + leadingSpaces.length,
+          );
         }
 
         if (trailingSpaces.length > trailingKeep) {
-          context.report({
-            loc: {
-              start: sourceCode.getLocFromIndex(
-                nodeEndOffset - delimiter.length - trailingSpaces.length,
-              ),
-              end: sourceCode.getLocFromIndex(
-                nodeEndOffset - delimiter.length - trailingKeep,
-              ),
-            },
-            messageId: 'style',
-            fix(fixer) {
-              return fixer.removeRange([
-                nodeEndOffset - delimiter.length - trailingSpaces.length,
-                nodeEndOffset - delimiter.length - trailingKeep,
-              ]);
-            },
-          });
+          reportPadding(
+            nodeEndOffset - delimiter.length - trailingSpaces.length,
+            nodeEndOffset - delimiter.length - trailingKeep,
+          );
         }
       },
     };
