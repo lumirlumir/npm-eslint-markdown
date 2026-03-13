@@ -116,7 +116,6 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
-    /*
     {
       code: '`  some text `',
       output: '` some text `',
@@ -169,7 +168,6 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
-    */ // TODO
     {
       code: '`  some text  `',
       output: '`some text`',
@@ -250,7 +248,6 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
-    /*
     {
       code: '``  `some text` ``',
       output: '`` `some text` ``',
@@ -317,7 +314,6 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
-    */ // TODO
 
     // Tab
     {

@@ -66,43 +66,52 @@ export default {
 
         if (!value) return;
 
-        if (leadingSpaces === ' ' && trailingSpaces === ' ') return;
+        const preserveSpace =
+          leadingSpaces.includes(' ') &&
+          trailingSpaces.includes(' ') &&
+          !leadingSpaces.includes('\t') &&
+          !trailingSpaces.includes('\t') &&
+          (leadingSpaces.length === 1 ||
+            trailingSpaces.length === 1 ||
+            value.startsWith('`') ||
+            value.endsWith('`'));
 
-        const [nodeStartOffset] = sourceCode.getRange(node);
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+        const keep = preserveSpace ? 1 : 0;
 
-        const leadingSpacesStartOffset = nodeStartOffset + delimiter.length;
-        const leadingSpacesEndOffset = leadingSpacesStartOffset + leadingSpaces.length;
-
-        const trailingSpacesStartOffset = leadingSpacesEndOffset + value.length;
-        const trailingSpacesEndOffset = trailingSpacesStartOffset + trailingSpaces.length;
-
-        if (leadingSpaces !== '') {
+        if (leadingSpaces.length > keep) {
           context.report({
             loc: {
-              start: sourceCode.getLocFromIndex(leadingSpacesStartOffset),
-              end: sourceCode.getLocFromIndex(leadingSpacesEndOffset),
+              start: sourceCode.getLocFromIndex(
+                nodeStartOffset + delimiter.length + keep,
+              ),
+              end: sourceCode.getLocFromIndex(
+                nodeStartOffset + delimiter.length + leadingSpaces.length,
+              ),
             },
             messageId: 'style',
             fix(fixer) {
               return fixer.removeRange([
-                leadingSpacesStartOffset,
-                leadingSpacesEndOffset,
+                nodeStartOffset + delimiter.length + keep,
+                nodeStartOffset + delimiter.length + leadingSpaces.length,
               ]);
             },
           });
         }
 
-        if (trailingSpaces !== '') {
+        if (trailingSpaces.length > keep) {
           context.report({
             loc: {
-              start: sourceCode.getLocFromIndex(trailingSpacesStartOffset),
-              end: sourceCode.getLocFromIndex(trailingSpacesEndOffset),
+              start: sourceCode.getLocFromIndex(
+                nodeEndOffset - delimiter.length - trailingSpaces.length,
+              ),
+              end: sourceCode.getLocFromIndex(nodeEndOffset - delimiter.length - keep),
             },
             messageId: 'style',
             fix(fixer) {
               return fixer.removeRange([
-                trailingSpacesStartOffset,
-                trailingSpacesEndOffset,
+                nodeEndOffset - delimiter.length - trailingSpaces.length,
+                nodeEndOffset - delimiter.length - keep,
               ]);
             },
           });
