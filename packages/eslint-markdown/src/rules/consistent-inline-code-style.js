@@ -91,38 +91,41 @@ export default {
         const startMatch = /^(\s+)(\S)/.exec(node.value) || [null, '', ''];
         const startBacktick = startMatch[2] === '`';
         const startPaddingLength = leadingSpaces.length - startMatch[1].length;
-        const startCount =
-          startMatch[1].length - (startBacktick && !startPaddingLength ? 1 : 0);
-        const startSpaces = startCount > 0;
+        const startBacktickSpaceAdjustment = startBacktick && !startPaddingLength ? 1 : 0;
+        const startSpaces = startMatch[1].length > startBacktickSpaceAdjustment;
 
         // eslint-disable-next-line -- TODO
         const endMatch = /(\S)(\s+)$/.exec(node.value) || [null, '', ''];
         const endBacktick = endMatch[1] === '`';
         const endPaddingLength = trailingSpaces.length - endMatch[2].length;
-        const endCount = endMatch[2].length - (endBacktick && !endPaddingLength ? 1 : 0);
-        const endSpaces = endCount > 0;
+        const endBacktickSpaceAdjustment = endBacktick && !endPaddingLength ? 1 : 0;
+        const endSpaces = endMatch[2].length > endBacktickSpaceAdjustment;
 
         const removePadding =
-          startSpaces &&
-          endSpaces &&
           startPaddingLength &&
           endPaddingLength &&
+          startSpaces &&
+          endSpaces &&
           !startBacktick &&
           !endBacktick;
 
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
 
         if (startSpaces) {
+          const baseOffset = nodeStartOffset + delimiter.length;
+
           reportStyle(
-            nodeStartOffset + delimiter.length + (removePadding ? 0 : startPaddingLength),
-            nodeStartOffset + delimiter.length + startPaddingLength + startCount,
+            baseOffset + (removePadding ? 0 : startPaddingLength),
+            baseOffset + leadingSpaces.length - startBacktickSpaceAdjustment,
           );
         }
 
         if (endSpaces) {
+          const baseOffset = nodeEndOffset - delimiter.length;
+
           reportStyle(
-            nodeEndOffset - delimiter.length - endPaddingLength - endCount,
-            nodeEndOffset - delimiter.length - (removePadding ? 0 : endPaddingLength),
+            baseOffset - trailingSpaces.length + endBacktickSpaceAdjustment,
+            baseOffset - (removePadding ? 0 : endPaddingLength),
           );
         }
       },
