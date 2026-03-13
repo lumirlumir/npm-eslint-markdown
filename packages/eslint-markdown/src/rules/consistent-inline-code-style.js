@@ -22,7 +22,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-const codeSpanRegex =
+const inlineCodeRegex =
   /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?<value>[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/u;
 
 // --------------------------------------------------------------------------------
@@ -59,13 +59,15 @@ export default {
      * @param {number} startOffset
      * @param {number} endOffset
      */
-    function reportPadding(startOffset, endOffset) {
+    function reportStyle(startOffset, endOffset) {
       context.report({
         loc: {
           start: sourceCode.getLocFromIndex(startOffset),
           end: sourceCode.getLocFromIndex(endOffset),
         },
+
         messageId: 'style',
+
         fix(fixer) {
           return fixer.removeRange([startOffset, endOffset]);
         },
@@ -74,7 +76,7 @@ export default {
 
     return {
       inlineCode(node) {
-        const match = sourceCode.getText(node).match(codeSpanRegex);
+        const match = sourceCode.getText(node).match(inlineCodeRegex);
 
         // Protect against unexpected cases, even though they should not occur in theory.
         if (!match || !match.groups) return;
@@ -108,14 +110,14 @@ export default {
             : 0;
 
         if (leadingSpaces.length > leadingKeep) {
-          reportPadding(
+          reportStyle(
             nodeStartOffset + delimiter.length + leadingKeep,
             nodeStartOffset + delimiter.length + leadingSpaces.length,
           );
         }
 
         if (trailingSpaces.length > trailingKeep) {
-          reportPadding(
+          reportStyle(
             nodeEndOffset - delimiter.length - trailingSpaces.length,
             nodeEndOffset - delimiter.length - trailingKeep,
           );
