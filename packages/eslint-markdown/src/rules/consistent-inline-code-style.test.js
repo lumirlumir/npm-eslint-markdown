@@ -26,13 +26,44 @@ ruleTester('consistent-inline-code-style', rule, {
     '`   `',
     '`some text`',
     '` some text `',
+    '`code`',
     '` code `',
+    // '`` `code``',
+    // '``code` ``',
+    '`` `code` ``',
     '`` `backticks` ``',
     '`` backtick` ``',
+    '`` ` ``',
   ],
 
   invalid: [
     // Space
+    {
+      code: '`  code`',
+      output: '`code`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 4,
+        },
+      ],
+    },
+    {
+      code: '`code  `',
+      output: '`code`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 8,
+        },
+      ],
+    },
     {
       code: '` some text`',
       output: '`some text`',
