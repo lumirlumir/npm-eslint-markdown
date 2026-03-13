@@ -133,6 +133,46 @@ ruleTester('consistent-inline-code-style', rule, {
       ],
     },
     {
+      code: '`   some text  `',
+      output: '`some text`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 5,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 16,
+        },
+      ],
+    },
+    {
+      code: '`  some text   `',
+      output: '`some text`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 16,
+        },
+      ],
+    },
+    {
       code: '`   some text   `',
       output: '`some text`',
       errors: [
@@ -152,6 +192,21 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
+    /*
+    {
+      code: '``  `some text` ``',
+      output: '`` `some text` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+        },
+      ],
+    },
+    */ // TODO
     /*
     {
       code: '`\tsome text\t`',

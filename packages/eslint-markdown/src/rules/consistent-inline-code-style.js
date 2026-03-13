@@ -72,6 +72,7 @@ export default {
 
         const leadingSpacesStartOffset = nodeStartOffset + delimiter.length;
         const leadingSpacesEndOffset = leadingSpacesStartOffset + leadingSpaces.length;
+
         const trailingSpacesStartOffset = leadingSpacesEndOffset + value.length;
         const trailingSpacesEndOffset = trailingSpacesStartOffset + trailingSpaces.length;
 
