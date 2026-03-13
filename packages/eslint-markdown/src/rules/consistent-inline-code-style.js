@@ -4,6 +4,8 @@
  * @see https://github.com/DavidAnson/markdownlint/blob/main/lib/md038.mjs
  */
 
+// TODO: Multiline inline code with `\n` is possible.
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
@@ -25,7 +27,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 const inlineCodeRegex =
-  /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?<value>[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/u;
+  /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?:[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/u;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -83,9 +85,7 @@ export default {
         // Protect against unexpected cases, even though they should not occur in theory.
         if (!match || !match.groups) return;
 
-        const { delimiter, leadingSpaces, value, trailingSpaces } = match.groups;
-
-        if (!value) return;
+        const { delimiter, leadingSpaces, trailingSpaces } = match.groups;
 
         // eslint-disable-next-line -- TODO
         const startMatch = /^(\s+)(\S)/.exec(node.value) || [null, '', ''];
