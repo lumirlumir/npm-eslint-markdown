@@ -233,6 +233,59 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
+    {
+      code: '`` `some text`  ``',
+      output: '`` `some text` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 16,
+        },
+      ],
+    },
+    {
+      code: '``  `some text`  ``',
+      output: '`` `some text` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 17,
+        },
+      ],
+    },
+    {
+      code: '``   `some text`   ``',
+      output: '`` `some text` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 19,
+        },
+      ],
+    },
     */ // TODO
 
     // Tab
