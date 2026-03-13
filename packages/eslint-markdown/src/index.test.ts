@@ -68,25 +68,26 @@ plugin.configs.all satisfies Linter.Config;
 plugin.configs.all.name satisfies 'md/all';
 plugin.configs.all.language satisfies 'markdown/gfm';
 plugin.configs.all.rules satisfies Linter.RulesRecord;
+
 type AllConfigRuleName = keyof typeof plugin.configs.all.rules;
 
 'md/allow-image-url' satisfies AllConfigRuleName;
 'md/allow-link-url' satisfies AllConfigRuleName;
-'md/code-lang-shorthand' satisfies AllConfigRuleName; // Recommended rule.
-'md/consistent-code-style' satisfies AllConfigRuleName; // Stylistic rule.
+'md/code-lang-shorthand' satisfies AllConfigRuleName;
+'md/consistent-code-style' satisfies AllConfigRuleName;
 'md/consistent-delete-style' satisfies AllConfigRuleName;
 'md/consistent-emphasis-style' satisfies AllConfigRuleName;
 'md/consistent-strong-style' satisfies AllConfigRuleName;
 'md/consistent-thematic-break-style' satisfies AllConfigRuleName;
 'md/consistent-unordered-list-style' satisfies AllConfigRuleName;
-'md/no-control-character' satisfies AllConfigRuleName; // Recommended rule.
+'md/no-control-character' satisfies AllConfigRuleName;
 'md/no-curly-quote' satisfies AllConfigRuleName;
 'md/no-double-space' satisfies AllConfigRuleName;
 'md/no-emoji' satisfies AllConfigRuleName;
 'md/no-git-conflict-marker' satisfies AllConfigRuleName;
 'md/no-irregular-dash' satisfies AllConfigRuleName;
 'md/no-irregular-whitespace' satisfies AllConfigRuleName;
-'md/no-tab' satisfies AllConfigRuleName; // Stylistic rule.
+'md/no-tab' satisfies AllConfigRuleName;
 'md/no-url-trailing-slash' satisfies AllConfigRuleName;
 'md/require-image-title' satisfies AllConfigRuleName;
 'md/require-link-title' satisfies AllConfigRuleName;
@@ -101,6 +102,7 @@ plugin.configs.recommended satisfies Linter.Config;
 plugin.configs.recommended.name satisfies 'md/recommended';
 plugin.configs.recommended.language satisfies 'markdown/gfm';
 plugin.configs.recommended.rules satisfies Linter.RulesRecord;
+
 type RecommendedConfigRuleName = keyof typeof plugin.configs.recommended.rules;
 
 'md/code-lang-shorthand' satisfies RecommendedConfigRuleName;
@@ -115,6 +117,7 @@ plugin.configs.stylistic satisfies Linter.Config;
 plugin.configs.stylistic.name satisfies 'md/stylistic';
 plugin.configs.stylistic.language satisfies 'markdown/gfm';
 plugin.configs.stylistic.rules satisfies Linter.RulesRecord;
+
 type StylisticConfigRuleName = keyof typeof plugin.configs.stylistic.rules;
 
 'md/consistent-code-style' satisfies StylisticConfigRuleName;
