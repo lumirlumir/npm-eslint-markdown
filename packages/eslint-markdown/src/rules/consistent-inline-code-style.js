@@ -15,6 +15,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
+ * @typedef {[]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
@@ -29,7 +30,7 @@ const inlineCodeRegex =
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-/** @type {RuleModule<[], MessageIds>} */
+/** @type {RuleModule<RuleOptions, MessageIds>} */
 export default {
   meta: {
     type: 'layout',
@@ -111,21 +112,17 @@ export default {
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
 
         if (startSpaces) {
-          const startOffset =
-            nodeStartOffset + delimiter.length + (removePadding ? 0 : startPaddingLength);
-          const endOffset =
-            nodeStartOffset + delimiter.length + startPaddingLength + startCount;
-
-          reportStyle(startOffset, endOffset);
+          reportStyle(
+            nodeStartOffset + delimiter.length + (removePadding ? 0 : startPaddingLength),
+            nodeStartOffset + delimiter.length + startPaddingLength + startCount,
+          );
         }
 
         if (endSpaces) {
-          const startOffset =
-            nodeEndOffset - delimiter.length - endPaddingLength - endCount;
-          const endOffset =
-            nodeEndOffset - delimiter.length - (removePadding ? 0 : endPaddingLength);
-
-          reportStyle(startOffset, endOffset);
+          reportStyle(
+            nodeEndOffset - delimiter.length - endPaddingLength - endCount,
+            nodeEndOffset - delimiter.length - (removePadding ? 0 : endPaddingLength),
+          );
         }
       },
     };
