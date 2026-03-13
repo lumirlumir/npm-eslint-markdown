@@ -85,42 +85,47 @@ export default {
 
         if (!value) return;
 
-        const startsWithBacktick = value.startsWith('`');
-        const endsWithBacktick = value.endsWith('`');
-        const hasLeadingTab = leadingSpaces.includes('\t');
-        const hasTrailingTab = trailingSpaces.includes('\t');
-        const keepPadding =
-          leadingSpaces.includes(' ') &&
-          trailingSpaces.includes(' ') &&
-          !hasLeadingTab &&
-          !hasTrailingTab &&
-          (leadingSpaces.length === 1 ||
-            trailingSpaces.length === 1 ||
-            startsWithBacktick ||
-            endsWithBacktick);
+        // eslint-disable-next-line -- TODO
+        const startMatch = /^(\s+)(\S)/.exec(node.value) || [null, '', ''];
+        const startBacktick = startMatch[2] === '`';
+        const startPaddingLength = leadingSpaces.length - startMatch[1].length;
+        const startCount =
+          startMatch[1].length - (startBacktick && !startPaddingLength ? 1 : 0);
+        const startSpaces = startCount > 0;
+
+        // eslint-disable-next-line -- TODO
+        const endMatch = /(\S)(\s+)$/.exec(node.value) || [null, '', ''];
+        const endBacktick = endMatch[1] === '`';
+        const endPaddingLength = trailingSpaces.length - endMatch[2].length;
+        const endCount = endMatch[2].length - (endBacktick && !endPaddingLength ? 1 : 0);
+        const endSpaces = endCount > 0;
+
+        const removePadding =
+          startSpaces &&
+          endSpaces &&
+          startPaddingLength &&
+          endPaddingLength &&
+          !startBacktick &&
+          !endBacktick;
 
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const leadingKeep =
-          keepPadding || (trailingSpaces === '' && !hasLeadingTab && startsWithBacktick)
-            ? 1
-            : 0;
-        const trailingKeep =
-          keepPadding || (leadingSpaces === '' && !hasTrailingTab && endsWithBacktick)
-            ? 1
-            : 0;
 
-        if (leadingSpaces.length > leadingKeep) {
-          reportStyle(
-            nodeStartOffset + delimiter.length + leadingKeep,
-            nodeStartOffset + delimiter.length + leadingSpaces.length,
-          );
+        if (startSpaces) {
+          const startOffset =
+            nodeStartOffset + delimiter.length + (removePadding ? 0 : startPaddingLength);
+          const endOffset =
+            nodeStartOffset + delimiter.length + startPaddingLength + startCount;
+
+          reportStyle(startOffset, endOffset);
         }
 
-        if (trailingSpaces.length > trailingKeep) {
-          reportStyle(
-            nodeEndOffset - delimiter.length - trailingSpaces.length,
-            nodeEndOffset - delimiter.length - trailingKeep,
-          );
+        if (endSpaces) {
+          const startOffset =
+            nodeEndOffset - delimiter.length - endPaddingLength - endCount;
+          const endOffset =
+            nodeEndOffset - delimiter.length - (removePadding ? 0 : endPaddingLength);
+
+          reportStyle(startOffset, endOffset);
         }
       },
     };
