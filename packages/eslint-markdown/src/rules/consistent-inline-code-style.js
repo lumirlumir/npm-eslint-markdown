@@ -66,7 +66,7 @@ export default {
 
         if (!value) return;
 
-        const preserveSpace =
+        const preservePadding =
           leadingSpaces.includes(' ') &&
           trailingSpaces.includes(' ') &&
           !leadingSpaces.includes('\t') &&
@@ -77,13 +77,24 @@ export default {
             value.endsWith('`'));
 
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const keep = preserveSpace ? 1 : 0;
+        const leadingKeep =
+          preservePadding ||
+          (trailingSpaces === '' &&
+            !leadingSpaces.includes('\t') &&
+            value.startsWith('`'))
+            ? 1
+            : 0;
+        const trailingKeep =
+          preservePadding ||
+          (leadingSpaces === '' && !trailingSpaces.includes('\t') && value.endsWith('`'))
+            ? 1
+            : 0;
 
-        if (leadingSpaces.length > keep) {
+        if (leadingSpaces.length > leadingKeep) {
           context.report({
             loc: {
               start: sourceCode.getLocFromIndex(
-                nodeStartOffset + delimiter.length + keep,
+                nodeStartOffset + delimiter.length + leadingKeep,
               ),
               end: sourceCode.getLocFromIndex(
                 nodeStartOffset + delimiter.length + leadingSpaces.length,
@@ -92,26 +103,28 @@ export default {
             messageId: 'style',
             fix(fixer) {
               return fixer.removeRange([
-                nodeStartOffset + delimiter.length + keep,
+                nodeStartOffset + delimiter.length + leadingKeep,
                 nodeStartOffset + delimiter.length + leadingSpaces.length,
               ]);
             },
           });
         }
 
-        if (trailingSpaces.length > keep) {
+        if (trailingSpaces.length > trailingKeep) {
           context.report({
             loc: {
               start: sourceCode.getLocFromIndex(
                 nodeEndOffset - delimiter.length - trailingSpaces.length,
               ),
-              end: sourceCode.getLocFromIndex(nodeEndOffset - delimiter.length - keep),
+              end: sourceCode.getLocFromIndex(
+                nodeEndOffset - delimiter.length - trailingKeep,
+              ),
             },
             messageId: 'style',
             fix(fixer) {
               return fixer.removeRange([
                 nodeEndOffset - delimiter.length - trailingSpaces.length,
-                nodeEndOffset - delimiter.length - keep,
+                nodeEndOffset - delimiter.length - trailingKeep,
               ]);
             },
           });
