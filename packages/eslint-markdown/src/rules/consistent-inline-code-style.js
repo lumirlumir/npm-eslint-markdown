@@ -1,10 +1,8 @@
 /**
  * @fileoverview Rule to enforce consistent inline code style.
  * @author 루밀LuMir(lumirlumir)
- * @see https://github.com/DavidAnson/markdownlint/blob/main/lib/md038.mjs
+ * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md038.mjs
  */
-
-// TODO: Multiline inline code with `\n` is possible.
 
 // --------------------------------------------------------------------------------
 // Import
@@ -26,10 +24,12 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
+// `\s` in regular expressions matches whitespace characters beyond `\r`, `\n`, ` `, and `\t`,
+// so we explicitly using `[\r\n \t]` to match those characters to avoid unexpected matches.
 const leadingInlineCodeRegex =
-  /^(?<leadingBackticks>`*)(?<leadingSpaces>\s+)(?<firstChar>\S)/;
+  /^(?<leadingBackticks>`*)(?<leadingSpaces>[\r\n \t]+)(?<firstChar>[^\r\n \t])/;
 const trailingInlineCodeRegex =
-  /(?<lastChar>\S)(?<trailingSpaces>\s+)(?<trailingBackticks>`*)$/;
+  /(?<lastChar>[^\r\n \t])(?<trailingSpaces>[\r\n \t]+)(?<trailingBackticks>`*)$/;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -97,14 +97,14 @@ export default {
         const startBacktickSpaceAdjustment = startBacktick && !startPaddingLength ? 1 : 0;
         const startSpaces = leadingSpacesValue.length > startBacktickSpaceAdjustment;
 
-        const { trailingSpaces = '', trailingBackticks = '' } =
+        const { trailingSpaces: trailingSpacesText = '', trailingBackticks = '' } =
           text.match(trailingInlineCodeRegex)?.groups ?? {};
         const { lastChar = '', trailingSpaces: trailingSpacesValue = '' } =
           node.value.match(trailingInlineCodeRegex)?.groups ?? {};
 
         const endBacktick = lastChar === '`';
         const endPaddingLength = /** @type {0 | 1} */ (
-          trailingSpaces.length - trailingSpacesValue.length
+          trailingSpacesText.length - trailingSpacesValue.length
         );
         const endBacktickSpaceAdjustment = endBacktick && !endPaddingLength ? 1 : 0;
         const endSpaces = trailingSpacesValue.length > endBacktickSpaceAdjustment;
@@ -124,7 +124,7 @@ export default {
           const baseOffset = nodeEndOffset - trailingBackticks.length;
 
           reportStyle(
-            baseOffset - trailingSpaces.length + endBacktickSpaceAdjustment,
+            baseOffset - trailingSpacesText.length + endBacktickSpaceAdjustment,
             baseOffset - (removePadding ? 0 : endPaddingLength),
           );
         }

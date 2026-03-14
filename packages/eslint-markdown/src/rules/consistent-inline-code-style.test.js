@@ -34,6 +34,8 @@ ruleTester('consistent-inline-code-style', rule, {
     '`` `backticks` ``',
     '`` backtick` ``',
     '`` ` ``',
+    '`\u00a0some text`',
+    '`some text\u00a0`',
   ],
 
   invalid: [
@@ -443,6 +445,45 @@ ruleTester('consistent-inline-code-style', rule, {
           column: 11,
           endLine: 1,
           endColumn: 12,
+        },
+      ],
+    },
+    {
+      code: '` code \r`',
+      output: '` code\r`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 7,
+          endLine: 1,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
+      code: '` code \n`',
+      output: '` code\n`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 7,
+          endLine: 1,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
+      code: '` code \r\n`',
+      output: '` code\r\n`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 7,
+          endLine: 1,
+          endColumn: 8,
         },
       ],
     },
