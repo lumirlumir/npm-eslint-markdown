@@ -100,6 +100,7 @@ export default {
 
         const startBacktick = firstChar === '`';
         const startPaddingLength = /** @type {0 | 1} */ (
+          // `startPaddingLength` is always `0` or `1` because the parser consumes at most one padding space on each side.
           leadingSpacesText.length - leadingSpacesValue.length
         );
         const startBacktickSpaceAdjustment = startBacktick && !startPaddingLength ? 1 : 0;
@@ -116,6 +117,7 @@ export default {
 
         const endBacktick = lastChar === '`';
         const endPaddingLength = /** @type {0 | 1} */ (
+          // `endPaddingLength` is always `0` or `1` because the parser consumes at most one padding space on each side.
           trailingSpacesText.length - trailingSpacesValue.length
         );
         const endBacktickSpaceAdjustment = endBacktick && !endPaddingLength ? 1 : 0;
