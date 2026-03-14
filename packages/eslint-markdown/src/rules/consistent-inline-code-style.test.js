@@ -65,6 +65,26 @@ ruleTester('consistent-inline-code-style', rule, {
       ],
     },
     {
+      code: '`  code  `',
+      output: '`code`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 8,
+          endLine: 1,
+          endColumn: 10,
+        },
+      ],
+    },
+    {
       code: '` some text`',
       output: '`some text`',
       errors: [
@@ -245,6 +265,92 @@ ruleTester('consistent-inline-code-style', rule, {
           column: 14,
           endLine: 1,
           endColumn: 17,
+        },
+      ],
+    },
+    {
+      code: '``  `code``',
+      output: '`` `code``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+        },
+      ],
+    },
+    {
+      code: '``code`  ``',
+      output: '``code` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 10,
+        },
+      ],
+    },
+    {
+      code: '``  code`  ``',
+      output: '`` code` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+        },
+      ],
+    },
+    {
+      code: '``  `code  ``',
+      output: '`` `code ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+        },
+      ],
+    },
+    {
+      code: '``  `code`  ``',
+      output: '`` `code` ``',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 12,
         },
       ],
     },
