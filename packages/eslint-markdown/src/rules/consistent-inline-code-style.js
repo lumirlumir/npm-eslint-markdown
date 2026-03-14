@@ -82,8 +82,16 @@ export default {
 
     return {
       inlineCode(node) {
+        // ------------------------------------------------------------------------
+        // 1. Extract the text and offsets of the inline code node.
+        // ------------------------------------------------------------------------
+
         const text = sourceCode.getText(node);
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+
+        // ------------------------------------------------------------------------
+        // 2. Extract the leading spaces and backticks of the inline code node.
+        // ------------------------------------------------------------------------
 
         const { leadingBackticks = '', leadingSpaces: leadingSpacesText = '' } =
           text.match(leadingInlineCodeRegex)?.groups ?? {};
@@ -97,6 +105,10 @@ export default {
         const startBacktickSpaceAdjustment = startBacktick && !startPaddingLength ? 1 : 0;
         const startSpaces = leadingSpacesValue.length > startBacktickSpaceAdjustment;
 
+        // ------------------------------------------------------------------------
+        // 3. Extract the trailing spaces and backticks of the inline code node.
+        // ------------------------------------------------------------------------
+
         const { trailingSpaces: trailingSpacesText = '', trailingBackticks = '' } =
           text.match(trailingInlineCodeRegex)?.groups ?? {};
         const { lastChar = '', trailingSpaces: trailingSpacesValue = '' } =
@@ -108,6 +120,10 @@ export default {
         );
         const endBacktickSpaceAdjustment = endBacktick && !endPaddingLength ? 1 : 0;
         const endSpaces = trailingSpacesValue.length > endBacktickSpaceAdjustment;
+
+        // ------------------------------------------------------------------------
+        // 4. Report if there are extra spaces or tabs next to backticks.
+        // ------------------------------------------------------------------------
 
         const removePadding = startSpaces && endSpaces && !startBacktick && !endBacktick;
 
