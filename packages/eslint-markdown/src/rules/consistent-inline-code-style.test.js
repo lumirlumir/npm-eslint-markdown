@@ -420,6 +420,32 @@ ruleTester('consistent-inline-code-style', rule, {
         },
       ],
     },
+    {
+      code: '```  `code` ```',
+      output: '``` `code` ```',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 5,
+          endLine: 1,
+          endColumn: 6,
+        },
+      ],
+    },
+    {
+      code: '``` `code`  ```',
+      output: '``` `code` ```',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 12,
+        },
+      ],
+    },
 
     // Tab
     {

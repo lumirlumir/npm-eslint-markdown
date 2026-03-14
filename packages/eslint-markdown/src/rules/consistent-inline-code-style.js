@@ -91,7 +91,9 @@ export default {
           node.value.match(leadingInlineCodeRegex)?.groups ?? {};
 
         const startBacktick = firstChar === '`';
-        const startPaddingLength = leadingSpacesText.length - leadingSpacesValue.length;
+        const startPaddingLength = /** @type {0 | 1} */ (
+          leadingSpacesText.length - leadingSpacesValue.length
+        );
         const startBacktickSpaceAdjustment = startBacktick && !startPaddingLength ? 1 : 0;
         const startSpaces = leadingSpacesValue.length > startBacktickSpaceAdjustment;
 
@@ -101,17 +103,13 @@ export default {
           node.value.match(trailingInlineCodeRegex)?.groups ?? {};
 
         const endBacktick = lastChar === '`';
-        const endPaddingLength = trailingSpaces.length - trailingSpacesValue.length;
+        const endPaddingLength = /** @type {0 | 1} */ (
+          trailingSpaces.length - trailingSpacesValue.length
+        );
         const endBacktickSpaceAdjustment = endBacktick && !endPaddingLength ? 1 : 0;
         const endSpaces = trailingSpacesValue.length > endBacktickSpaceAdjustment;
 
-        const removePadding =
-          startPaddingLength &&
-          endPaddingLength &&
-          startSpaces &&
-          endSpaces &&
-          !startBacktick &&
-          !endBacktick;
+        const removePadding = startSpaces && endSpaces && !startBacktick && !endBacktick;
 
         if (startSpaces) {
           const baseOffset = nodeStartOffset + leadingBackticks.length;
