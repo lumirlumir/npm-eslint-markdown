@@ -26,8 +26,10 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-const inlineCodeRegex =
-  /^(?<delimiter>`+)(?<leadingSpaces>[ \t]*)(?:[\s\S]*?)(?<trailingSpaces>[ \t]*)\k<delimiter>$/u;
+const leadingInlineCodeRegex =
+  /^(?<leadingBackticks>`*)(?<leadingSpaces>\s+)(?<firstChar>\S)/;
+const trailingInlineCodeRegex =
+  /(?<lastChar>\S)(?<trailingSpaces>\s+)(?<trailingBackticks>`*)$/;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -80,26 +82,28 @@ export default {
 
     return {
       inlineCode(node) {
-        const match = sourceCode.getText(node).match(inlineCodeRegex);
+        const text = sourceCode.getText(node);
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
 
-        // Protect against unexpected cases, even though they should not occur in theory.
-        if (!match || !match.groups) return;
+        const { leadingBackticks = '', leadingSpaces: leadingSpacesText = '' } =
+          text.match(leadingInlineCodeRegex)?.groups ?? {};
+        const { leadingSpaces: leadingSpacesValue = '', firstChar = '' } =
+          node.value.match(leadingInlineCodeRegex)?.groups ?? {};
 
-        const { delimiter, leadingSpaces, trailingSpaces } = match.groups;
-
-        // eslint-disable-next-line -- TODO
-        const startMatch = /^(\s+)(\S)/.exec(node.value) || [null, '', ''];
-        const startBacktick = startMatch[2] === '`';
-        const startPaddingLength = leadingSpaces.length - startMatch[1].length;
+        const startBacktick = firstChar === '`';
+        const startPaddingLength = leadingSpacesText.length - leadingSpacesValue.length;
         const startBacktickSpaceAdjustment = startBacktick && !startPaddingLength ? 1 : 0;
-        const startSpaces = startMatch[1].length > startBacktickSpaceAdjustment;
+        const startSpaces = leadingSpacesValue.length > startBacktickSpaceAdjustment;
 
-        // eslint-disable-next-line -- TODO
-        const endMatch = /(\S)(\s+)$/.exec(node.value) || [null, '', ''];
-        const endBacktick = endMatch[1] === '`';
-        const endPaddingLength = trailingSpaces.length - endMatch[2].length;
+        const { trailingSpaces = '', trailingBackticks = '' } =
+          text.match(trailingInlineCodeRegex)?.groups ?? {};
+        const { lastChar = '', trailingSpaces: trailingSpacesValue = '' } =
+          node.value.match(trailingInlineCodeRegex)?.groups ?? {};
+
+        const endBacktick = lastChar === '`';
+        const endPaddingLength = trailingSpaces.length - trailingSpacesValue.length;
         const endBacktickSpaceAdjustment = endBacktick && !endPaddingLength ? 1 : 0;
-        const endSpaces = endMatch[2].length > endBacktickSpaceAdjustment;
+        const endSpaces = trailingSpacesValue.length > endBacktickSpaceAdjustment;
 
         const removePadding =
           startPaddingLength &&
@@ -109,19 +113,17 @@ export default {
           !startBacktick &&
           !endBacktick;
 
-        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-
         if (startSpaces) {
-          const baseOffset = nodeStartOffset + delimiter.length;
+          const baseOffset = nodeStartOffset + leadingBackticks.length;
 
           reportStyle(
             baseOffset + (removePadding ? 0 : startPaddingLength),
-            baseOffset + leadingSpaces.length - startBacktickSpaceAdjustment,
+            baseOffset + leadingSpacesText.length - startBacktickSpaceAdjustment,
           );
         }
 
         if (endSpaces) {
-          const baseOffset = nodeEndOffset - delimiter.length;
+          const baseOffset = nodeEndOffset - trailingBackticks.length;
 
           reportStyle(
             baseOffset - trailingSpaces.length + endBacktickSpaceAdjustment,
