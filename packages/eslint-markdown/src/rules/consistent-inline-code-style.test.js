@@ -510,7 +510,7 @@ ruleTester('consistent-inline-code-style', rule, {
       ],
     },
     {
-      // Single space is not reported, but single tab is reported.
+      // A single space is not reported, but a single tab is.
       code: '`\tsome text\t`',
       output: '`some text`',
       errors: [
