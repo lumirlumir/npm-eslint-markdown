@@ -25,7 +25,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 // `\s` in regular expressions matches whitespace characters beyond `\r`, `\n`, ` `, and `\t`,
-// so we explicitly using `[\r\n \t]` to match those characters to avoid unexpected matches.
+// so we explicitly use `[\r\n \t]` to match those characters to avoid unexpected matches.
 const leadingInlineCodeRegex =
   /^(?<leadingBackticks>`*)(?<leadingSpaces>[\r\n \t]+)(?<firstChar>[^\r\n \t])/;
 const trailingInlineCodeRegex =
