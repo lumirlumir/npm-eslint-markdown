@@ -490,6 +490,27 @@ ruleTester('consistent-inline-code-style', rule, {
 
     // Tab
     {
+      code: '`\tcode\t`',
+      output: '`code`',
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3,
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 7,
+          endLine: 1,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
+      // Single space is not reported, but single tab is reported.
       code: '`\tsome text\t`',
       output: '`some text`',
       errors: [

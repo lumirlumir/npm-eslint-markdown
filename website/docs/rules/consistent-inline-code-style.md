@@ -5,7 +5,7 @@
 
 This rule enforces a single, consistent style for inline code in Markdown files by disallowing extra spaces or tabs next to the opening and closing backticks.
 
-An inline code is defined as text wrapped in backticks. While Markdown allows a single leading and trailing whitespace when needed, this rule ensures that there are no extra spaces or tabs next to the opening and closing backticks, which can reduce readability.
+An inline code is defined as text wrapped in backticks. While Markdown allows a single leading and trailing space when needed, this rule ensures that there are no extra spaces or tabs next to the opening and closing backticks, which can reduce readability.
 
 ## Examples
 
