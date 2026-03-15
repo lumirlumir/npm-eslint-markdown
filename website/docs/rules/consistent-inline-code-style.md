@@ -67,6 +67,10 @@ Code spans containing only spaces are allowed by the CommonMark specification an
 `   `
 ```
 
+## Options
+
+No options are available for this rule.
+
 ## Fix
 
 This rule fixes the inline code by removing extra spaces or tabs next to the opening and closing backticks.
