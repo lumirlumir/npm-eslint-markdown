@@ -70,7 +70,7 @@ jobs:
           # The variables `subject` and `title` can be used within the message.
           subjectPatternError: The subject "{subject}" found in the pull request title "{title}" didn't match the configured pattern. Please ensure that the subject doesn't start with an uppercase character.
 
-      - uses: marocchino/sticky-pull-request-comment@v2
+      - uses: marocchino/sticky-pull-request-comment@v3
         # When the previous steps fails, the workflow would stop. By adding this
         # condition you can continue the execution with the populated error message.
         if: always() && (steps.lint-pull-request-title.outputs.error_message != null)
@@ -135,7 +135,7 @@ jobs:
 
       # Delete the previous comment when the issue has been resolved.
       - if: ${{ steps.lint-pull-request-title.outputs.error_message == null }}
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: pull-request-title-lint-error
           delete: true
@@ -274,13 +274,13 @@ jobs:
 
       # Delete the previous comment if it exists.
       - if: ${{ steps.labeler.outputs.result != 'skipped' }}
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: labeler
           delete: true
 
       - if: ${{ steps.labeler.outputs.result != 'skipped' }}
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: labeler
           message: |
