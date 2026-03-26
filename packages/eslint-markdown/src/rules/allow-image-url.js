@@ -102,7 +102,8 @@ export default {
      * @param {string} url
      * @returns {boolean}
      */
-    const testUrl = (regex, url) => new RegExp(regex.source, regex.flags.replace(/[gy]/gu, '')).test(url);
+    const testUrl = (regex, url) =>
+      new RegExp(regex.source, regex.flags.replace(/[gy]/gu, '')).test(url);
 
     /** @type {Set<{ loc: Position, url: string }>} */
     const images = new Set();
