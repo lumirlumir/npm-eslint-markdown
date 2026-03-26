@@ -50,6 +50,15 @@ ruleTester('allow-image-url', rule, {
       ],
     },
     {
+      name: '`allowUrls` option should allow multiple images with a sticky RegExp',
+      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/https:\/\/example\.com/y],
+        },
+      ],
+    },
+    {
       name: '`disallowUrls` option - 1',
       code: '![Text](https://example.com)',
       options: [
@@ -261,6 +270,39 @@ ruleTester('allow-image-url', rule, {
           line: 1,
           column: 1,
           endLine: 1,
+          endColumn: 29,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option should report multiple images with a sticky RegExp',
+      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/https:\/\/example\.com/y],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/https:\\/\\/example\\.com/y`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 29,
+        },
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/https:\\/\\/example\\.com/y`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
           endColumn: 29,
         },
       ],

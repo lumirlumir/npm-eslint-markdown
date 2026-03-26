@@ -97,6 +97,12 @@ export default {
         normalizeIdentifier(identifier).toLowerCase(),
       ),
     );
+    /**
+     * @param {RegExp} regex
+     * @param {string} url
+     * @returns {boolean}
+     */
+    const testUrl = (regex, url) => new RegExp(regex.source, regex.flags.replace(/[gy]/gu, '')).test(url);
 
     /** @type {Set<{ loc: Position, url: string }>} */
     const images = new Set();
@@ -163,7 +169,7 @@ export default {
          */
 
         for (const { loc, url } of images) {
-          if (!allowUrls.some(regex => regex.test(url))) {
+          if (!allowUrls.some(regex => testUrl(regex, url))) {
             context.report({
               loc,
               messageId: 'allowImageUrl',
@@ -174,7 +180,7 @@ export default {
             });
           }
 
-          if (disallowUrls.some(regex => regex.test(url))) {
+          if (disallowUrls.some(regex => testUrl(regex, url))) {
             context.report({
               loc,
               messageId: 'disallowImageUrl',

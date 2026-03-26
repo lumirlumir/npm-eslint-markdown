@@ -50,6 +50,15 @@ ruleTester('allow-link-url', rule, {
       ],
     },
     {
+      name: '`allowUrls` option should allow multiple links with a global RegExp',
+      code: '[Text](https://example.com)\n<https://example.com>',
+      options: [
+        {
+          allowUrls: [/example.com/g],
+        },
+      ],
+    },
+    {
       name: '`disallowUrls` option - 1',
       code: '[Text](https://example.com)',
       options: [
@@ -284,6 +293,39 @@ ruleTester('allow-link-url', rule, {
           column: 1,
           endLine: 1,
           endColumn: 28,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option should report multiple links with a global RegExp',
+      code: '[Text](https://example.com)\n<https://example.com>',
+      options: [
+        {
+          disallowUrls: [/example.com/g],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/g`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/g`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 22,
         },
       ],
     },
