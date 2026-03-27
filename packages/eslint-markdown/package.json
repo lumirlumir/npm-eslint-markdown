@@ -73,7 +73,7 @@
     }
   },
   "dependencies": {
-    "@eslint/markdown": "^7.5.1",
+    "@eslint/markdown": "^8.0.0",
     "micromark-util-normalize-identifier": "^2.0.1",
     "parse5": "^8.0.0"
   },
