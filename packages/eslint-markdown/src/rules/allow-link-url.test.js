@@ -50,11 +50,29 @@ ruleTester('allow-link-url', rule, {
       ],
     },
     {
-      name: '`allowUrls` option should allow multiple links with a global RegExp',
-      code: '[Text](https://example.com)\n<https://example.com>',
+      name: '`allowUrls` option should handle global (`g`) RegExp',
+      code: '[Text](https://example.com)',
       options: [
         {
-          allowUrls: [/example.com/g],
+          allowUrls: [/example/g],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` option should handle sticky (`y`) RegExp',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/example/y],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` option should handle global (`g`) and sticky (`y`) RegExp',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/example/gy],
         },
       ],
     },
@@ -297,11 +315,11 @@ ruleTester('allow-link-url', rule, {
       ],
     },
     {
-      name: '`disallowUrls` option should report multiple links with a global RegExp',
-      code: '[Text](https://example.com)\n<https://example.com>',
+      name: '`disallowUrls` option should handle global (`g`) RegExp',
+      code: '[Text](https://example.com)',
       options: [
         {
-          disallowUrls: [/example.com/g],
+          disallowUrls: [/example/g],
         },
       ],
       errors: [
@@ -309,23 +327,56 @@ ruleTester('allow-link-url', rule, {
           messageId: 'disallowLinkUrl',
           data: {
             url: 'https://example.com',
-            patterns: '`/example.com/g`',
+            patterns: '`/example/g`',
           },
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 28,
         },
+      ],
+    },
+    {
+      name: '`disallowUrls` option should handle sticky (`y`) RegExp',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/example/y],
+        },
+      ],
+      errors: [
         {
           messageId: 'disallowLinkUrl',
           data: {
             url: 'https://example.com',
-            patterns: '`/example.com/g`',
+            patterns: '`/example/y`',
           },
-          line: 2,
+          line: 1,
           column: 1,
-          endLine: 2,
-          endColumn: 22,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option should handle global (`g`) and sticky (`y`) RegExp',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/example/gy],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example/gy`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
         },
       ],
     },

@@ -24,6 +24,21 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  */
 
 // --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+const gyFlagRegex = /[gy]/g;
+
+/** @param {RegExp} regex */
+function stripGYFlags(regex) {
+  if (gyFlagRegex.test(regex.flags)) {
+    return new RegExp(regex.source, regex.flags.replace(gyFlagRegex, ''));
+  }
+
+  return regex;
+}
+
+// --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
 
@@ -97,13 +112,8 @@ export default {
         normalizeIdentifier(identifier).toLowerCase(),
       ),
     );
-    /**
-     * @param {RegExp} regex
-     * @param {string} url
-     * @returns {boolean}
-     */
-    const testUrl = (regex, url) =>
-      new RegExp(regex.source, regex.flags.replace(/[gy]/gu, '')).test(url);
+    const sanitizedAllowUrls = allowUrls.map(stripGYFlags);
+    const sanitizedDisallowUrls = disallowUrls.map(stripGYFlags);
 
     /** @type {Set<{ loc: Position, url: string }>} */
     const links = new Set();
@@ -170,7 +180,7 @@ export default {
          */
 
         for (const { loc, url } of links) {
-          if (!allowUrls.some(regex => testUrl(regex, url))) {
+          if (!sanitizedAllowUrls.some(regex => regex.test(url))) {
             context.report({
               loc,
               messageId: 'allowLinkUrl',
@@ -181,7 +191,7 @@ export default {
             });
           }
 
-          if (disallowUrls.some(regex => testUrl(regex, url))) {
+          if (sanitizedDisallowUrls.some(regex => regex.test(url))) {
             context.report({
               loc,
               messageId: 'disallowLinkUrl',

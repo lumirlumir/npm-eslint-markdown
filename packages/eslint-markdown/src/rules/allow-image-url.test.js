@@ -68,6 +68,15 @@ ruleTester('allow-image-url', rule, {
       ],
     },
     {
+      name: '`allowUrls` option should handle global (`g`) and sticky (`y`) RegExp',
+      code: '![Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/example/gy],
+        },
+      ],
+    },
+    {
       name: '`disallowUrls` option - 1',
       code: '![Text](https://example.com)',
       options: [
@@ -319,6 +328,28 @@ ruleTester('allow-image-url', rule, {
           data: {
             url: 'https://example.com',
             patterns: '`/example/y`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 29,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option should handle global (`g`) and sticky (`y`) RegExp',
+      code: '![Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/example/gy],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example/gy`',
           },
           line: 1,
           column: 1,
