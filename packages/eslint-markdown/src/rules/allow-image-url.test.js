@@ -50,11 +50,20 @@ ruleTester('allow-image-url', rule, {
       ],
     },
     {
-      name: '`allowUrls` option should allow multiple images with a sticky RegExp',
-      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      name: '`allowUrls` option should handle global (`g`) RegExp',
+      code: '![Text](https://example.com)',
       options: [
         {
-          allowUrls: [/https:\/\/example\.com/y],
+          allowUrls: [/example/g],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` option should handle sticky (`y`) RegExp',
+      code: '![Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/example/y],
         },
       ],
     },
@@ -275,11 +284,11 @@ ruleTester('allow-image-url', rule, {
       ],
     },
     {
-      name: '`disallowUrls` option should report multiple images with a sticky RegExp',
-      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      name: '`disallowUrls` option should handle global (`g`) RegExp',
+      code: '![Text](https://example.com)',
       options: [
         {
-          disallowUrls: [/https:\/\/example\.com/y],
+          disallowUrls: [/example/g],
         },
       ],
       errors: [
@@ -287,22 +296,33 @@ ruleTester('allow-image-url', rule, {
           messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
-            patterns: '`/https:\\/\\/example\\.com/y`',
+            patterns: '`/example/g`',
           },
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 29,
         },
+      ],
+    },
+    {
+      name: '`disallowUrls` option should handle sticky (`y`) RegExp',
+      code: '![Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/example/y],
+        },
+      ],
+      errors: [
         {
           messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
-            patterns: '`/https:\\/\\/example\\.com/y`',
+            patterns: '`/example/y`',
           },
-          line: 2,
+          line: 1,
           column: 1,
-          endLine: 2,
+          endLine: 1,
           endColumn: 29,
         },
       ],
