@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    /* Type Checking */
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "alwaysStrict": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noPropertyAccessFromIndexSignature": false, // Off: Prefer ESLint rule
+    "noUncheckedIndexedAccess": false, // Off: Too tight
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictBuiltinIteratorReturn": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "useUnknownInCatchVariables": true,
+
+    /* Modules */
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "types": ["node"],
+
+    /* Emit */
+    "declaration": true,
+    "emitDeclarationOnly": true,
+
+    /* JavaScript Support */
+    "allowJs": true,
+    "checkJs": true,
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+
+    /* Language and Environment */
+    "target": "ESNext"
+  }
+}

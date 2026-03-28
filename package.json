@@ -46,6 +46,6 @@
     "markdownlint-cli": "^0.48.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
   }
 }
