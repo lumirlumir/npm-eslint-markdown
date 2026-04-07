@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "include": [
     "src/**/*.js",
     "src/**/*.mjs",
@@ -11,47 +12,12 @@
   ],
   "exclude": ["src/**/*.test.js", "src/**/*.test.ts", "**/fixtures/**"],
   "compilerOptions": {
-    /* Type Checking */
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "alwaysStrict": true,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noPropertyAccessFromIndexSignature": false, // Off: Prefer ESLint rule
-    "noUncheckedIndexedAccess": false, // Off: Too tight
-    "noUnusedLocals": false, // Off: Does not recognize JSDoc `@import` statements
-    "noUnusedParameters": true,
-    "strict": true,
-    "strictBindCallApply": true,
-    "strictBuiltinIteratorReturn": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
-
     /* Modules */
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
     "rootDir": "./src",
+    "types": ["node", "mdast", "unist"],
 
     /* Emit */
-    "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "build",
-
-    /* JavaScript Support */
-    "allowJs": true,
-    "checkJs": true,
-
-    /* Interop Constraints */
-    "allowSyntheticDefaultImports": true,
-
-    /* Language and Environment */
-    "target": "ESNext",
 
     /* Completeness */
     "skipLibCheck": true

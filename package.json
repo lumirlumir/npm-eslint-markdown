@@ -39,13 +39,13 @@
     "c8": "^11.0.0",
     "editorconfig-checker": "^6.1.1",
     "eslint": "^9.39.4",
-    "eslint-config-bananass": "^0.6.0",
+    "eslint-config-bananass": "^0.6.1",
     "eslint-markdown": "^0.6.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "markdownlint-cli": "^0.48.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
   }
 }
