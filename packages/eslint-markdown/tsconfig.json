@@ -17,6 +17,9 @@
     "types": ["node", "mdast", "unist"],
 
     /* Emit */
-    "outDir": "build"
+    "outDir": "build",
+
+    /* Completeness */
+    "skipLibCheck": true
   }
 }
