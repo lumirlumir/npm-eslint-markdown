@@ -91,7 +91,7 @@ describe('is-blank-line', () => {
     });
 
     it('should return `false` when a nested blockquote marker remains after the given depth', () => {
-      strictEqual(isBlankLine('> >', 0), false);
+      strictEqual(isBlankLine('> \\>', 0), false);
     });
   });
 });

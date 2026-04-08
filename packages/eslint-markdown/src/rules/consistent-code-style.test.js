@@ -731,5 +731,54 @@ Paragraph`,
         },
       ],
     },
+
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - with blockquote',
+      code: `> \\>
+> \`\`\`
+> code block 1
+> \`\`\`
+>`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+      errors: [
+        {
+          messageId: 'blankLineAbove',
+          line: 2,
+          column: 3,
+          endLine: 4,
+          endColumn: 6,
+          data: { blankLineAbove: 1 },
+        },
+      ],
+    },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - with blockquote',
+      code: `>
+> \`\`\`
+> code block 1
+> \`\`\`
+> \\>`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+      errors: [
+        {
+          messageId: 'blankLineBelow',
+          line: 2,
+          column: 3,
+          endLine: 4,
+          endColumn: 6,
+          data: { blankLineBelow: 1 },
+        },
+      ],
+    },
   ],
 });
