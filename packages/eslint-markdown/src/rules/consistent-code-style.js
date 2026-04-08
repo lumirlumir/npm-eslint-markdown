@@ -132,8 +132,14 @@ export default {
 
     /** @type {CodeStyle | null} */
     let codeStyle = style === 'consistent' ? null : style;
+    let blockquoteDepth = -1; // NOTE: Depth `0` is the first blockquote level, which is the top level.
 
     return {
+      blockquote() {
+        // When entering a `blockquote` node, increase the depth.
+        blockquoteDepth++;
+      },
+
       code(node) {
         // ------------------------------------------------------------------------
         // 1. Check code style consistency.
@@ -182,7 +188,7 @@ export default {
             }
 
             // If the line is blank, continue checking the next line. If it's not blank, report the issue.
-            if (isBlankLine(line)) {
+            if (isBlankLine(line, blockquoteDepth)) {
               continue;
             }
 
@@ -225,7 +231,7 @@ export default {
             }
 
             // If the line is blank, continue checking the next line. If it's not blank, report the issue.
-            if (isBlankLine(line)) {
+            if (isBlankLine(line, blockquoteDepth)) {
               continue;
             }
 
@@ -243,6 +249,11 @@ export default {
             break;
           }
         }
+      },
+
+      'blockquote:exit'() {
+        // When exiting a `blockquote` node, decrease the depth.
+        blockquoteDepth--;
       },
     };
   },

@@ -39,6 +39,18 @@ describe('is-blank-line', () => {
     it('should return `true` for a string containing mixed spaces and tabs - 2', () => {
       strictEqual(isBlankLine(' \t    \t \t  '), true);
     });
+
+    it('should return `true` for a single blockquote marker', () => {
+      strictEqual(isBlankLine('>', 0), true);
+    });
+
+    it('should return `true` for a top-level blockquote marker with only trailing spaces', () => {
+      strictEqual(isBlankLine('>   ', 0), true);
+    });
+
+    it('should return `true` for nested blockquote markers with spaces between markers', () => {
+      strictEqual(isBlankLine(' >   > \t ', 1), true);
+    });
   });
 
   describe('non-blank line', () => {
@@ -68,6 +80,18 @@ describe('is-blank-line', () => {
 
     it('should return `false` for a non-breaking space', () => {
       strictEqual(isBlankLine('\u00A0'), false);
+    });
+
+    it('should return `false` for a string containing text after a blockquote marker', () => {
+      strictEqual(isBlankLine('> a', 0), false);
+    });
+
+    it('should return `false` for a string containing text after a blockquote marker and another blockquote marker', () => {
+      strictEqual(isBlankLine('> a >', 0), false);
+    });
+
+    it('should return `false` when a nested blockquote marker remains after the given depth', () => {
+      strictEqual(isBlankLine('> \\>', 0), false);
     });
   });
 });

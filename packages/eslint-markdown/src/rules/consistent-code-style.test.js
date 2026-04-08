@@ -168,6 +168,23 @@ code block 1
       options: [{ blankLineAbove: 2 }],
     },
 
+    {
+      name: '`blankLineAbove` option - with blockquote',
+      code: `>
+> \`\`\`
+> code block 1
+> \`\`\``,
+      options: [{ blankLineAbove: 1 }],
+    },
+    {
+      name: '`blankLineAbove` option - with nested blockquote',
+      code: `> >
+> > \`\`\`
+> > code block 1
+> > \`\`\``,
+      options: [{ blankLineAbove: 1 }],
+    },
+
     // option: `blankLineBelow`
     {
       name: '`blankLineBelow` option - `markdownlint` `MD031` does not check indented code blocks, so no error is reported',
@@ -256,6 +273,23 @@ Paragraph`,
       options: [{ blankLineBelow: 2 }],
     },
 
+    {
+      name: '`blankLineBelow` option - with blockquote',
+      code: `> \`\`\`
+> code block 1
+> \`\`\`
+>`,
+      options: [{ blankLineBelow: 1 }],
+    },
+    {
+      name: '`blankLineBelow` option - with nested blockquote',
+      code: `> > \`\`\`
+> > code block 1
+> > \`\`\`
+> >`,
+      options: [{ blankLineBelow: 1 }],
+    },
+
     // option: mixed
     {
       name: '`blankLineAbove` and `blankLineBelow` options - `markdownlint` example',
@@ -307,6 +341,35 @@ Paragraph`,
         {
           blankLineAbove: 2,
           blankLineBelow: 3,
+        },
+      ],
+    },
+
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - with blockquote',
+      code: `>
+> \`\`\`
+> code block 1
+> \`\`\`
+>`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+    },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - with nested blockquote',
+      code: `> >
+> > \`\`\`
+> > code block 1
+> > \`\`\`
+> >`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
         },
       ],
     },
@@ -665,6 +728,55 @@ Paragraph`,
           endLine: 5,
           endColumn: 4,
           data: { blankLineBelow: 2 },
+        },
+      ],
+    },
+
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - with blockquote',
+      code: `> \\>
+> \`\`\`
+> code block 1
+> \`\`\`
+>`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+      errors: [
+        {
+          messageId: 'blankLineAbove',
+          line: 2,
+          column: 3,
+          endLine: 4,
+          endColumn: 6,
+          data: { blankLineAbove: 1 },
+        },
+      ],
+    },
+    {
+      name: '`blankLineAbove` and `blankLineBelow` options - with blockquote',
+      code: `>
+> \`\`\`
+> code block 1
+> \`\`\`
+> \\>`,
+      options: [
+        {
+          blankLineAbove: 1,
+          blankLineBelow: 1,
+        },
+      ],
+      errors: [
+        {
+          messageId: 'blankLineBelow',
+          line: 2,
+          column: 3,
+          endLine: 4,
+          endColumn: 6,
+          data: { blankLineBelow: 1 },
         },
       ],
     },
