@@ -94,7 +94,7 @@ export default {
     const unorderedListStyle = [
       style === 'consistent' || style === 'sublist' ? null : style,
     ];
-    let listDepth = -1;
+    let listDepth = -1; // NOTE: Depth `0` is the first list level, which is the top level.
 
     return {
       list() {
