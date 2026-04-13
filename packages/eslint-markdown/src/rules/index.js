@@ -18,6 +18,7 @@ import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
 // import noBoldParagraph from './no-bold-paragraph.js';
 import noControlCharacter from './no-control-character.js';
 import noCurlyQuote from './no-curly-quote.js';
+import noDoublePunctuation from './no-double-punctuation.js';
 import noDoubleSpace from './no-double-space.js';
 import noEmoji from './no-emoji.js';
 import noGitConflictMarker from './no-git-conflict-marker.js';
@@ -45,6 +46,7 @@ export default {
   // 'no-bold-paragraph': noBoldParagraph,
   'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
+  'no-double-punctuation': noDoublePunctuation,
   'no-double-space': noDoubleSpace,
   'no-emoji': noEmoji,
   'no-git-conflict-marker': noGitConflictMarker,
