@@ -43,10 +43,19 @@ ruleTester('no-double-punctuation', rule, {
     },
     {
       name: 'Allowed question marks and periods',
-      code: 'Really?? Maybe...',
+      code: 'Really?? Maybe..',
       options: [
         {
           allow: ['??', '..'],
+        },
+      ],
+    },
+    {
+      name: 'Allowed exclamation marks and question marks',
+      code: 'Hello!! Are you sure??',
+      options: [
+        {
+          allow: ['!!', '??'],
         },
       ],
     },
