@@ -44,12 +44,12 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          # Do not cache node_modules, as it can cause unexpected issues when testing cross-platform.
+          cache: npm # https://github.com/actions/setup-node#caching-global-packages-data
 
-      - name: Set up node_modules
+      - name: Install dependencies
         run: npm ci
 
-      - name: Set up ESLint
+      - name: Install ESLint
         run: npm install -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown
 
       - name: Build
