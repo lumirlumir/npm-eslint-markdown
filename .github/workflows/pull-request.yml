@@ -154,7 +154,7 @@ jobs:
 
     steps:
       - name: Labeler
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         id: labeler
         with:
           result-encoding: string
