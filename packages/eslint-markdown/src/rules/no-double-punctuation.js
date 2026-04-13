@@ -65,7 +65,7 @@ export default {
 
     messages: {
       noDoublePunctuation:
-        'Double punctuation pattern `{{ punctuation }}` is not allowed.',
+        'Repeated punctuation pattern `{{ punctuation }}` is not allowed.',
     },
 
     language: 'markdown',

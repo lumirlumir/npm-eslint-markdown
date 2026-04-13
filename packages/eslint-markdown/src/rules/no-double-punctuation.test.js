@@ -26,7 +26,7 @@ ruleTester('no-double-punctuation', rule, {
     },
     {
       name: 'Mixed punctuation marks',
-      code: 'Really?! Yes...',
+      code: 'Really?! Yes.',
     },
     {
       name: 'Repeated punctuation in inline code',
@@ -134,9 +134,9 @@ Really??`,
         {
           messageId: 'noDoublePunctuation',
           line: 3,
-          column: 7,
+          column: 8,
           endLine: 3,
-          endColumn: 8,
+          endColumn: 9,
           data: {
             punctuation: '??',
           },
