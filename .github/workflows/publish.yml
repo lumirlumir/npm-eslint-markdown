@@ -19,19 +19,13 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: npm # https://github.com/actions/setup-node#caching-global-packages-data
           registry-url: https://registry.npmjs.org
-
-      - name: Set up cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Update npm
         run: npm install -g npm@latest
 
-      - name: Set up node_modules
+      - name: Install dependencies
         run: npm ci
 
       - name: Build
