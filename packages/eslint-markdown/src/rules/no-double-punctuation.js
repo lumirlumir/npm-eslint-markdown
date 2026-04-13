@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to disallow repeated punctuation in text.
+ * @fileoverview Rule to disallow double consecutive punctuation in text.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -23,7 +23,11 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-const repeatedPunctuationChars = '！!~～.。,，·?？';
+/**
+ * This pattern is based on the punctuation list used by `remark-lint`.
+ * @see https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-heading-punctuation#parameters
+ */
+const doublePunctuationRegex = /(?:^|(?<=[^!,.:;?]))[!,.:;?]{2}(?:$|(?=[^!,.:;?]))/g;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -35,7 +39,7 @@ export default {
     type: 'problem',
 
     docs: {
-      description: 'Disallow repeated punctuation in text',
+      description: 'Disallow double consecutive punctuation in text',
       url: URL_RULE_DOCS('no-double-punctuation'),
       recommended: false,
       stylistic: false,
@@ -49,6 +53,9 @@ export default {
             type: 'array',
             items: {
               type: 'string',
+              minLength: 2,
+              maxLength: 2,
+              pattern: '^[!,.:;?]{2}$',
             },
             uniqueItems: true,
           },
@@ -65,7 +72,7 @@ export default {
 
     messages: {
       noDoublePunctuation:
-        'Repeated punctuation pattern `{{ punctuation }}` is not allowed.',
+        'Double punctuation marks `{{ punctuation }}` are not allowed.',
     },
 
     language: 'markdown',
@@ -80,27 +87,15 @@ export default {
     return {
       text(node) {
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const text = sourceCode.getText(node);
+        const matches = sourceCode.getText(node).matchAll(doublePunctuationRegex);
 
-        for (let index = 1; index < text.length; index += 1) {
-          const previousCharacter = text[index - 1];
-          const currentCharacter = text[index];
+        for (const match of matches) {
+          const punctuation = match[0];
 
-          if (
-            previousCharacter !== currentCharacter ||
-            !repeatedPunctuationChars.includes(currentCharacter)
-          ) {
-            continue;
-          }
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + punctuation.length;
 
-          const punctuation = previousCharacter + currentCharacter;
-
-          if (allow.includes(punctuation)) {
-            continue;
-          }
-
-          const startOffset = nodeStartOffset + index;
-          const endOffset = startOffset + currentCharacter.length;
+          if (allow.includes(punctuation)) continue;
 
           context.report({
             loc: {

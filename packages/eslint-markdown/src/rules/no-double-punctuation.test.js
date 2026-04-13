@@ -16,25 +16,31 @@ import rule from './no-double-punctuation.js';
 
 ruleTester('no-double-punctuation', rule, {
   valid: [
+    '',
+    '  ',
+    '!',
+    ',',
+    '.',
+    ':',
+    ';',
+    '?',
+    '!!!',
+    ',,,',
+    '...',
+    ':::',
+    ';;;',
+    '???',
+    'Foo! Bar? Baz.',
+    'Foo... Bar!!! Baz!!?',
+    '`Foo!!` and `Bar??`', // `InlineCode` is ignored.
+    `\`\`\`md
+Foo!!
+Bar??
+\`\`\``, // `Code` is ignored.
+
+    // `allow` option
     {
-      name: 'Empty string',
-      code: '',
-    },
-    {
-      name: 'Single punctuation marks',
-      code: 'Hello! Are you there? Yes.',
-    },
-    {
-      name: 'Mixed punctuation marks',
-      code: 'Really?! Yes.',
-    },
-    {
-      name: 'Repeated punctuation in inline code',
-      code: '`Hello!!` and `Wait??`',
-    },
-    {
-      name: 'Allowed exclamation marks',
-      code: 'Hello!!',
+      code: 'Foo!!',
       options: [
         {
           allow: ['!!'],
@@ -42,20 +48,10 @@ ruleTester('no-double-punctuation', rule, {
       ],
     },
     {
-      name: 'Allowed question marks and periods',
-      code: 'Really?? Maybe..',
+      code: 'Foo?! Bar..',
       options: [
         {
-          allow: ['??', '..'],
-        },
-      ],
-    },
-    {
-      name: 'Allowed exclamation marks and question marks',
-      code: 'Hello!! Are you sure??',
-      options: [
-        {
-          allow: ['!!', '??'],
+          allow: ['?!', '..'],
         },
       ],
     },
@@ -63,15 +59,14 @@ ruleTester('no-double-punctuation', rule, {
 
   invalid: [
     {
-      name: 'Double exclamation marks',
-      code: 'Hello!!',
+      code: '!!',
       errors: [
         {
           messageId: 'noDoublePunctuation',
           line: 1,
-          column: 7,
+          column: 1,
           endLine: 1,
-          endColumn: 8,
+          endColumn: 3,
           data: {
             punctuation: '!!',
           },
@@ -79,73 +74,74 @@ ruleTester('no-double-punctuation', rule, {
       ],
     },
     {
-      name: 'Triple exclamation marks',
-      code: 'Hello!!!',
+      code: ',,',
       errors: [
         {
           messageId: 'noDoublePunctuation',
           line: 1,
-          column: 7,
+          column: 1,
           endLine: 1,
-          endColumn: 8,
+          endColumn: 3,
           data: {
-            punctuation: '!!',
-          },
-        },
-        {
-          messageId: 'noDoublePunctuation',
-          line: 1,
-          column: 8,
-          endLine: 1,
-          endColumn: 9,
-          data: {
-            punctuation: '!!',
+            punctuation: ',,',
           },
         },
       ],
     },
     {
-      name: 'Repeated punctuation on multiple lines',
-      code: `Hello!!
-Wait...
-Really??`,
+      code: '..',
       errors: [
         {
           messageId: 'noDoublePunctuation',
           line: 1,
-          column: 7,
+          column: 1,
           endLine: 1,
-          endColumn: 8,
-          data: {
-            punctuation: '!!',
-          },
-        },
-        {
-          messageId: 'noDoublePunctuation',
-          line: 2,
-          column: 6,
-          endLine: 2,
-          endColumn: 7,
+          endColumn: 3,
           data: {
             punctuation: '..',
           },
         },
+      ],
+    },
+    {
+      code: '::',
+      errors: [
         {
           messageId: 'noDoublePunctuation',
-          line: 2,
-          column: 7,
-          endLine: 2,
-          endColumn: 8,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
           data: {
-            punctuation: '..',
+            punctuation: '::',
           },
         },
+      ],
+    },
+    {
+      code: ';;',
+      errors: [
         {
           messageId: 'noDoublePunctuation',
-          line: 3,
-          column: 8,
-          endLine: 3,
-          endColumn: 9,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: {
+            punctuation: ';;',
+          },
+        },
+      ],
+    },
+    {
+      code: '??',
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
           data: {
             punctuation: '??',
           },
@@ -153,8 +149,74 @@ Really??`,
       ],
     },
     {
-      name: 'Allow only exclamation marks',
-      code: 'Hello!! Really??',
+      code: 'Foo!!',
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+          data: {
+            punctuation: '!!',
+          },
+        },
+      ],
+    },
+    {
+      code: 'Foo?!',
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+          data: {
+            punctuation: '?!',
+          },
+        },
+      ],
+    },
+    {
+      code: `Foo!!
+Bar..
+Baz;:`,
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+          data: {
+            punctuation: '!!',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 2,
+          column: 4,
+          endLine: 2,
+          endColumn: 6,
+          data: {
+            punctuation: '..',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 3,
+          column: 4,
+          endLine: 3,
+          endColumn: 6,
+          data: {
+            punctuation: ';:',
+          },
+        },
+      ],
+    },
+    {
+      code: 'Foo!! Bar?!',
       options: [
         {
           allow: ['!!'],
@@ -164,11 +226,11 @@ Really??`,
         {
           messageId: 'noDoublePunctuation',
           line: 1,
-          column: 16,
+          column: 10,
           endLine: 1,
-          endColumn: 17,
+          endColumn: 12,
           data: {
-            punctuation: '??',
+            punctuation: '?!',
           },
         },
       ],

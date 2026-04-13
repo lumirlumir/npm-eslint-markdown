@@ -3,15 +3,19 @@
 
 ## Rule Details
 
-Repeated punctuation such as `!!`, `??`, `...`, and `~~` can make Markdown content look noisy and inconsistent.
-
-This rule disallows repeated punctuation in text for the following characters:
+This rule disallows standalone two-character punctuation runs in text when both characters are one of these punctuation marks:
 
 ```txt
-！ ! ~ ～ . 。 , ， · ? ？
+! , . : ; ?
 ```
 
 It checks plain text content and ignores code blocks and inline code.
+
+Examples of reported patterns include `!!`, `?!`, `..`, and `;:`.
+
+> [!NOTE]
+>
+> The current implementation only reports exact two-character runs. Longer runs such as `...`, `!!!`, and `!!?` are not reported.
 
 ## Examples
 
@@ -24,10 +28,10 @@ Examples of **incorrect** code for this rule:
 ```md eslint-check
 <!-- eslint md/no-double-punctuation: 'error' -->
 
-Hello!!
-Are you sure??
-Maybe...
-This is fine~~
+Foo!!
+Bar?!
+Baz..
+Qux;:
 ```
 
 ### :white_check_mark: Correct {#correct}
@@ -36,24 +40,29 @@ Examples of **correct** code for this rule:
 
 #### Default
 
-```md eslint-check
+````md eslint-check
 <!-- eslint md/no-double-punctuation: 'error' -->
 
-Hello!
-Are you sure?
-Maybe.
-This is fine~
-```
+Foo!
+Bar?
+Baz...
+Qux!!!
 
-#### With `{ allow: ['!!', '??'] }` Option
+`Foo??`
+
+```md
+Foo;:
+```
+````
+
+#### With `{ allow: ['!!', '?!'] }` Option
 
 ```md eslint-check
-<!-- eslint md/no-double-punctuation: ['error', { allow: ['!!', '??'] }] -->
+<!-- eslint md/no-double-punctuation: ['error', { allow: ['!!', '?!'] }] -->
 
-Hello!!
-Are you sure??
-Maybe.
-This is fine~
+Foo!!
+Bar?!
+Baz.
 ```
 
 ## Options
@@ -68,7 +77,7 @@ This is fine~
 
 > Type: `string[]` / Default: `[]`
 
-When `allow` is specified, the listed repeated punctuation patterns are ignored by this rule. This is useful when patterns such as `!!` or `??` are intentionally used in your document.
+When `allow` is specified, the listed two-character punctuation patterns are ignored by this rule. This is useful when patterns such as `!!` or `?!` are intentionally used in your document.
 
 ## Prior Art
 
