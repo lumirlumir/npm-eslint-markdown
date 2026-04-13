@@ -61,9 +61,8 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/lint-staged.config.mjs
   - source: ./prettier.config.mjs
     dest: ./configs/prettier.config.mjs
-  # tsconfig.json
-  - source: ./packages/eslint-markdown/tsconfig.json
-    dest: ./configs/tsconfig.json
+  - source: ./tsconfig.base.json
+    dest: ./configs/tsconfig.base.json
   # tsconfig.test.json
   - source: ./packages/eslint-markdown/tsconfig.test.json
     dest: ./configs/tsconfig.test.json

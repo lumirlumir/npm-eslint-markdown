@@ -7,14 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../core/rule-tester.js';
 import rule from './no-emoji.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('no-emoji', rule, {
   valid: [
     {
       name: 'Empty',

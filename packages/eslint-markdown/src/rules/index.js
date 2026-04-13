@@ -6,8 +6,10 @@
 import allowImageUrl from './allow-image-url.js';
 import allowLinkUrl from './allow-link-url.js';
 import codeLangShorthand from './code-lang-shorthand.js';
+import consistentCodeStyle from './consistent-code-style.js';
 import consistentDeleteStyle from './consistent-delete-style.js';
 import consistentEmphasisStyle from './consistent-emphasis-style.js';
+import consistentInlineCodeStyle from './consistent-inline-code-style.js';
 import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
@@ -31,8 +33,10 @@ export default {
   'allow-image-url': allowImageUrl,
   'allow-link-url': allowLinkUrl,
   'code-lang-shorthand': codeLangShorthand,
+  'consistent-code-style': consistentCodeStyle,
   'consistent-delete-style': consistentDeleteStyle,
   'consistent-emphasis-style': consistentEmphasisStyle,
+  'consistent-inline-code-style': consistentInlineCodeStyle,
   'consistent-strong-style': consistentStrongStyle,
   'consistent-thematic-break-style': consistentThematicBreakStyle,
   'consistent-unordered-list-style': consistentUnorderedListStyle,

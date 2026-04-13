@@ -276,9 +276,8 @@ export default defineConfig({
       groupIconVitePlugin(),
       codecovVitePlugin({
         // Put the Codecov vite plugin after all other plugins
-        enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined, // Works only in CI when CODECOV_TOKEN is set
+        enableBundleAnalysis: process.env.CODECOV !== undefined, // Enable bundle analysis when CODECOV environment variable is defined
         bundleName: 'website',
-        uploadToken: process.env.CODECOV_TOKEN,
         gitService: 'github',
       }),
     ],
@@ -317,11 +316,11 @@ export default defineConfig({
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')
-    .split(/(`[^`]+`)/)
-    .map(part =>
-      part.startsWith('`') && part.endsWith('`')
-        ? `<code>${part.slice(1, -1)}</code>`
-        : part,
+    .split(/(?<inlineCode>`[^`]+`)/)
+    .map(segment =>
+      segment.startsWith('`') && segment.endsWith('`')
+        ? `<code>${segment.slice(1, -1)}</code>`
+        : segment,
     )
     .join('')}.
 </p>

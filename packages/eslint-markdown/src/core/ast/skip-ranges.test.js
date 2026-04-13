@@ -12,14 +12,13 @@
 
 import { describe, it } from 'node:test';
 import { strictEqual } from 'node:assert';
-import { getFileName } from '../tests/index.js';
 import SkipRanges from './skip-ranges.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-describe(getFileName(import.meta.url), () => {
+describe('skip-ranges', () => {
   describe('push()', () => {
     it('should push a range to the list of skip ranges', () => {
       const skipRanges = new SkipRanges();

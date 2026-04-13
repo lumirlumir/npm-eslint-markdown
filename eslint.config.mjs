@@ -4,7 +4,10 @@ import md from 'eslint-markdown';
 
 /** @type {import("eslint").Linter.Config[]} */
 export default defineConfig([
-  globalIgnores(['**/build/', '**/coverage/', '**/.vitepress/cache/'], 'global/ignores'),
+  globalIgnores(
+    ['**/build/', '**/coverage/', '**/.vitepress/.temp/', '**/.vitepress/cache/'],
+    'global/ignores',
+  ),
 
   bananass.configs.js,
   bananass.configs.ts,

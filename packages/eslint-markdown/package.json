@@ -1,6 +1,6 @@
 {
   "name": "eslint-markdown",
-  "version": "0.4.0",
+  "version": "0.6.1",
   "type": "module",
   "description": "Lint your Markdown with ESLint.🛠️",
   "exports": {
@@ -40,6 +40,7 @@
     "gfm"
   ],
   "author": "루밀LuMir <rpfos@naver.com> (https://github.com/lumirlumir)",
+  "funding": "https://github.com/sponsors/lumirlumir",
   "license": "MIT",
   "homepage": "https://eslint-markdown.lumir.page",
   "repository": {
@@ -78,6 +79,7 @@
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
-    "eslint": "^9.39.2"
+    "@types/unist": "^3.0.3",
+    "eslint": "^9.39.4"
   }
 }
