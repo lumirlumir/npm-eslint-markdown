@@ -8,12 +8,12 @@
     "start": "npx vitepress preview"
   },
   "devDependencies": {
-    "@codecov/vite-plugin": "^2.0.0",
+    "@codecov/vite-plugin": "^2.0.1",
     "@shikijs/transformers": "^3.20.0",
     "@shikijs/vitepress-twoslash": "^3.20.0",
     "eslint-markdown": "^0.6.1",
     "twoslash-eslint": "^0.3.4",
     "vitepress": "^2.0.0-alpha.15",
-    "vitepress-plugin-group-icons": "^1.7.3"
+    "vitepress-plugin-group-icons": "^1.7.5"
   }
 }
