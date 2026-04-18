@@ -3,9 +3,9 @@
   "name": "website",
   "type": "module",
   "scripts": {
-    "dev": "npx vitepress --open --host",
-    "build": "npx vitepress build --outDir build",
-    "start": "npx vitepress preview"
+    "dev": "vitepress --open --host",
+    "build": "vitepress build --outDir build",
+    "start": "vitepress preview"
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^2.0.1",
