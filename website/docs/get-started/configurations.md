@@ -38,7 +38,7 @@ So, we **highly recommend** using the `eslint-markdown` plugin alongside ESLint'
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import markdown from '@eslint/markdown';
 import md from 'eslint-markdown'; // [!code ++]
@@ -113,7 +113,7 @@ export default defineConfig([
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import markdown from '@eslint/markdown';
 import md from 'eslint-markdown'; // [!code ++]
@@ -165,7 +165,7 @@ However, if you prefer not to use ESLint's built-in Markdown support, you can st
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown'; // [!code ++]
 
@@ -219,7 +219,7 @@ export default defineConfig([
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown'; // [!code ++]
 
@@ -275,7 +275,7 @@ Recommended rules for documentation correctness that can be used without additio
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -329,7 +329,7 @@ export default defineConfig([
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -389,7 +389,7 @@ Rules considered best practices for modern Markdown documents that do not affect
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -443,7 +443,7 @@ export default defineConfig([
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -499,7 +499,7 @@ This configuration is useful if you want to build your own custom configuration 
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -562,7 +562,7 @@ export default defineConfig([
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -637,7 +637,7 @@ We generally do not recommend extending from `'md/all'`, as many of its rules ma
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
@@ -682,7 +682,7 @@ export default defineConfig([
 
 ::: code-group
 
-```js [eslint.config.js]
+```js [eslint.config.mjs]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
