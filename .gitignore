@@ -9,6 +9,9 @@ next-env.d.ts
 **/.vitepress/.temp/
 **/.vitepress/cache/
 
+# cache
+.eslintcache
+
 # env
 .env
 .env.development
