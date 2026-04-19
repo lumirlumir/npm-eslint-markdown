@@ -37,7 +37,7 @@ Examples of **incorrect** code for this rule:
 # Heading { #id} ⁡
 ```
 
-```js [eslint.config.mjs] {5}
+```js [eslint.config.js] {5}
 export default [
   // ...
   {
@@ -73,7 +73,7 @@ Examples of **correct** code for this rule:
 ###### Heading 6 {#heading-6}
 ```
 
-```js [eslint.config.mjs] {5}
+```js [eslint.config.js] {5}
 export default [
   // ...
   {
