@@ -32,12 +32,12 @@ lumirlumir/lumirlumir-configs:
   - source: ./.vscode/settings.json
     dest: ./configs/.vscode/settings.json
   # ./scripts
-  - source: ./scripts/cp.mjs
-    dest: ./configs/scripts/cp.mjs
-  - source: ./scripts/vercel-ignore-command.sh
-    dest: ./configs/scripts/vercel-ignore-command.sh
-  - source: ./scripts/version.mjs
-    dest: ./configs/scripts/version.mjs
+  - source: ./scripts/cp.js
+    dest: ./configs/scripts/cp.js
+  - source: ./scripts/vercel-ignore-command.js
+    dest: ./configs/scripts/vercel-ignore-command.js
+  - source: ./scripts/version.js
+    dest: ./configs/scripts/version.js
   # ./
   - source: ./.editorconfig
     dest: ./configs/.editorconfig
@@ -57,10 +57,10 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/LICENSE.md
   - source: ./VScode.code-workspace
     dest: ./configs/VScode.code-workspace
-  - source: ./lint-staged.config.mjs
-    dest: ./configs/lint-staged.config.mjs
-  - source: ./prettier.config.mjs
-    dest: ./configs/prettier.config.mjs
+  - source: ./lint-staged.config.js
+    dest: ./configs/lint-staged.config.js
+  - source: ./prettier.config.js
+    dest: ./configs/prettier.config.js
   - source: ./tsconfig.base.json
     dest: ./configs/tsconfig.base.json
   # tsconfig.test.json
