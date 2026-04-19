@@ -1,10 +1,9 @@
 /**
  * @fileoverview Script to bump versions of packages in the monorepo.
- * Usage: `node path/to/version.mjs <semver> [preid]`
+ * Usage: `node path/to/version.js <semver> [preid]`
  */
 
 /* eslint-disable no-console -- CLI */
-// @ts-check
 
 // --------------------------------------------------------------------------------
 // Import

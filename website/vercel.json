@@ -2,7 +2,7 @@
   "buildCommand": "npm run build",
   "cleanUrls": true,
   "framework": "vitepress",
-  "ignoreCommand": "bash ../scripts/vercel-ignore-command.sh",
+  "ignoreCommand": "node ../scripts/vercel-ignore-command.js",
   "installCommand": "npm install --prefix ..",
   "outputDirectory": "build"
 }
