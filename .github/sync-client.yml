@@ -1,9 +1,9 @@
-lumirlumir/lumirlumir-configs:
+lumirlumir/lumirlumir:
   - source: ./.github/sync-client.yml
     dest: ./clients/npm-eslint-markdown.yml
   # ./.github/workflows
-  - source: ./.github/workflows/lint.yml
-    dest: ./configs/.github/workflows/lint.yml
+  - source: ./.github/workflows/ci.yml
+    dest: ./configs/.github/workflows/ci.yml
   - source: ./.github/workflows/publish.yml
     dest: ./configs/.github/workflows/publish.yml
   - source: ./.github/workflows/pull-request.yml
@@ -12,8 +12,6 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/.github/workflows/release.yml
   - source: ./.github/workflows/sync-client.yml
     dest: ./configs/.github/workflows/sync-client.yml
-  - source: ./.github/workflows/test.yml
-    dest: ./configs/.github/workflows/test.yml
   - source: ./.github/workflows/version-monorepo.yml
     dest: ./configs/.github/workflows/version-monorepo.yml
   # ./.github
