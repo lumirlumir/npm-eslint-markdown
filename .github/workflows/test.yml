@@ -1,4 +1,4 @@
-name: test-cross-platform
+name: test
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: ${{ !contains(github.ref, 'main') }}
 
 jobs:
-  test-cross-platform:
+  cross-platform:
     strategy:
       fail-fast: false
       matrix:
