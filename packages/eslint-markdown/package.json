@@ -59,7 +59,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "node ../../scripts/build-config.mjs && npx tsc && node ../../scripts/cp.mjs ../../LICENSE.md LICENSE.md ../../README.md README.md",
+    "build": "node ../../scripts/build-config.js && tsc && node ../../scripts/cp.js ../../LICENSE.md LICENSE.md ../../README.md README.md",
     "test": "npm run test:types && npm run test:unit",
     "test:types": "tsc -p ./tsconfig.test.json",
     "test:unit": "node --test"
@@ -73,9 +73,9 @@
     }
   },
   "dependencies": {
-    "@eslint/markdown": "^8.0.1",
+    "@eslint/markdown": "^7.5.1",
     "micromark-util-normalize-identifier": "^2.0.1",
-    "parse5": "^8.0.0"
+    "parse5": "^8.0.1"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",

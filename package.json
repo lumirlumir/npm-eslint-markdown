@@ -2,6 +2,7 @@
   "private": true,
   "name": "npm-eslint-markdown",
   "version": "0.6.1",
+  "type": "module",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
@@ -14,8 +15,8 @@
   "scripts": {
     "prepare": "husky",
     "release:publish": "node -e \"require('child_process').execSync('npm publish -w packages ' + (require('./package.json').version.includes('-') ? '--tag next' : ''), { stdio: 'inherit' })\"",
-    "release:version": "node ./scripts/version.mjs",
-    "coverage": "npx c8 --reporter=lcov npm run test",
+    "release:version": "node ./scripts/version.js",
+    "coverage": "c8 --reporter=lcov npm run test",
     "test": "npm run test -w packages/eslint-markdown",
     "build": "npm-run-all -c -l -p --aggregate-output build:**",
     "build:pkg:em": "npm run build -w packages/eslint-markdown",
@@ -25,14 +26,14 @@
     "start": "npm run start:website",
     "start:website": "npm run start -w website",
     "fix": "npm-run-all -c -l -p fix:*",
-    "fix:eslint": "npx eslint --fix",
-    "fix:prettier": "npx prettier . --write --ignore-unknown",
-    "fix:markdownlint": "npx markdownlint **/*.md --fix",
+    "fix:eslint": "eslint --fix",
+    "fix:prettier": "prettier . --write --ignore-unknown",
+    "fix:markdownlint": "markdownlint **/*.md --fix",
     "lint": "npm-run-all -c -l -p lint:*",
-    "lint:eslint": "npx eslint",
-    "lint:prettier": "npx prettier . --check --ignore-unknown",
-    "lint:editorconfig": "npx editorconfig-checker -config .editorconfig-checker.json",
-    "lint:markdownlint": "npx markdownlint **/*.md"
+    "lint:eslint": "eslint",
+    "lint:prettier": "prettier . --check --ignore-unknown",
+    "lint:editorconfig": "editorconfig-checker -config .editorconfig-checker.json",
+    "lint:markdownlint": "markdownlint **/*.md"
   },
   "devDependencies": {
     "@types/node": "^20.19.39",
@@ -45,7 +46,7 @@
     "lint-staged": "^16.4.0",
     "markdownlint-cli": "^0.48.0",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.8.2",
-    "typescript": "^6.0.2"
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
   }
 }

@@ -1,6 +1,6 @@
 /**
  * @fileoverview Script to copy files from src to dest.
- * Usage: `node path/to/cp.mjs src1 dest1 src2 dest2 src3 dest3 ...`
+ * Usage: `node path/to/cp.js src1 dest1 src2 dest2 src3 dest3 ...`
  */
 
 // --------------------------------------------------------------------------------
