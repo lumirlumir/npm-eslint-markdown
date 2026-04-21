@@ -1,4 +1,4 @@
-name: lint
+name: ci
 
 on:
   push:
@@ -39,3 +39,31 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+  coverage:
+    runs-on: ubuntu-latest
+
+    env:
+      CODECOV: true
+
+    steps:
+      - name: Set up checkout
+        uses: actions/checkout@v6
+
+      - name: Set up node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm # https://github.com/actions/setup-node#caching-global-packages-data
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Test and test coverage
+        run: npm run coverage
+
+      - name: Upload results to codecov
+        uses: codecov/codecov-action@v6
