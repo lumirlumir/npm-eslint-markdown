@@ -32,11 +32,9 @@ ruleTester('no-double-punctuation', rule, {
     '???',
     'Foo! Bar? Baz.',
     'Foo... Bar!!! Baz!!?',
+    'Foo?!? Bar,.; Baz;:!',
     '`Foo!!` and `Bar??`', // `InlineCode` is ignored.
-    `\`\`\`md
-Foo!!
-Bar??
-\`\`\``, // `Code` is ignored.
+    '```md\nFoo!!\nBar??\n```', // `Code` is ignored.
 
     // `allow` option
     {
@@ -52,6 +50,14 @@ Bar??
       options: [
         {
           allow: ['?!', '..'],
+        },
+      ],
+    },
+    {
+      code: 'Typo,.',
+      options: [
+        {
+          allow: [',.'],
         },
       ],
     },
@@ -179,6 +185,105 @@ Bar??
       ],
     },
     {
+      code: `# Heading!!
+
+> Quote::
+
+- Item??`,
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 12,
+          data: {
+            punctuation: '!!',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 3,
+          column: 8,
+          endLine: 3,
+          endColumn: 10,
+          data: {
+            punctuation: '::',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 9,
+          data: {
+            punctuation: '??',
+          },
+        },
+      ],
+    },
+    {
+      code: '**Strong!!** and *Emphasis??* and [Link::](https://example.com)',
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: '!!',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 29,
+          data: {
+            punctuation: '??',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 42,
+          data: {
+            punctuation: '::',
+          },
+        },
+      ],
+    },
+    {
+      code: 'Foo!! `code??` Bar?!',
+      errors: [
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+          data: {
+            punctuation: '!!',
+          },
+        },
+        {
+          messageId: 'noDoublePunctuation',
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 21,
+          data: {
+            punctuation: '?!',
+          },
+        },
+      ],
+    },
+    {
       code: `Foo!!
 Bar..
 Baz;:`,
@@ -215,6 +320,8 @@ Baz;:`,
         },
       ],
     },
+
+    // `allow` option
     {
       code: 'Foo!! Bar?!',
       options: [
