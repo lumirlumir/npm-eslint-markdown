@@ -50,6 +50,7 @@ export default function all(plugin) {
       'md/consistent-unordered-list-style': 'error',
       'md/no-control-character': 'error',
       'md/no-curly-quote': 'error',
+      'md/no-double-punctuation': 'error',
       'md/no-double-space': 'error',
       'md/no-emoji': 'error',
       'md/no-git-conflict-marker': 'error',
