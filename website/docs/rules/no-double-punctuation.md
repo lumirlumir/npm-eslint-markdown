@@ -3,19 +3,15 @@
 
 ## Rule Details
 
-This rule disallows standalone two-character punctuation runs in text when both characters are one of these punctuation marks:
+Consecutive punctuation in prose is usually a typo. It often slips through review because the sentence is still readable at a glance, but it makes Markdown sources look noisy and inconsistent. This rule helps catch those accidental punctuation pairs in text.
+
+It reports cases where exactly two of the following punctuation marks appear in a row:
 
 ```txt
 ! , . : ; ?
 ```
 
-It checks plain text content and ignores code blocks and inline code.
-
-Examples of reported patterns include `!!`, `?!`, `..`, and `;:`.
-
-> [!NOTE]
->
-> The current implementation only reports exact two-character runs. Longer runs such as `...`, `!!!`, and `!!?` are not reported.
+For example, `!!`, `?!`, `..`, `::`, `??`, and `;:` are reported, whereas `...`, `!!!`, `?!?`, and `,.;` are not.
 
 ## Examples
 
@@ -28,10 +24,10 @@ Examples of **incorrect** code for this rule:
 ```md eslint-check
 <!-- eslint md/no-double-punctuation: 'error' -->
 
-Foo!!
-Bar?!
-Baz..
-Qux;:
+This usually means a typo!.
+Did you mean this?!
+Maybe this..
+Wait,. what about this?
 ```
 
 ### :white_check_mark: Correct {#correct}
@@ -40,29 +36,22 @@ Examples of **correct** code for this rule:
 
 #### Default
 
-````md eslint-check
+```md eslint-check
 <!-- eslint md/no-double-punctuation: 'error' -->
 
-Foo!
-Bar?
-Baz...
-Qux!!!
-
-`Foo??`
-
-```md
-Foo;:
+This is fine.
+Is this correct?
+Wait...
+Amazing!!!
 ```
-````
 
 #### With `{ allow: ['!!', '?!'] }` Option
 
 ```md eslint-check
 <!-- eslint md/no-double-punctuation: ['error', { allow: ['!!', '?!'] }] -->
 
-Foo!!
-Bar?!
-Baz.
+Really!!
+Are you sure?!
 ```
 
 ## Options
@@ -77,8 +66,8 @@ Baz.
 
 > Type: `string[]` / Default: `[]`
 
-When `allow` is specified, the listed two-character punctuation patterns are ignored by this rule. This is useful when patterns such as `!!` or `?!` are intentionally used in your document.
+When `allow` is specified, the listed two-character punctuation patterns are ignored by this rule. This is useful when punctuation such as `!!` or `?!` is intentionally used for tone or emphasis instead of being treated as a typo.
 
 ## Prior Art
 
-- [`remark-lint-no-repeat-punctuation`](https://github.com/laysent/remark-lint-plugins/tree/HEAD/packages/remark-lint-no-repeat-punctuation)
+- [`remark-lint-no-repeat-punctuation`](https://github.com/laysent/remark-lint-plugins/tree/HEAD/packages/remark-lint-no-repeat-punctuation#remark-lint-no-repeat-punctuation)

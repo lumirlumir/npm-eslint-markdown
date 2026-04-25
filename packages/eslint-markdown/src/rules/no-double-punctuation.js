@@ -71,8 +71,7 @@ export default {
     ],
 
     messages: {
-      noDoublePunctuation:
-        'Double punctuation marks `{{ punctuation }}` are not allowed.',
+      noDoublePunctuation: 'Double punctuation mark `{{ punctuation }}` is not allowed.',
     },
 
     language: 'markdown',
