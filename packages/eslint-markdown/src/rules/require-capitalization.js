@@ -217,14 +217,14 @@ export default {
       },
 
       // tableCell: th (table header)
-      'table > tableRow:first-child > tableCell'(node) {
+      'table > tableRow:first-child > tableCell'(/** @type {TableCell} */ node) {
         if (skipTableCell === true || skipTableCell === 'th') return;
 
         report(node);
       },
 
       // tableCell: td (table data)
-      'table > tableRow:not(:first-child) > tableCell'(node) {
+      'table > tableRow:not(:first-child) > tableCell'(/** @type {TableCell} */ node) {
         if (skipTableCell === true || skipTableCell === 'td') return;
 
         report(node);
