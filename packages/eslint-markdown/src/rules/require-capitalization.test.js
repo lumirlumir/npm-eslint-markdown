@@ -25,28 +25,6 @@ ruleTester('require-capitalization', rule, {
       code: '  ',
     },
 
-    // paragraph
-    {
-      name: 'Paragraph: 1 level depth',
-      code: 'Hello World!',
-    },
-    {
-      name: 'Paragraph: 2 level depth - em',
-      code: '*Hello* World!',
-    },
-    {
-      name: 'Paragraph: 2 level depth - strong',
-      code: '**Hello** World!',
-    },
-    {
-      name: 'Paragraph: 3 level depth - em + strong - 1',
-      code: '***Hello*** World!',
-    },
-    {
-      name: 'Paragraph: 3 level depth - em + strong - 2',
-      code: '_**Hello**_ World!',
-    },
-
     // Options: Heading
     {
       name: 'Should not detect headings when `skipHeading` is `true`',
@@ -82,6 +60,16 @@ ruleTester('require-capitalization', rule, {
     {
       name: 'Heading: 3 level depth - em + strong - 2',
       code: '# _**Hello**_ _World!_',
+      options: [{ skipHeading: false }],
+    },
+    {
+      name: 'Heading: A text node with leading spaces should not be detected - 1',
+      code: '# `code` hello world!',
+      options: [{ skipHeading: false }],
+    },
+    {
+      name: 'Heading: A text node with leading spaces should not be detected - 2',
+      code: '# ![alt](image.png) hello world!',
       options: [{ skipHeading: false }],
     },
 
@@ -122,86 +110,56 @@ ruleTester('require-capitalization', rule, {
       code: '- _**Hello**_ _World!_',
       options: [{ skipListItem: false }],
     },
-  ],
+    {
+      name: 'ListItem: A text node with leading spaces should not be detected - 1',
+      code: '- `code` hello world!',
+      options: [{ skipListItem: false }],
+    },
+    {
+      name: 'ListItem: A text node with leading spaces should not be detected - 2',
+      code: '- ![alt](image.png) hello world!',
+      options: [{ skipListItem: false }],
+    },
 
-  invalid: [
-    // Paragraph
+    // Options: Paragraph
     {
       name: 'Paragraph: 1 level depth',
-      code: 'hello world!',
-      output: 'Hello world!',
-      errors: [
-        {
-          messageId: 'requireCapitalization',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 2,
-          data: { lowercase: 'h' },
-        },
-      ],
+      code: 'Hello World!',
+      options: [{ skipParagraph: false }],
     },
     {
       name: 'Paragraph: 2 level depth - em',
-      code: '*hello* world!',
-      output: '*Hello* world!',
-      errors: [
-        {
-          messageId: 'requireCapitalization',
-          line: 1,
-          column: 2,
-          endLine: 1,
-          endColumn: 3,
-          data: { lowercase: 'h' },
-        },
-      ],
+      code: '*Hello* World!',
+      options: [{ skipParagraph: false }],
     },
     {
       name: 'Paragraph: 2 level depth - strong',
-      code: '**hello** world!',
-      output: '**Hello** world!',
-      errors: [
-        {
-          messageId: 'requireCapitalization',
-          line: 1,
-          column: 3,
-          endLine: 1,
-          endColumn: 4,
-          data: { lowercase: 'h' },
-        },
-      ],
+      code: '**Hello** World!',
+      options: [{ skipParagraph: false }],
     },
     {
       name: 'Paragraph: 3 level depth - em + strong - 1',
-      code: '***hello*** world!',
-      output: '***Hello*** world!',
-      errors: [
-        {
-          messageId: 'requireCapitalization',
-          line: 1,
-          column: 4,
-          endLine: 1,
-          endColumn: 5,
-          data: { lowercase: 'h' },
-        },
-      ],
+      code: '***Hello*** World!',
+      options: [{ skipParagraph: false }],
     },
     {
       name: 'Paragraph: 3 level depth - em + strong - 2',
-      code: '_**hello**_ world!',
-      output: '_**Hello**_ world!',
-      errors: [
-        {
-          messageId: 'requireCapitalization',
-          line: 1,
-          column: 4,
-          endLine: 1,
-          endColumn: 5,
-          data: { lowercase: 'h' },
-        },
-      ],
+      code: '_**Hello**_ World!',
+      options: [{ skipParagraph: false }],
     },
+    {
+      name: 'Paragraph: A text node with leading spaces should not be detected - 1',
+      code: '`code` hello world!',
+      options: [{ skipParagraph: false }],
+    },
+    {
+      name: 'Paragraph: A text node with leading spaces should not be detected - 2',
+      code: '![alt](image.png) hello world!',
+      options: [{ skipParagraph: false }],
+    },
+  ],
 
+  invalid: [
     // Options: Heading
     {
       name: 'Heading: 1 level depth',
@@ -361,6 +319,88 @@ ruleTester('require-capitalization', rule, {
           column: 6,
           endLine: 1,
           endColumn: 7,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+
+    // Options: Paragraph
+    {
+      name: 'Paragraph: 1 level depth',
+      code: 'hello world!',
+      output: 'Hello world!',
+      options: [{ skipParagraph: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'Paragraph: 2 level depth - em',
+      code: '*hello* world!',
+      output: '*Hello* world!',
+      options: [{ skipParagraph: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'Paragraph: 2 level depth - strong',
+      code: '**hello** world!',
+      output: '**Hello** world!',
+      options: [{ skipParagraph: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'Paragraph: 3 level depth - em + strong - 1',
+      code: '***hello*** world!',
+      output: '***Hello*** world!',
+      options: [{ skipParagraph: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'Paragraph: 3 level depth - em + strong - 2',
+      code: '_**hello**_ world!',
+      output: '_**Hello**_ world!',
+      options: [{ skipParagraph: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
           data: { lowercase: 'h' },
         },
       ],
