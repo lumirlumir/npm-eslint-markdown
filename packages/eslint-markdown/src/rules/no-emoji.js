@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[]} RuleOptions
+ * @typedef {[{ allow: string[] }]} RuleOptions
  * @typedef {'noEmoji'} MessageIds
  */
 
@@ -41,6 +41,28 @@ export default {
       stylistic: false,
     },
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          allow: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            uniqueItems: true,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        allow: [],
+      },
+    ],
+
     messages: {
       noEmoji: 'Emojis are not allowed.',
     },
@@ -52,6 +74,7 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
+    const [{ allow }] = context.options;
 
     return {
       text(node) {
@@ -59,8 +82,12 @@ export default {
         const matches = sourceCode.getText(node).matchAll(emojiRegex);
 
         for (const match of matches) {
+          const emoji = match[0];
+
+          if (allow.includes(emoji)) continue;
+
           const startOffset = nodeStartOffset + match.index;
-          const endOffset = startOffset + match[0].length;
+          const endOffset = startOffset + emoji.length;
 
           context.report({
             loc: {

@@ -28,6 +28,26 @@ ruleTester('no-emoji', rule, {
       name: 'Text without emojis',
       code: 'Hello, world!',
     },
+
+    // Options
+    {
+      name: '`allow` option - 1',
+      code: 'Hello, 😄!',
+      options: [
+        {
+          allow: ['😄'],
+        },
+      ],
+    },
+    {
+      name: '`allow` option - 2',
+      code: 'Hello, 😄 and 🦄!',
+      options: [
+        {
+          allow: ['😄', '🦄'],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -99,6 +119,27 @@ ruleTester('no-emoji', rule, {
           column: 3,
           endLine: 2,
           endColumn: 5,
+        },
+      ],
+    },
+
+    // Options
+    {
+      // 😄's length is 2, 🦄's length is 2.
+      name: '`allow` option - 1',
+      code: 'Hello, 😄 and 🦄!',
+      options: [
+        {
+          allow: ['😄'],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'noEmoji',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 17,
         },
       ],
     },
