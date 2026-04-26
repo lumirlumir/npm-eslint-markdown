@@ -5,7 +5,7 @@
 
 This rule enforces the use of capital letters at the beginning of sentences in Markdown documents. Maintaining consistent capitalization improves document readability and professionalism.
 
-The rule checks the first text node in paragraphs, headings, blockquotes, list items, and table cells (depending on configuration) to ensure proper capitalization. When the checked text begins with a lowercase letter, the rule flags it as a violation and can automatically fix the issue by converting that letter to uppercase.
+The rule checks the first text node in paragraphs, headings, blockquotes, footnote definitions, list items, and table cells (depending on configuration) to ensure proper capitalization. When the checked text begins with a lowercase letter, the rule flags it as a violation and can automatically fix the issue by converting that letter to uppercase.
 
 ## Examples
 
@@ -23,6 +23,8 @@ hello world!
 # hello world!
 
 > hello world!
+
+[^note]: footnote text
 
 - hello world!
 
@@ -46,6 +48,8 @@ Hello world!
 
 > Hello world!
 
+[^note]: Footnote text
+
 - Hello world!
 
 | Heading |
@@ -68,6 +72,7 @@ Hello world!
 ```js
 'md/require-capitalization': ['error', {
   skipBlockquote: false,
+  skipFootnoteDefinition: false,
   skipHeading: false,
   skipListItem: false,
   skipParagraph: false,
@@ -80,6 +85,12 @@ Hello world!
 > Type: `boolean` / Default: `false`
 
 When set to `true`, paragraphs that are direct children of blockquotes are not checked for capitalization.
+
+### `skipFootnoteDefinition`
+
+> Type: `boolean` / Default: `false`
+
+When set to `true`, GFM footnote definitions are not checked for capitalization.
 
 ### `skipHeading`
 
@@ -97,7 +108,7 @@ When set to `true`, paragraphs in list items are not checked for capitalization.
 
 > Type: `boolean` / Default: `false`
 
-When set to `true`, regular paragraphs are not checked for capitalization. This does not skip headings, blockquote paragraphs, list item paragraphs, or table cells.
+When set to `true`, regular paragraphs are not checked for capitalization. This does not skip headings, blockquote paragraphs, footnote definitions, list item paragraphs, or table cells.
 
 ### `skipTableCell`
 

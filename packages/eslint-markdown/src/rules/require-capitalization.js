@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { Node, Parent, Heading, Paragraph, TableCell, Text } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ skipBlockquote: boolean, skipHeading: boolean, skipListItem: boolean, skipParagraph: boolean, skipTableCell: boolean }]} RuleOptions
+ * @typedef {[{ skipBlockquote: boolean, skipFootnoteDefinition: boolean, skipHeading: boolean, skipListItem: boolean, skipParagraph: boolean, skipTableCell: boolean }]} RuleOptions
  * @typedef {'requireCapitalization'} MessageIds
  */
 
@@ -82,6 +82,9 @@ export default {
           skipBlockquote: {
             type: 'boolean',
           },
+          skipFootnoteDefinition: {
+            type: 'boolean',
+          },
           skipHeading: {
             type: 'boolean',
           },
@@ -102,6 +105,7 @@ export default {
     defaultOptions: [
       {
         skipBlockquote: false,
+        skipFootnoteDefinition: false,
         skipHeading: false,
         skipListItem: false,
         skipParagraph: false,
@@ -120,8 +124,16 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ skipBlockquote, skipHeading, skipListItem, skipParagraph, skipTableCell }] =
-      context.options;
+    const [
+      {
+        skipBlockquote,
+        skipFootnoteDefinition,
+        skipHeading,
+        skipListItem,
+        skipParagraph,
+        skipTableCell,
+      },
+    ] = context.options;
 
     /** @param {Heading | Paragraph | TableCell} node */
     function report(node) {
@@ -167,6 +179,13 @@ export default {
         report(node);
       },
 
+      // footnoteDefinition
+      'footnoteDefinition > paragraph'(/** @type {Paragraph} */ node) {
+        if (skipFootnoteDefinition) return;
+
+        report(node);
+      },
+
       // heading
       heading(node) {
         if (skipHeading) return;
@@ -182,7 +201,7 @@ export default {
       },
 
       // paragraph
-      'paragraph:not(blockquote > paragraph, listItem > paragraph)'(
+      'paragraph:not(blockquote > paragraph, footnoteDefinition > paragraph, listItem > paragraph)'(
         /** @type {Paragraph} */ node,
       ) {
         if (skipParagraph) return;

@@ -73,6 +73,63 @@ ruleTester('require-capitalization', rule, {
       options: [{ skipBlockquote: false }],
     },
 
+    // Options: FootnoteDefinition
+    {
+      name: 'Should not detect footnote definitions when `skipFootnoteDefinition` is `true`',
+      code: '[^1]: hello world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: true }],
+    },
+
+    {
+      name: 'FootnoteDefinition: Empty',
+      code: '[^1]:',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: 1 level depth',
+      code: '[^1]: Hello World!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: 2 level depth - em',
+      code: '[^1]: *Hello* World!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: 2 level depth - strong',
+      code: '[^1]: **Hello** World!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: 3 level depth - em + strong - 1',
+      code: '[^1]: ***Hello*** World!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: 3 level depth - em + strong - 2',
+      code: '[^1]: _**Hello**_ _World!_',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: A text node with leading spaces should not be detected - 1',
+      code: '[^1]: `code` hello world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+    {
+      name: 'FootnoteDefinition: A text node with leading spaces should not be detected - 2',
+      code: '[^1]: ![alt](image.png) hello world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+    },
+
     // Options: Heading
     {
       name: 'Should not detect headings when `skipHeading` is `true`',
@@ -348,6 +405,93 @@ ruleTester('require-capitalization', rule, {
           column: 6,
           endLine: 1,
           endColumn: 7,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+
+    // Options: FootnoteDefinition
+    {
+      name: 'FootnoteDefinition: 1 level depth',
+      code: '[^1]: hello world!',
+      output: '[^1]: Hello world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 7,
+          endLine: 1,
+          endColumn: 8,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'FootnoteDefinition: 2 level depth - em',
+      code: '[^1]: *hello* world!',
+      output: '[^1]: *Hello* world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 8,
+          endLine: 1,
+          endColumn: 9,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'FootnoteDefinition: 2 level depth - strong',
+      code: '[^1]: **hello** world!',
+      output: '[^1]: **Hello** world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 10,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'FootnoteDefinition: 3 level depth - em + strong - 1',
+      code: '[^1]: ***hello*** world!',
+      output: '[^1]: ***Hello*** world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'FootnoteDefinition: 3 level depth - em + strong - 2',
+      code: '[^1]: _**hello**_ world!',
+      output: '[^1]: _**Hello**_ world!',
+      language: 'markdown/gfm',
+      options: [{ skipFootnoteDefinition: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
           data: { lowercase: 'h' },
         },
       ],
