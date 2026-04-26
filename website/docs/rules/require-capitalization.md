@@ -112,9 +112,9 @@ When set to `true`, regular paragraphs are not checked for capitalization. This 
 
 ### `skipTableCell`
 
-> Type: `boolean` / Default: `false`
+> Type: `boolean | 'th' | 'td'` / Default: `false`
 
-When set to `true`, GFM table cells are not checked for capitalization.
+When set to `true`, GFM table cells are not checked for capitalization. When set to `'th'`, only table header cells are skipped. When set to `'td'`, only table data cells are skipped.
 
 ## Fix
 

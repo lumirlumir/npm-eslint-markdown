@@ -276,6 +276,18 @@ ruleTester('require-capitalization', rule, {
       language: 'markdown/gfm',
       options: [{ skipTableCell: true }],
     },
+    {
+      name: "Should not detect table header cells when `skipTableCell` is `'th'`",
+      code: '| heading |\n| - |\n| Data |',
+      language: 'markdown/gfm',
+      options: [{ skipTableCell: 'th' }],
+    },
+    {
+      name: "Should not detect table data cells when `skipTableCell` is `'td'`",
+      code: '| Heading |\n| - |\n| data |',
+      language: 'markdown/gfm',
+      options: [{ skipTableCell: 'td' }],
+    },
 
     {
       name: 'TableCell: Empty',
@@ -826,6 +838,66 @@ ruleTester('require-capitalization', rule, {
           endLine: 1,
           endColumn: 7,
           data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'TableCell: Header and data cells',
+      code: '| header |\n| - |\n| data |',
+      output: '| Header |\n| - |\n| Data |',
+      language: 'markdown/gfm',
+      options: [{ skipTableCell: false }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: { lowercase: 'h' },
+        },
+        {
+          messageId: 'requireCapitalization',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { lowercase: 'd' },
+        },
+      ],
+    },
+
+    {
+      name: 'TableCell: Header cells should be detected when `skipTableCell` is `td`',
+      code: '| header |\n| - |\n| data |',
+      output: '| Header |\n| - |\n| data |',
+      language: 'markdown/gfm',
+      options: [{ skipTableCell: 'td' }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: { lowercase: 'h' },
+        },
+      ],
+    },
+    {
+      name: 'TableCell: Data cells should be detected when `skipTableCell` is `th`',
+      code: '| header |\n| - |\n| data |',
+      output: '| header |\n| - |\n| Data |',
+      language: 'markdown/gfm',
+      options: [{ skipTableCell: 'th' }],
+      errors: [
+        {
+          messageId: 'requireCapitalization',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 4,
+          data: { lowercase: 'd' },
         },
       ],
     },

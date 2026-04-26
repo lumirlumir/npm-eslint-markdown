@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { Node, Parent, Heading, Paragraph, TableCell, Text } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ skipBlockquote: boolean, skipFootnoteDefinition: boolean, skipHeading: boolean, skipListItem: boolean, skipParagraph: boolean, skipTableCell: boolean }]} RuleOptions
+ * @typedef {[{ skipBlockquote: boolean, skipFootnoteDefinition: boolean, skipHeading: boolean, skipListItem: boolean, skipParagraph: boolean, skipTableCell: boolean | 'th' | 'td' }]} RuleOptions
  * @typedef {'requireCapitalization'} MessageIds
  */
 
@@ -95,7 +95,14 @@ export default {
             type: 'boolean',
           },
           skipTableCell: {
-            type: 'boolean',
+            oneOf: [
+              {
+                type: 'boolean',
+              },
+              {
+                enum: ['th', 'td'],
+              },
+            ],
           },
         },
         additionalProperties: false,
@@ -209,9 +216,16 @@ export default {
         report(node);
       },
 
-      // tableCell
-      tableCell(node) {
-        if (skipTableCell) return;
+      // tableCell: th (table header)
+      'table > tableRow:first-child > tableCell'(node) {
+        if (skipTableCell === true || skipTableCell === 'th') return;
+
+        report(node);
+      },
+
+      // tableCell: td (table data)
+      'table > tableRow:not(:first-child) > tableCell'(node) {
+        if (skipTableCell === true || skipTableCell === 'td') return;
 
         report(node);
       },
