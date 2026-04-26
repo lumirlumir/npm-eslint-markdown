@@ -59,3 +59,7 @@ You might want to disable this rule if:
 - You're working with a documentation style guide that permits or requires lowercase at the beginning of sentences
 - Your document contains many code examples or technical terms that conventionally start with lowercase
 - You're writing in a language other than English or a language that doesn't follow the same capitalization rules
+
+## Prior Art
+
+- [`capitalized-comments`](https://eslint.org/docs/latest/rules/capitalized-comments)
