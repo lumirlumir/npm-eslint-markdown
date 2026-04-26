@@ -45,9 +45,29 @@ Unicorn :unicorn:
 +1 :+1:
 ```
 
+#### With `{ allow: ['😃', '🦄'] }` Option
+
+```md eslint-check
+<!-- eslint md/no-emoji: ['error', { allow: ['😃', '🦄'] }] -->
+
+Smiley 😃
+Unicorn 🦄
++1 :+1:
+```
+
 ## Options
 
-No options are available for this rule.
+```js
+'md/no-emoji': ['error', {
+  allow: [],
+}]
+```
+
+### `allow`
+
+> Type: `string[]` / Default: `[]`
+
+When specified, specific emoji sequences are allowed if they match one of the strings in this array. This is useful when a document intentionally uses a small set of raw Unicode emojis while still disallowing all others.
 
 ## Limitations
 
