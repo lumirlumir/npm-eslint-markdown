@@ -3,8 +3,6 @@
  * @author 루밀LuMir(lumirlumir)
  */
 
-// @ts-nocheck -- TODO
-
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
@@ -16,9 +14,9 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Text, Heading, Paragraph } from 'mdast';
+ * @import { Node, Parent, Heading, Paragraph, TableCell, Text } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ skipHeading: boolean, skipListItem: boolean }]} RuleOptions
+ * @typedef {[{ skipBlockquote: boolean, skipHeading: boolean, skipListItem: boolean, skipParagraph: boolean, skipTableCell: boolean }]} RuleOptions
  * @typedef {'requireCapitalization'} MessageIds
  */
 
@@ -30,23 +28,32 @@ const lowercaseRegex = /^[a-z]/u;
 
 /**
  * Traverses the Markdown AST using a DFS pre-order approach to find the first text node.
- * @param {any} node
+ * @param {Node} node
  * @returns {Text | null}
  */
-function findFirstLeafTextNode(node) {
-  // Base case: if this is a text node, return it
-  if (node.type === 'text') return node;
+function findFirstTextNode(node) {
+  // Base case: if the current node is a text node, return it.
+  if (node.type === 'text') {
+    return /** @type {Text} */ (node);
+  }
 
-  // Check if node has children to traverse
-  if (node.children && node.children.length > 0)
-    // Iterate through children in order
-    for (const child of node.children) {
-      const textNode = findFirstLeafTextNode(child);
-      // Return the first text node found in the subtree
-      if (textNode) return textNode;
+  // Check if the current node has children to traverse.
+  // In the Markdown AST (Mdast), if a node has children
+  // they are always represented as an array even when empty.
+  if ('children' in node) {
+    const parentNode = /** @type {Parent} */ (node);
+
+    for (const child of parentNode.children) {
+      const textNode = findFirstTextNode(child);
+
+      // Return the first text node found in the subtree.
+      if (textNode) {
+        return textNode;
+      }
     }
+  }
 
-  // No text node found in this subtree
+  // When no text node is found in the subtree, return `null`.
   return null;
 }
 
@@ -72,10 +79,19 @@ export default {
       {
         type: 'object',
         properties: {
+          skipBlockquote: {
+            type: 'boolean',
+          },
           skipHeading: {
             type: 'boolean',
           },
           skipListItem: {
+            type: 'boolean',
+          },
+          skipParagraph: {
+            type: 'boolean',
+          },
+          skipTableCell: {
             type: 'boolean',
           },
         },
@@ -85,8 +101,11 @@ export default {
 
     defaultOptions: [
       {
-        skipHeading: true,
-        skipListItem: true,
+        skipBlockquote: false,
+        skipHeading: false,
+        skipListItem: false,
+        skipParagraph: false,
+        skipTableCell: false,
       },
     ],
 
@@ -100,60 +119,80 @@ export default {
   },
 
   create(context) {
-    /** @param {Heading | Paragraph} node */
+    const { sourceCode } = context;
+    const [{ skipBlockquote, skipHeading, skipListItem, skipParagraph, skipTableCell }] =
+      context.options;
+
+    /** @param {Heading | Paragraph | TableCell} node */
     function report(node) {
-      const textNode = findFirstLeafTextNode(node);
+      const textNode = findFirstTextNode(node);
 
       if (!textNode) return;
 
-      const match = textNode.value.match(lowercaseRegex);
+      const match = lowercaseRegex.exec(textNode.value);
 
       if (!match) return;
 
+      const [nodeStartOffset] = sourceCode.getRange(textNode);
       const lowercase = match[0];
+      const startOffset = nodeStartOffset + match.index;
+      const endOffset = startOffset + lowercase.length;
 
       context.report({
         loc: {
-          start: {
-            line: textNode.position.start.line,
-            column: textNode.position.start.column,
-          },
-          end: {
-            line: textNode.position.start.line,
-            column: textNode.position.start.column + lowercase.length,
-          },
+          start: sourceCode.getLocFromIndex(startOffset),
+          end: sourceCode.getLocFromIndex(endOffset),
         },
 
         data: {
-          lowercase: match[0],
+          lowercase,
         },
 
         messageId: 'requireCapitalization',
 
         fix(fixer) {
           return fixer.replaceTextRange(
-            [
-              textNode.position.start.offset,
-              textNode.position.start.offset + lowercase.length,
-            ],
+            [startOffset, endOffset],
             lowercase.toUpperCase(),
           );
         },
       });
     }
 
-    const [{ skipHeading, skipListItem }] = context.options;
-
     return {
-      paragraph(node) {
-        if (context.sourceCode.getParent(node).type === 'listItem' && skipListItem)
-          return;
+      // blockquote
+      'blockquote > paragraph'(/** @type {Paragraph} */ node) {
+        if (skipBlockquote) return;
 
         report(node);
       },
 
+      // heading
       heading(node) {
         if (skipHeading) return;
+
+        report(node);
+      },
+
+      // listItem
+      'listItem > paragraph'(/** @type {Paragraph} */ node) {
+        if (skipListItem) return;
+
+        report(node);
+      },
+
+      // paragraph
+      'paragraph:not(blockquote > paragraph, listItem > paragraph)'(
+        /** @type {Paragraph} */ node,
+      ) {
+        if (skipParagraph) return;
+
+        report(node);
+      },
+
+      // tableCell
+      tableCell(node) {
+        if (skipTableCell) return;
 
         report(node);
       },
