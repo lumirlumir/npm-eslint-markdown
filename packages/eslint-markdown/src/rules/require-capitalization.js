@@ -3,6 +3,10 @@
  * @author 루밀LuMir(lumirlumir)
  */
 
+// TODO:
+// - Consider `always` and `never` options for each node type.
+// - Consider allow or allowPattern options to allow certain words or patterns to be exempt from capitalization.
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
