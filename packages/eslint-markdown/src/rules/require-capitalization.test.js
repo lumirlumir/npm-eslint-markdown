@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-irregular-dash.js`.
+ * @fileoverview Test for `require-capitalization.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -8,13 +8,13 @@
 // --------------------------------------------------------------------------------
 
 import ruleTester from '../core/rule-tester.js';
-import rule from './en-capitalization.js';
+import rule from './require-capitalization.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester('en-capitalization', rule, {
+ruleTester('require-capitalization', rule, {
   valid: [
     {
       name: 'Empty',
@@ -132,7 +132,7 @@ ruleTester('en-capitalization', rule, {
       output: 'Hello world!',
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 1,
           endLine: 1,
@@ -146,7 +146,7 @@ ruleTester('en-capitalization', rule, {
       output: '*Hello* world!',
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 2,
           endLine: 1,
@@ -160,7 +160,7 @@ ruleTester('en-capitalization', rule, {
       output: '**Hello** world!',
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 3,
           endLine: 1,
@@ -174,7 +174,7 @@ ruleTester('en-capitalization', rule, {
       output: '***Hello*** world!',
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -188,7 +188,7 @@ ruleTester('en-capitalization', rule, {
       output: '_**Hello**_ world!',
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -205,7 +205,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 3,
           endLine: 1,
@@ -220,7 +220,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -235,7 +235,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 5,
           endLine: 1,
@@ -250,7 +250,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
@@ -265,7 +265,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
@@ -282,7 +282,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 3,
           endLine: 1,
@@ -297,7 +297,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -312,7 +312,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 5,
           endLine: 1,
@@ -327,7 +327,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
@@ -342,7 +342,7 @@ ruleTester('en-capitalization', rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: 'enCapitalization',
+          messageId: 'requireCapitalization',
           line: 1,
           column: 6,
           endLine: 1,

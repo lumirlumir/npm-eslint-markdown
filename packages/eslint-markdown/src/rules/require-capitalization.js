@@ -19,7 +19,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  * @import { Text, Heading, Paragraph } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ skipHeading: boolean, skipListItem: boolean }]} RuleOptions
- * @typedef {'enCapitalization'} MessageIds
+ * @typedef {'requireCapitalization'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ export default {
 
     docs: {
       description: 'Enforce the use of capital letters at the beginning of sentences',
-      url: URL_RULE_DOCS('en-capitalization'),
+      url: URL_RULE_DOCS('require-capitalization'),
       recommended: false,
       stylistic: false,
     },
@@ -91,7 +91,7 @@ export default {
     ],
 
     messages: {
-      enCapitalization: '`{{ lowercase }}` should be capitalized.',
+      requireCapitalization: '`{{ lowercase }}` should be capitalized.',
     },
 
     language: 'markdown',
@@ -128,7 +128,7 @@ export default {
           lowercase: match[0],
         },
 
-        messageId: 'enCapitalization',
+        messageId: 'requireCapitalization',
 
         fix(fixer) {
           return fixer.replaceTextRange(

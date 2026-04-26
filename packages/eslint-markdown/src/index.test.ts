@@ -56,6 +56,7 @@ type RuleName = keyof typeof plugin.rules;
 'no-irregular-whitespace' satisfies RuleName;
 'no-tab' satisfies RuleName;
 'no-url-trailing-slash' satisfies RuleName;
+'require-capitalization' satisfies RuleName;
 'require-image-title' satisfies RuleName;
 'require-link-title' satisfies RuleName;
 
@@ -91,6 +92,7 @@ type AllConfigRuleName = keyof typeof plugin.configs.all.rules;
 'md/no-irregular-whitespace' satisfies AllConfigRuleName;
 'md/no-tab' satisfies AllConfigRuleName;
 'md/no-url-trailing-slash' satisfies AllConfigRuleName;
+'md/require-capitalization' satisfies AllConfigRuleName;
 'md/require-image-title' satisfies AllConfigRuleName;
 'md/require-link-title' satisfies AllConfigRuleName;
 
