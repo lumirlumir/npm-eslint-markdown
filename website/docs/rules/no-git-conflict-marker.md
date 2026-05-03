@@ -158,3 +158,7 @@ Examples of **correct** code for this rule:
 > Type: `boolean | string[]` / Default: `true`
 
 `true` allows Git conflict markers in all code blocks, while `string[]` allows Git conflict markers only in code blocks for the specified languages.
+
+## Fix
+
+This rule fixes Git conflict markers by removing the full marker lines, including labels such as `HEAD` or branch names.
