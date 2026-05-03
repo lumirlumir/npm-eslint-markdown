@@ -278,6 +278,23 @@ ruleTester('no-git-conflict-marker', rule, {
       ],
     },
     {
+      name: 'LS(U+2028) in a marker line should be removed with the marker line',
+      code: '<<<<<<< HEAD\u2028branch label\nHello',
+      output: 'Hello',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+    },
+    {
       name: 'Git conflict marker in code',
       code: '```txt\n>>>>>>>\n```\n>>>>>>>',
       output: '```txt\n>>>>>>>\n```\n',
