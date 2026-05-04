@@ -68,6 +68,14 @@ Are you sure?!
 
 When `allow` is specified, the listed two-character punctuation patterns are ignored by this rule. This is useful when punctuation such as `!!` or `?!` is intentionally used for tone or emphasis instead of being treated as a typo.
 
+## Fix
+
+This rule provides a fix when two punctuation marks are the same by replacing the pair with a single punctuation mark. For example, `!!` is fixed to `!`, and `..` is fixed to `.`.
+
+## Suggestions
+
+This rule provides suggestions when the two punctuation marks are different. You can replace the pair with either the left punctuation mark or the right punctuation mark. For example, `?!` can be replaced with `?` or `!`.
+
 ## Prior Art
 
 - [`remark-lint-no-repeat-punctuation`](https://github.com/laysent/remark-lint-plugins/tree/HEAD/packages/remark-lint-no-repeat-punctuation#remark-lint-no-repeat-punctuation)

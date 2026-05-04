@@ -66,6 +66,7 @@ ruleTester('no-double-punctuation', rule, {
   invalid: [
     {
       code: '!!',
+      output: '!',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -76,11 +77,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '!!',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: ',,',
+      output: ',',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -91,11 +94,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: ',,',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: '..',
+      output: '.',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -106,11 +111,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '..',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: '::',
+      output: ':',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -121,11 +128,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '::',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: ';;',
+      output: ';',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -136,11 +145,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: ';;',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: '??',
+      output: '?',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -151,11 +162,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '??',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: 'Foo!!',
+      output: 'Foo!',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -166,6 +179,7 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '!!',
           },
+          suggestions: undefined,
         },
       ],
     },
@@ -181,6 +195,24 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '?!',
           },
+          suggestions: [
+            {
+              output: 'Foo?',
+              messageId: 'suggestReplaceWithLeft',
+              data: {
+                punctuation: '?!',
+                leftPunctuation: '?',
+              },
+            },
+            {
+              output: 'Foo!',
+              messageId: 'suggestReplaceWithRight',
+              data: {
+                punctuation: '?!',
+                rightPunctuation: '!',
+              },
+            },
+          ],
         },
       ],
     },
@@ -190,6 +222,11 @@ ruleTester('no-double-punctuation', rule, {
 > Quote::
 
 - Item??`,
+      output: `# Heading!
+
+> Quote:
+
+- Item?`,
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -200,6 +237,7 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '!!',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -210,6 +248,7 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '::',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -220,11 +259,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '??',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: '**Strong!!** and *Emphasis??* and [Link::](https://example.com)',
+      output: '**Strong!** and *Emphasis?* and [Link:](https://example.com)',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -235,6 +276,7 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '!!',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -245,6 +287,7 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '??',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -255,11 +298,13 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '::',
           },
+          suggestions: undefined,
         },
       ],
     },
     {
       code: 'Foo!! `code??` Bar?!',
+      output: 'Foo! `code??` Bar?!',
       errors: [
         {
           messageId: 'noDoublePunctuation',
@@ -270,6 +315,7 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '!!',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -280,12 +326,33 @@ ruleTester('no-double-punctuation', rule, {
           data: {
             punctuation: '?!',
           },
+          suggestions: [
+            {
+              output: 'Foo!! `code??` Bar?',
+              messageId: 'suggestReplaceWithLeft',
+              data: {
+                punctuation: '?!',
+                leftPunctuation: '?',
+              },
+            },
+            {
+              output: 'Foo!! `code??` Bar!',
+              messageId: 'suggestReplaceWithRight',
+              data: {
+                punctuation: '?!',
+                rightPunctuation: '!',
+              },
+            },
+          ],
         },
       ],
     },
     {
       code: `Foo!!
 Bar..
+Baz;:`,
+      output: `Foo!
+Bar.
 Baz;:`,
       errors: [
         {
@@ -297,6 +364,7 @@ Baz;:`,
           data: {
             punctuation: '!!',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -307,6 +375,7 @@ Baz;:`,
           data: {
             punctuation: '..',
           },
+          suggestions: undefined,
         },
         {
           messageId: 'noDoublePunctuation',
@@ -317,6 +386,28 @@ Baz;:`,
           data: {
             punctuation: ';:',
           },
+          suggestions: [
+            {
+              output: `Foo!!
+Bar..
+Baz;`,
+              messageId: 'suggestReplaceWithLeft',
+              data: {
+                punctuation: ';:',
+                leftPunctuation: ';',
+              },
+            },
+            {
+              output: `Foo!!
+Bar..
+Baz:`,
+              messageId: 'suggestReplaceWithRight',
+              data: {
+                punctuation: ';:',
+                rightPunctuation: ':',
+              },
+            },
+          ],
         },
       ],
     },
@@ -339,6 +430,24 @@ Baz;:`,
           data: {
             punctuation: '?!',
           },
+          suggestions: [
+            {
+              output: 'Foo!! Bar?',
+              messageId: 'suggestReplaceWithLeft',
+              data: {
+                punctuation: '?!',
+                leftPunctuation: '?',
+              },
+            },
+            {
+              output: 'Foo!! Bar!',
+              messageId: 'suggestReplaceWithRight',
+              data: {
+                punctuation: '?!',
+                rightPunctuation: '!',
+              },
+            },
+          ],
         },
       ],
     },
