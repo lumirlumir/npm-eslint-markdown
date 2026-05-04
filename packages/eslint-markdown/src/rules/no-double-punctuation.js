@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ allow: string[] }]} RuleOptions
- * @typedef {'noDoublePunctuation'} MessageIds
+ * @typedef {'noDoublePunctuation' | 'suggestReplaceWithLeft' | 'suggestReplaceWithRight'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -45,6 +45,10 @@ export default {
       stylistic: false,
     },
 
+    fixable: 'code',
+
+    hasSuggestions: true,
+
     schema: [
       {
         type: 'object',
@@ -72,6 +76,10 @@ export default {
 
     messages: {
       noDoublePunctuation: 'Double punctuation mark `{{ punctuation }}` is not allowed.',
+      suggestReplaceWithLeft:
+        'Replace `{{ punctuation }}` with the left punctuation mark `{{ leftPunctuation }}`.',
+      suggestReplaceWithRight:
+        'Replace `{{ punctuation }}` with the right punctuation mark `{{ rightPunctuation }}`.',
     },
 
     language: 'markdown',
@@ -96,7 +104,8 @@ export default {
 
           if (allow.includes(punctuation)) continue;
 
-          context.report({
+          const [leftPunctuation, rightPunctuation] = punctuation;
+          const violation = /** @type {const} */ ({
             loc: {
               start: sourceCode.getLocFromIndex(startOffset),
               end: sourceCode.getLocFromIndex(endOffset),
@@ -108,6 +117,53 @@ export default {
 
             messageId: 'noDoublePunctuation',
           });
+
+          if (leftPunctuation === rightPunctuation) {
+            context.report({
+              ...violation,
+
+              fix(fixer) {
+                return fixer.replaceTextRange([startOffset, endOffset], leftPunctuation);
+              },
+            });
+          } else {
+            context.report({
+              ...violation,
+
+              suggest: [
+                {
+                  messageId: 'suggestReplaceWithLeft',
+
+                  data: {
+                    punctuation,
+                    leftPunctuation,
+                  },
+
+                  fix(fixer) {
+                    return fixer.replaceTextRange(
+                      [startOffset, endOffset],
+                      leftPunctuation,
+                    );
+                  },
+                },
+                {
+                  messageId: 'suggestReplaceWithRight',
+
+                  data: {
+                    punctuation,
+                    rightPunctuation,
+                  },
+
+                  fix(fixer) {
+                    return fixer.replaceTextRange(
+                      [startOffset, endOffset],
+                      rightPunctuation,
+                    );
+                  },
+                },
+              ],
+            });
+          }
         }
       },
     };
