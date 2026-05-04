@@ -72,7 +72,7 @@ When `allow` is specified, the listed two-character punctuation patterns are ign
 
 This rule provides a fix when two punctuation marks are the same by replacing the pair with a single punctuation mark. For example, `!!` is fixed to `!`, and `..` is fixed to `.`.
 
-## Suggestions
+## Suggestion
 
 This rule provides suggestions when the two punctuation marks are different. You can replace the pair with either the left punctuation mark or the right punctuation mark. For example, `?!` can be replaced with `?` or `!`.
 
