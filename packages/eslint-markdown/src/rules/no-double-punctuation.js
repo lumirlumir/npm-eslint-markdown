@@ -105,7 +105,7 @@ export default {
           if (allow.includes(punctuation)) continue;
 
           const [leftPunctuation, rightPunctuation] = punctuation;
-          const violoation = /** @type {const} */ ({
+          const violation = /** @type {const} */ ({
             loc: {
               start: sourceCode.getLocFromIndex(startOffset),
               end: sourceCode.getLocFromIndex(endOffset),
@@ -120,7 +120,7 @@ export default {
 
           if (leftPunctuation === rightPunctuation) {
             context.report({
-              ...violoation,
+              ...violation,
 
               fix(fixer) {
                 return fixer.replaceTextRange([startOffset, endOffset], leftPunctuation);
@@ -128,7 +128,7 @@ export default {
             });
           } else {
             context.report({
-              ...violoation,
+              ...violation,
 
               suggest: [
                 {
