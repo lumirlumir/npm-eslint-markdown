@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `allow-heading.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

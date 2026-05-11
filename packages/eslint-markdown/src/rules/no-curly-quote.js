@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow curly quotes(`“`, `”`, `‘` or `’`) in text.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

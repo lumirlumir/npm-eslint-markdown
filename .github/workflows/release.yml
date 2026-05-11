@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   release:
-    if: (github.event.pull_request.merged == true) && (github.event.pull_request.user.login == 'lumirlumir') && contains(github.event.pull_request.title, 'chore(release)') && startsWith(github.event.pull_request.head.ref, 'chore-release-bump-package-versions-from-v')
+    if: (github.event.pull_request.merged == true) && (github.event.pull_request.user.login == 'lumir') && contains(github.event.pull_request.title, 'chore(release)') && startsWith(github.event.pull_request.head.ref, 'chore-release-bump-package-versions-from-v')
 
     runs-on: ubuntu-slim
 

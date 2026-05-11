@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of title attribute for images.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

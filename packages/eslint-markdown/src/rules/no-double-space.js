@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow double or multiple consecutive spaces in text, except for leading and trailing spaces.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

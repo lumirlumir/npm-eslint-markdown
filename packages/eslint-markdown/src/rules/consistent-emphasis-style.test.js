@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `consistent-emphasis-style.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

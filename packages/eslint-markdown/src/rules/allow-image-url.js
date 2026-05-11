@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of allowed or disallowed URLs for images.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

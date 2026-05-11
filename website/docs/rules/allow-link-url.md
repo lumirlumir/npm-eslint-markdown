@@ -189,4 +189,4 @@ You might want to disable this rule if you don't need to enforce any specific UR
 
 ## Prior Art
 
-- [`textlint-rule-allowed-uris`](https://github.com/lumirlumir/npm-textlint-rule-allowed-uris#readme)
+- [`textlint-rule-allowed-uris`](https://github.com/lumir/npm-textlint-rule-allowed-uris#readme)

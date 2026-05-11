@@ -13,7 +13,7 @@ All packages are located in the `packages` directory, and the documentation can 
 1. Clone it to your local directory. ([Git](https://git-scm.com/downloads) is required.)
 
     ```sh
-    git clone https://github.com/lumirlumir/npm-eslint-markdown.git
+    git clone https://github.com/lumir/npm-eslint-markdown.git
     ```
 
 1. Move to the `npm-eslint-markdown` directory.

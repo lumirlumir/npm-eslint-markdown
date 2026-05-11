@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow control character.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir
  */
 
 // --------------------------------------------------------------------------------

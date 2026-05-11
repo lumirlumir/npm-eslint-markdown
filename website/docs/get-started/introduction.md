@@ -10,7 +10,7 @@ Simply lint your Markdown files using the same tool you use for JavaScript, Type
 
 Our goal is to provide a set of ESLint rules that help you write better Markdown documents and make it easy to migrate from popular Markdown linters such as [`markdownlint`](https://github.com/DavidAnson/markdownlint#readme), [`remark-lint`](https://github.com/remarkjs/remark-lint#readme), and [`textlint`](https://github.com/textlint/textlint#readme). (You can find additional details in the [Migration Guide](migration.md).)
 
-By combining this [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown#readme) plugin with ESLint's built-in Markdown support [`@eslint/markdown`](https://github.com/eslint/markdown#readme), you can lint both your code and documentation with a single tool.
+By combining this [`eslint-markdown`](https://github.com/lumir/npm-eslint-markdown#readme) plugin with ESLint's built-in Markdown support [`@eslint/markdown`](https://github.com/eslint/markdown#readme), you can lint both your code and documentation with a single tool.
 
 ::: tip :unicorn:
 

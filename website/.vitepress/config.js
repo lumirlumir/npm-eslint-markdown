@@ -30,9 +30,9 @@ import { createTwoslasher } from 'twoslash-eslint';
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
 const PKG_NAME = packageJson.name;
 const PKG_DESCRIPTION = packageJson.description;
-const PKG_AUTHOR = '루밀LuMir';
+const PKG_AUTHOR = 'lumir';
 const URL_HOMEPAGE = packageJson.homepage;
-const URL_GITHUB = `https://github.com/lumirlumir/npm-${PKG_NAME}`;
+const URL_GITHUB = `https://github.com/lumir/npm-${PKG_NAME}`;
 const URL_RULE_SRC = `${URL_GITHUB}/tree/main/packages/${PKG_NAME}/src/rules`;
 
 // --------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: `Copyright © 2024-${new Date().getFullYear()} <a href="https://github.com/lumirlumir">${PKG_AUTHOR}(lumirlumir)</a>`,
+      copyright: `Copyright © 2024-${new Date().getFullYear()} <a href="https://github.com/lumir">${PKG_AUTHOR}</a>`,
     },
   },
 
