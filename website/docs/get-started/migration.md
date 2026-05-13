@@ -1,6 +1,6 @@
 # Migration Guide
 
-This chapter provides guidance for migrating to [`eslint-markdown`](https://github.com/lumir/npm-eslint-markdown) and [`@eslint/markdown`](https://github.com/eslint/markdown) from other Markdown linting tools like [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`remark-lint`](https://github.com/remarkjs/remark-lint#readme), and [`textlint`](https://github.com/textlint/textlint#readme).
+This chapter provides guidance for migrating to [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown) and [`@eslint/markdown`](https://github.com/eslint/markdown) from other Markdown linting tools like [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`remark-lint`](https://github.com/remarkjs/remark-lint#readme), and [`textlint`](https://github.com/textlint/textlint#readme).
 
 | Emoji              | Compatibility        |
 | :----------------: | :------------------: |
@@ -89,7 +89,7 @@ This section is currently under construction and will be updated soon.
 
 | `textlint` | `eslint-markdown` or `@eslint/markdown` |
 | :--------- | :-------------------------------------- |
-| [`textlint-rule-allowed-uris`](https://github.com/lumir/npm-textlint-rule-allowed-uris#readme) :white_check_mark: | [`md/allow-image-url`](../rules/allow-image-url.md)<br>[`md/allow-link-url`](../rules/allow-link-url.md)<br>[`markdown/no-unused-definitions`](https://github.com/eslint/markdown/blob/main/docs/rules/no-unused-definitions.md#no-unused-definitions) |
+| [`textlint-rule-allowed-uris`](https://github.com/lumirlumir/npm-textlint-rule-allowed-uris#readme) :white_check_mark: | [`md/allow-image-url`](../rules/allow-image-url.md)<br>[`md/allow-link-url`](../rules/allow-link-url.md)<br>[`markdown/no-unused-definitions`](https://github.com/eslint/markdown/blob/main/docs/rules/no-unused-definitions.md#no-unused-definitions) |
 | [`textlint-rule-doubled-spaces`](https://github.com/iwamatsu0430/textlint-rule-doubled-spaces) :white_check_mark: | [`md/no-double-space`](../rules/no-double-space.md) |
 | [`textlint-rule-no-curly-quotes`](https://github.com/aborazmeh/textlint-rule-no-curly-quotes#readme) :white_check_mark: | [`md/no-curly-quote`](../rules/no-curly-quote.md) |
 | [`textlint-rule-no-invalid-control-character`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character) :warning: | [`md/no-control-character`](../rules/no-control-character.md) |

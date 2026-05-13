@@ -39,17 +39,17 @@
     "commonmark",
     "gfm"
   ],
-  "author": "lumir <rpfos@naver.com> (https://github.com/lumir)",
-  "funding": "https://github.com/sponsors/lumir",
+  "author": "lumir <rpfos@naver.com> (https://github.com/lumirlumir)",
+  "funding": "https://github.com/sponsors/lumirlumir",
   "license": "MIT",
   "homepage": "https://eslint-markdown.lumir.page",
   "repository": {
     "type": "github",
-    "url": "git+https://github.com/lumir/npm-eslint-markdown.git",
+    "url": "git+https://github.com/lumirlumir/npm-eslint-markdown.git",
     "directory": "packages/eslint-markdown"
   },
   "bugs": {
-    "url": "https://github.com/lumir/npm-eslint-markdown/issues"
+    "url": "https://github.com/lumirlumir/npm-eslint-markdown/issues"
   },
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"

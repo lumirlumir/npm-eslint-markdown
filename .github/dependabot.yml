@@ -3,7 +3,7 @@ updates:
   # Maintain dependencies for npm.
   - package-ecosystem: 'npm'
     assignees:
-      - 'lumir'
+      - 'lumirlumir'
     commit-message:
       prefix: 'chore'
       include: 'scope'
@@ -50,7 +50,7 @@ updates:
   # Maintain dependencies for GitHub Actions.
   - package-ecosystem: 'github-actions'
     assignees:
-      - 'lumir'
+      - 'lumirlumir'
     commit-message:
       prefix: 'chore'
       include: 'scope'
