@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `code-lang-shorthand.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

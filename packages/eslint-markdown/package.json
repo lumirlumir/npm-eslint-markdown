@@ -39,7 +39,7 @@
     "commonmark",
     "gfm"
   ],
-  "author": "루밀LuMir <rpfos@naver.com> (https://github.com/lumirlumir)",
+  "author": "lumir <rpfos@naver.com> (https://github.com/lumirlumir)",
   "funding": "https://github.com/sponsors/lumirlumir",
   "license": "MIT",
   "homepage": "https://eslint-markdown.lumir.page",

@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce consistent strong style.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

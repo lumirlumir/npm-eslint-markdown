@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-url-trailing-slash.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

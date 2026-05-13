@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow git conflict markers.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
