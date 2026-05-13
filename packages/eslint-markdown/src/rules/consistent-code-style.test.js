@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `consistent-code-style.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
