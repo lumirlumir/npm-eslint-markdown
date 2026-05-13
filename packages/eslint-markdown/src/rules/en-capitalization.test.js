@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-irregular-dash.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

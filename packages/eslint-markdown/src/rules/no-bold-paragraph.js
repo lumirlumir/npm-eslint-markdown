@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow using fully bolded paragraphs as headings.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // @ts-nocheck -- TODO

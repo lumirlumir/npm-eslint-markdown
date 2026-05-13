@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of title attribute for links.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

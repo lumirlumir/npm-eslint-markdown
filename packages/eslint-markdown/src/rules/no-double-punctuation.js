@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow double consecutive punctuation in text.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

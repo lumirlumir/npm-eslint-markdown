@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `consistent-strong-style.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

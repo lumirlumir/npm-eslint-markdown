@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce consistent delete style.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

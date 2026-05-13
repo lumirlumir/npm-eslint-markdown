@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `index.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

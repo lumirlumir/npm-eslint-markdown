@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of shorthand for code block language identifiers.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

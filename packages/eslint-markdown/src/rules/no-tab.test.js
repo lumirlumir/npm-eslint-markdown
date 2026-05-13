@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-tab.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

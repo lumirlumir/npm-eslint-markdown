@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `allow-link-url.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  * @see https://github.com/lumirlumir/npm-textlint-rule-allowed-uris/blob/main/src/textlint-rule-allowed-uris.test.js
  */
 

@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow emojis in text.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

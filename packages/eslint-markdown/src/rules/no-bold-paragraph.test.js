@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-bold-paragraph.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

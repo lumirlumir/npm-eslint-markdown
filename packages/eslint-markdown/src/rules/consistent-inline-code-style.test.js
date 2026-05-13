@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `consistent-inline-code-style.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  * Note: All test cases have been verified against `markdownlint`'s MD038 rule.
  */
 

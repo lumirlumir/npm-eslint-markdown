@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow tab characters.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

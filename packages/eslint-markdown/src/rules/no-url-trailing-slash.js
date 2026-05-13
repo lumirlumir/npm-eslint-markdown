@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow URL trailing slash.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

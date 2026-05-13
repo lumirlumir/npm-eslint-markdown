@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce consistent code style.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 /*

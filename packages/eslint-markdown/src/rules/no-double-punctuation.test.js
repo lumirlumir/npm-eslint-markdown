@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-double-punctuation.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

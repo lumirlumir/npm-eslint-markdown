@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce consistent inline code style.
- * @author lumir
+ * @author lumir(lumirlumir)
  * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md038.mjs
  */
 

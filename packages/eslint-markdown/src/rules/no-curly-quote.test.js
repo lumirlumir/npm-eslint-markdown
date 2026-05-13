@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-curly-quote.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

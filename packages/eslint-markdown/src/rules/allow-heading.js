@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of allowed text for headings.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

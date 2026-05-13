@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-git-conflict-marker.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

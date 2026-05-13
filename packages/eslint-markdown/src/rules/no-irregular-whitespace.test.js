@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-irregular-whitespace.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

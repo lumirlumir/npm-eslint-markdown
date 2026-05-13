@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-control-character.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

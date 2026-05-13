@@ -247,7 +247,7 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: `Copyright © 2024-${new Date().getFullYear()} <a href="https://github.com/lumirlumir">${PKG_AUTHOR}</a>`,
+      copyright: `Copyright © 2024-${new Date().getFullYear()} <a href="https://github.com/lumirlumir">${PKG_AUTHOR}(lumirlumir)</a>`,
     },
   },
 

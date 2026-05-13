@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `require-link-title.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

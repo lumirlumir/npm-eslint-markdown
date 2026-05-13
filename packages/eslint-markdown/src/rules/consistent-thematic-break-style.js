@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce consistent thematic break style.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

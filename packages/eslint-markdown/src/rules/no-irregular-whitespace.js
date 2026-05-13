@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow irregular whitespace.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

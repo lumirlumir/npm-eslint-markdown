@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `heading-id.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

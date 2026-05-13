@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `consistent-thematic-break-style.js`.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

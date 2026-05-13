@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of heading IDs.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // @ts-nocheck -- TODO

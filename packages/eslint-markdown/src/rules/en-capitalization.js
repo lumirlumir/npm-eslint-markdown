@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of capital letters at the beginning of sentences.
- * @author lumir
+ * @author lumir(lumirlumir)
  */
 
 // @ts-nocheck -- TODO
