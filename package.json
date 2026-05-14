@@ -36,7 +36,7 @@
     "lint:markdownlint": "markdownlint **/*.md"
   },
   "devDependencies": {
-    "@types/node": "^20.19.40",
+    "@types/node": "^20.19.41",
     "c8": "^11.0.0",
     "editorconfig-checker": "^6.1.1",
     "eslint": "^9.39.4",
