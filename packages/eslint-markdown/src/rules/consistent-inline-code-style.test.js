@@ -8,7 +8,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../core/rule-tester.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './consistent-inline-code-style.js';
 
 // --------------------------------------------------------------------------------
