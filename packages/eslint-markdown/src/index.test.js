@@ -15,12 +15,19 @@ import { Linter } from 'eslint/universal';
 import markdown from '@eslint/markdown';
 
 import md from './index.js';
+import packageJson from '../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
 describe('index', () => {
+  describe('package.json', () => {
+    it('should have `sideEffects: false`', () => {
+      strictEqual(packageJson.sideEffects, false);
+    });
+  });
+
   describe('Basic', () => {
     it('should have correct meta information', () => {
       strictEqual(md.meta.name, 'eslint-markdown');
