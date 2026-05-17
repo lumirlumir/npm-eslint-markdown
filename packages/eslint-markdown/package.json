@@ -26,6 +26,7 @@
     "LICENSE.md",
     "README.md",
     "!src/**/*.test.{js,ts}",
+    "!{src,build}/tests/**",
     "!**/fixtures/**"
   ],
   "keywords": [
