@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "npm-eslint-markdown",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "type": "module",
   "packageManager": "npm@11.11.0",
   "engines": {
@@ -36,12 +36,12 @@
     "lint:markdownlint": "markdownlint **/*.md"
   },
   "devDependencies": {
-    "@types/node": "^20.19.39",
+    "@types/node": "^20.19.41",
     "c8": "^11.0.0",
     "editorconfig-checker": "^6.1.1",
     "eslint": "^9.39.4",
     "eslint-config-bananass": "^0.6.1",
-    "eslint-markdown": "^0.8.0",
+    "eslint-markdown": "^0.9.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "markdownlint-cli": "^0.48.0",

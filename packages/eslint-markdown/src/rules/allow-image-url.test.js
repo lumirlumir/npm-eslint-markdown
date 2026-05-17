@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `allow-image-url.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  * @see https://github.com/lumirlumir/npm-textlint-rule-allowed-uris/blob/main/src/textlint-rule-allowed-uris.test.js
  */
 
