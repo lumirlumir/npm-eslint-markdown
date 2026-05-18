@@ -50,7 +50,7 @@ jobs:
         run: npm ci --no-audit --no-fund --prefer-offline
 
       - name: Install ESLint
-        run: npm install -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown --no-audit --no-fund --prefer-offline
+        run: npm install --no-audit --no-fund --prefer-offline -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown 
 
       - name: Build
         run: npm run build --if-present
