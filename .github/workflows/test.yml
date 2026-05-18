@@ -24,6 +24,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
         node-version:
+          - 26.x
           - 24.x
           - 22.x
           - 22.13.0
@@ -50,7 +51,7 @@ jobs:
         run: npm ci --no-audit --no-fund --prefer-offline
 
       - name: Install ESLint
-        run: npm install --no-audit --no-fund --prefer-offline -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown 
+        run: npm install --no-audit --no-fund --prefer-offline -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown
 
       - name: Build
         run: npm run build --if-present
