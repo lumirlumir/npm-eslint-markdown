@@ -13,7 +13,7 @@
 > If you like this package, please give it a star on [GitHub](https://github.com/lumirlumir/npm-eslint-markdown)!⭐<br/>
 > Your support helps us improve and maintain the project.
 
-Lint your Markdown with ESLint.🛠️
+Lint your Markdown with ESLint. Additional rules for use with `@eslint/markdown`.🛠️
 
 ## Documentation
 
