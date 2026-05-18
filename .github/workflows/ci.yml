@@ -32,7 +32,7 @@ jobs:
           cache: npm # https://github.com/actions/setup-node#caching-global-packages-data
 
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund
+        run: npm ci --no-audit --no-fund --prefer-offline
 
       - name: Build
         run: npm run build --if-present
@@ -57,7 +57,7 @@ jobs:
           cache: npm # https://github.com/actions/setup-node#caching-global-packages-data
 
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund
+        run: npm ci --no-audit --no-fund --prefer-offline
 
       - name: Build
         run: npm run build --if-present

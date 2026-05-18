@@ -24,6 +24,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
         node-version:
+          - 26.x
           - 24.x
           - 22.x
           - 22.13.0
@@ -47,10 +48,10 @@ jobs:
           cache: npm # https://github.com/actions/setup-node#caching-global-packages-data
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit --no-fund --prefer-offline
 
       - name: Install ESLint
-        run: npm install -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown
+        run: npm install --no-audit --no-fund -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown
 
       - name: Build
         run: npm run build --if-present
