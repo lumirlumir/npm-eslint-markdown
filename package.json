@@ -3,7 +3,7 @@
   "name": "npm-eslint-markdown",
   "version": "0.9.1",
   "type": "module",
-  "packageManager": "npm@11.12.1",
+  "packageManager": "npm@10.9.2",
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
@@ -15,7 +15,7 @@
     },
     "packageManager": {
       "name": "npm",
-      "version": ">=11.12.1",
+      "version": ">=10.9.2",
       "onFail": "error"
     }
   },
