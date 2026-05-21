@@ -3,9 +3,21 @@
   "name": "npm-eslint-markdown",
   "version": "0.9.1",
   "type": "module",
-  "packageManager": "npm@11.11.0",
+  "packageManager": "npm@10.9.2",
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^20.19.0 || ^22.13.0 || >=24.0.0",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": ">=10.9.2",
+      "onFail": "error"
+    }
   },
   "workspaces": [
     ".",
@@ -26,11 +38,11 @@
     "start": "npm run start:website",
     "start:website": "npm run start -w website",
     "fix": "npm-run-all -c -l -p fix:*",
-    "fix:eslint": "eslint --fix",
+    "fix:eslint": "eslint --fix --cache --cache-strategy content",
     "fix:prettier": "prettier . --write --ignore-unknown",
     "fix:markdownlint": "markdownlint **/*.md --fix",
     "lint": "npm-run-all -c -l -p lint:*",
-    "lint:eslint": "eslint",
+    "lint:eslint": "eslint --cache --cache-strategy content",
     "lint:prettier": "prettier . --check --ignore-unknown",
     "lint:editorconfig": "editorconfig-checker -config .editorconfig-checker.json",
     "lint:markdownlint": "markdownlint **/*.md"

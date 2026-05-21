@@ -14,6 +14,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ !contains(github.ref, 'main') }}
 
+env:
+  HUSKY: 0 # Skip Husky during CI: https://typicode.github.io/husky/how-to.html#ci-server-and-docker
+
 jobs:
   cross-platform:
     strategy:
