@@ -1,20 +1,20 @@
 /**
  * @fileoverview Test for `consistent-thematic-break-style.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './consistent-thematic-break-style.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('consistent-thematic-break-style', rule, {
   valid: [
     {
       name: 'Empty',

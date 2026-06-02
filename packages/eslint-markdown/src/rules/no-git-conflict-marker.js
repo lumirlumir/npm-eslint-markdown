@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow git conflict markers.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
@@ -24,7 +24,8 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-const gitConflictMarkerRegex = /(?:^|(?<=[\r\n]))(?:<{7}(?!<)|={7}(?!=)|>{7}(?!>))/gu;
+const gitConflictMarkerRegex =
+  /(?:^|(?<=[\r\n]))(?<gitConflictMarker><{7}(?!<)|={7}(?!=)|>{7}(?!>))[^\r\n]*\r?\n?/gu;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -41,6 +42,8 @@ export default {
       recommended: true,
       stylistic: false,
     },
+
+    fixable: 'code',
 
     schema: [
       {
@@ -99,7 +102,7 @@ export default {
         const matches = sourceCode.text.matchAll(gitConflictMarkerRegex);
 
         for (const match of matches) {
-          const gitConflictMarker = match[0];
+          const gitConflictMarker = match[1];
 
           const startOffset = match.index;
           const endOffset = startOffset + gitConflictMarker.length;
@@ -117,6 +120,11 @@ export default {
             },
 
             messageId: 'noGitConflictMarker',
+
+            fix(fixer) {
+              // Remove the entire line containing the git conflict marker, including the newline character.
+              return fixer.removeRange([startOffset, startOffset + match[0].length]);
+            },
           });
         }
       },

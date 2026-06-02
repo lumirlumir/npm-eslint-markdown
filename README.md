@@ -1,8 +1,7 @@
 # eslint-markdown
 
-[![lint](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/lint.yml?label=lint&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/lint.yml)
+[![ci](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/ci.yml?label=ci&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/ci.yml)
 [![test](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/test.yml?label=test&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/test.yml)
-[![test-cross-platform](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/test-cross-platform.yml?label=test-cross-platform&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/test-cross-platform.yml)
 [![codecov](https://img.shields.io/codecov/c/gh/lumirlumir/npm-eslint-markdown?token=LJMUst9eR3&label=Codecov&color=6358d4&labelColor=333333&logo=codecov)](https://codecov.io/gh/lumirlumir/npm-eslint-markdown)
 ![Node Current](https://img.shields.io/node/v/eslint-markdown?color=6358d4&labelColor=333333&logo=node.js)
 
@@ -14,7 +13,7 @@
 > If you like this package, please give it a star on [GitHub](https://github.com/lumirlumir/npm-eslint-markdown)!⭐<br/>
 > Your support helps us improve and maintain the project.
 
-Lint your Markdown with ESLint.🛠️
+Lint your Markdown with ESLint. Additional rules for use with `@eslint/markdown`.🛠️
 
 ## Documentation
 
@@ -24,6 +23,12 @@ For full documentation, see the [official documentation of the `eslint-markdown`
 - [Configurations](https://eslint-markdown.lumir.page/docs/get-started/configurations)
 - [Migration Guide](https://eslint-markdown.lumir.page/docs/get-started/migration)
 - [Rules](https://eslint-markdown.lumir.page/docs/rules)
+
+## Compatibility
+
+This [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown#readme) plugin does not include any rules that overlap with ESLint's built-in Markdown rules provided by [`@eslint/markdown`](https://github.com/eslint/markdown#readme).
+
+So, we **highly recommend** using the `eslint-markdown` plugin alongside ESLint's built-in Markdown support, `@eslint/markdown`.
 
 ## Code of Conduct
 

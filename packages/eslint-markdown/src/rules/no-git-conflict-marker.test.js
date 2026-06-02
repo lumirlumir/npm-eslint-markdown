@@ -1,20 +1,20 @@
 /**
  * @fileoverview Test for `no-git-conflict-marker.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './no-git-conflict-marker.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('no-git-conflict-marker', rule, {
   valid: [
     // Basic
     {
@@ -118,6 +118,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`<` repeats 7 times',
       code: '<<<<<<<',
+      output: '',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -134,6 +135,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`=` repeats 7 times',
       code: '=======',
+      output: '',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -150,6 +152,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`>` repeats 7 times',
       code: '>>>>>>>',
+      output: '',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -166,6 +169,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: 'Real world example (CRLF)',
       code: '<<<<<<< HEAD\r\nHello\r\n=======\r\nWorld\r\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      output: 'Hello\r\nWorld\r\n',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -202,6 +206,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: 'Real world example (CR)',
       code: '<<<<<<< HEAD\rHello\r=======\rWorld\r>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      output: 'Hello\rWorld\r',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -238,6 +243,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: 'Real world example (LF)',
       code: '<<<<<<< HEAD\nHello\n=======\nWorld\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      output: 'Hello\nWorld\n',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -272,8 +278,26 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
+      name: 'LS(U+2028) in a marker line should be removed with the marker line',
+      code: '<<<<<<< HEAD\u2028branch label\nHello',
+      output: 'Hello',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+    },
+    {
       name: 'Git conflict marker in code',
       code: '```txt\n>>>>>>>\n```\n>>>>>>>',
+      output: '```txt\n>>>>>>>\n```\n',
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -293,6 +317,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: '`skipCode: false` option: code block should not be skipped (`>`)',
       code: `\`\`\`md
 >>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
+\`\`\``,
+      output: `\`\`\`md
 \`\`\``,
       errors: [
         {
@@ -317,6 +343,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: `\`\`\`md
 =======
 \`\`\``,
+      output: `\`\`\`md
+\`\`\``,
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -340,6 +368,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: `\`\`\`md
 <<<<<<< HEAD
 \`\`\``,
+      output: `\`\`\`md
+\`\`\``,
       errors: [
         {
           messageId: 'noGitConflictMarker',
@@ -362,6 +392,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: "`skipCode: ['js', 'ts']` option: code block with language `md` should not be skipped (`<`)",
       code: `\`\`\`md
 <<<<<<< HEAD
+\`\`\``,
+      output: `\`\`\`md
 \`\`\``,
       errors: [
         {

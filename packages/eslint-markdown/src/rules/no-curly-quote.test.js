@@ -1,20 +1,20 @@
 /**
  * @fileoverview Test for `no-curly-quote.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './no-curly-quote.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('no-curly-quote', rule, {
   valid: [
     // Default
     '',

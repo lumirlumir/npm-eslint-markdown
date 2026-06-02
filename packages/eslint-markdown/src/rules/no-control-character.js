@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow control character.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ allow: string[], skipCode: boolean | string[], skipInlineCode: boolean }]} RuleOptions
- * @typedef {'noControlCharacter'} MessageIds
+ * @typedef {'noControlCharacter' | 'suggestRemove'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -42,6 +42,8 @@ export default {
       recommended: true,
       stylistic: false,
     },
+
+    hasSuggestions: true,
 
     schema: [
       {
@@ -86,6 +88,7 @@ export default {
 
     messages: {
       noControlCharacter: 'Control character `{{ controlCharacter }}` is not allowed.',
+      suggestRemove: 'Remove control character `{{ controlCharacter }}`.',
     },
 
     language: 'markdown',
@@ -124,6 +127,8 @@ export default {
 
           if (skipRanges.includes(startOffset)) continue;
 
+          const controlCharacterCode = `U+${controlCharacter.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`;
+
           context.report({
             loc: {
               start: sourceCode.getLocFromIndex(startOffset),
@@ -131,10 +136,24 @@ export default {
             },
 
             data: {
-              controlCharacter: `U+${controlCharacter.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
+              controlCharacter: controlCharacterCode,
             },
 
             messageId: 'noControlCharacter',
+
+            suggest: [
+              {
+                messageId: 'suggestRemove',
+
+                data: {
+                  controlCharacter: controlCharacterCode,
+                },
+
+                fix(fixer) {
+                  return fixer.removeRange([startOffset, endOffset]);
+                },
+              },
+            ],
           });
         }
       },

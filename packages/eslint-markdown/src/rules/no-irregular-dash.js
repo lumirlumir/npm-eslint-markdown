@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow irregular dash.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------

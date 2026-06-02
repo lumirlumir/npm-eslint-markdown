@@ -1,20 +1,20 @@
 /**
  * @fileoverview Test for `code-lang-shorthand.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './code-lang-shorthand.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('code-lang-shorthand', rule, {
   valid: [
     // Basic
     {

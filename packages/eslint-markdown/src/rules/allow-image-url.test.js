@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `allow-image-url.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  * @see https://github.com/lumirlumir/npm-textlint-rule-allowed-uris/blob/main/src/textlint-rule-allowed-uris.test.js
  */
 
@@ -8,14 +8,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './allow-image-url.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('allow-image-url', rule, {
   valid: [
     {
       name: 'Empty',

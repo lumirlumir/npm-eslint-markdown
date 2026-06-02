@@ -284,6 +284,10 @@ When specified, specific control characters are allowed if they match one of the
 
 `true` allows control characters in all inline code.
 
+## Suggestion
+
+This rule provides a suggestion that removes the reported control character from the Markdown document.
+
 ## When Not To Use It
 
 You might want to disable this rule if you're working with documents that intentionally contain control characters for specific purposes, such as demonstrating control character behavior or working with specialized text formats.

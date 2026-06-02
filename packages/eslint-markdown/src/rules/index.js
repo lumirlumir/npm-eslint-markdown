@@ -9,6 +9,7 @@ import codeLangShorthand from './code-lang-shorthand.js';
 import consistentCodeStyle from './consistent-code-style.js';
 import consistentDeleteStyle from './consistent-delete-style.js';
 import consistentEmphasisStyle from './consistent-emphasis-style.js';
+import consistentInlineCodeStyle from './consistent-inline-code-style.js';
 import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
@@ -16,6 +17,7 @@ import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
 // import noBoldParagraph from './no-bold-paragraph.js';
 import noControlCharacter from './no-control-character.js';
 import noCurlyQuote from './no-curly-quote.js';
+import noDoublePunctuation from './no-double-punctuation.js';
 import noDoubleSpace from './no-double-space.js';
 import noEmoji from './no-emoji.js';
 import noGitConflictMarker from './no-git-conflict-marker.js';
@@ -35,6 +37,7 @@ export default {
   'consistent-code-style': consistentCodeStyle,
   'consistent-delete-style': consistentDeleteStyle,
   'consistent-emphasis-style': consistentEmphasisStyle,
+  'consistent-inline-code-style': consistentInlineCodeStyle,
   'consistent-strong-style': consistentStrongStyle,
   'consistent-thematic-break-style': consistentThematicBreakStyle,
   'consistent-unordered-list-style': consistentUnorderedListStyle,
@@ -42,6 +45,7 @@ export default {
   // 'no-bold-paragraph': noBoldParagraph,
   'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
+  'no-double-punctuation': noDoublePunctuation,
   'no-double-space': noDoubleSpace,
   'no-emoji': noEmoji,
   'no-git-conflict-marker': noGitConflictMarker,

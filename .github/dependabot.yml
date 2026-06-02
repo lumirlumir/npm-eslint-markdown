@@ -14,25 +14,30 @@ updates:
       babel:
         patterns:
           - '@babel/*'
+      next:
+        patterns:
+          - 'next'
+          - '@next/*'
       react:
         patterns:
           - 'react'
           - 'react-dom'
           - '@types/react'
           - '@types/react-dom'
-      next:
-        patterns:
-          - 'next'
-          - '@next/*'
       shikijs:
         patterns:
           - '@shikijs/*'
       typescript-eslint:
         patterns:
           - '@typescript-eslint/*'
-      types:
+      vitest:
         patterns:
-          - '@types/*'
+          - 'vitest'
+          - '@vitest/*'
+      dev-dependencies:
+        dependency-type: 'development'
+        patterns:
+          - '*'
     open-pull-requests-limit: 2
     schedule:
       interval: 'daily'

@@ -6,22 +6,15 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { createRequire } from 'node:module';
-
-// --------------------------------------------------------------------------------
-// Declaration
-// --------------------------------------------------------------------------------
-
-/** @type {{ homepage: string, name: 'eslint-markdown', version: string }} */
-const { homepage, name, version } = createRequire(import.meta.url)('../../package.json');
+import pkg from '../../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
+/** @type {'eslint-markdown'} */
+export const PKG_NAME = /** @type {'eslint-markdown'} */ (pkg.name);
 /** @satisfies {string} */
-export const PKG_NAME = name;
-/** @satisfies {string} */
-export const PKG_VERSION = version;
+export const PKG_VERSION = pkg.version;
 /** Get the URL for the rule documentation based on the rule name. @param {string} [ruleName] */
-export const URL_RULE_DOCS = (ruleName = '') => `${homepage}/docs/rules/${ruleName}`;
+export const URL_RULE_DOCS = (ruleName = '') => `${pkg.homepage}/docs/rules/${ruleName}`;

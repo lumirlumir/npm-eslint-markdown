@@ -4,6 +4,7 @@ node_modules
 # production
 build
 .next
+**/.vitepress/.temp/
 **/.vitepress/cache/
 
 # env

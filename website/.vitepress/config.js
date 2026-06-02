@@ -30,7 +30,7 @@ import { createTwoslasher } from 'twoslash-eslint';
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
 const PKG_NAME = packageJson.name;
 const PKG_DESCRIPTION = packageJson.description;
-const PKG_AUTHOR = '루밀LuMir';
+const PKG_AUTHOR = 'lumir';
 const URL_HOMEPAGE = packageJson.homepage;
 const URL_GITHUB = `https://github.com/lumirlumir/npm-${PKG_NAME}`;
 const URL_RULE_SRC = `${URL_GITHUB}/tree/main/packages/${PKG_NAME}/src/rules`;
@@ -276,9 +276,8 @@ export default defineConfig({
       groupIconVitePlugin(),
       codecovVitePlugin({
         // Put the Codecov vite plugin after all other plugins
-        enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined, // Works only in CI when CODECOV_TOKEN is set
+        enableBundleAnalysis: process.env.CODECOV !== undefined, // Enable bundle analysis when CODECOV environment variable is defined
         bundleName: 'website',
-        uploadToken: process.env.CODECOV_TOKEN,
         gitService: 'github',
       }),
     ],
@@ -307,7 +306,7 @@ export default defineConfig({
   ${(rule.meta.docs.recommended ?? false) ? '<code class="rule-emoji">✅ Recommended</code>' : ''}
   ${(rule.meta.docs.stylistic ?? false) ? '<code class="rule-emoji">🎨 Stylistic</code>' : ''}
   ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
-  ${(rule.meta.docs.suggestion ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
+  ${(rule.meta.hasSuggestions ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
   ${(rule.meta.dialects.includes('commonmark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>

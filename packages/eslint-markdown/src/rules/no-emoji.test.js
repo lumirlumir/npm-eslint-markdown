@@ -1,20 +1,20 @@
 /**
  * @fileoverview Test for `no-emoji.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../core/tests/index.js';
+import ruleTester from '../tests/rule-tester.js';
 import rule from './no-emoji.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-ruleTester(getFileName(import.meta.url), rule, {
+ruleTester('no-emoji', rule, {
   valid: [
     {
       name: 'Empty',
@@ -27,6 +27,26 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: 'Text without emojis',
       code: 'Hello, world!',
+    },
+
+    // Options
+    {
+      name: '`allow` option - 1',
+      code: 'Hello, 😄!',
+      options: [
+        {
+          allow: ['😄'],
+        },
+      ],
+    },
+    {
+      name: '`allow` option - 2',
+      code: 'Hello, 😄 and 🦄!',
+      options: [
+        {
+          allow: ['😄', '🦄'],
+        },
+      ],
     },
   ],
 
@@ -99,6 +119,27 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 3,
           endLine: 2,
           endColumn: 5,
+        },
+      ],
+    },
+
+    // Options
+    {
+      // 😄's length is 2, 🦄's length is 2.
+      name: '`allow` option - 1',
+      code: 'Hello, 😄 and 🦄!',
+      options: [
+        {
+          allow: ['😄'],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'noEmoji',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 17,
         },
       ],
     },

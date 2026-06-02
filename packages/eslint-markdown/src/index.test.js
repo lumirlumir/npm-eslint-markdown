@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `index.js`.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
@@ -14,14 +14,20 @@ import { defineConfig } from 'eslint/config';
 import { Linter } from 'eslint/universal';
 import markdown from '@eslint/markdown';
 
-import { getFileName } from './core/tests/index.js';
 import md from './index.js';
+import packageJson from '../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-describe(getFileName(import.meta.url), () => {
+describe('index', () => {
+  describe('package.json', () => {
+    it('should have `sideEffects: false`', () => {
+      strictEqual(packageJson.sideEffects, false);
+    });
+  });
+
   describe('Basic', () => {
     it('should have correct meta information', () => {
       strictEqual(md.meta.name, 'eslint-markdown');
