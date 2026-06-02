@@ -33,14 +33,13 @@
 
 import { describe, it } from 'node:test';
 import { match, strictEqual } from 'node:assert';
-import { getFileName } from '../tests/index.js';
 import escapeStringRegexp from './escape-string-regexp.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
-describe(getFileName(import.meta.url), () => {
+describe('escape-string-regexp', () => {
   it('main', () => {
     strictEqual(
       escapeStringRegexp('\\ ^ $ * + ? . ( ) | { } [ ]'),
