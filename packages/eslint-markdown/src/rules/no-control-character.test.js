@@ -84,6 +84,31 @@ console.log(\u0003'Hello World');
     // Basic
     {
       name: 'control character',
+      code: 'Foo\u0000Bar',
+      errors: [
+        {
+          messageId: 'noControlCharacter',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: {
+            controlCharacter: 'U+0000',
+          },
+          suggestions: [
+            {
+              output: 'FooBar',
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0000',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'control characters',
       code: `
 1\u00002\u00013\u00024\u00035\u00046\u00057\u00068\u00079\u00080\u000b
 1\u000c2\u000e3\u000f4\u00105\u00116\u00127\u00138\u00149\u00150\u0016
@@ -102,6 +127,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0000',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -112,6 +138,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0001',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -122,6 +149,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0002',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -132,6 +160,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0003',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -142,6 +171,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0004',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -152,6 +182,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0005',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -162,6 +193,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0006',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -172,6 +204,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0007',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -182,6 +215,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0008',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -192,6 +226,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+000B',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -202,6 +237,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+000C',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -212,6 +248,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+000E',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -222,6 +259,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+000F',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -232,6 +270,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0010',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -242,6 +281,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0011',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -252,6 +292,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0012',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -262,6 +303,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0013',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -272,6 +314,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0014',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -282,6 +325,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0015',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -292,6 +336,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0016',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -302,6 +347,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0017',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -312,6 +358,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0018',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -322,6 +369,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0019',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -332,6 +380,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+001A',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -342,6 +391,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+001B',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -352,6 +402,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+001C',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -362,6 +413,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+001D',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -372,6 +424,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+001E',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -382,6 +435,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+001F',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -392,6 +446,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+007F',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -402,6 +457,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0080',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -412,6 +468,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0081',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -422,6 +479,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0082',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -432,6 +490,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0083',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -442,6 +501,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0084',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -452,6 +512,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0085',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -462,6 +523,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0086',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -472,6 +534,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0087',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -482,6 +545,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0088',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -492,6 +556,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0089',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -502,6 +567,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+008A',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -512,6 +578,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+008B',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -522,6 +589,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+008C',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -532,6 +600,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+008D',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -542,6 +611,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+008E',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -552,6 +622,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+008F',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -562,6 +633,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0090',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -572,6 +644,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0091',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -582,6 +655,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0092',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -592,6 +666,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0093',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -602,6 +677,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0094',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -612,6 +688,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0095',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -622,6 +699,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0096',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -632,6 +710,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0097',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -642,6 +721,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0098',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -652,6 +732,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0099',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -662,6 +743,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+009A',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -672,6 +754,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+009B',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -682,6 +765,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+009C',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -692,6 +776,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+009D',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -702,6 +787,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+009E',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -712,6 +798,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+009F',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -722,6 +809,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+202C',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -732,6 +820,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+202D',
           },
+          suggestions: 1,
         },
         {
           messageId: 'noControlCharacter',
@@ -742,6 +831,7 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+202E',
           },
+          suggestions: 1,
         },
       ],
     },
@@ -758,6 +848,15 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0000',
           },
+          suggestions: [
+            {
+              output: '`\u0000`',
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0000',
+              },
+            },
+          ],
         },
       ],
     },
@@ -776,6 +875,15 @@ console.log(\u0003'Hello World');
           data: {
             controlCharacter: 'U+0002',
           },
+          suggestions: [
+            {
+              output: `1\u00002\u00013`,
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0002',
+              },
+            },
+          ],
         },
       ],
       options: [
@@ -800,6 +908,18 @@ console.log(\u0005'Hello World');
           data: {
             controlCharacter: 'U+0005',
           },
+          suggestions: [
+            {
+              output: `
+\`\`\`js
+console.log('Hello World');
+\`\`\``,
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0005',
+              },
+            },
+          ],
         },
       ],
       options: [
@@ -825,6 +945,19 @@ Foo\u0002Bar
           data: {
             controlCharacter: 'U+0002',
           },
+          suggestions: [
+            {
+              output: `\`\`\`md
+FooBar
+\`\`\`
+
+    code block with\u0003ETX`,
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0002',
+              },
+            },
+          ],
         },
         {
           messageId: 'noControlCharacter',
@@ -835,6 +968,19 @@ Foo\u0002Bar
           data: {
             controlCharacter: 'U+0003',
           },
+          suggestions: [
+            {
+              output: `\`\`\`md
+Foo\u0002Bar
+\`\`\`
+
+    code block withETX`,
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0003',
+              },
+            },
+          ],
         },
       ],
       options: [
@@ -856,6 +1002,15 @@ Foo\u0002Bar
           data: {
             controlCharacter: 'U+0006',
           },
+          suggestions: [
+            {
+              output: "`console.log('Hello World')`",
+              messageId: 'suggestRemove',
+              data: {
+                controlCharacter: 'U+0006',
+              },
+            },
+          ],
         },
       ],
       options: [
