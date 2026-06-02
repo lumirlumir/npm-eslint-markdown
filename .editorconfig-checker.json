@@ -1,3 +1,6 @@
 {
-  "Exclude": []
+  "Exclude": [
+    "website/docs/rules/no-control-character.md",
+    "website/docs/rules/no-irregular-whitespace.md"
+  ]
 }
