@@ -46,6 +46,7 @@ For faster iteration, use workspace-scoped commands when appropriate:
 
 - All tests should be DAMP (Descriptive And Meaningful Phrase).
 - Do not use `for` iteration to generate test cases. Prefer individually named tests that clearly describe the scenario.
+- When writing suggestion test cases, prefer explicit suggestion objects when the expected `output` is concise; use count-only assertions when full output would make the test noisy.
 
 ## Pull Request Workflow
 
