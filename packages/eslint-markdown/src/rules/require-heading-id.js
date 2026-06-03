@@ -88,6 +88,17 @@ export default {
     const { sourceCode } = context;
     const [mode, { leftDelimiter, rightDelimiter, allowDepths }] = context.options;
 
+    const escapedLeftDelimiter = escapeStringRegexp(leftDelimiter);
+    const escapedRightDelimiter = escapeStringRegexp(rightDelimiter);
+
+    /**
+     * We don't use the `[ \t]*$` pattern at the end of the regex because trailing
+     * whitespace is already removed from a `heading` node's child `text` node.
+     */
+    const headingIdRegex = new RegExp(
+      `(?<leadingSpaces>[ \t]+)(?<headingId>${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter})$`,
+    );
+
     return {
       heading(node) {
         // If the heading's depth is included in `allowDepths`, skip it.
@@ -178,17 +189,6 @@ export default {
 
           return;
         }
-
-        const escapedLeftDelimiter = escapeStringRegexp(leftDelimiter);
-        const escapedRightDelimiter = escapeStringRegexp(rightDelimiter);
-
-        /**
-         * We don't use the `[ \t]*$` pattern at the end of the regex because trailing
-         * whitespace is already removed from a `heading` node's child `text` node.
-         */
-        const headingIdRegex = new RegExp(
-          `(?<leadingSpaces>[ \t]+)(?<headingId>${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter})$`,
-        );
 
         const match = headingIdRegex.exec(lastChildNode.value);
 
