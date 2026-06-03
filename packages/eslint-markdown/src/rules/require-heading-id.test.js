@@ -461,5 +461,26 @@ ruleTester('require-heading-id', rule, {
       ],
       options: ['never'],
     },
+
+    // `allowDepths` option
+    {
+      name: 'ATX: Ignore h2-h6 heading ID, but h1 heading ID is missing',
+      code: '# Heading',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 10,
+        },
+      ],
+      options: [
+        'always',
+        {
+          allowDepths: [2, 3, 4, 5, 6],
+        },
+      ],
+    },
   ],
 });
