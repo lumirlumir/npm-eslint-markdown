@@ -636,6 +636,502 @@ ruleTester('require-heading-id', rule, {
       options: ['never'],
     },
 
+    // `never` option: ATX Closed Headings
+    {
+      name: 'ATX Closed: h1 heading ID exists',
+      code: '# Heading 1 {#heading-1} #',
+      output: '# Heading 1  #',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 25,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'ATX Closed: h2 heading ID exists',
+      code: '## Heading 2 {#heading-2} ##',
+      output: '## Heading 2  ##',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 26,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'ATX Closed: h3 heading ID exists',
+      code: '### Heading 3 {#heading-3} ###',
+      output: '### Heading 3  ###',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'ATX Closed: h4 heading ID exists',
+      code: '#### Heading 4 {#heading-4} ####',
+      output: '#### Heading 4  ####',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'ATX Closed: h5 heading ID exists',
+      code: '##### Heading 5 {#heading-5} #####',
+      output: '##### Heading 5  #####',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 29,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'ATX Closed: h6 heading ID exists',
+      code: '###### Heading 6 {#heading-6} ######',
+      output: '###### Heading 6  ######',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 30,
+        },
+      ],
+      options: ['never'],
+    },
+
+    // `never` option: Setext Headings
+    {
+      name: 'Setext: h1 heading ID exists',
+      code: 'Heading 1 {#heading-1}\n=========',
+      output: 'Heading 1 \n=========',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 23,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'Setext: multiline h1 heading ID exists',
+      code: 'Heading 1\nMultiple Lines {#heading-1}\n=========',
+      output: 'Heading 1\nMultiple Lines \n=========',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'Setext: h2 heading ID exists',
+      code: 'Heading 2 {#heading-2}\n---------',
+      output: 'Heading 2 \n---------',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 23,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'Setext: multiline h2 heading ID exists',
+      code: 'Heading 2\nMultiple Lines {#heading-2}\n---------',
+      output: 'Heading 2\nMultiple Lines \n---------',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+      options: ['never'],
+    },
+
+    // `leftDelimiter` and `rightDelimiter` option: ATX Headings
+    {
+      name: 'ATX: Custom Delimiters `[`, `]` h1 heading ID exists',
+      code: '# Heading 1 [#heading-1]',
+      output: '# Heading 1 ',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 25,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX: Custom Delimiters `[`, `]` h2 heading ID exists',
+      code: '## Heading 2 [#heading-2]',
+      output: '## Heading 2 ',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 26,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX: Custom Delimiters `[`, `]` h3 heading ID exists',
+      code: '### Heading 3 [#heading-3]',
+      output: '### Heading 3 ',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX: Custom Delimiters `[`, `]` h4 heading ID exists',
+      code: '#### Heading 4 [#heading-4]',
+      output: '#### Heading 4 ',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX: Custom Delimiters `[`, `]` h5 heading ID exists',
+      code: '##### Heading 5 [#heading-5]',
+      output: '##### Heading 5 ',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 29,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX: Custom Delimiters `[`, `]` h6 heading ID exists',
+      code: '###### Heading 6 [#heading-6]',
+      output: '###### Heading 6 ',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 30,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+
+    // `leftDelimiter` and `rightDelimiter` option: ATX Closed Headings
+    {
+      name: 'ATX Closed: Custom Delimiters `[`, `]` h1 heading ID exists',
+      code: '# Heading 1 [#heading-1] #',
+      output: '# Heading 1  #',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 25,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Custom Delimiters `[`, `]` h2 heading ID exists',
+      code: '## Heading 2 [#heading-2] ##',
+      output: '## Heading 2  ##',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 26,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Custom Delimiters `[`, `]` h3 heading ID exists',
+      code: '### Heading 3 [#heading-3] ###',
+      output: '### Heading 3  ###',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Custom Delimiters `[`, `]` h4 heading ID exists',
+      code: '#### Heading 4 [#heading-4] ####',
+      output: '#### Heading 4  ####',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Custom Delimiters `[`, `]` h5 heading ID exists',
+      code: '##### Heading 5 [#heading-5] #####',
+      output: '##### Heading 5  #####',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 29,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Custom Delimiters `[`, `]` h6 heading ID exists',
+      code: '###### Heading 6 [#heading-6] ######',
+      output: '###### Heading 6  ######',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 30,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+
+    // `leftDelimiter` and `rightDelimiter` option: Setext Headings
+    {
+      name: 'Setext: Custom Delimiters `[`, `]` h1 heading ID exists',
+      code: 'Heading 1 [#heading-1]\n=========',
+      output: 'Heading 1 \n=========',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 23,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'Setext: Custom Delimiters `[`, `]` multiline h1 heading ID exists',
+      code: 'Heading 1\nMultiple Lines [#heading-1]\n=========',
+      output: 'Heading 1\nMultiple Lines \n=========',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'Setext: Custom Delimiters `[`, `]` h2 heading ID exists',
+      code: 'Heading 2 [#heading-2]\n---------',
+      output: 'Heading 2 \n---------',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 23,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+    {
+      name: 'Setext: Custom Delimiters `[`, `]` multiline h2 heading ID exists',
+      code: 'Heading 2\nMultiple Lines [#heading-2]\n---------',
+      output: 'Heading 2\nMultiple Lines \n---------',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+      options: [
+        'never',
+        {
+          leftDelimiter: '[',
+          rightDelimiter: ']',
+        },
+      ],
+    },
+
     // `allowDepths` option
     {
       name: 'ATX: Ignore h2-h6 heading ID, but h1 heading ID is missing',
