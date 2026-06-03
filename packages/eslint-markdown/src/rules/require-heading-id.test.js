@@ -343,6 +343,32 @@ ruleTester('require-heading-id', rule, {
         },
       ],
     },
+    {
+      name: 'ATX: h1 heading ID wrapped in emphasis',
+      code: '# Heading *{#id}*',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 18,
+        },
+      ],
+    },
+    {
+      name: 'ATX: h1 heading ID wrapped in strong',
+      code: '# Heading **{#id}**',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 20,
+          endLine: 1,
+          endColumn: 20,
+        },
+      ],
+    },
 
     // `never` option: ATX Headings
     {
