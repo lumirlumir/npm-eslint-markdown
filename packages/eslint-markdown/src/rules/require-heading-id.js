@@ -156,8 +156,9 @@ export default {
 
         /*
          * Missing heading IDs are reported on the last character of the last child
-         * node rather than as a zero-width location at the end of that node, because
-         * some editors such as VSCode render zero-width diagnostics incorrectly.
+         * node rather than as a zero-width location (i.e. `column === endColumn`)
+         * at the end of that node, because some editors such as VSCode render
+         * zero-width diagnostics incorrectly.
          */
         const [lastChildNodeStartOffset, lastChildNodeEndOffset] =
           sourceCode.getRange(lastChildNode);
