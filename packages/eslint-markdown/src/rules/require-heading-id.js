@@ -187,12 +187,12 @@ export default {
          * whitespace is already removed from a `heading` node's child `text` node.
          */
         const headingIdRegex = new RegExp(
-          `(?<=[ \t]+)${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter}$`,
+          `(?<leadingSpaces>[ \t]+)(?<headingId>${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter})$`,
         );
 
         const match = headingIdRegex.exec(lastChildNode.value);
 
-        if (!match) {
+        if (!match || !match.groups) {
           if (mode === 'always') {
             context.report({
               loc: {
@@ -208,15 +208,15 @@ export default {
         }
 
         if (mode === 'never') {
-          const headingId = match[0];
-
-          const startOffset = lastChildNodeStartOffset + match.index;
-          const endOffset = startOffset + headingId.length;
+          const { leadingSpaces, headingId } = match.groups;
+          const leadingSpacesStartOffset = lastChildNodeStartOffset + match.index;
+          const headingIdStartOffset = leadingSpacesStartOffset + leadingSpaces.length;
+          const headingIdEndOffset = headingIdStartOffset + headingId.length;
 
           context.report({
             loc: {
-              start: sourceCode.getLocFromIndex(startOffset),
-              end: sourceCode.getLocFromIndex(endOffset),
+              start: sourceCode.getLocFromIndex(headingIdStartOffset),
+              end: sourceCode.getLocFromIndex(headingIdEndOffset),
             },
 
             data: {
@@ -226,7 +226,10 @@ export default {
             messageId: 'headingIdNever',
 
             fix(fixer) {
-              return fixer.replaceTextRange([startOffset, endOffset], '');
+              return fixer.replaceTextRange(
+                [leadingSpacesStartOffset, headingIdEndOffset],
+                '',
+              );
             },
           });
         }

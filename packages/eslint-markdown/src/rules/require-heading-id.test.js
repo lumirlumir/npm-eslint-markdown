@@ -574,10 +574,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: h1 heading ID exists',
       code: '# Heading 1 {#heading-1}',
-      output: '# Heading 1 ',
+      output: '# Heading 1',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-1}',
+          },
           line: 1,
           column: 13,
           endLine: 1,
@@ -589,10 +592,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: h2 heading ID exists',
       code: '## Heading 2 {#heading-2}',
-      output: '## Heading 2 ',
+      output: '## Heading 2',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-2}',
+          },
           line: 1,
           column: 14,
           endLine: 1,
@@ -604,10 +610,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: h3 heading ID exists',
       code: '### Heading 3 {#heading-3}',
-      output: '### Heading 3 ',
+      output: '### Heading 3',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-3}',
+          },
           line: 1,
           column: 15,
           endLine: 1,
@@ -619,10 +628,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: h4 heading ID exists',
       code: '#### Heading 4 {#heading-4}',
-      output: '#### Heading 4 ',
+      output: '#### Heading 4',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-4}',
+          },
           line: 1,
           column: 16,
           endLine: 1,
@@ -634,10 +646,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: h5 heading ID exists',
       code: '##### Heading 5 {#heading-5}',
-      output: '##### Heading 5 ',
+      output: '##### Heading 5',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-5}',
+          },
           line: 1,
           column: 17,
           endLine: 1,
@@ -649,10 +664,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: h6 heading ID exists',
       code: '###### Heading 6 {#heading-6}',
-      output: '###### Heading 6 ',
+      output: '###### Heading 6',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-6}',
+          },
           line: 1,
           column: 18,
           endLine: 1,
@@ -666,10 +684,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: h1 heading ID exists',
       code: '# Heading 1 {#heading-1} #',
-      output: '# Heading 1  #',
+      output: '# Heading 1 #',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-1}',
+          },
           line: 1,
           column: 13,
           endLine: 1,
@@ -681,10 +702,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: h2 heading ID exists',
       code: '## Heading 2 {#heading-2} ##',
-      output: '## Heading 2  ##',
+      output: '## Heading 2 ##',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-2}',
+          },
           line: 1,
           column: 14,
           endLine: 1,
@@ -696,10 +720,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: h3 heading ID exists',
       code: '### Heading 3 {#heading-3} ###',
-      output: '### Heading 3  ###',
+      output: '### Heading 3 ###',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-3}',
+          },
           line: 1,
           column: 15,
           endLine: 1,
@@ -711,10 +738,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: h4 heading ID exists',
       code: '#### Heading 4 {#heading-4} ####',
-      output: '#### Heading 4  ####',
+      output: '#### Heading 4 ####',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-4}',
+          },
           line: 1,
           column: 16,
           endLine: 1,
@@ -726,10 +756,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: h5 heading ID exists',
       code: '##### Heading 5 {#heading-5} #####',
-      output: '##### Heading 5  #####',
+      output: '##### Heading 5 #####',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-5}',
+          },
           line: 1,
           column: 17,
           endLine: 1,
@@ -741,10 +774,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: h6 heading ID exists',
       code: '###### Heading 6 {#heading-6} ######',
-      output: '###### Heading 6  ######',
+      output: '###### Heading 6 ######',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-6}',
+          },
           line: 1,
           column: 18,
           endLine: 1,
@@ -758,10 +794,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: h1 heading ID exists',
       code: 'Heading 1 {#heading-1}\n=========',
-      output: 'Heading 1 \n=========',
+      output: 'Heading 1\n=========',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-1}',
+          },
           line: 1,
           column: 11,
           endLine: 1,
@@ -773,10 +812,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: multiline h1 heading ID exists',
       code: 'Heading 1\nMultiple Lines {#heading-1}\n=========',
-      output: 'Heading 1\nMultiple Lines \n=========',
+      output: 'Heading 1\nMultiple Lines\n=========',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-1}',
+          },
           line: 2,
           column: 16,
           endLine: 2,
@@ -788,10 +830,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: h2 heading ID exists',
       code: 'Heading 2 {#heading-2}\n---------',
-      output: 'Heading 2 \n---------',
+      output: 'Heading 2\n---------',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-2}',
+          },
           line: 1,
           column: 11,
           endLine: 1,
@@ -803,10 +848,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: multiline h2 heading ID exists',
       code: 'Heading 2\nMultiple Lines {#heading-2}\n---------',
-      output: 'Heading 2\nMultiple Lines \n---------',
+      output: 'Heading 2\nMultiple Lines\n---------',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '{#heading-2}',
+          },
           line: 2,
           column: 16,
           endLine: 2,
@@ -820,10 +868,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: Custom Delimiters `[`, `]` h1 heading ID exists',
       code: '# Heading 1 [#heading-1]',
-      output: '# Heading 1 ',
+      output: '# Heading 1',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-1]',
+          },
           line: 1,
           column: 13,
           endLine: 1,
@@ -841,10 +892,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: Custom Delimiters `[`, `]` h2 heading ID exists',
       code: '## Heading 2 [#heading-2]',
-      output: '## Heading 2 ',
+      output: '## Heading 2',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-2]',
+          },
           line: 1,
           column: 14,
           endLine: 1,
@@ -862,10 +916,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: Custom Delimiters `[`, `]` h3 heading ID exists',
       code: '### Heading 3 [#heading-3]',
-      output: '### Heading 3 ',
+      output: '### Heading 3',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-3]',
+          },
           line: 1,
           column: 15,
           endLine: 1,
@@ -883,10 +940,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: Custom Delimiters `[`, `]` h4 heading ID exists',
       code: '#### Heading 4 [#heading-4]',
-      output: '#### Heading 4 ',
+      output: '#### Heading 4',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-4]',
+          },
           line: 1,
           column: 16,
           endLine: 1,
@@ -904,10 +964,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: Custom Delimiters `[`, `]` h5 heading ID exists',
       code: '##### Heading 5 [#heading-5]',
-      output: '##### Heading 5 ',
+      output: '##### Heading 5',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-5]',
+          },
           line: 1,
           column: 17,
           endLine: 1,
@@ -925,10 +988,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX: Custom Delimiters `[`, `]` h6 heading ID exists',
       code: '###### Heading 6 [#heading-6]',
-      output: '###### Heading 6 ',
+      output: '###### Heading 6',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-6]',
+          },
           line: 1,
           column: 18,
           endLine: 1,
@@ -948,10 +1014,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: Custom Delimiters `[`, `]` h1 heading ID exists',
       code: '# Heading 1 [#heading-1] #',
-      output: '# Heading 1  #',
+      output: '# Heading 1 #',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-1]',
+          },
           line: 1,
           column: 13,
           endLine: 1,
@@ -969,10 +1038,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: Custom Delimiters `[`, `]` h2 heading ID exists',
       code: '## Heading 2 [#heading-2] ##',
-      output: '## Heading 2  ##',
+      output: '## Heading 2 ##',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-2]',
+          },
           line: 1,
           column: 14,
           endLine: 1,
@@ -990,10 +1062,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: Custom Delimiters `[`, `]` h3 heading ID exists',
       code: '### Heading 3 [#heading-3] ###',
-      output: '### Heading 3  ###',
+      output: '### Heading 3 ###',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-3]',
+          },
           line: 1,
           column: 15,
           endLine: 1,
@@ -1011,10 +1086,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: Custom Delimiters `[`, `]` h4 heading ID exists',
       code: '#### Heading 4 [#heading-4] ####',
-      output: '#### Heading 4  ####',
+      output: '#### Heading 4 ####',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-4]',
+          },
           line: 1,
           column: 16,
           endLine: 1,
@@ -1032,10 +1110,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: Custom Delimiters `[`, `]` h5 heading ID exists',
       code: '##### Heading 5 [#heading-5] #####',
-      output: '##### Heading 5  #####',
+      output: '##### Heading 5 #####',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-5]',
+          },
           line: 1,
           column: 17,
           endLine: 1,
@@ -1053,10 +1134,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'ATX Closed: Custom Delimiters `[`, `]` h6 heading ID exists',
       code: '###### Heading 6 [#heading-6] ######',
-      output: '###### Heading 6  ######',
+      output: '###### Heading 6 ######',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-6]',
+          },
           line: 1,
           column: 18,
           endLine: 1,
@@ -1076,10 +1160,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: Custom Delimiters `[`, `]` h1 heading ID exists',
       code: 'Heading 1 [#heading-1]\n=========',
-      output: 'Heading 1 \n=========',
+      output: 'Heading 1\n=========',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-1]',
+          },
           line: 1,
           column: 11,
           endLine: 1,
@@ -1097,10 +1184,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: Custom Delimiters `[`, `]` multiline h1 heading ID exists',
       code: 'Heading 1\nMultiple Lines [#heading-1]\n=========',
-      output: 'Heading 1\nMultiple Lines \n=========',
+      output: 'Heading 1\nMultiple Lines\n=========',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-1]',
+          },
           line: 2,
           column: 16,
           endLine: 2,
@@ -1118,10 +1208,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: Custom Delimiters `[`, `]` h2 heading ID exists',
       code: 'Heading 2 [#heading-2]\n---------',
-      output: 'Heading 2 \n---------',
+      output: 'Heading 2\n---------',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-2]',
+          },
           line: 1,
           column: 11,
           endLine: 1,
@@ -1139,10 +1232,13 @@ ruleTester('require-heading-id', rule, {
     {
       name: 'Setext: Custom Delimiters `[`, `]` multiline h2 heading ID exists',
       code: 'Heading 2\nMultiple Lines [#heading-2]\n---------',
-      output: 'Heading 2\nMultiple Lines \n---------',
+      output: 'Heading 2\nMultiple Lines\n---------',
       errors: [
         {
           messageId: 'headingIdNever',
+          data: {
+            headingId: '[#heading-2]',
+          },
           line: 2,
           column: 16,
           endLine: 2,
