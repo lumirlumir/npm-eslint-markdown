@@ -149,7 +149,7 @@ export default {
          * ```
          */
         if (!lastChildNode) {
-          // TODO: Report an error if the mode is `always`.
+          // If there are no child nodes, intentionally skip it.
           return;
         }
 

@@ -26,6 +26,32 @@ ruleTester('require-heading-id', rule, {
       code: '  ',
     },
 
+    // Default: Empty Headings
+    {
+      name: 'ATX: Empty h1 heading',
+      code: '#',
+    },
+    {
+      name: 'ATX: Empty h2 heading',
+      code: '##',
+    },
+    {
+      name: 'ATX: Empty h3 heading',
+      code: '###',
+    },
+    {
+      name: 'Close ATX: Empty h1 heading',
+      code: '# #',
+    },
+    {
+      name: 'Close ATX: Empty h2 heading',
+      code: '## ##',
+    },
+    {
+      name: 'Close ATX: Empty h3 heading',
+      code: '### ###',
+    },
+
     // Default: ATX Headings
     {
       name: 'ATX: Correct h1 heading ID',
