@@ -190,7 +190,7 @@ export default {
           return;
         }
 
-        const match = headingIdRegex.exec(lastChildNode.value);
+        const match = headingIdRegex.exec(sourceCode.getText(lastChildNode));
 
         if (!match || !match.groups) {
           if (mode === 'always') {

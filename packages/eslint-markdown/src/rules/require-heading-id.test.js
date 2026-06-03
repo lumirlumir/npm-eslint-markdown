@@ -874,6 +874,44 @@ ruleTester('require-heading-id', rule, {
       options: ['never'],
     },
 
+    // `never` option: Edge Cases
+    {
+      name: 'ATX: h1 heading ID after character reference exists',
+      code: '# R&amp;D {#r-d}',
+      output: '# R&amp;D',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          data: {
+            headingId: '{#r-d}',
+          },
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 17,
+        },
+      ],
+      options: ['never'],
+    },
+    {
+      name: 'ATX: h1 heading ID with escaped character exists',
+      code: '# Heading {#r\\&d}',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'headingIdNever',
+          data: {
+            headingId: '{#r\\&d}',
+          },
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 18,
+        },
+      ],
+      options: ['never'],
+    },
+
     // `leftDelimiter` and `rightDelimiter` option: ATX Headings
     {
       name: 'ATX: Custom Delimiters `[`, `]` h1 heading ID exists',
