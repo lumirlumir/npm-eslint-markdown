@@ -150,6 +150,7 @@ export default {
          */
         if (!lastChildNode) {
           // If there are no child nodes, intentionally skip it.
+          // This is not the part we want to report.
           return;
         }
 
