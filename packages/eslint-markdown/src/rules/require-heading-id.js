@@ -123,17 +123,45 @@ export default {
          *           ^^            ^^
          * ```
          */
-        const textNode = node.children.at(-1);
+        const lastChildNode = node.children.at(-1);
 
-        const headingEndPosition = sourceCode.getLoc(node).end;
+        /*
+         * ATX headings and closed ATX headings that contain no content have no child nodes.
+         *
+         * ATX Headings:
+         *
+         * ```md
+         * #
+         *
+         * ##
+         *
+         * ###
+         * ```
+         *
+         * ATX Closed Headings:
+         *
+         * ```md
+         * # #
+         *
+         * ## ##
+         *
+         * ### ###
+         * ```
+         */
+        if (!lastChildNode) {
+          // TODO: Report an error if the mode is `always`.
+          return;
+        }
+
+        const lastChildNodeEndPosition = sourceCode.getLoc(lastChildNode).end;
 
         // If the last child node is not a `text` node, report an error.
-        if (textNode?.type !== 'text') {
+        if (lastChildNode.type !== 'text') {
           if (mode === 'always') {
             context.report({
               loc: {
-                start: headingEndPosition,
-                end: headingEndPosition,
+                start: lastChildNodeEndPosition,
+                end: lastChildNodeEndPosition,
               },
 
               messageId: 'headingIdAlways',
@@ -154,14 +182,14 @@ export default {
           `(?<=[ \t]+)${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter}$`,
         );
 
-        const match = headingIdRegex.exec(textNode.value);
+        const match = headingIdRegex.exec(lastChildNode.value);
 
         if (!match) {
           if (mode === 'always') {
             context.report({
               loc: {
-                start: headingEndPosition,
-                end: headingEndPosition,
+                start: lastChildNodeEndPosition,
+                end: lastChildNodeEndPosition,
               },
 
               messageId: 'headingIdAlways',
@@ -174,14 +202,14 @@ export default {
         if (mode === 'always' && match === null) {
           context.report({
             loc: {
-              start: headingEndPosition,
-              end: headingEndPosition,
+              start: lastChildNodeEndPosition,
+              end: lastChildNodeEndPosition,
             },
 
             messageId: 'headingIdAlways',
           });
         } else if (mode === 'never' && match !== null) {
-          const [nodeStartOffset] = sourceCode.getRange(textNode);
+          const [nodeStartOffset] = sourceCode.getRange(lastChildNode);
 
           const headingId = match[0];
 

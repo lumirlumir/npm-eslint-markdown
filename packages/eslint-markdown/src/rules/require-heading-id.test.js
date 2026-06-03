@@ -188,6 +188,13 @@ ruleTester('require-heading-id', rule, {
       options: ['never'],
     },
 
+    // `never` option: Edge Cases
+    {
+      name: 'ATX: If there is no space or tab before the `leftDelimiter`, it should not be treated as a heading ID',
+      code: '# Heading{#id}',
+      options: ['never'],
+    },
+
     // `leftDelimiter` and `rightDelimiter` option
     {
       name: 'ATX: Custom Delimiters `[`, `]`',
@@ -366,6 +373,19 @@ ruleTester('require-heading-id', rule, {
           column: 20,
           endLine: 1,
           endColumn: 20,
+        },
+      ],
+    },
+    {
+      name: 'ATX: h1 heading ending with image',
+      code: '# Heading ![Alt](image.png)',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 28,
         },
       ],
     },
