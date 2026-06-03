@@ -295,7 +295,7 @@ ruleTester('require-heading-id', rule, {
           allowDepths: [1],
         },
       ],
-    }
+    },
   ],
 
   invalid: [
