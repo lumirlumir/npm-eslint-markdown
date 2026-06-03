@@ -158,7 +158,8 @@ export default {
          * node rather than as a zero-width location at the end of that node, because
          * some editors such as VSCode render zero-width diagnostics incorrectly.
          */
-        const [, lastChildNodeEndOffset] = sourceCode.getRange(lastChildNode);
+        const [lastChildNodeStartOffset, lastChildNodeEndOffset] =
+          sourceCode.getRange(lastChildNode);
 
         // If the last child node is not a `text` node, report an error.
         if (lastChildNode.type !== 'text') {
@@ -205,11 +206,9 @@ export default {
         }
 
         if (mode === 'never') {
-          const [nodeStartOffset] = sourceCode.getRange(lastChildNode);
-
           const headingId = match[0];
 
-          const startOffset = nodeStartOffset + match.index;
+          const startOffset = lastChildNodeStartOffset + match.index;
           const endOffset = startOffset + headingId.length;
 
           context.report({
