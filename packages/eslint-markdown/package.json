@@ -1,6 +1,6 @@
 {
   "name": "eslint-markdown",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "type": "module",
   "sideEffects": false,
   "description": "Lint your Markdown with ESLint. Additional rules for use with `@eslint/markdown`.🛠️",
