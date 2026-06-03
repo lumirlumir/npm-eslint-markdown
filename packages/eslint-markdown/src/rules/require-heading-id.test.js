@@ -101,6 +101,14 @@ ruleTester('require-heading-id', rule, {
       name: 'ATX: h1 heading ID and trailing spaces',
       code: '# Heading {#id}  ',
     },
+    {
+      name: 'ATX: h1 heading ID and trailing tabs',
+      code: '# Heading {#id}\t\t',
+    },
+    {
+      name: 'ATX: h1 heading ID and trailing spaces and tabs',
+      code: '# Heading {#id}  \t',
+    },
 
     // `never` option: ATX Headings
     {
