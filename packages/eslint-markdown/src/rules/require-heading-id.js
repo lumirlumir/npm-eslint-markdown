@@ -11,7 +11,7 @@ import { escapeStringRegexp } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**

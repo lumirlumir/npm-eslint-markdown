@@ -9,6 +9,12 @@ Heading IDs are helpful for linking to specific sections within a document and a
 
 When building websites with internationalization in mind, it's recommended to use English words for heading IDs. This is because certain languages may cause issues with URL encoding, leading to characters like `%20` or `%C3%A9` when IDs are encoded, which can make it difficult for people to recognize.
 
+::: tip NOTE
+
+This rule intentionally skips reporting on empty headings, such as `#`, `##`, or `# #`.
+
+:::
+
 ## Examples
 
 ### :x: Incorrect
