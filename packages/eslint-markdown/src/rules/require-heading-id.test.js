@@ -98,16 +98,28 @@ ruleTester('require-heading-id', rule, {
 
     // Default: Edge Cases
     {
-      name: 'ATX: h1 heading ID and trailing spaces',
+      name: 'ATX: h1 heading ID with trailing spaces',
       code: '# Heading {#id}  ',
     },
     {
-      name: 'ATX: h1 heading ID and trailing tabs',
+      name: 'ATX: h1 heading ID with trailing tabs',
       code: '# Heading {#id}\t\t',
     },
     {
-      name: 'ATX: h1 heading ID and trailing spaces and tabs',
+      name: 'ATX: h1 heading ID with trailing spaces and tabs',
       code: '# Heading {#id}  \t',
+    },
+    {
+      name: 'ATX: h1 heading ID with leading spaces',
+      code: '# Heading   {#id}',
+    },
+    {
+      name: 'ATX: h1 heading ID with leading tabs',
+      code: '# Heading\t\t{#id}',
+    },
+    {
+      name: 'ATX: h1 heading ID with leading spaces and tabs',
+      code: '# Heading  \t{#id}',
     },
 
     // `never` option: ATX Headings
