@@ -3,8 +3,6 @@
  * @author lumir(lumirlumir)
  */
 
-// @ts-nocheck -- TODO
-
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
@@ -92,60 +90,118 @@ export default {
 
     return {
       heading(node) {
-        if (allowDepths.includes(node.depth)) return;
+        // If the heading's depth is included in `allowDepths`, skip it.
+        if (allowDepths.includes(node.depth)) {
+          return;
+        }
 
-        const regex = new RegExp(
-          `${escapeStringRegexp(leftDelimiter)}#[^${escapeStringRegexp(rightDelimiter)}]+${escapeStringRegexp(rightDelimiter)}[ \t]*$`,
+        /*
+         * Instead of using deep recursive traversal to find the final `text` node,
+         * we simply access the node's last child directly with shallow traversal.
+         *
+         * This is because in the "Not OK" case, the `text` node is located
+         * in the last position while DFS(Depth First Search) traversal,
+         * but is located under `emphasis` or `strong` nodes.
+         *
+         * This is the situation we don't want to support.
+         * There must be pure ` #{custom-id}` text at the end of the heading
+         * without being wrapped by other nodes.
+         *
+         * OK:
+         *
+         * ```md
+         * # heading {#custom-id}
+         * ```
+         *
+         * Not OK:
+         *
+         * ```md
+         * # heading *{#custom-id}*
+         *           ^            ^
+         *
+         * # heading **{#custom-id}**
+         *           ^^            ^^
+         * ```
+         */
+        const textNode = node.children.at(-1);
+
+        const headingEndPosition = sourceCode.getLoc(node).end;
+
+        // If the last child node is not a `text` node, report an error.
+        if (textNode?.type !== 'text') {
+          if (mode === 'always') {
+            context.report({
+              loc: {
+                start: headingEndPosition,
+                end: headingEndPosition,
+              },
+
+              messageId: 'headingIdAlways',
+            });
+          }
+
+          return;
+        }
+
+        const escapedLeftDelimiter = escapeStringRegexp(leftDelimiter);
+        const escapedRightDelimiter = escapeStringRegexp(rightDelimiter);
+
+        /**
+         * - We don't use the `[ \t]*$` pattern at the end of the regex because trailing
+         *   whitespace is already removed from a `heading` node's child `text` node.
+         */
+        const headingIdRegex = new RegExp(
+          `(?<=[ \t]+)${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter}$`,
         );
-        const match = sourceCode.getText(node).match(regex);
+
+        const match = headingIdRegex.exec(textNode.value);
+
+        if (!match) {
+          if (mode === 'always') {
+            context.report({
+              loc: {
+                start: headingEndPosition,
+                end: headingEndPosition,
+              },
+
+              messageId: 'headingIdAlways',
+            });
+          }
+
+          return;
+        }
 
         if (mode === 'always' && match === null) {
           context.report({
             loc: {
-              start: {
-                line: node.position.start.line,
-                column: node.position.end.column,
-              },
-              end: {
-                line: node.position.start.line,
-                column: node.position.end.column,
-              },
+              start: headingEndPosition,
+              end: headingEndPosition,
             },
 
             messageId: 'headingIdAlways',
           });
         } else if (mode === 'never' && match !== null) {
-          const headingIdLength = match[0].length;
+          const [nodeStartOffset] = sourceCode.getRange(textNode);
 
-          const matchIndexStart = match.index;
-          const matchIndexEnd = matchIndexStart + headingIdLength;
+          const headingId = match[0];
+
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + headingId.length;
 
           context.report({
             loc: {
-              start: {
-                line: node.position.start.line,
-                column: node.position.start.column + matchIndexStart,
-              },
-              end: {
-                line: node.position.start.line,
-                column: node.position.start.column + matchIndexEnd,
-              },
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
             },
 
             data: {
-              headingId: match[0],
+              headingId,
             },
 
             messageId: 'headingIdNever',
 
             fix(fixer) {
-              return fixer.replaceTextRange(
-                [
-                  node.position.start.offset + matchIndexStart,
-                  node.position.start.offset + matchIndexEnd,
-                ],
-                '',
-              );
+              return fixer.replaceTextRange([startOffset, endOffset], '');
             },
           });
         }

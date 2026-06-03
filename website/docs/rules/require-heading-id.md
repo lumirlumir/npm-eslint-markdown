@@ -17,6 +17,10 @@ Examples of **incorrect** code for this rule:
 
 #### Default (With `'always'` First Option)
 
+<br>
+
+##### ATX Headings
+
 ```md eslint-check
 <!-- eslint md/require-heading-id: 'error' -->
 
@@ -31,13 +35,72 @@ Examples of **incorrect** code for this rule:
 ##### Heading 5
 
 ###### Heading 6
+```
+
+##### ATX Closed Headings
+
+```md
+<!-- eslint md/require-heading-id: 'error' -->
+
+# Heading 1 #
+
+## Heading 2 ##
+
+### Heading 3 ###
+
+#### Heading 4 ####
+
+##### Heading 5 #####
+
+###### Heading 6 ######
+```
+
+##### Setext Headings
+
+```md
+<!-- eslint md/require-heading-id: 'error' -->
+Heading 1
+=========
+
+Heading 1
+Multiple Lines
+=========
+
+Heading 2
+---------
+
+Heading 2
+Multiple Lines
+---------
+```
+
+##### Other Invalid Heading ID Syntax
+
+```md eslint-check
+<!-- eslint md/require-heading-id: 'error' -->
 
 # Heading {#}
 
+If a heading ID is empty, it won't be recognized as valid.
+
 # Heading { #id}
+
+If a heading ID has leading whitespaces, it won't be recognized as valid.
+
+# Heading *{#id}*
+
+If a custom heading ID is wrapped in `emphasis`, it won't be recognized as valid.
+
+# Heading **{#id}**
+
+If a custom heading ID is wrapped in `strong`, it won't be recognized as valid.
 ```
 
 #### With `'never'` First Option
+
+<br>
+
+##### ATX Headings
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: ['error', 'never'] -->
@@ -55,12 +118,63 @@ Examples of **incorrect** code for this rule:
 ###### Heading 6 {#heading-6}
 ```
 
-#### With `{ leftDelimiter: '[', rightDelimiter: ']' }` Second Option
+##### ATX Closed Headings
 
 ```md eslint-check
-<!-- eslint md/require-heading-id: ['error', 'always', { leftDelimiter: '[', rightDelimiter: ']' }] -->
+<!-- eslint md/require-heading-id: ['error', 'never'] -->
 
-TODO
+# Heading 1 {#heading-1} #
+
+## Heading 2 {#heading-2} ##
+
+### Heading 3 {#heading-3} ###
+
+#### Heading 4 {#heading-4} ####
+
+##### Heading 5 {#heading-5} #####
+
+###### Heading 6 {#heading-6} ######
+```
+
+##### Setext Headings
+
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'never'] -->
+Heading 1 {#heading-1}
+=========
+
+Heading 1 
+Multiple Lines {#heading-1}
+=========
+
+Heading 2 {#heading-2}
+---------
+
+Heading 2
+Multiple Lines {#heading-2}
+---------
+```
+
+#### With `'never', { leftDelimiter: '[', rightDelimiter: ']' }` Second Option
+
+<br>
+
+##### ATX Headings
+
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'never', { leftDelimiter: '[', rightDelimiter: ']' }] -->
+
+# Heading 1 [#heading-1]
+
+## Heading 2 [#heading-2]
+
+### Heading 3 [#heading-3]
+
+#### Heading 4 [#heading-4]
+
+##### Heading 5 [#heading-5]
+
+###### Heading 6 [#heading-6]
 ```
 
 ### :white_check_mark: Correct
