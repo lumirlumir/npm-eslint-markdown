@@ -199,16 +199,7 @@ export default {
           return;
         }
 
-        if (mode === 'always' && match === null) {
-          context.report({
-            loc: {
-              start: lastChildNodeEndPosition,
-              end: lastChildNodeEndPosition,
-            },
-
-            messageId: 'headingIdAlways',
-          });
-        } else if (mode === 'never' && match !== null) {
+        if (mode === 'never') {
           const [nodeStartOffset] = sourceCode.getRange(lastChildNode);
 
           const headingId = match[0];
