@@ -343,6 +343,140 @@ ruleTester('require-heading-id', rule, {
       ],
     },
 
+    // Default: ATX Closed Headings
+    {
+      name: 'ATX Closed: Missing h1 heading ID',
+      code: '# Heading 1 #',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 12,
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Missing h2 heading ID',
+      code: '## Heading 2 ##',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 12,
+          endLine: 1,
+          endColumn: 13,
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Missing h3 heading ID',
+      code: '### Heading 3 ###',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 14,
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Missing h4 heading ID',
+      code: '#### Heading 4 ####',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 15,
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Missing h5 heading ID',
+      code: '##### Heading 5 #####',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 16,
+        },
+      ],
+    },
+    {
+      name: 'ATX Closed: Missing h6 heading ID',
+      code: '###### Heading 6 ######',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 17,
+        },
+      ],
+    },
+
+    // Default: Setext Headings
+    {
+      name: 'Setext: Missing h1 heading ID',
+      code: 'Heading 1\n=========',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 10,
+        },
+      ],
+    },
+    {
+      name: 'Setext: Missing multiline h1 heading ID',
+      code: 'Heading 1\nMultiple Lines\n=========',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 2,
+          column: 14,
+          endLine: 2,
+          endColumn: 15,
+        },
+      ],
+    },
+    {
+      name: 'Setext: Missing h2 heading ID',
+      code: 'Heading 2\n---------',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 10,
+        },
+      ],
+    },
+    {
+      name: 'Setext: Missing multiline h2 heading ID',
+      code: 'Heading 2\nMultiple Lines\n---------',
+      errors: [
+        {
+          messageId: 'headingIdAlways',
+          line: 2,
+          column: 14,
+          endLine: 2,
+          endColumn: 15,
+        },
+      ],
+    },
+
     // Default: Edge Cases
     {
       name: 'ATX: h1 heading ID with nothing',
