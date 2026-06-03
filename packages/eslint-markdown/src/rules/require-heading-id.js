@@ -153,15 +153,20 @@ export default {
           return;
         }
 
-        const lastChildNodeEndPosition = sourceCode.getLoc(lastChildNode).end;
+        /*
+         * Missing heading IDs are reported on the last character of the last child
+         * node rather than as a zero-width location at the end of that node, because
+         * some editors such as VSCode render zero-width diagnostics incorrectly.
+         */
+        const [, lastChildNodeEndOffset] = sourceCode.getRange(lastChildNode);
 
         // If the last child node is not a `text` node, report an error.
         if (lastChildNode.type !== 'text') {
           if (mode === 'always') {
             context.report({
               loc: {
-                start: lastChildNodeEndPosition,
-                end: lastChildNodeEndPosition,
+                start: sourceCode.getLocFromIndex(lastChildNodeEndOffset - 1),
+                end: sourceCode.getLocFromIndex(lastChildNodeEndOffset),
               },
 
               messageId: 'headingIdAlways',
@@ -175,8 +180,8 @@ export default {
         const escapedRightDelimiter = escapeStringRegexp(rightDelimiter);
 
         /**
-         * - We don't use the `[ \t]*$` pattern at the end of the regex because trailing
-         *   whitespace is already removed from a `heading` node's child `text` node.
+         * We don't use the `[ \t]*$` pattern at the end of the regex because trailing
+         * whitespace is already removed from a `heading` node's child `text` node.
          */
         const headingIdRegex = new RegExp(
           `(?<=[ \t]+)${escapedLeftDelimiter}#[^${escapedRightDelimiter}]+${escapedRightDelimiter}$`,
@@ -188,8 +193,8 @@ export default {
           if (mode === 'always') {
             context.report({
               loc: {
-                start: lastChildNodeEndPosition,
-                end: lastChildNodeEndPosition,
+                start: sourceCode.getLocFromIndex(lastChildNodeEndOffset - 1),
+                end: sourceCode.getLocFromIndex(lastChildNodeEndOffset),
               },
 
               messageId: 'headingIdAlways',

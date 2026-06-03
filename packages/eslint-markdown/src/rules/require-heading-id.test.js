@@ -271,7 +271,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 12,
+          column: 11,
           endLine: 1,
           endColumn: 12,
         },
@@ -284,7 +284,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 13,
+          column: 12,
           endLine: 1,
           endColumn: 13,
         },
@@ -297,7 +297,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 14,
+          column: 13,
           endLine: 1,
           endColumn: 14,
         },
@@ -310,7 +310,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 15,
+          column: 14,
           endLine: 1,
           endColumn: 15,
         },
@@ -323,7 +323,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 16,
+          column: 15,
           endLine: 1,
           endColumn: 16,
         },
@@ -336,7 +336,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 17,
+          column: 16,
           endLine: 1,
           endColumn: 17,
         },
@@ -351,7 +351,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 14,
+          column: 13,
           endLine: 1,
           endColumn: 14,
         },
@@ -364,7 +364,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 17,
+          column: 16,
           endLine: 1,
           endColumn: 17,
         },
@@ -377,7 +377,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 18,
+          column: 17,
           endLine: 1,
           endColumn: 18,
         },
@@ -390,7 +390,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 20,
+          column: 19,
           endLine: 1,
           endColumn: 20,
         },
@@ -403,7 +403,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 28,
+          column: 27,
           endLine: 1,
           endColumn: 28,
         },
@@ -510,7 +510,7 @@ ruleTester('require-heading-id', rule, {
         {
           messageId: 'headingIdAlways',
           line: 1,
-          column: 10,
+          column: 9,
           endLine: 1,
           endColumn: 10,
         },
