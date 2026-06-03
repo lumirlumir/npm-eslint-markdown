@@ -3,7 +3,7 @@
 
 ## Rule Details
 
-Some Markdown parsers or plugins, like [`@mdit/plugin-attrs`](https://mdit-plugins.github.io/attrs.html) or [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs), support custom heading IDs which can be used to add IDs to headings.
+Some Markdown parsers or plugins, like [`@mdit/plugin-attrs`](https://mdit-plugins.github.io/attrs.html), [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs), or [`remark-custom-header-id`](https://github.com/sindresorhus/remark-custom-header-id) support custom heading IDs which can be used to add IDs to headings.
 
 Heading IDs are helpful for linking to specific sections within a document and are supported by some websites and markdown parsers through the `{#id}` syntax. These IDs not only provide improved accessibility, allowing screen readers to create a navigable table of contents, but also enhance SEO by helping search engines understand the structure of the document and deliver better search results.
 
