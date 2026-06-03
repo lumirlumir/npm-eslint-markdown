@@ -286,6 +286,16 @@ ruleTester('require-heading-id', rule, {
         },
       ],
     },
+    {
+      name: 'ATX: Ignore h1 heading ID even with `never` mode',
+      code: '# Heading 1 {#heading-1}',
+      options: [
+        'never',
+        {
+          allowDepths: [1],
+        },
+      ],
+    }
   ],
 
   invalid: [
