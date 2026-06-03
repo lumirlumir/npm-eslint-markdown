@@ -3,9 +3,9 @@
 
 ## Rule Details
 
-Some Markdown parsers or plugins, like [`@mdit/plugin-attrs`](https://mdit-plugins.github.io/attrs.html), [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs), or [`remark-custom-header-id`](https://github.com/sindresorhus/remark-custom-header-id) support custom heading IDs which can be used to add IDs to headings.
+Some Markdown parsers or plugins, like [`@mdit/plugin-attrs`](https://mdit-plugins.github.io/attrs.html), [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs), or [`remark-custom-header-id`](https://github.com/sindresorhus/remark-custom-header-id), support custom heading ID syntax, which can be used to add IDs to headings.
 
-Heading IDs are helpful for linking to specific sections within a document and are supported by some websites and markdown parsers through the `{#id}` syntax. These IDs not only provide improved accessibility, allowing screen readers to create a navigable table of contents, but also enhance SEO by helping search engines understand the structure of the document and deliver better search results.
+Heading IDs are helpful for linking to specific sections within a document and are supported by some websites and Markdown parsers through the `{#id}` syntax. These IDs not only provide improved accessibility, allowing screen readers to create a navigable table of contents, but also enhance SEO by helping search engines understand the structure of the document and deliver better search results.
 
 When building websites with internationalization in mind, it's recommended to use English words for heading IDs. This is because certain languages may cause issues with URL encoding, leading to characters like `%20` or `%C3%A9` when IDs are encoded, which can make it difficult for people to recognize.
 
@@ -68,11 +68,11 @@ Multiple Lines
 
 # Heading {#}
 
-If a heading ID is empty, it won't be recognized as valid.
+If a custom heading ID is empty, it won't be recognized as valid.
 
 # Heading { #id}
 
-If a heading ID has leading whitespaces, it won't be recognized as valid.
+If a custom heading ID has leading whitespace, it won't be recognized as valid.
 
 # Heading *{#id}*
 
@@ -121,7 +121,7 @@ If a custom heading ID is wrapped in `strong`, it won't be recognized as valid.
 Heading 1 {#heading-1}
 =========
 
-Heading 1 
+Heading 1
 Multiple Lines {#heading-1}
 =========
 
@@ -133,9 +133,7 @@ Multiple Lines {#heading-2}
 ---------
 ```
 
-#### With `'never', { leftDelimiter: '[', rightDelimiter: ']' }` Second Option
-
-##### ATX Headings
+#### With `'never'` First Option and `{ leftDelimiter: '[', rightDelimiter: ']' }` Second Option
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: ['error', 'never', { leftDelimiter: '[', rightDelimiter: ']' }] -->
@@ -173,7 +171,7 @@ Multiple Lines {#heading-2}
 Heading 1 [#heading-1]
 =========
 
-Heading 1 
+Heading 1
 Multiple Lines [#heading-1]
 =========
 
@@ -330,7 +328,7 @@ The right delimiter to use for heading IDs.
 
 > Type: `Array<1 | 2 | 3 | 4 | 5 | 6>` / Default: `[]`
 
-An array of heading depths to ignore. For example, `[1, 2]` would ignore the first and second level headings.
+An array of heading depths to ignore. For example, `[1, 2]` would ignore level 1 and level 2 headings.
 
 ## Prior Art
 
