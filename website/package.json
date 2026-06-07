@@ -13,7 +13,7 @@
     "@shikijs/vitepress-twoslash": "^3.20.0",
     "eslint-markdown": "^0.10.0",
     "twoslash-eslint": "^0.3.4",
-    "vitepress": "^2.0.0-alpha.15",
+    "vitepress": "2.0.0-alpha.17",
     "vitepress-plugin-group-icons": "^1.7.5"
   }
 }
