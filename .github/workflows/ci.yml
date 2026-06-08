@@ -66,4 +66,4 @@ jobs:
         run: npm run coverage
 
       - name: Upload results to codecov
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
