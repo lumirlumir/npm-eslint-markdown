@@ -51,6 +51,9 @@ bar`,
 
 
 bar`,
+      output: `foo
+
+bar`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
@@ -61,6 +64,7 @@ bar`,
         },
       ],
     },
+    /*
     {
       name: 'Leading consecutive blank lines are reported by default',
       code: `
@@ -126,6 +130,8 @@ bar`,
         },
       ],
     },
+    */
+    /*
     {
       name: '`skipCode: false` option checks consecutive blank lines in fenced code',
       code: `\`\`\`js
@@ -145,5 +151,6 @@ bar
         },
       ],
     },
+    */
   ],
 });

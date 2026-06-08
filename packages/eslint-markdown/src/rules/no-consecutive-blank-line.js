@@ -1,13 +1,13 @@
 /**
  * @fileoverview Rule to disallow consecutive blank lines.
- * @author 루밀LuMir(lumirlumir)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { isBlankLine } from '../core/ast/index.js';
+import { isBlankLine, SkipRanges } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ max: number, skipCode: boolean }]} RuleOptions
+ * @typedef {[{ max: number, skipCode: boolean | string[] }]} RuleOptions
  * @typedef {'noConsecutiveBlankLine'} MessageIds
  */
 
@@ -44,10 +44,21 @@ export default {
         properties: {
           max: {
             type: 'integer',
-            minimum: 0, // TODO: Think about proper minimum value
+            minimum: 0,
           },
           skipCode: {
-            type: 'boolean',
+            oneOf: [
+              {
+                type: 'boolean',
+              },
+              {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+                uniqueItems: true,
+              },
+            ],
           },
         },
         additionalProperties: false,
@@ -71,54 +82,59 @@ export default {
   },
 
   create(context) {
-    const {
-      sourceCode: { lines },
-    } = context;
-    const [{ max /* skipCode */ }] = context.options;
+    const { options, sourceCode } = context;
+    const [{ max, skipCode }] = options;
+    const { lines } = sourceCode;
+
+    const skipRanges = new SkipRanges();
 
     return {
+      code(node) {
+        if (
+          Array.isArray(skipCode) ? node.lang && skipCode.includes(node.lang) : skipCode
+        )
+          skipRanges.push(sourceCode.getRange(node)); // Store range information of `Code`.
+      },
+
       'root:exit'() {
-        /** @type {number | null} */
-        let startIdx = null;
+        let count = 0;
 
-        for (let currentIdx = 0; currentIdx < lines.length; currentIdx++) {
-          if (isBlankLine(lines[currentIdx])) {
-            if (startIdx === null) {
-              startIdx = currentIdx;
-            }
-          } else if (startIdx !== null) {
-            if (currentIdx - startIdx > max) {
-              context.report({
-                loc: {
-                  start: { line: startIdx + max + 1, column: 1 },
-                  end: {
-                    line: currentIdx + 1,
-                    column: 1,
-                  },
-                },
-                messageId: 'noConsecutiveBlankLine',
-              });
-            }
-
-            startIdx = null;
-          }
-        }
-
-        /*
-         * Handle the case where the file ends with blank lines.
-         * Now, `currentIdx` is equal to `lines.length`.
-         */
-        if (startIdx !== null && lines.length - startIdx > max) {
-          context.report({
-            loc: {
-              start: { line: startIdx + max + 1, column: 1 },
-              end: {
-                line: lines.length + 1,
-                column: 1,
-              },
-            },
-            messageId: 'noConsecutiveBlankLine',
+        for (let currentLineIdx = 0; currentLineIdx < lines.length; currentLineIdx++) {
+          const startLoc = /** @type {const} */ ({
+            line: currentLineIdx + 1,
+            column: 1,
           });
+          const endLoc = /** @type {const} */ ({
+            line: currentLineIdx + 2,
+            column: 1,
+          });
+
+          if (
+            skipRanges.includes(sourceCode.getIndexFromLoc(startLoc)) ||
+            !isBlankLine(lines[currentLineIdx])
+          ) {
+            count = 0;
+          } else {
+            count++;
+          }
+
+          if (max < count) {
+            context.report({
+              loc: {
+                start: startLoc,
+                end: endLoc,
+              },
+
+              messageId: 'noConsecutiveBlankLine',
+
+              fix(fixer) {
+                return fixer.removeRange([
+                  sourceCode.getIndexFromLoc(startLoc),
+                  sourceCode.getIndexFromLoc(endLoc),
+                ]);
+              },
+            });
+          }
         }
       },
     };
