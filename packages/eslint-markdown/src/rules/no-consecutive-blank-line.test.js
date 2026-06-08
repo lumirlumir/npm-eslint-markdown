@@ -109,6 +109,7 @@ bar`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -123,6 +124,7 @@ bar`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -147,6 +149,7 @@ baz`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -154,6 +157,7 @@ baz`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 6,
           column: 1,
           endLine: 7,
@@ -173,6 +177,7 @@ baz`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 2,
           column: 1,
           endLine: 3,
@@ -180,6 +185,7 @@ baz`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -187,6 +193,7 @@ baz`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -194,6 +201,7 @@ baz`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 5,
           column: 1,
           endLine: 6,
@@ -201,6 +209,7 @@ baz`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 6,
           column: 1,
           endLine: 7,
@@ -218,6 +227,7 @@ foo`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 2,
           column: 1,
           endLine: 3,
@@ -236,6 +246,7 @@ foo`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -243,6 +254,7 @@ foo`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -261,6 +273,7 @@ foo`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -268,6 +281,7 @@ foo`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -287,6 +301,7 @@ foo`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -294,6 +309,7 @@ foo`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -301,6 +317,7 @@ foo`,
         },
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 5,
           column: 1,
           endLine: 6,
@@ -327,6 +344,7 @@ bar
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -342,6 +360,7 @@ bar
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -366,6 +385,7 @@ bar
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -381,6 +401,7 @@ bar
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 3,
           column: 1,
           endLine: 4,
@@ -405,6 +426,7 @@ bar
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 1 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -429,6 +451,7 @@ bar`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 2 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -444,6 +467,7 @@ bar`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 2 },
           line: 4,
           column: 1,
           endLine: 5,
@@ -472,6 +496,7 @@ bar`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
+          data: { max: 5 },
           line: 7,
           column: 1,
           endLine: 8,

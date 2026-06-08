@@ -74,7 +74,8 @@ export default {
     ],
 
     messages: {
-      noConsecutiveBlankLine: 'Consecutive blank lines are not allowed.',
+      noConsecutiveBlankLine:
+        'More than {{ max }} consecutive blank line(s) are not allowed.',
     },
 
     language: 'markdown',
@@ -127,6 +128,10 @@ export default {
               loc: {
                 start: startLoc,
                 end: endLoc,
+              },
+
+              data: {
+                max,
               },
 
               messageId: 'noConsecutiveBlankLine',
