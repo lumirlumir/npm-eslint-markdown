@@ -30,11 +30,6 @@ bar`,
     // `max` option
     {
       code: `foo
-bar`,
-      options: [{ max: 0 }],
-    },
-    {
-      code: `foo
 
 bar`,
       options: [{ max: 1 }],
@@ -55,11 +50,37 @@ bar`,
 \`\`\``,
       options: [{ skipCode: true }],
     },
+    {
+      code: `\`\`\`md
+foo
+
+
+bar
+\`\`\``,
+      options: [{ skipCode: ['md'] }],
+    },
+    {
+      code: `\`\`\`md
+foo
+
+
+bar
+\`\`\`
+
+\`\`\`txt
+baz
+
+
+qux
+\`\`\``,
+      options: [{ skipCode: ['md', 'txt'] }],
+    },
   ],
 
   invalid: [
+    // Basic
     {
-      name: 'Two blank lines between paragraphs are reported by default',
+      name: 'Consecutive blank lines are reported by default',
       code: `foo
 
 
@@ -77,11 +98,12 @@ bar`,
         },
       ],
     },
-    /*
     {
       name: 'Leading consecutive blank lines are reported by default',
       code: `
 
+foo`,
+      output: `
 foo`,
       errors: [
         {
@@ -93,22 +115,83 @@ foo`,
         },
       ],
     },
+    /*
     {
       name: 'Trailing consecutive blank lines are reported by default',
       code: `foo
 
 
 `,
+      output: `foo
+`,
       errors: [
         {
           messageId: 'noConsecutiveBlankLine',
           line: 3,
+          column: 1,
+          endLine: 4,
+          endColumn: 1,
+        },
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 1,
+        },
+      ],
+    },
+    */
+
+    // `skipCode` option
+    {
+      code: `\`\`\`md
+foo
+
+
+bar
+\`\`\``,
+      output: `\`\`\`md
+foo
+
+bar
+\`\`\``,
+      options: [{ skipCode: ['js', 'ts'] }],
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 4,
           column: 1,
           endLine: 5,
           endColumn: 1,
         },
       ],
     },
+    {
+      code: `\`\`\`
+foo
+
+
+bar
+\`\`\``,
+      output: `\`\`\`
+foo
+
+bar
+\`\`\``,
+      options: [{ skipCode: ['md'] }],
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 4,
+          column: 1,
+          endLine: 5,
+          endColumn: 1,
+        },
+      ],
+    },
+
+    /*
     {
       name: '`max: 0` option reports the blank line between paragraphs',
       code: `foo

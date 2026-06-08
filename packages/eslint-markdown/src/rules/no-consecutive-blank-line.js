@@ -44,7 +44,7 @@ export default {
         properties: {
           max: {
             type: 'integer',
-            minimum: 0,
+            minimum: 1,
           },
           skipCode: {
             oneOf: [
@@ -104,16 +104,10 @@ export default {
             line: currentLineIdx + 1,
             column: 1,
           };
-          const endLoc =
-            currentLineIdx + 1 === lines.length // When the current line is the last line.
-              ? {
-                  line: currentLineIdx + 1,
-                  column: lines[currentLineIdx].length + 1,
-                }
-              : {
-                  line: currentLineIdx + 2,
-                  column: 1,
-                };
+          const endLoc = {
+            line: currentLineIdx + 2,
+            column: 1,
+          };
 
           if (
             skipRanges.includes(sourceCode.getIndexFromLoc(startLoc)) ||
@@ -134,6 +128,11 @@ export default {
               messageId: 'noConsecutiveBlankLine',
 
               fix(fixer) {
+                // If the current line is the last line.
+                if (currentLineIdx + 1 === lines.length) {
+                  return null;
+                }
+
                 return fixer.removeRange([
                   sourceCode.getIndexFromLoc(startLoc),
                   sourceCode.getIndexFromLoc(endLoc),
