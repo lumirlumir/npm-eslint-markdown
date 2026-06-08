@@ -97,28 +97,34 @@ export default {
       },
 
       'root:exit'() {
-        let count = 0;
+        let consecutiveBlankLineCount = 0;
 
         for (let currentLineIdx = 0; currentLineIdx < lines.length; currentLineIdx++) {
-          const startLoc = /** @type {const} */ ({
+          const startLoc = {
             line: currentLineIdx + 1,
             column: 1,
-          });
-          const endLoc = /** @type {const} */ ({
-            line: currentLineIdx + 2,
-            column: 1,
-          });
+          };
+          const endLoc =
+            currentLineIdx + 1 === lines.length // When the current line is the last line.
+              ? {
+                  line: currentLineIdx + 1,
+                  column: lines[currentLineIdx].length + 1,
+                }
+              : {
+                  line: currentLineIdx + 2,
+                  column: 1,
+                };
 
           if (
             skipRanges.includes(sourceCode.getIndexFromLoc(startLoc)) ||
             !isBlankLine(lines[currentLineIdx])
           ) {
-            count = 0;
+            consecutiveBlankLineCount = 0;
           } else {
-            count++;
+            consecutiveBlankLineCount++;
           }
 
-          if (max < count) {
+          if (max < consecutiveBlankLineCount) {
             context.report({
               loc: {
                 start: startLoc,
