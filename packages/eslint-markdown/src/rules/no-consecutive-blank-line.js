@@ -1,6 +1,7 @@
 /**
  * @fileoverview Rule to disallow consecutive blank lines.
  * @author lumir(lumirlumir)
+ * @see https://github.com/DavidAnson/markdownlint/blob/main/lib/md012.mjs
  */
 
 // --------------------------------------------------------------------------------
