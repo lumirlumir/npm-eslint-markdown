@@ -16,31 +16,44 @@ import rule from './no-consecutive-blank-line.js';
 
 ruleTester('no-consecutive-blank-line', rule, {
   valid: [
+    '',
+    '  ',
+    'foo',
+    // Basic
+    `foo
+
+bar`,
+    `foo
+\t \t
+bar`,
+
+    // `max` option
     {
-      name: 'Empty document has no blank lines',
-      code: '',
+      code: `foo
+bar`,
+      options: [{ max: 0 }],
     },
     {
-      name: 'Single blank line between paragraphs is allowed by default',
       code: `foo
 
 bar`,
+      options: [{ max: 1 }],
     },
     {
-      name: 'Single blank line containing spaces and tabs is allowed by default',
-      code: 'foo\n \t \nbar',
-    },
-    {
-      name: '`max` option allows two consecutive blank lines',
       code: `foo
 
 
 bar`,
       options: [{ max: 2 }],
     },
+
+    // `skipCode` option
     {
-      name: 'Inline code without consecutive blank lines is allowed',
-      code: '`foo`',
+      code: `\`\`\`
+
+
+\`\`\``,
+      options: [{ skipCode: true }],
     },
   ],
 
