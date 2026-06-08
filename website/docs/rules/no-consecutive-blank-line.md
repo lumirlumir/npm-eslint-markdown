@@ -3,11 +3,9 @@
 
 ## Rule Details
 
-This rule disallows more than a configured number of consecutive blank lines in Markdown files.
+This rule disallows more than a configured number of consecutive blank lines in Markdown files. Consistent blank line usage makes documents easier to scan and avoids accidental large gaps between sections, paragraphs, and list content.
 
-Keeping blank line usage consistent makes documents easier to scan and avoids accidental large gaps between sections, paragraphs, and list content.
-
-A blank line is a line that contains no characters, or contains only spaces and tabs.
+For this rule, a blank line is a line that contains no characters, or contains only spaces and tabs. By default, the rule allows one consecutive blank line and ignores consecutive blank lines inside code blocks.
 
 ## Examples
 
@@ -26,12 +24,14 @@ foo
 bar
 ```
 
-#### With `{ max: 0 }` Option
+#### With `{ max: 2 }` Option
 
 ```md eslint-check
-<!-- eslint md/no-consecutive-blank-line: ['error', { max: 0 }] -->
+<!-- eslint md/no-consecutive-blank-line: ['error', { max: 2 }] -->
 
 foo
+
+
 
 bar
 ```
@@ -42,6 +42,26 @@ bar
 <!-- eslint md/no-consecutive-blank-line: ['error', { skipCode: false }] -->
 
 ```js
+foo
+
+
+bar
+```
+````
+
+#### With `{ skipCode: ['js', 'ts'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-consecutive-blank-line: ['error', { skipCode: ['js', 'ts'] }] -->
+
+```md
+foo
+
+
+bar
+```
+
+```
 foo
 
 
@@ -74,15 +94,6 @@ bar
 ```
 ````
 
-#### With `{ max: 0 }` Option
-
-```md eslint-check
-<!-- eslint md/no-consecutive-blank-line: ['error', { max: 0 }] -->
-
-foo
-bar
-```
-
 #### With `{ max: 2 }` Option
 
 ```md eslint-check
@@ -93,6 +104,46 @@ foo
 
 bar
 ```
+
+#### With `{ skipCode: true }` Option
+
+````md eslint-check
+<!-- eslint md/no-consecutive-blank-line: ['error', { skipCode: true }] -->
+
+```md
+foo
+
+
+bar
+```
+
+```
+foo
+
+
+bar
+```
+````
+
+#### With `{ skipCode: ['md', 'txt'] }` Option
+
+````md eslint-check
+<!-- eslint md/no-consecutive-blank-line: ['error', { skipCode: ['md', 'txt'] }] -->
+
+```md
+foo
+
+
+bar
+```
+
+```txt
+baz
+
+
+qux
+```
+````
 
 ## Options
 
@@ -109,11 +160,13 @@ bar
 
 Set the maximum number of consecutive blank lines to allow.
 
+This value must be an integer greater than or equal to `1`.
+
 ### `skipCode`
 
-> Type: `boolean` / Default: `true`
+> Type: `boolean | string[]` / Default: `true`
 
-When `skipCode` is set to `true`, this rule ignores consecutive blank lines inside fenced and indented code blocks.
+`true` allows consecutive blank lines in all code blocks, while `string[]` allows consecutive blank lines only in code blocks for the specified languages.
 
 ## Fix
 
