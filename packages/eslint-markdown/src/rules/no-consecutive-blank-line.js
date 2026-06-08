@@ -84,7 +84,7 @@ export default {
   create(context) {
     const { options, sourceCode } = context;
     const [{ max, skipCode }] = options;
-    const { lines } = sourceCode;
+    const { lines, text } = sourceCode;
 
     const skipRanges = new SkipRanges();
 
@@ -100,14 +100,14 @@ export default {
         let consecutiveBlankLineCount = 0;
 
         for (let currentLineIdx = 0; currentLineIdx < lines.length; currentLineIdx++) {
-          const startLoc = {
+          const startLoc = /** @type {const} */ ({
             line: currentLineIdx + 1,
             column: 1,
-          };
-          const endLoc = {
+          });
+          const endLoc = /** @type {const} */ ({
             line: currentLineIdx + 2,
             column: 1,
-          };
+          });
 
           if (
             skipRanges.includes(sourceCode.getIndexFromLoc(startLoc)) ||
@@ -119,6 +119,9 @@ export default {
           }
 
           if (max < consecutiveBlankLineCount) {
+            const lastAllowedBlankLineIdx =
+              currentLineIdx - consecutiveBlankLineCount + max;
+
             context.report({
               loc: {
                 start: startLoc,
@@ -128,15 +131,58 @@ export default {
               messageId: 'noConsecutiveBlankLine',
 
               fix(fixer) {
-                // If the current line is the last line.
+                /*
+                 * When the consecutive blank-line run reaches EOF, the fixer must remove the
+                 * whole excess tail at once instead of removing only the current line.
+                 *
+                 * `currentLineIdx + 1 === lines.length` means the current line is the final
+                 * logical line in `sourceCode.lines`. In a case like `foo\n\n\n  ` with
+                 * `max: 1`, the final line is still a blank line, but it may contain spaces.
+                 * If we only remove from the current line start, those trailing spaces can
+                 * survive and produce `foo\n  ` instead of the intended `foo\n`.
+                 *
+                 * The start of the removal range is calculated from the last blank line that
+                 * is still allowed by `max`:
+                 *
+                 *   currentLineIdx - consecutiveBlankLineCount
+                 *     -> zero-based index of the first line in the current blank-line run
+                 *
+                 *   + max
+                 *     -> zero-based index of the last blank line we want to keep
+                 *
+                 *   + 1
+                 *     -> convert the zero-based line index to ESLint's one-based loc line
+                 *
+                 * The column is `lines[lastAllowedBlankLineIdx].length + 1`, which points to the
+                 * end of that allowed blank line. The range then ends at `text.length`, so
+                 * everything after the allowed blank line is removed, including remaining blank
+                 * lines, line endings, and any spaces on the final blank line.
+                 *
+                 * Example with `foo\n\n\n  ` and `max: 1`:
+                 *
+                 *   lines = ['foo', '', '', '  ']
+                 *   currentLineIdx = 3
+                 *   consecutiveBlankLineCount = 3
+                 *   max = 1
+                 *
+                 *   lastAllowedBlankLineIdx = 3 - 3 + 1 = 1
+                 *
+                 * So the fixer removes from the end of line 2 to EOF, producing `foo\n`.
+                 */
                 if (currentLineIdx + 1 === lines.length) {
-                  return null;
+                  return fixer.removeRange([
+                    sourceCode.getIndexFromLoc({
+                      line: lastAllowedBlankLineIdx + 1,
+                      column: lines[lastAllowedBlankLineIdx].length + 1,
+                    }),
+                    text.length,
+                  ]);
+                } else {
+                  return fixer.removeRange([
+                    sourceCode.getIndexFromLoc(startLoc),
+                    sourceCode.getIndexFromLoc(endLoc),
+                  ]);
                 }
-
-                return fixer.removeRange([
-                  sourceCode.getIndexFromLoc(startLoc),
-                  sourceCode.getIndexFromLoc(endLoc),
-                ]);
               },
             });
           }
