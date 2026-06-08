@@ -100,7 +100,7 @@ bar`,
       ],
     },
     {
-      name: '',
+      name: 'Fully consecutive blank lines without content are reported by default',
       code: `
 
 
