@@ -15,6 +15,7 @@ import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import consistentUnorderedListStyle from './consistent-unordered-list-style.js';
 // import enCapitalization from './en-capitalization.js';
 // import noBoldParagraph from './no-bold-paragraph.js';
+import noConsecutiveBlankLine from './no-consecutive-blank-line.js';
 import noControlCharacter from './no-control-character.js';
 import noCurlyQuote from './no-curly-quote.js';
 import noDoublePunctuation from './no-double-punctuation.js';
@@ -43,6 +44,7 @@ export default {
   'consistent-unordered-list-style': consistentUnorderedListStyle,
   // 'en-capitalization': enCapitalization,
   // 'no-bold-paragraph': noBoldParagraph,
+  'no-consecutive-blank-line': noConsecutiveBlankLine,
   'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
   'no-double-punctuation': noDoublePunctuation,

@@ -46,6 +46,7 @@ type RuleName = keyof typeof plugin.rules;
 'consistent-strong-style' satisfies RuleName;
 'consistent-thematic-break-style' satisfies RuleName;
 'consistent-unordered-list-style' satisfies RuleName;
+'no-consecutive-blank-line' satisfies RuleName;
 'no-control-character' satisfies RuleName;
 'no-curly-quote' satisfies RuleName;
 'no-double-punctuation' satisfies RuleName;
@@ -81,6 +82,7 @@ type AllConfigRuleName = keyof typeof plugin.configs.all.rules;
 'md/consistent-strong-style' satisfies AllConfigRuleName;
 'md/consistent-thematic-break-style' satisfies AllConfigRuleName;
 'md/consistent-unordered-list-style' satisfies AllConfigRuleName;
+'md/no-consecutive-blank-line' satisfies AllConfigRuleName;
 'md/no-control-character' satisfies AllConfigRuleName;
 'md/no-curly-quote' satisfies AllConfigRuleName;
 'md/no-double-punctuation' satisfies AllConfigRuleName;
@@ -128,6 +130,7 @@ type StylisticConfigRuleName = keyof typeof plugin.configs.stylistic.rules;
 'md/consistent-strong-style' satisfies StylisticConfigRuleName;
 'md/consistent-thematic-break-style' satisfies StylisticConfigRuleName;
 'md/consistent-unordered-list-style' satisfies StylisticConfigRuleName;
+'md/no-consecutive-blank-line' satisfies StylisticConfigRuleName;
 'md/no-tab' satisfies StylisticConfigRuleName;
 
 // #endregion configs
