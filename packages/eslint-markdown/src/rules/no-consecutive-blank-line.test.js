@@ -52,12 +52,29 @@ bar`,
       options: [{ skipCode: true }],
     },
     {
+      name: '`skipCode: true` option skips consecutive blank lines in indented code',
+      code: '    foo\n    \n    \n    bar',
+      options: [{ skipCode: true }],
+    },
+    {
       code: `\`\`\`md
 foo
 
 
 bar
 \`\`\``,
+      options: [{ skipCode: ['md'] }],
+    },
+    {
+      name: '`skipCode: ["md"]` option does not connect blank lines around matched fenced code',
+      code: `foo
+
+\`\`\`md
+
+
+\`\`\`
+
+bar`,
       options: [{ skipCode: ['md'] }],
     },
     {
@@ -95,6 +112,51 @@ bar`,
           line: 3,
           column: 1,
           endLine: 4,
+          endColumn: 1,
+        },
+      ],
+    },
+    {
+      name: 'Consecutive blank lines with CRLF line endings are reported by default',
+      code: 'foo\r\n\r\n\r\nbar',
+      output: 'foo\r\n\r\nbar',
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 3,
+          column: 1,
+          endLine: 4,
+          endColumn: 1,
+        },
+      ],
+    },
+    {
+      name: 'Multiple separate consecutive blank line groups are reported by default',
+      code: `foo
+
+
+bar
+
+
+baz`,
+      output: `foo
+
+bar
+
+baz`,
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 3,
+          column: 1,
+          endLine: 4,
+          endColumn: 1,
+        },
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 6,
+          column: 1,
+          endLine: 7,
           endColumn: 1,
         },
       ],
@@ -214,7 +276,7 @@ foo`,
       ],
     },
     {
-      name: '',
+      name: 'Trailing consecutive blank lines with spaces and tabs on multiple lines are reported by default',
       code: `foo
 
 
@@ -273,6 +335,21 @@ bar
       ],
     },
     {
+      name: '`skipCode: false` option checks consecutive blank lines in indented code',
+      code: '    foo\n    \n    \n    bar',
+      output: '    foo\n    \n    bar',
+      options: [{ skipCode: false }],
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 3,
+          column: 1,
+          endLine: 4,
+          endColumn: 1,
+        },
+      ],
+    },
+    {
       name: '`skipCode: ["md"]` option checks consecutive blank lines in unannotated fenced code',
       code: `\`\`\`
 foo
@@ -292,6 +369,21 @@ bar
           line: 4,
           column: 1,
           endLine: 5,
+          endColumn: 1,
+        },
+      ],
+    },
+    {
+      name: '`skipCode: ["js"]` option checks consecutive blank lines in indented code',
+      code: '    foo\n    \n    \n    bar',
+      output: '    foo\n    \n    bar',
+      options: [{ skipCode: ['js'] }],
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 3,
+          column: 1,
+          endLine: 4,
           endColumn: 1,
         },
       ],
@@ -333,6 +425,21 @@ bar`,
 
 
 bar`,
+      options: [{ max: 2 }],
+      errors: [
+        {
+          messageId: 'noConsecutiveBlankLine',
+          line: 4,
+          column: 1,
+          endLine: 5,
+          endColumn: 1,
+        },
+      ],
+    },
+    {
+      name: '`max: 2` option fixes trailing consecutive blank lines',
+      code: 'foo\n\n\n  ',
+      output: 'foo\n\n',
       options: [{ max: 2 }],
       errors: [
         {
