@@ -7,6 +7,7 @@
 
 [![npm package eslint-markdown latest version](https://img.shields.io/npm/v/eslint-markdown?label=eslint-markdown@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
 [![npm package eslint-markdown next version](https://img.shields.io/npm/v/eslint-markdown/next?label=eslint-markdown@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
+[![npm package eslint-markdown downloads per month](https://img.shields.io/npm/dm/eslint-markdown?label=downloads&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
 
 > [!IMPORTANT]
 >
