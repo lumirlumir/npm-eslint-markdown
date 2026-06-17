@@ -40,6 +40,7 @@ This section is currently under construction and will be updated soon.
 
 | `markdownlint` | `eslint-markdown` or `@eslint/markdown` |
 | :------------- | :-------------------------------------- |
+| [`MD001` - Heading levels should only increment by one level at a time](https://github.com/DavidAnson/markdownlint/blob/main/doc/md001.md#md001---heading-levels-should-only-increment-by-one-level-at-a-time) :white_check_mark: | [`markdown/heading-increment`](https://github.com/eslint/markdown/blob/main/docs/rules/heading-increment.md#heading-increment) |
 | [`MD004` - Unordered list style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md004.md#md004---unordered-list-style) :white_check_mark: | [`md/consistent-unordered-list-style`](../rules/consistent-unordered-list-style.md) |
 | [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
 | [`MD012` - Multiple consecutive blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md012.md#md012---multiple-consecutive-blank-lines) :white_check_mark: | [`md/no-consecutive-blank-line`](../rules/no-consecutive-blank-line.md) |
