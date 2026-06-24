@@ -1,0 +1,3 @@
+npx eslint "**/*.md" --stats -f json > eslint-stats.json
+
+cargo build --release && cp build/release/npm_eslint_markdown.dll build/release/npm_eslint_markdown.node
