@@ -4,18 +4,13 @@ version = "0.1.0"
 edition = "2024"
 
 [lib]
-crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 markdown = { version = "1.0.0", features = ["serde"] }
-napi = { version = "3", default-features = false, features = ["napi4"] }
-napi-derive = "3"
-serde_json = "1.0"
+napi = { version = "3.9.4", default-features = false, features = ["napi4"] }
+napi-derive = "3.5.7"
+serde_json = "1.0.150"
 
 [build-dependencies]
-napi-build = "2"
-
-# Enhance lib performance
-[profile.release]
-codegen-units = 1
-lto = "thin"
+napi-build = "2.3.2"
