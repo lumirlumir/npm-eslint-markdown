@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Set up checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # This step extracts the correct package names because it runs right after the checkout.
       - name: Extract package names from the monorepo structure for use as scopes.
