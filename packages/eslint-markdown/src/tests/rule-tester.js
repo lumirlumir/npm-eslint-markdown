@@ -6,7 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { match, ok } from 'node:assert';
 import { RuleTester } from 'eslint';
 import markdown from '@eslint/markdown';
@@ -26,6 +26,9 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
+
+RuleTester.describe = describe;
+RuleTester.it = it;
 
 /**
  * Rule tester for CommonMark.
@@ -112,13 +115,13 @@ export default function ruleTester(ruleName, rule, tests) {
 
     describe('rule', () => {
       if (meta?.dialects?.includes('commonmark')) {
-        it('commonmark', () => {
+        describe('commonmark', () => {
           ruleTesterCommonmark.run(ruleName, rule, tests);
         });
       }
 
       if (meta?.dialects?.includes('gfm')) {
-        it('gfm', () => {
+        describe('gfm', () => {
           ruleTesterGfm.run(ruleName, rule, tests);
         });
       }

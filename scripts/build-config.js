@@ -9,7 +9,7 @@
 
 import { writeFileSync } from 'node:fs';
 import markdown from 'eslint-markdown';
-import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies -- Required
+import prettier from 'prettier';
 
 // --------------------------------------------------------------------------------
 // Helper

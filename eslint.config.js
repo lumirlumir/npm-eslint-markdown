@@ -20,6 +20,27 @@ export default defineConfig([
   md.configs.recommended,
   md.configs.stylistic,
 
+  // js
+  {
+    name: 'js/global',
+    rules: {
+      'import/no-cycle': 'off', // Too computationally expensive. TODO: Remove this in shared config.
+      'import/no-extraneous-dependencies': 'off', // Too computationally expensive. TODO: Remove this in shared config.
+    },
+  },
+  {
+    name: 'js/tests',
+    files: [
+      'packages/eslint-markdown/**/*.test.{js,mjs,cjs}',
+      'packages/eslint-markdown/**/*.test-d.{ts,mts,cts,tsx}',
+      'packages/eslint-markdown/src/tests/**/*.js',
+    ],
+    rules: {
+      'n/no-unpublished-import': 'off', // False positive for test files, since they are not published.
+    },
+  },
+
+  // md
   {
     name: 'md/global',
     files: ['**/*.md'],

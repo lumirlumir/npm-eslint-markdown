@@ -26,7 +26,8 @@
     "build",
     "LICENSE.md",
     "README.md",
-    "!src/**/*.test.{js,ts}",
+    "!src/**/*.test.{js,mjs,cjs,ts,mts,cts}",
+    "!src/**/*.test-d.{ts,mts,cts}",
     "!{src,build}/tests/**",
     "!**/fixtures/**"
   ],
@@ -63,8 +64,8 @@
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/build-config.js && tsc && node ../../scripts/cp.js ../../LICENSE.md LICENSE.md ../../README.md README.md",
     "test": "npm run test:types && npm run test:unit",
-    "test:types": "tsc -p ./tsconfig.test.json",
-    "test:unit": "node --test"
+    "test:types": "tsc -p ./tsconfig.test-d.json",
+    "test:unit": "vitest run"
   },
   "peerDependencies": {
     "eslint": "^9.31.0 || ^10.0.0-rc.0"
@@ -82,6 +83,7 @@
   "devDependencies": {
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.3",
-    "eslint": "^9.39.4"
+    "eslint": "^9.39.4",
+    "vitest": "^4.1.9"
   }
 }

@@ -20,7 +20,6 @@
     }
   },
   "workspaces": [
-    ".",
     "packages/*",
     "website"
   ],
@@ -28,8 +27,9 @@
     "prepare": "husky",
     "release:publish": "node -e \"require('child_process').execSync('npm publish -w packages ' + (require('./package.json').version.includes('-') ? '--tag next' : ''), { stdio: 'inherit' })\"",
     "release:version": "node ./scripts/version.js",
-    "coverage": "c8 --reporter=lcov npm run test",
+    "coverage": "vitest run --coverage",
     "test": "npm run test -w packages/eslint-markdown",
+    "test:pkg:em": "npm run test -w packages/eslint-markdown",
     "build": "npm-run-all -c -l -p --aggregate-output build:**",
     "build:pkg:em": "npm run build -w packages/eslint-markdown",
     "build:website": "npm run build -w website",
@@ -47,9 +47,12 @@
     "lint:editorconfig": "editorconfig-checker -config .editorconfig-checker.json",
     "lint:markdownlint": "markdownlint **/*.md"
   },
+  "allowScripts": {
+    "esbuild": true
+  },
   "devDependencies": {
     "@types/node": "^20.19.43",
-    "c8": "^11.0.0",
+    "@vitest/coverage-v8": "^4.1.8",
     "editorconfig-checker": "^6.1.1",
     "eslint": "^9.39.4",
     "eslint-config-bananass": "^0.7.0",
@@ -59,6 +62,7 @@
     "markdownlint-cli": "^0.48.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
   }
 }
