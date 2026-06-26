@@ -12,7 +12,14 @@
   ],
   "exclude": [
     "src/**/*.test.js",
+    "src/**/*.test.mjs",
+    "src/**/*.test.cjs",
     "src/**/*.test.ts",
+    "src/**/*.test.mts",
+    "src/**/*.test.cts",
+    "src/**/*.test-d.ts",
+    "src/**/*.test-d.mts",
+    "src/**/*.test-d.cts",
     "src/tests/**/*.js",
     "src/tests/**/*.ts",
     "**/fixtures/**"

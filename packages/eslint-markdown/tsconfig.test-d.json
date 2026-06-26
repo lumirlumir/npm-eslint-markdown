@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.test.ts"],
+  "include": ["src/**/*.test-d.ts", "src/**/*.test-d.mts", "src/**/*.test-d.cts"],
   "exclude": [],
   "compilerOptions": {
     /* Type Checking */

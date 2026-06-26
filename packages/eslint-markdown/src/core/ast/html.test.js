@@ -6,7 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { ok, strictEqual } from 'node:assert';
 import getElementsByTagName from './html.js';
 
