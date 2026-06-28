@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "**/*.config.js",
+    "**/*.config.mjs",
+    "**/*.config.cjs",
+    "**/*.config.ts",
+    "**/*.config.mts",
+    "**/*.config.cts"
+  ],
+  "compilerOptions": {
+    /* Modules */
+    "rootDir": ".",
+    "types": ["node"],
+
+    /* Emit */
+    "noEmit": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  }
+}
