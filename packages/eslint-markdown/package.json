@@ -7,7 +7,7 @@
   "exports": {
     ".": {
       "types": "./build/index.d.ts",
-      "default": "./src/index.js"
+      "default": "./build/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -22,13 +22,12 @@
     }
   },
   "files": [
-    "src",
     "build",
     "LICENSE.md",
     "README.md",
-    "!src/**/*.test.{js,mjs,cjs,ts,mts,cts}",
-    "!src/**/*.test-d.{ts,mts,cts}",
-    "!{src,build}/tests/**",
+    "!build/**/*.test.{js,mjs,cjs,ts,mts,cts}",
+    "!build/**/*.test-d.{ts,mts,cts}",
+    "!build/tests/**",
     "!**/fixtures/**"
   ],
   "keywords": [
@@ -62,7 +61,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "node ../../scripts/build-config.js && tsc -b tsconfig.build.json && node ../../scripts/cp.js ../../LICENSE.md LICENSE.md ../../README.md README.md",
+    "build": "tsc -b tsconfig.build.json && node ../../scripts/build-config.js && tsc -b tsconfig.build.json && node ../../scripts/cp.js ../../LICENSE.md LICENSE.md ../../README.md README.md",
     "test": "npm run test:types && npm run test:unit",
     "test:types": "tsc -b ./tsconfig.test-d.json",
     "test:unit": "vitest run"

@@ -31,12 +31,32 @@ export default defineConfig([
   {
     name: 'js/tests',
     files: [
-      'packages/eslint-markdown/**/*.test.{js,mjs,cjs}',
+      'packages/eslint-markdown/**/*.test.{js,mjs,cjs,ts,mts,cts}',
       'packages/eslint-markdown/**/*.test-d.{ts,mts,cts,tsx}',
-      'packages/eslint-markdown/src/tests/**/*.js',
+      'packages/eslint-markdown/src/tests/**/*.{js,ts}',
     ],
     rules: {
       'n/no-unpublished-import': 'off', // False positive for test files, since they are not published.
+    },
+  },
+  {
+    name: 'ts/nodenext-mixed-js',
+    files: ['packages/eslint-markdown/src/**/*.ts'],
+    rules: {
+      'n/no-missing-import': [
+        'error',
+        {
+          ignoreTypeImport: true,
+          typescriptExtensionMap: [
+            ['.ts', '.js'],
+            ['.js', '.js'],
+            ['.mts', '.mjs'],
+            ['.mjs', '.mjs'],
+            ['.cts', '.cjs'],
+            ['.cjs', '.cjs'],
+          ],
+        },
+      ],
     },
   },
 

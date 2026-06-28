@@ -21,7 +21,7 @@ import prettier from 'prettier';
  */
 async function generateCode(configName, rules) {
   const url = new URL(
-    `../packages/eslint-markdown/src/configs/${configName}.js`,
+    `../packages/eslint-markdown/src/configs/${configName}.ts`,
     import.meta.url,
   );
   const prettierConfig = await prettier.resolveConfig(url);
@@ -36,23 +36,14 @@ async function generateCode(configName, rules) {
 // --------------------------------------------------------------------------------
 
 import markdown from '@eslint/markdown';
-
-// --------------------------------------------------------------------------------
-// Typedef
-// --------------------------------------------------------------------------------
-
-/**
- * @import { ESLint, Linter } from "eslint";
- */
+import type { ESLint, Linter } from 'eslint';
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @param {ESLint.Plugin} plugin */
-export default function ${configName}(plugin) {
-  /** @satisfies {Linter.Config} */
-  return /** @type {const} */ ({
+export default function ${configName}(plugin: ESLint.Plugin) {
+  return {
     name: 'md/${configName}',
     files: ['**/*.md'],
     plugins: {
@@ -66,7 +57,7 @@ export default function ${configName}(plugin) {
     },
     language: 'markdown/gfm',
     ${configName === 'base' ? '' : `rules: ${JSON.stringify(rules)},`}
-  });
+  } as const satisfies Linter.Config;
 }
 `.trimStart();
 
