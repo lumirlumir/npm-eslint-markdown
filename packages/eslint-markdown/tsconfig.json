@@ -1,38 +1,11 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": [
-    "src/**/*.js",
-    "src/**/*.mjs",
-    "src/**/*.cjs",
-    "src/**/*.jsx",
-    "src/**/*.ts",
-    "src/**/*.mts",
-    "src/**/*.cts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "src/**/*.test.js",
-    "src/**/*.test.mjs",
-    "src/**/*.test.cjs",
-    "src/**/*.test.ts",
-    "src/**/*.test.mts",
-    "src/**/*.test.cts",
-    "src/**/*.test-d.ts",
-    "src/**/*.test-d.mts",
-    "src/**/*.test-d.cts",
-    "src/tests/**/*.js",
-    "src/tests/**/*.ts",
-    "**/fixtures/**"
-  ],
-  "compilerOptions": {
-    /* Modules */
-    "rootDir": "./src",
-    "types": [],
-
-    /* Emit */
-    "outDir": "build",
-
-    /* Completeness */
-    "skipLibCheck": true
-  }
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    },
+    {
+      "path": "./tsconfig.test-d.json"
+    }
+  ]
 }

@@ -23,9 +23,10 @@
     "useUnknownInCatchVariables": true,
 
     /* Modules */
-    "module": "NodeNext",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
-    "types": ["node"],
+    "rootDir": "${configDir}/src",
+    "types": [],
 
     /* Emit */
     "declaration": true,
@@ -41,6 +42,11 @@
     "verbatimModuleSyntax": true,
 
     /* Language and Environment */
-    "target": "ESNext"
+    "target": "esnext",
+
+    /* Projects */
+    "composite": true,
+    "incremental": true,
+    "tsBuildInfoFile": "${configDir}/.tsbuildinfo/tsconfig.tsbuildinfo"
   }
 }
