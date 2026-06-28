@@ -3,9 +3,6 @@
   "references": [
     {
       "path": "./packages/eslint-markdown/tsconfig.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
     }
   ]
 }
