@@ -53,7 +53,7 @@ function findFirstLeafTextNode(node: any): Text | null {
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-const rule: RuleModule<RuleOptions, MessageIds> = {
+export default {
   meta: {
     type: 'problem',
 
@@ -157,6 +157,4 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
       },
     };
   },
-};
-
-export default rule;
+} as const satisfies RuleModule<RuleOptions, MessageIds>;
