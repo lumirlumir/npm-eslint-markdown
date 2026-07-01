@@ -8,12 +8,11 @@
 // --------------------------------------------------------------------------------
 
 import { URL_RULE_DOCS } from '../core/constants.js';
+import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
-
-import type { RuleModule } from '../core/types.js';
 
 type RuleOptions = [{ style: string }];
 type MessageIds = 'style';

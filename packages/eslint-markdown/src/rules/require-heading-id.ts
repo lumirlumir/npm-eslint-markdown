@@ -10,12 +10,11 @@
 import type { Heading } from 'mdast';
 import { escapeStringRegexp } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
+import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
-
-import type { RuleModule } from '../core/types.js';
 
 type RuleOptions = [
   'always' | 'never',

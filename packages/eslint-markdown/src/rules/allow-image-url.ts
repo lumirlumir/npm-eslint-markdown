@@ -7,17 +7,16 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import type { Definition } from 'mdast';
 import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
 import type { Position } from 'unist';
-import type { Definition } from 'mdast';
 import { getElementsByTagName } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
+import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
-
-import type { RuleModule } from '../core/types.js';
 
 type RuleOptions = [
   { allowUrls: RegExp[]; disallowUrls: RegExp[]; allowDefinitions: string[] },

@@ -8,24 +8,13 @@
 // --------------------------------------------------------------------------------
 
 import { URL_RULE_DOCS } from '../core/constants.js';
+import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
 
-import type { RuleModule } from '../core/types.js';
-
-type HeadingOption = false | string[];
-type RuleOptions = [
-  {
-    h1: HeadingOption;
-    h2: HeadingOption;
-    h3: HeadingOption;
-    h4: HeadingOption;
-    h5: HeadingOption;
-    h6: HeadingOption;
-  },
-];
+type RuleOptions = [Record<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6', false | string[]>];
 type MessageIds = 'allowHeading' | 'allowHeadingDepth';
 
 // --------------------------------------------------------------------------------
