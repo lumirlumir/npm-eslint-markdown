@@ -1,0 +1,162 @@
+/**
+ * @fileoverview Rule to enforce the use of capital letters at the beginning of sentences.
+ * @author lumir(lumirlumir)
+ */
+
+// eslint-disable-next-line -- TODO: This rule is not fully migrated to TypeScript yet.
+// @ts-nocheck -- TODO
+
+// --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import type { Heading, Paragraph, Text } from 'mdast';
+import { URL_RULE_DOCS } from '../core/constants.js';
+import type { RuleModule } from '../core/types.js';
+
+// --------------------------------------------------------------------------------
+// Typedef
+// --------------------------------------------------------------------------------
+
+type RuleOptions = [{ skipHeading: boolean; skipListItem: boolean }];
+type MessageIds = 'enCapitalization';
+
+// --------------------------------------------------------------------------------
+// Helpers
+// --------------------------------------------------------------------------------
+
+const lowercaseRegex = /^[a-z]/u;
+
+/**
+ * Traverses the Markdown AST using a DFS pre-order approach to find the first text node.
+ * @param node The node to start searching from.
+ * @returns The first text node, if present.
+ */ // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: This rule is not fully migrated to TypeScript yet.
+function findFirstLeafTextNode(node: any): Text | null {
+  // Base case: if this is a text node, return it
+  if (node.type === 'text') return node;
+
+  // Check if node has children to traverse
+  if (node.children && node.children.length > 0)
+    // Iterate through children in order
+    for (const child of node.children) {
+      const textNode = findFirstLeafTextNode(child);
+      // Return the first text node found in the subtree
+      if (textNode) return textNode;
+    }
+
+  // No text node found in this subtree
+  return null;
+}
+
+// --------------------------------------------------------------------------------
+// Rule Definition
+// --------------------------------------------------------------------------------
+
+const rule: RuleModule<RuleOptions, MessageIds> = {
+  meta: {
+    type: 'problem',
+
+    docs: {
+      description: 'Enforce the use of capital letters at the beginning of sentences',
+      url: URL_RULE_DOCS('en-capitalization'),
+      recommended: false,
+      stylistic: false,
+    },
+
+    fixable: 'code',
+
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          skipHeading: {
+            type: 'boolean',
+          },
+          skipListItem: {
+            type: 'boolean',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        skipHeading: true,
+        skipListItem: true,
+      },
+    ],
+
+    messages: {
+      enCapitalization: '`{{ lowercase }}` should be capitalized.',
+    },
+
+    language: 'markdown',
+
+    dialects: ['commonmark', 'gfm'],
+  },
+
+  create(context) {
+    /** @param node The heading or paragraph node to report. */
+    function report(node: Heading | Paragraph) {
+      const textNode = findFirstLeafTextNode(node);
+
+      if (!textNode) return;
+
+      const match = textNode.value.match(lowercaseRegex);
+
+      if (!match) return;
+
+      const lowercase = match[0];
+
+      context.report({
+        loc: {
+          start: {
+            line: textNode.position.start.line,
+            column: textNode.position.start.column,
+          },
+          end: {
+            line: textNode.position.start.line,
+            column: textNode.position.start.column + lowercase.length,
+          },
+        },
+
+        data: {
+          lowercase: match[0],
+        },
+
+        messageId: 'enCapitalization',
+
+        fix(fixer) {
+          return fixer.replaceTextRange(
+            [
+              textNode.position.start.offset,
+              textNode.position.start.offset + lowercase.length,
+            ],
+            lowercase.toUpperCase(),
+          );
+        },
+      });
+    }
+
+    const [{ skipHeading, skipListItem }] = context.options;
+
+    return {
+      paragraph(node) {
+        if (context.sourceCode.getParent(node).type === 'listItem' && skipListItem)
+          return;
+
+        report(node);
+      },
+
+      heading(node) {
+        if (skipHeading) return;
+
+        report(node);
+      },
+    };
+  },
+};
+
+export default rule;

@@ -261,7 +261,7 @@ export default defineConfig([
 
 ### `recommended`
 
-> See the [source code for the `recommended` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/recommended.js) for the exact contents.
+> See the [source code for the `recommended` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/recommended.ts) for the exact contents.
 
 Recommended rules for documentation correctness that can be used without additional configuration. These rules typically report issues that represent bad practices and/or likely bugs.
 
@@ -375,7 +375,7 @@ export default defineConfig([
 
 ### `stylistic`
 
-> See the [source code for the `stylistic` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/stylistic.js) for the exact contents.
+> See the [source code for the `stylistic` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/stylistic.ts) for the exact contents.
 
 Rules considered best practices for modern Markdown documents that do not affect documentation rendering. These rules are generally opinionated and focus on enforcing consistent or simpler patterns.
 
@@ -489,7 +489,7 @@ export default defineConfig([
 
 ### `base`
 
-> See the [source code for the `base` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/base.js) for the exact contents.
+> See the [source code for the `base` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/base.ts) for the exact contents.
 
 A minimal ruleset that defines only the required [language](https://github.com/eslint/markdown?tab=readme-ov-file#languages) and [language options](https://github.com/eslint/markdown?tab=readme-ov-file#language-options) needed to run `eslint-markdown`.
 
@@ -617,7 +617,7 @@ export default defineConfig([
 
 ### `all`
 
-> See the [source code for the `all` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/all.js) for the exact contents.
+> See the [source code for the `all` configuration](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/configs/all.ts) for the exact contents.
 
 Enables all rules provided as a part of `eslint-markdown`. Note that many rules are not applicable in all codebases, or are meant to be configured.
 
