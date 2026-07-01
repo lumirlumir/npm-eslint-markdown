@@ -31,8 +31,8 @@ const lowercaseRegex = /^[a-z]/u;
  * Traverses the Markdown AST using a DFS pre-order approach to find the first text node.
  * @param node The node to start searching from.
  * @returns The first text node, if present.
- */
-function findFirstLeafTextNode(node: unknown): Text | null {
+ */ // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: This rule is not fully migrated to TypeScript yet.
+function findFirstLeafTextNode(node: any): Text | null {
   // Base case: if this is a text node, return it
   if (node.type === 'text') return node;
 
