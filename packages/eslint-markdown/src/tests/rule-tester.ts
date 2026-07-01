@@ -51,6 +51,12 @@ const ruleTesterGfm = new RuleTester({
 // Export
 // --------------------------------------------------------------------------------
 
+/**
+ * Markdown rule tester.
+ * @param ruleName Rule name.
+ * @param rule Rule module.
+ * @param tests Tests.
+ */
 export default function ruleTester(
   ruleName: string,
   rule: RuleModule<RuleOptions, MessageIds>,
