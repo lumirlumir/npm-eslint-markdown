@@ -240,6 +240,11 @@ ruleTester('require-heading-id', rule, {
       code: '# Heading{#id}',
       options: ['never'],
     },
+    {
+      name: 'ATX: Heading ending with image should not be reported in `never` mode',
+      code: '# Heading ![Alt](image.png)',
+      options: ['never'],
+    },
 
     // `leftDelimiter` and `rightDelimiter` option
     {

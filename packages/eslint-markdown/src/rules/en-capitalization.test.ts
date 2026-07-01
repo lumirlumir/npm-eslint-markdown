@@ -46,6 +46,10 @@ ruleTester('en-capitalization', rule, {
       name: 'Paragraph: 3 level depth - em + strong - 2',
       code: '_**Hello**_ World!',
     },
+    {
+      name: 'Paragraph with image before text should not be reported',
+      code: '![Alt](image.png) Hello World!',
+    },
 
     // Options: Heading
     {

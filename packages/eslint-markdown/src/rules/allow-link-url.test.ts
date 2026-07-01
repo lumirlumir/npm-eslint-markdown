@@ -217,6 +217,15 @@ ruleTester('allow-link-url', rule, {
         },
       ],
     },
+    {
+      name: 'HTML anchor without href should not be checked',
+      code: '<a class="anchor">text</a>',
+      options: [
+        {
+          disallowUrls: [/.*/],
+        },
+      ],
+    },
   ],
 
   invalid: [
