@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './require-heading-id.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './require-heading-id.js';
 
 // --------------------------------------------------------------------------------
 // Test

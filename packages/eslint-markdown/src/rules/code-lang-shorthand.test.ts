@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './code-lang-shorthand.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './code-lang-shorthand.js';
 
 // --------------------------------------------------------------------------------
 // Test

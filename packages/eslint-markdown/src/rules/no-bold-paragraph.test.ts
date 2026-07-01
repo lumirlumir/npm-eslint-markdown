@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './no-bold-paragraph.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './no-bold-paragraph.js';
 
 // --------------------------------------------------------------------------------
 // Helpers

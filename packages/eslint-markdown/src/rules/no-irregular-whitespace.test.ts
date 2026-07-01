@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './no-irregular-whitespace.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './no-irregular-whitespace.js';
 
 // --------------------------------------------------------------------------------
 // Test

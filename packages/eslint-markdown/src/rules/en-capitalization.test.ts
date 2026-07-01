@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './en-capitalization.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './en-capitalization.js';
 
 // --------------------------------------------------------------------------------
 // Test

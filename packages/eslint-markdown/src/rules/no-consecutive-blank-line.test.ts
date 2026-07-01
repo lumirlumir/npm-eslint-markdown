@@ -8,8 +8,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './no-consecutive-blank-line.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './no-consecutive-blank-line.js';
 
 // --------------------------------------------------------------------------------
 // Test

@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './no-git-conflict-marker.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './no-git-conflict-marker.js';
 
 // --------------------------------------------------------------------------------
 // Test

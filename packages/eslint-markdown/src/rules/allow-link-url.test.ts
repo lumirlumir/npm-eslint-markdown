@@ -8,8 +8,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './allow-link-url.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './allow-link-url.js';
 
 // --------------------------------------------------------------------------------
 // Test

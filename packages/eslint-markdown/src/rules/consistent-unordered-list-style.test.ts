@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './consistent-unordered-list-style.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './consistent-unordered-list-style.js';
 
 // --------------------------------------------------------------------------------
 // Test

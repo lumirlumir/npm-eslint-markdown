@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './no-tab.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './no-tab.js';
 
 // --------------------------------------------------------------------------------
 // Test

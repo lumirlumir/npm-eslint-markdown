@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './consistent-thematic-break-style.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './consistent-thematic-break-style.js';
 
 // --------------------------------------------------------------------------------
 // Test

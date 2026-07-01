@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './require-link-title.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './require-link-title.js';
 
 // --------------------------------------------------------------------------------
 // Test

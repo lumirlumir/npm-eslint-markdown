@@ -8,8 +8,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import ruleTester from '../tests/rule-tester.ts';
-import rule from './consistent-inline-code-style.ts';
+import ruleTester from '../tests/rule-tester.js';
+import rule from './consistent-inline-code-style.js';
 
 // --------------------------------------------------------------------------------
 // Test

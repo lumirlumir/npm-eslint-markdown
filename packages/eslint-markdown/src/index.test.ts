@@ -14,7 +14,7 @@ import { defineConfig } from 'eslint/config';
 import { Linter } from 'eslint/universal';
 import markdown from '@eslint/markdown';
 
-import md from './index.ts';
+import md from './index.js';
 import packageJson from '../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
