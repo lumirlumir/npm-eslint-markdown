@@ -24,11 +24,7 @@
   "files": [
     "build",
     "LICENSE.md",
-    "README.md",
-    "!build/**/*.test.{js,mjs,cjs,ts,mts,cts}",
-    "!build/**/*.test-d.{ts,mts,cts}",
-    "!build/tests/**",
-    "!**/fixtures/**"
+    "README.md"
   ],
   "keywords": [
     "eslint",
