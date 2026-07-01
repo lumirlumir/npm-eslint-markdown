@@ -27,7 +27,7 @@ const headingRegex = /^#{1,6}\s+/u;
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-const rule: RuleModule<RuleOptions, MessageIds> = {
+export default {
   meta: {
     type: 'problem',
 
@@ -186,6 +186,4 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
       },
     };
   },
-};
-
-export default rule;
+} as const satisfies RuleModule<RuleOptions, MessageIds>;
