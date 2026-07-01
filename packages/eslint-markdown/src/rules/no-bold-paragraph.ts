@@ -3,7 +3,7 @@
  * @author lumir(lumirlumir)
  */
 
-/* eslint-disable -- TODO: This rule is not fully migrated to TypeScript yet. */
+// eslint-disable-next-line -- TODO: This rule is not fully migrated to TypeScript yet.
 // @ts-nocheck -- TODO
 
 // --------------------------------------------------------------------------------
@@ -49,20 +49,14 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
     return {
       strong(node) {
         const parentNode = context.sourceCode.getParent(node);
-
-        if (parentNode?.type !== 'paragraph') return;
-
         const ancestorNode = context.sourceCode.getParent(parentNode);
-        const { position: parentPosition } = parentNode;
-        const { position: nodePosition } = node;
 
         if (
-          ancestorNode?.type !== 'listItem' &&
-          parentPosition !== undefined &&
-          nodePosition !== undefined &&
-          parentPosition.start.line === parentPosition.end.line && // Should be a single line.
-          parentPosition.start.offset === nodePosition.start.offset && // Should have the same start offset.
-          parentPosition.end.offset === nodePosition.end.offset // Should have the same end offset.
+          parentNode.type === 'paragraph' &&
+          ancestorNode.type !== 'listItem' &&
+          parentNode.position.start.line === parentNode.position.end.line && // Should be a single line.
+          parentNode.position.start.offset === node.position.start.offset && // Should have the same start offset.
+          parentNode.position.end.offset === node.position.end.offset // Should have the same end offset.
         ) {
           context.report({
             node,

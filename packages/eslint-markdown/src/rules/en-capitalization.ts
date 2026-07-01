@@ -3,7 +3,7 @@
  * @author lumir(lumirlumir)
  */
 
-/* eslint-disable -- TODO: This rule is not fully migrated to TypeScript yet. */
+// eslint-disable-next-line -- TODO: This rule is not fully migrated to TypeScript yet.
 // @ts-nocheck -- TODO
 
 // --------------------------------------------------------------------------------
@@ -27,21 +27,6 @@ type MessageIds = 'enCapitalization';
 
 const lowercaseRegex = /^[a-z]/u;
 
-function hasChildren(node: unknown): node is { children: unknown[] } {
-  return (
-    typeof node === 'object' &&
-    node !== null &&
-    'children' in node &&
-    Array.isArray(node.children)
-  );
-}
-
-function isTextNode(node: unknown): node is Text {
-  return (
-    typeof node === 'object' && node !== null && 'type' in node && node.type === 'text'
-  );
-}
-
 /**
  * Traverses the Markdown AST using a DFS pre-order approach to find the first text node.
  * @param node The node to start searching from.
@@ -49,10 +34,10 @@ function isTextNode(node: unknown): node is Text {
  */
 function findFirstLeafTextNode(node: unknown): Text | null {
   // Base case: if this is a text node, return it
-  if (isTextNode(node)) return node;
+  if (node.type === 'text') return node;
 
   // Check if node has children to traverse
-  if (hasChildren(node) && node.children.length > 0)
+  if (node.children && node.children.length > 0)
     // Iterate through children in order
     for (const child of node.children) {
       const textNode = findFirstLeafTextNode(child);
@@ -119,11 +104,6 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
 
       if (!textNode) return;
 
-      const { position } = textNode;
-      const startOffset = position?.start.offset;
-
-      if (position === undefined || startOffset === undefined) return;
-
       const match = textNode.value.match(lowercaseRegex);
 
       if (!match) return;
@@ -133,12 +113,12 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
       context.report({
         loc: {
           start: {
-            line: position.start.line,
-            column: position.start.column,
+            line: textNode.position.start.line,
+            column: textNode.position.start.column,
           },
           end: {
-            line: position.start.line,
-            column: position.start.column + lowercase.length,
+            line: textNode.position.start.line,
+            column: textNode.position.start.column + lowercase.length,
           },
         },
 
@@ -150,7 +130,10 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
 
         fix(fixer) {
           return fixer.replaceTextRange(
-            [startOffset, startOffset + lowercase.length],
+            [
+              textNode.position.start.offset,
+              textNode.position.start.offset + lowercase.length,
+            ],
             lowercase.toUpperCase(),
           );
         },
@@ -161,7 +144,7 @@ const rule: RuleModule<RuleOptions, MessageIds> = {
 
     return {
       paragraph(node) {
-        if (context.sourceCode.getParent(node)?.type === 'listItem' && skipListItem)
+        if (context.sourceCode.getParent(node).type === 'listItem' && skipListItem)
           return;
 
         report(node);
