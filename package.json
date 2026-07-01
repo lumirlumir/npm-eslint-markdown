@@ -32,7 +32,7 @@
     "test:types": "tsc -b",
     "test:unit": "vitest run",
     "test:pkg:em": "npm run test -w packages/eslint-markdown",
-    "build": "npm-run-all -l build:pkg:em build:website",
+    "build": "npm run build:pkg:em && npm run build:website",
     "build:pkg:em": "npm run build -w packages/eslint-markdown",
     "build:website": "npm run build -w website",
     "dev": "npm run dev:website",
