@@ -3,6 +3,9 @@
  * @author lumir(lumirlumir)
  */
 
+/* eslint-disable -- TODO: This rule is not fully migrated to TypeScript yet. */
+// @ts-nocheck -- TODO
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------

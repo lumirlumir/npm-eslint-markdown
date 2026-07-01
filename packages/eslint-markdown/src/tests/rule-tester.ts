@@ -9,8 +9,7 @@
 import { describe, it } from 'vitest';
 import { match, ok } from 'node:assert';
 import { RuleTester } from 'eslint';
-import markdown from '@eslint/markdown';
-import type { MarkdownRuleDefinitionTypeOptions } from '@eslint/markdown';
+import markdown, { type MarkdownRuleDefinitionTypeOptions } from '@eslint/markdown';
 import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
@@ -88,9 +87,10 @@ export default function ruleTester(
       });
 
       it('`meta.messages.messageId` should exist and value should follow the convention', () => {
-        Object.values(meta?.messages ?? {}).forEach(message => {
+        // @ts-expect-error -- Required for testing.
+        Object.values(meta.messages).forEach(message => {
           ok(message);
-          match(String(message), /^[^a-z].*\.$/);
+          match(message, /^[^a-z].*\.$/);
         });
       });
 
