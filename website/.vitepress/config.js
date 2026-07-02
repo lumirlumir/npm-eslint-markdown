@@ -14,7 +14,6 @@ import packageJson from 'eslint-markdown/package.json' with { type: 'json' };
 
 import { defineConfig } from 'vitepress';
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
-import { codecovVitePlugin } from '@codecov/vite-plugin';
 import {
   transformerNotationWordHighlight,
   transformerMetaWordHighlight,
@@ -22,6 +21,8 @@ import {
 } from '@shikijs/transformers';
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { createTwoslasher } from 'twoslash-eslint';
+
+import codecovVitePlugin from './plugin.js';
 
 // --------------------------------------------------------------------------------
 // Constant
