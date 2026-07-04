@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { SkipRanges } from '../core/ast/index.js';
+import { SkipRanges } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
