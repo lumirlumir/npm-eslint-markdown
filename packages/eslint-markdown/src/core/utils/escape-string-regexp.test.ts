@@ -31,8 +31,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'vitest';
-import { match, strictEqual } from 'node:assert';
+import { assert, describe, it } from 'vitest';
 import escapeStringRegexp from './escape-string-regexp.js';
 
 // --------------------------------------------------------------------------------
@@ -41,17 +40,17 @@ import escapeStringRegexp from './escape-string-regexp.js';
 
 describe('escape-string-regexp', () => {
   it('main', () => {
-    strictEqual(
+    assert.strictEqual(
       escapeStringRegexp('\\ ^ $ * + ? . ( ) | { } [ ]'),
       '\\\\ \\^ \\$ \\* \\+ \\? \\. \\( \\) \\| \\{ \\} \\[ \\]',
     );
   });
 
   it('escapes `-` in a way compatible with PCRE', () => {
-    strictEqual(escapeStringRegexp('foo - bar'), 'foo \\x2d bar');
+    assert.strictEqual(escapeStringRegexp('foo - bar'), 'foo \\x2d bar');
   });
 
   it('escapes `-` in a way compatible with the Unicode flag', () => {
-    match('-', new RegExp(escapeStringRegexp('-'), 'u'));
+    assert.match('-', new RegExp(escapeStringRegexp('-'), 'u'));
   });
 });
