@@ -7,8 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'vitest';
-import { ok, strictEqual } from 'node:assert';
+import { assert, describe, it } from 'vitest';
 
 import { defineConfig } from 'eslint/config';
 import { Linter } from 'eslint/universal';
@@ -24,49 +23,49 @@ import packageJson from '../package.json' with { type: 'json' };
 describe('index', () => {
   describe('package.json', () => {
     it('should have `sideEffects: false`', () => {
-      strictEqual(packageJson.sideEffects, false);
+      assert.strictEqual(packageJson.sideEffects, false);
     });
   });
 
   describe('Basic', () => {
     it('should have correct meta information', () => {
-      strictEqual(md.meta.name, 'eslint-markdown');
-      strictEqual(typeof md.meta.version, 'string');
+      assert.strictEqual(md.meta.name, 'eslint-markdown');
+      assert.strictEqual(typeof md.meta.version, 'string');
     });
 
     it('should have rules', () => {
-      ok(md.rules);
-      strictEqual(typeof md.rules, 'object');
-      strictEqual(Object.keys(md.rules).length > 0, true);
+      assert.ok(md.rules);
+      assert.strictEqual(typeof md.rules, 'object');
+      assert.strictEqual(Object.keys(md.rules).length > 0, true);
     });
 
     it('should have configs', () => {
-      ok(md.configs);
-      ok(md.configs.all);
-      ok(md.configs.base);
-      ok(md.configs.recommended);
-      ok(md.configs.stylistic);
-      strictEqual(typeof md.configs, 'object');
-      strictEqual(Object.keys(md.configs).length > 0, true);
+      assert.ok(md.configs);
+      assert.ok(md.configs.all);
+      assert.ok(md.configs.base);
+      assert.ok(md.configs.recommended);
+      assert.ok(md.configs.stylistic);
+      assert.strictEqual(typeof md.configs, 'object');
+      assert.strictEqual(Object.keys(md.configs).length > 0, true);
     });
   });
 
   describe('Config rules should use `md/` prefix', () => {
     it('`all` configuration', () => {
       for (const allConfigRuleName of Object.keys(md.configs.all.rules)) {
-        strictEqual(allConfigRuleName.startsWith('md/'), true);
+        assert.strictEqual(allConfigRuleName.startsWith('md/'), true);
       }
     });
 
     it('`recommended` configuration', () => {
       for (const recommendedConfigRuleName of Object.keys(md.configs.recommended.rules)) {
-        strictEqual(recommendedConfigRuleName.startsWith('md/'), true);
+        assert.strictEqual(recommendedConfigRuleName.startsWith('md/'), true);
       }
     });
 
     it('`stylistic` configuration', () => {
       for (const stylisticConfigRuleName of Object.keys(md.configs.stylistic.rules)) {
-        strictEqual(stylisticConfigRuleName.startsWith('md/'), true);
+        assert.strictEqual(stylisticConfigRuleName.startsWith('md/'), true);
       }
     });
   });
@@ -87,13 +86,13 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(extendsStyleConfigResult.length, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
     });
 
     it('`all` configuration with `@eslint/markdown` plugin', () => {
@@ -116,19 +115,22 @@ describe('index', () => {
         },
       );
 
-      strictEqual(extendsStyleConfigResult.length, 2);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
-      strictEqual(extendsStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(extendsStyleConfigResult[1].severity, 2);
-      strictEqual(extendsStyleConfigResult[1].line, 3);
-      strictEqual(extendsStyleConfigResult[1].column, 1);
-      strictEqual(extendsStyleConfigResult[1].endLine, 3);
-      strictEqual(extendsStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(extendsStyleConfigResult.length, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
+        extendsStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(extendsStyleConfigResult[1].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[1].line, 3);
+      assert.strictEqual(extendsStyleConfigResult[1].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[1].endLine, 3);
+      assert.strictEqual(extendsStyleConfigResult[1].endColumn, 11);
     });
 
     it('`base` configuration', () => {
@@ -149,13 +151,13 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(extendsStyleConfigResult.length, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
     });
 
     it('`base` configuration with `@eslint/markdown` plugin', () => {
@@ -181,19 +183,22 @@ describe('index', () => {
         },
       );
 
-      strictEqual(extendsStyleConfigResult.length, 2);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
-      strictEqual(extendsStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(extendsStyleConfigResult[1].severity, 2);
-      strictEqual(extendsStyleConfigResult[1].line, 3);
-      strictEqual(extendsStyleConfigResult[1].column, 1);
-      strictEqual(extendsStyleConfigResult[1].endLine, 3);
-      strictEqual(extendsStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(extendsStyleConfigResult.length, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
+        extendsStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(extendsStyleConfigResult[1].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[1].line, 3);
+      assert.strictEqual(extendsStyleConfigResult[1].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[1].endLine, 3);
+      assert.strictEqual(extendsStyleConfigResult[1].endColumn, 11);
     });
 
     it('`recommended` configuration', () => {
@@ -211,13 +216,13 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(extendsStyleConfigResult.length, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
     });
 
     it('`recommended` configuration with `@eslint/markdown` plugin', () => {
@@ -240,19 +245,22 @@ describe('index', () => {
         },
       );
 
-      strictEqual(extendsStyleConfigResult.length, 2);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
-      strictEqual(extendsStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(extendsStyleConfigResult[1].severity, 2);
-      strictEqual(extendsStyleConfigResult[1].line, 3);
-      strictEqual(extendsStyleConfigResult[1].column, 1);
-      strictEqual(extendsStyleConfigResult[1].endLine, 3);
-      strictEqual(extendsStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(extendsStyleConfigResult.length, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
+        extendsStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(extendsStyleConfigResult[1].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[1].line, 3);
+      assert.strictEqual(extendsStyleConfigResult[1].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[1].endLine, 3);
+      assert.strictEqual(extendsStyleConfigResult[1].endColumn, 11);
     });
 
     it('`stylistic` configuration', () => {
@@ -270,16 +278,16 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(
+      assert.strictEqual(extendsStyleConfigResult.length, 1);
+      assert.strictEqual(
         extendsStyleConfigResult[0].ruleId,
         'md/consistent-thematic-break-style',
       );
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 3);
-      strictEqual(extendsStyleConfigResult[0].column, 1);
-      strictEqual(extendsStyleConfigResult[0].endLine, 3);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 4);
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 4);
     });
 
     it('`stylistic` configuration with `@eslint/markdown` plugin', () => {
@@ -302,22 +310,25 @@ describe('index', () => {
         },
       );
 
-      strictEqual(extendsStyleConfigResult.length, 2);
-      strictEqual(
+      assert.strictEqual(extendsStyleConfigResult.length, 2);
+      assert.strictEqual(
         extendsStyleConfigResult[0].ruleId,
         'md/consistent-thematic-break-style',
       );
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 3);
-      strictEqual(extendsStyleConfigResult[0].column, 1);
-      strictEqual(extendsStyleConfigResult[0].endLine, 3);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 4);
-      strictEqual(extendsStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(extendsStyleConfigResult[1].severity, 2);
-      strictEqual(extendsStyleConfigResult[1].line, 5);
-      strictEqual(extendsStyleConfigResult[1].column, 1);
-      strictEqual(extendsStyleConfigResult[1].endLine, 5);
-      strictEqual(extendsStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 4);
+      assert.strictEqual(
+        extendsStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(extendsStyleConfigResult[1].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[1].line, 5);
+      assert.strictEqual(extendsStyleConfigResult[1].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[1].endLine, 5);
+      assert.strictEqual(extendsStyleConfigResult[1].endColumn, 11);
     });
 
     it('Mixed configuration', () => {
@@ -340,28 +351,31 @@ describe('index', () => {
         },
       );
 
-      strictEqual(extendsStyleConfigResult.length, 3);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(extendsStyleConfigResult[0].severity, 2);
-      strictEqual(extendsStyleConfigResult[0].line, 1);
-      strictEqual(extendsStyleConfigResult[0].column, 3);
-      strictEqual(extendsStyleConfigResult[0].endLine, 1);
-      strictEqual(extendsStyleConfigResult[0].endColumn, 5);
-      strictEqual(
+      assert.strictEqual(extendsStyleConfigResult.length, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(extendsStyleConfigResult[0].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[0].line, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].column, 3);
+      assert.strictEqual(extendsStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(extendsStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
         extendsStyleConfigResult[1].ruleId,
         'md/consistent-thematic-break-style',
       );
-      strictEqual(extendsStyleConfigResult[1].severity, 2);
-      strictEqual(extendsStyleConfigResult[1].line, 5);
-      strictEqual(extendsStyleConfigResult[1].column, 1);
-      strictEqual(extendsStyleConfigResult[1].endLine, 5);
-      strictEqual(extendsStyleConfigResult[1].endColumn, 4);
-      strictEqual(extendsStyleConfigResult[2].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(extendsStyleConfigResult[2].severity, 2);
-      strictEqual(extendsStyleConfigResult[2].line, 7);
-      strictEqual(extendsStyleConfigResult[2].column, 1);
-      strictEqual(extendsStyleConfigResult[2].endLine, 7);
-      strictEqual(extendsStyleConfigResult[2].endColumn, 11);
+      assert.strictEqual(extendsStyleConfigResult[1].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[1].line, 5);
+      assert.strictEqual(extendsStyleConfigResult[1].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[1].endLine, 5);
+      assert.strictEqual(extendsStyleConfigResult[1].endColumn, 4);
+      assert.strictEqual(
+        extendsStyleConfigResult[2].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(extendsStyleConfigResult[2].severity, 2);
+      assert.strictEqual(extendsStyleConfigResult[2].line, 7);
+      assert.strictEqual(extendsStyleConfigResult[2].column, 1);
+      assert.strictEqual(extendsStyleConfigResult[2].endLine, 7);
+      assert.strictEqual(extendsStyleConfigResult[2].endColumn, 11);
     });
   });
 
@@ -373,13 +387,13 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(cascadingStyleConfigResult.length, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
     });
 
     it('`all` configuration with `@eslint/markdown` plugin', () => {
@@ -396,19 +410,22 @@ describe('index', () => {
         },
       );
 
-      strictEqual(cascadingStyleConfigResult.length, 2);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
-      strictEqual(cascadingStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(cascadingStyleConfigResult[1].severity, 2);
-      strictEqual(cascadingStyleConfigResult[1].line, 3);
-      strictEqual(cascadingStyleConfigResult[1].column, 1);
-      strictEqual(cascadingStyleConfigResult[1].endLine, 3);
-      strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(cascadingStyleConfigResult.length, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
+        cascadingStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(cascadingStyleConfigResult[1].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[1].line, 3);
+      assert.strictEqual(cascadingStyleConfigResult[1].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[1].endLine, 3);
+      assert.strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
     });
 
     it('`base` configuration', () => {
@@ -421,13 +438,13 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(cascadingStyleConfigResult.length, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
     });
 
     it('`base` configuration with `@eslint/markdown` plugin', () => {
@@ -445,19 +462,22 @@ describe('index', () => {
         },
       );
 
-      strictEqual(cascadingStyleConfigResult.length, 2);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
-      strictEqual(cascadingStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(cascadingStyleConfigResult[1].severity, 2);
-      strictEqual(cascadingStyleConfigResult[1].line, 3);
-      strictEqual(cascadingStyleConfigResult[1].column, 1);
-      strictEqual(cascadingStyleConfigResult[1].endLine, 3);
-      strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(cascadingStyleConfigResult.length, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
+        cascadingStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(cascadingStyleConfigResult[1].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[1].line, 3);
+      assert.strictEqual(cascadingStyleConfigResult[1].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[1].endLine, 3);
+      assert.strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
     });
 
     it('`recommended` configuration', () => {
@@ -467,13 +487,13 @@ describe('index', () => {
         filename: 'test.md',
       });
 
-      strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(cascadingStyleConfigResult.length, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
     });
 
     it('`recommended` configuration with `@eslint/markdown` plugin', () => {
@@ -490,19 +510,22 @@ describe('index', () => {
         },
       );
 
-      strictEqual(cascadingStyleConfigResult.length, 2);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
-      strictEqual(cascadingStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(cascadingStyleConfigResult[1].severity, 2);
-      strictEqual(cascadingStyleConfigResult[1].line, 3);
-      strictEqual(cascadingStyleConfigResult[1].column, 1);
-      strictEqual(cascadingStyleConfigResult[1].endLine, 3);
-      strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(cascadingStyleConfigResult.length, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
+        cascadingStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(cascadingStyleConfigResult[1].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[1].line, 3);
+      assert.strictEqual(cascadingStyleConfigResult[1].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[1].endLine, 3);
+      assert.strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
     });
 
     it('`stylistic` configuration', () => {
@@ -516,16 +539,16 @@ describe('index', () => {
         },
       );
 
-      strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(
+      assert.strictEqual(cascadingStyleConfigResult.length, 1);
+      assert.strictEqual(
         cascadingStyleConfigResult[0].ruleId,
         'md/consistent-thematic-break-style',
       );
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 3);
-      strictEqual(cascadingStyleConfigResult[0].column, 1);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 3);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 4);
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 4);
     });
 
     it('`stylistic` configuration with `@eslint/markdown` plugin', () => {
@@ -542,22 +565,25 @@ describe('index', () => {
         },
       );
 
-      strictEqual(cascadingStyleConfigResult.length, 2);
-      strictEqual(
+      assert.strictEqual(cascadingStyleConfigResult.length, 2);
+      assert.strictEqual(
         cascadingStyleConfigResult[0].ruleId,
         'md/consistent-thematic-break-style',
       );
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 3);
-      strictEqual(cascadingStyleConfigResult[0].column, 1);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 3);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 4);
-      strictEqual(cascadingStyleConfigResult[1].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(cascadingStyleConfigResult[1].severity, 2);
-      strictEqual(cascadingStyleConfigResult[1].line, 5);
-      strictEqual(cascadingStyleConfigResult[1].column, 1);
-      strictEqual(cascadingStyleConfigResult[1].endLine, 5);
-      strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 4);
+      assert.strictEqual(
+        cascadingStyleConfigResult[1].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(cascadingStyleConfigResult[1].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[1].line, 5);
+      assert.strictEqual(cascadingStyleConfigResult[1].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[1].endLine, 5);
+      assert.strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
     });
 
     it('Mixed configuration', () => {
@@ -575,28 +601,31 @@ describe('index', () => {
         },
       );
 
-      strictEqual(cascadingStyleConfigResult.length, 3);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-      strictEqual(cascadingStyleConfigResult[0].severity, 2);
-      strictEqual(cascadingStyleConfigResult[0].line, 1);
-      strictEqual(cascadingStyleConfigResult[0].column, 3);
-      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
-      strictEqual(
+      assert.strictEqual(cascadingStyleConfigResult.length, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      assert.strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[0].line, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].column, 3);
+      assert.strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      assert.strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      assert.strictEqual(
         cascadingStyleConfigResult[1].ruleId,
         'md/consistent-thematic-break-style',
       );
-      strictEqual(cascadingStyleConfigResult[1].severity, 2);
-      strictEqual(cascadingStyleConfigResult[1].line, 5);
-      strictEqual(cascadingStyleConfigResult[1].column, 1);
-      strictEqual(cascadingStyleConfigResult[1].endLine, 5);
-      strictEqual(cascadingStyleConfigResult[1].endColumn, 4);
-      strictEqual(cascadingStyleConfigResult[2].ruleId, 'markdown/no-unused-definitions');
-      strictEqual(cascadingStyleConfigResult[2].severity, 2);
-      strictEqual(cascadingStyleConfigResult[2].line, 7);
-      strictEqual(cascadingStyleConfigResult[2].column, 1);
-      strictEqual(cascadingStyleConfigResult[2].endLine, 7);
-      strictEqual(cascadingStyleConfigResult[2].endColumn, 11);
+      assert.strictEqual(cascadingStyleConfigResult[1].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[1].line, 5);
+      assert.strictEqual(cascadingStyleConfigResult[1].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[1].endLine, 5);
+      assert.strictEqual(cascadingStyleConfigResult[1].endColumn, 4);
+      assert.strictEqual(
+        cascadingStyleConfigResult[2].ruleId,
+        'markdown/no-unused-definitions',
+      );
+      assert.strictEqual(cascadingStyleConfigResult[2].severity, 2);
+      assert.strictEqual(cascadingStyleConfigResult[2].line, 7);
+      assert.strictEqual(cascadingStyleConfigResult[2].column, 1);
+      assert.strictEqual(cascadingStyleConfigResult[2].endLine, 7);
+      assert.strictEqual(cascadingStyleConfigResult[2].endColumn, 11);
     });
   });
 });
