@@ -39,28 +39,6 @@ ruleTester('allow-heading', rule, {
 
     // Options
     {
-      name: 'Headings should not be reported when false is given',
-      code: `
-# Hello
-## World
-### Hello World
-#### Hello World
-##### Hello World
-###### Hello World
-`,
-      options: [
-        {
-          h1: false,
-          h2: false,
-          h3: false,
-          h4: false,
-          h5: false,
-          h6: false,
-        },
-      ],
-    },
-
-    {
       name: 'Headings should not be reported when they are allowed',
       code: `
 # Hello
@@ -83,12 +61,37 @@ ruleTester('allow-heading', rule, {
 `,
       options: [
         {
-          h1: ['Hello', 'World'],
-          h2: ['Hello', 'World'],
-          h3: ['Hello', 'World'],
-          h4: ['Hello', 'World'],
-          h5: ['Hello', 'World'],
-          h6: ['Hello', 'World'],
+          h1: { allow: [/^# (?:Hello|World)$/u] },
+          h2: { allow: [/^## (?:Hello|World)$/u] },
+          h3: { allow: [/^### (?:Hello|World)$/u] },
+          h4: { allow: [/^#### (?:Hello|World)$/u] },
+          h5: { allow: [/^##### (?:Hello|World)$/u] },
+          h6: { allow: [/^###### (?:Hello|World)$/u] },
+        },
+      ],
+    },
+    {
+      name: 'Headings should not be reported when they are not disallowed',
+      code: `
+# Hello
+## World
+`,
+      options: [
+        {
+          h1: { disallow: [/Foo/u] },
+          h2: { disallow: [/Foo/u] },
+        },
+      ],
+    },
+    {
+      name: 'Headings should not be reported when they are allowed and not disallowed',
+      code: '# Hello',
+      options: [
+        {
+          h1: {
+            allow: [/^# Hello$/u],
+            disallow: [/^# World$/u],
+          },
         },
       ],
     },
@@ -97,11 +100,11 @@ ruleTester('allow-heading', rule, {
   invalid: [
     // Basic: allow heading
     {
-      name: 'Headings should be reported when they are not allowed - h1',
+      name: 'ATX: h1 heading should be reported when it is not allowed',
       code: '# Hello',
       options: [
         {
-          h1: ['World'],
+          h1: { allow: [/^# World$/u] },
         },
       ],
       errors: [
@@ -111,16 +114,16 @@ ruleTester('allow-heading', rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
-          data: { heading: 'Hello', allow: '`World`' },
+          data: { depth: '1', heading: '# Hello', allow: '`/^# World$/u`' },
         },
       ],
     },
     {
-      name: 'Headings should be reported when they are not allowed - h2',
+      name: 'ATX: h2 heading should be reported when it is not allowed',
       code: '## Hello',
       options: [
         {
-          h2: ['World'],
+          h2: { allow: [/^## World$/u] },
         },
       ],
       errors: [
@@ -130,16 +133,16 @@ ruleTester('allow-heading', rule, {
           column: 1,
           endLine: 1,
           endColumn: 9,
-          data: { heading: 'Hello', allow: '`World`' },
+          data: { depth: '2', heading: '## Hello', allow: '`/^## World$/u`' },
         },
       ],
     },
     {
-      name: 'Headings should be reported when they are not allowed - h3',
+      name: 'ATX: h3 heading should be reported when it is not allowed',
       code: '### Hello',
       options: [
         {
-          h3: ['World'],
+          h3: { allow: [/^### World$/u] },
         },
       ],
       errors: [
@@ -149,16 +152,16 @@ ruleTester('allow-heading', rule, {
           column: 1,
           endLine: 1,
           endColumn: 10,
-          data: { heading: 'Hello', allow: '`World`' },
+          data: { depth: '3', heading: '### Hello', allow: '`/^### World$/u`' },
         },
       ],
     },
     {
-      name: 'Headings should be reported when they are not allowed - h4',
+      name: 'ATX: h4 heading should be reported when it is not allowed',
       code: '#### Hello',
       options: [
         {
-          h4: ['World'],
+          h4: { allow: [/^#### World$/u] },
         },
       ],
       errors: [
@@ -168,16 +171,16 @@ ruleTester('allow-heading', rule, {
           column: 1,
           endLine: 1,
           endColumn: 11,
-          data: { heading: 'Hello', allow: '`World`' },
+          data: { depth: '4', heading: '#### Hello', allow: '`/^#### World$/u`' },
         },
       ],
     },
     {
-      name: 'Headings should be reported when they are not allowed - h5',
+      name: 'ATX: h5 heading should be reported when it is not allowed',
       code: '##### Hello',
       options: [
         {
-          h5: ['World'],
+          h5: { allow: [/^##### World$/u] },
         },
       ],
       errors: [
@@ -187,16 +190,16 @@ ruleTester('allow-heading', rule, {
           column: 1,
           endLine: 1,
           endColumn: 12,
-          data: { heading: 'Hello', allow: '`World`' },
+          data: { depth: '5', heading: '##### Hello', allow: '`/^##### World$/u`' },
         },
       ],
     },
     {
-      name: 'Headings should be reported when they are not allowed - h6',
+      name: 'ATX: h6 heading should be reported when it is not allowed',
       code: '###### Hello',
       options: [
         {
-          h6: ['World'],
+          h6: { allow: [/^###### World$/u] },
         },
       ],
       errors: [
@@ -206,171 +209,90 @@ ruleTester('allow-heading', rule, {
           column: 1,
           endLine: 1,
           endColumn: 13,
-          data: { heading: 'Hello', allow: '`World`' },
+          data: { depth: '6', heading: '###### Hello', allow: '`/^###### World$/u`' },
         },
       ],
     },
 
-    // Basic: allow heading depth
+    // Basic: disallow heading
     {
-      name: 'Specific depth headings should be reported entirely when empty array option is given - h1',
-      code: '# Hello\n# World',
+      name: 'Heading should be reported when it is disallowed',
+      code: '# Hello',
       options: [
         {
-          h1: [],
+          h1: { disallow: [/^# Hello$/u] },
         },
       ],
       errors: [
         {
-          messageId: 'allowHeadingDepth',
+          messageId: 'disallowHeading',
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 8,
-          data: { depth: 1 },
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/u`' },
         },
+      ],
+    },
+
+    // Basic: allow and disallow heading
+    {
+      name: 'Heading should be reported when it is not allowed and is disallowed',
+      code: '# Hello',
+      options: [
         {
-          messageId: 'allowHeadingDepth',
-          line: 2,
+          h1: {
+            allow: [/^# World$/u],
+            disallow: [/^# Hello$/u],
+          },
+        },
+      ],
+      errors: [
+        {
+          messageId: 'allowHeading',
+          line: 1,
           column: 1,
-          endLine: 2,
+          endLine: 1,
           endColumn: 8,
-          data: { depth: 1 },
+          data: { depth: '1', heading: '# Hello', allow: '`/^# World$/u`' },
+        },
+        {
+          messageId: 'disallowHeading',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/u`' },
         },
       ],
     },
+
+    // Edge cases
     {
-      name: 'Specific depth headings should be reported entirely when empty array option is given - h2',
-      code: '## Hello\n## World',
+      name: 'Headings should be reported when empty allow array is given',
+      code: '# Hello\n## World',
       options: [
         {
-          h2: [],
+          h1: { allow: [] },
+          h2: { allow: [] },
         },
       ],
       errors: [
         {
-          messageId: 'allowHeadingDepth',
+          messageId: 'allowHeading',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 9,
-          data: { depth: 2 },
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', allow: '' },
         },
         {
-          messageId: 'allowHeadingDepth',
+          messageId: 'allowHeading',
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 9,
-          data: { depth: 2 },
-        },
-      ],
-    },
-    {
-      name: 'Specific depth headings should be reported entirely when empty array option is given - h3',
-      code: '### Hello\n### World',
-      options: [
-        {
-          h3: [],
-        },
-      ],
-      errors: [
-        {
-          messageId: 'allowHeadingDepth',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 10,
-          data: { depth: 3 },
-        },
-        {
-          messageId: 'allowHeadingDepth',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 10,
-          data: { depth: 3 },
-        },
-      ],
-    },
-    {
-      name: 'Specific depth headings should be reported entirely when empty array option is given - h4',
-      code: '#### Hello\n#### World',
-      options: [
-        {
-          h4: [],
-        },
-      ],
-      errors: [
-        {
-          messageId: 'allowHeadingDepth',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 11,
-          data: { depth: 4 },
-        },
-        {
-          messageId: 'allowHeadingDepth',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 11,
-          data: { depth: 4 },
-        },
-      ],
-    },
-    {
-      name: 'Specific depth headings should be reported entirely when empty array option is given - h5',
-      code: '##### Hello\n##### World',
-      options: [
-        {
-          h5: [],
-        },
-      ],
-      errors: [
-        {
-          messageId: 'allowHeadingDepth',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 12,
-          data: { depth: 5 },
-        },
-        {
-          messageId: 'allowHeadingDepth',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 12,
-          data: { depth: 5 },
-        },
-      ],
-    },
-    {
-      name: 'Specific depth headings should be reported entirely when empty array option is given - h6',
-      code: '###### Hello\n###### World',
-      options: [
-        {
-          h6: [],
-        },
-      ],
-      errors: [
-        {
-          messageId: 'allowHeadingDepth',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 13,
-          data: { depth: 6 },
-        },
-        {
-          messageId: 'allowHeadingDepth',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 13,
-          data: { depth: 6 },
+          data: { depth: '2', heading: '## World', allow: '' },
         },
       ],
     },

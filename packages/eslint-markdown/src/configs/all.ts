@@ -29,6 +29,7 @@ export default function all(plugin: ESLint.Plugin) {
     },
     language: 'markdown/gfm',
     rules: {
+      'md/allow-heading': 'error',
       'md/allow-image-url': 'error',
       'md/allow-link-url': 'error',
       'md/code-lang-shorthand': 'error',

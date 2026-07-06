@@ -53,23 +53,16 @@ export default defineConfig([
     name: 'md/website/rules',
     files: ['website/docs/rules/**/*.md'],
     rules: {
-      /* TODO: Turn this back on when `allow-heading` rule is stabilized.
       'md/allow-heading': [
         'error',
         {
-          h2: [
-            'Rule Details',
-            'Examples',
-            'Options',
-            'Fix',
-            'Limitations',
-            'When Not To Use It',
-            'Further Reading',
-            'Prior Art',
-          ],
+          h2: {
+            allow: [
+              /^## (?:Rule Details|Examples|Options|Fix|Suggestion|Limitations|When Not To Use It|Further Reading|Prior Art)$/u,
+            ],
+          },
         },
       ],
-      */
     },
   },
 ]);
