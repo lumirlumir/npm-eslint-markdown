@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to enforce the use of allowed text for headings.
+ * @fileoverview Rule to enforce the use of allowed or disallowed headings.
  * @author lumir(lumirlumir)
  */
 
@@ -7,6 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import type { Heading } from 'mdast';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -14,14 +15,51 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [Record<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6', false | string[]>];
-type MessageIds = 'allowHeading' | 'allowHeadingDepth';
+export interface HeadingOptions {
+  allow: RegExp[];
+  disallow: RegExp[];
+}
+type RuleOptions = [Record<`h${Heading['depth']}`, HeadingOptions>];
+type MessageIds = 'allowHeading' | 'disallowHeading';
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
-const headingRegex = /^#{1,6}\s+/u;
+const statefulRegexFlagRegex = /[gy]/u;
+
+const headingOptionsSchema = {
+  type: 'object',
+  properties: {
+    allow: {
+      type: 'array',
+      items: {
+        type: 'object',
+      },
+      uniqueItems: true,
+    },
+    disallow: {
+      type: 'array',
+      items: {
+        type: 'object',
+      },
+      uniqueItems: true,
+    },
+  },
+  additionalProperties: false,
+} as const;
+
+/**
+ * Tests a regex without mutating the state stored in its `lastIndex`.
+ * @param regex Regex to test.
+ * @param text Text to test.
+ * @returns Whether the regex matches the text.
+ */
+function testRegexStateless(regex: RegExp, text: string) {
+  return statefulRegexFlagRegex.test(regex.flags)
+    ? new RegExp(regex).test(text)
+    : regex.test(text);
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -32,7 +70,7 @@ export default {
     type: 'problem',
 
     docs: {
-      description: 'Enforce the use of allowed text for headings',
+      description: 'Enforce the use of allowed or disallowed headings',
       url: URL_RULE_DOCS('allow-heading'),
       recommended: false,
       stylistic: false,
@@ -42,78 +80,12 @@ export default {
       {
         type: 'object',
         properties: {
-          h1: {
-            oneOf: [
-              {
-                enum: [false],
-              },
-              {
-                type: 'array',
-                items: { type: 'string' },
-                uniqueItems: true,
-              },
-            ],
-          },
-          h2: {
-            oneOf: [
-              {
-                enum: [false],
-              },
-              {
-                type: 'array',
-                items: { type: 'string' },
-                uniqueItems: true,
-              },
-            ],
-          },
-          h3: {
-            oneOf: [
-              {
-                enum: [false],
-              },
-              {
-                type: 'array',
-                items: { type: 'string' },
-                uniqueItems: true,
-              },
-            ],
-          },
-          h4: {
-            oneOf: [
-              {
-                enum: [false],
-              },
-              {
-                type: 'array',
-                items: { type: 'string' },
-                uniqueItems: true,
-              },
-            ],
-          },
-          h5: {
-            oneOf: [
-              {
-                enum: [false],
-              },
-              {
-                type: 'array',
-                items: { type: 'string' },
-                uniqueItems: true,
-              },
-            ],
-          },
-          h6: {
-            oneOf: [
-              {
-                enum: [false],
-              },
-              {
-                type: 'array',
-                items: { type: 'string' },
-                uniqueItems: true,
-              },
-            ],
-          },
+          h1: headingOptionsSchema,
+          h2: headingOptionsSchema,
+          h3: headingOptionsSchema,
+          h4: headingOptionsSchema,
+          h5: headingOptionsSchema,
+          h6: headingOptionsSchema,
         },
         additionalProperties: false,
       },
@@ -121,19 +93,20 @@ export default {
 
     defaultOptions: [
       {
-        h1: false,
-        h2: false,
-        h3: false,
-        h4: false,
-        h5: false,
-        h6: false,
+        h1: { allow: [/.*/u], disallow: [] },
+        h2: { allow: [/.*/u], disallow: [] },
+        h3: { allow: [/.*/u], disallow: [] },
+        h4: { allow: [/.*/u], disallow: [] },
+        h5: { allow: [/.*/u], disallow: [] },
+        h6: { allow: [/.*/u], disallow: [] },
       },
     ],
 
     messages: {
       allowHeading:
-        'The heading text `{{ heading }}` is not allowed. Please use one of the following text: {{ allow }}.',
-      allowHeadingDepth: 'The heading depth `h{{ depth }}` is not allowed.',
+        'The level {{ depth }} heading `{{ heading }}` is not in the list of allowed headings. (Allow: {{ allow }}).',
+      disallowHeading:
+        'The level {{ depth }} heading `{{ heading }}` is in the list of disallowed headings. (Disallow: {{ disallow }}).',
     },
 
     language: 'markdown',
@@ -142,6 +115,7 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
     const headingMap = {
       1: h1,
@@ -150,36 +124,34 @@ export default {
       4: h4,
       5: h5,
       6: h6,
-    };
+    } as const satisfies Record<Heading['depth'], HeadingOptions>;
 
     return {
       heading(node) {
-        const actualHeadingText = context.sourceCode
-          .getText(node)
-          .replace(headingRegex, '');
-        const expectedHeadingTexts = headingMap[node.depth];
+        const { depth } = node;
+        const { allow, disallow } = headingMap[depth];
+        const headingText = sourceCode.getText(node);
 
-        if (expectedHeadingTexts === false) return;
-
-        if (expectedHeadingTexts.length === 0) {
+        if (!allow.some(regex => testRegexStateless(regex, headingText))) {
           context.report({
             node,
-
-            messageId: 'allowHeadingDepth',
-
+            messageId: 'allowHeading',
             data: {
-              depth: String(node.depth),
+              depth,
+              heading: headingText,
+              allow: allow.map(regex => `\`${regex}\``).join(', '),
             },
           });
-        } else if (!expectedHeadingTexts.includes(actualHeadingText)) {
+        }
+
+        if (disallow.some(regex => testRegexStateless(regex, headingText))) {
           context.report({
             node,
-
-            messageId: 'allowHeading',
-
+            messageId: 'disallowHeading',
             data: {
-              heading: actualHeadingText,
-              allow: expectedHeadingTexts.map(text => `\`${text}\``).join(', '),
+              depth,
+              heading: headingText,
+              disallow: disallow.map(regex => `\`${regex}\``).join(', '),
             },
           });
         }

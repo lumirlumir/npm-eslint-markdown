@@ -2,7 +2,7 @@
 
 // TODO: Re-enable the commented-out rules once they stabilize.
 
-// import allowHeading from './allow-heading.js';
+import allowHeading from './allow-heading.js';
 import allowImageUrl from './allow-image-url.js';
 import allowLinkUrl from './allow-link-url.js';
 import codeLangShorthand from './code-lang-shorthand.js';
@@ -31,7 +31,7 @@ import requireImageTitle from './require-image-title.js';
 import requireLinkTitle from './require-link-title.js';
 
 export default {
-  // 'allow-heading': allowHeading,
+  'allow-heading': allowHeading,
   'allow-image-url': allowImageUrl,
   'allow-link-url': allowLinkUrl,
   'code-lang-shorthand': codeLangShorthand,

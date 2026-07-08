@@ -288,7 +288,7 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (
       /^docs\/rules\/(?!index).+/.test(pageData.relativePath) &&
-      !/(?:allow-heading|en-capitalization|no-bold-paragraph)\.md$/.test(
+      !/(?:en-capitalization|no-bold-paragraph)\.md$/.test(
         // TODO: Remove this exclusion when the rules are stabilized.
         pageData.relativePath,
       )
@@ -312,8 +312,8 @@ export default defineConfig({
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>
 <p>
-  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.js">Rule Source</a></code>
-  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.test.js">Test Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.ts">Rule Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.test.ts">Test Source</a></code>
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')

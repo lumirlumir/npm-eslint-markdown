@@ -3,9 +3,9 @@
 
 ## Rule Details
 
-This rule enforces that heading text content matches predefined allowed values. It allows you to restrict the text of headings at different levels (`h1`-`h6`) to specific sets of allowed strings, ensuring consistency in document structure and terminology across your Markdown files.
+This rule enforces that headings match predefined allowed or disallowed patterns. It allows you to restrict headings at different levels (`h1`-`h6`) to specific sets of regular expressions, ensuring consistency in document structure and terminology across your Markdown files.
 
-The rule examines each heading in the document, extracts its text content, and checks if it appears in the configured allowed list for that heading level. If the heading text is not in the allowed list, the rule reports an error.
+The rule examines each heading in the document and checks its Markdown source text, such as `# Introduction` or `## Overview`, against the configured patterns for that heading level.
 
 This is particularly useful for:
 
@@ -16,7 +16,7 @@ This is particularly useful for:
 
 ::: info
 
-This rule doesn't report any errors by default. You must configure it with the allowed heading values you want to enforce.
+This rule doesn't report any errors by default. You must configure it with the allowed or disallowed heading patterns you want to enforce.
 
 :::
 
@@ -26,10 +26,10 @@ This rule doesn't report any errors by default. You must configure it with the a
 
 Examples of **incorrect** code for this rule:
 
-#### With `{ h1: ["Introduction"], h2: ["Overview", "Installation"] }` Option
+#### With `{ h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }` Option
 
-```md [incorrect.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h1: ["Introduction"], h2: ["Overview", "Installation"] }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }] -->
 
 # Introduction
 
@@ -44,12 +44,12 @@ Examples of **incorrect** code for this rule:
 ### Feature 1
 ```
 
-#### With `{ h3: [] }` Option
+#### With `{ h3: { allow: [] } }` Option
 
-If you want to disallow all `h3` headings, you can set the `h3` option to an empty array. This will report any `h3` heading as an error.
+If you want to disallow all `h3` headings, you can set the `h3.allow` option to an empty array. This will report any `h3` heading as an error.
 
-```md [incorrect.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h3: [] }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h3: { allow: [] } }] -->
 
 # Introduction
 
@@ -72,9 +72,9 @@ Examples of **correct** code for this rule:
 
 #### Default
 
-This rule doesn't report any errors by default. You must configure it with the allowed heading values you want to enforce.
+This rule doesn't report any errors by default. You must configure it with the allowed or disallowed heading patterns you want to enforce.
 
-```md [correct.md] eslint-check
+```md eslint-check
 <!-- eslint md/allow-heading: "error" -->
 
 # Introduction
@@ -84,10 +84,10 @@ This rule doesn't report any errors by default. You must configure it with the a
 ## Installation
 ```
 
-#### With `{ h1: ["Introduction"], h2: ["Overview", "Installation"] }` Option
+#### With `{ h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }` Option
 
-```md [correct.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h1: ["Introduction"], h2: ["Overview", "Installation"] }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }] -->
 
 # Introduction
 
@@ -96,12 +96,10 @@ This rule doesn't report any errors by default. You must configure it with the a
 ## Installation
 ```
 
-#### With `{ h1: false, h2: false, h3: false, h4: false, h5: false, h6: false }` Option
+#### With `{ h1: { disallow: [/^# Draft$/] } }` Option
 
-If you want to allow any text for all headings, you can set each heading level to `false`. This will not restrict any headings.
-
-```md [correct.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h1: false, h2: false, h3: false, h4: false, h5: false, h6: false }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h1: { disallow: [/^# Draft$/] } }] -->
 
 # H1 Heading
 
@@ -120,56 +118,57 @@ If you want to allow any text for all headings, you can set each heading level t
 
 ```js
 'md/allow-heading': ['error', {
-  h1: false,
-  h2: false,
-  h3: false,
-  h4: false, 
-  h5: false,    
-  h6: false,
+  h1: { allow: [/.*/u], disallow: [] },
+  h2: { allow: [/.*/u], disallow: [] },
+  h3: { allow: [/.*/u], disallow: [] },
+  h4: { allow: [/.*/u], disallow: [] },
+  h5: { allow: [/.*/u], disallow: [] },
+  h6: { allow: [/.*/u], disallow: [] },
 }]
 ```
 
 Each heading level can be configured with:
 
-- `false`: No restrictions for that heading level (any text is allowed).
-- An array of strings: Only these exact strings are allowed for that heading level.
-- An empty array `[]`: No headings at that level are allowed (all headings at that level will be reported).
+- `allow`: Allowed heading patterns. Only headings matching at least one pattern are allowed.
+- `disallow`: Disallowed heading patterns. Headings matching any pattern are reported.
+
+The patterns are tested against the Markdown source text for the entire heading node. For example, `## Overview` matches an `h2` ATX heading with the text `Overview`.
 
 ### `h1`
 
-> Default: `false`
+> Default: `{ allow: [/.*/u], disallow: [] }`
 
-The allowed values for `h1` headings. This can be set to an array of strings to restrict `h1` headings to specific values. If set to an empty array, no `h1` headings are allowed.
+The allowed and disallowed patterns for `h1` headings.
 
 ### `h2`
 
-> Default: `false`
+> Default: `{ allow: [/.*/u], disallow: [] }`
 
-The allowed values for `h2` headings. This can be set to an array of strings to restrict `h2` headings to specific values. If set to an empty array, no `h2` headings are allowed.
+The allowed and disallowed patterns for `h2` headings.
 
 ### `h3`
 
-> Default: `false`
+> Default: `{ allow: [/.*/u], disallow: [] }`
 
-The allowed values for `h3` headings. This can be set to an array of strings to restrict `h3` headings to specific values. If set to an empty array, no `h3` headings are allowed.
+The allowed and disallowed patterns for `h3` headings.
 
 ### `h4`
 
-> Default: `false`
+> Default: `{ allow: [/.*/u], disallow: [] }`
 
-The allowed values for `h4` headings. This can be set to an array of strings to restrict `h4` headings to specific values. If set to an empty array, no `h4` headings are allowed.
+The allowed and disallowed patterns for `h4` headings.
 
 ### `h5`
 
-> Default: `false`
+> Default: `{ allow: [/.*/u], disallow: [] }`
 
-The allowed values for `h5` headings. This can be set to an array of strings to restrict `h5` headings to specific values. If set to an empty array, no `h5` headings are allowed.
+The allowed and disallowed patterns for `h5` headings.
 
 ### `h6`
 
-> Default: `false`
+> Default: `{ allow: [/.*/u], disallow: [] }`
 
-The allowed values for `h6` headings. This can be set to an array of strings to restrict `h6` headings to specific values. If set to an empty array, no `h6` headings are allowed.
+The allowed and disallowed patterns for `h6` headings.
 
 ## When Not To Use It
 
