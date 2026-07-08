@@ -26,10 +26,10 @@ This rule doesn't report any errors by default. You must configure it with the a
 
 Examples of **incorrect** code for this rule:
 
-#### With `{ h1: { allow: [/^# Introduction$/u] }, h2: { allow: [/^## (?:Overview|Installation)$/u] } }` Option
+#### With `{ h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }` Option
 
-```md [incorrect.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h1: { allow: [/^# Introduction$/u] }, h2: { allow: [/^## (?:Overview|Installation)$/u] } }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }] -->
 
 # Introduction
 
@@ -48,7 +48,7 @@ Examples of **incorrect** code for this rule:
 
 If you want to disallow all `h3` headings, you can set the `h3.allow` option to an empty array. This will report any `h3` heading as an error.
 
-```md [incorrect.md] eslint-check
+```md eslint-check
 <!-- eslint md/allow-heading: ["error", { h3: { allow: [] } }] -->
 
 # Introduction
@@ -74,7 +74,7 @@ Examples of **correct** code for this rule:
 
 This rule doesn't report any errors by default. You must configure it with the allowed or disallowed heading patterns you want to enforce.
 
-```md [correct.md] eslint-check
+```md eslint-check
 <!-- eslint md/allow-heading: "error" -->
 
 # Introduction
@@ -84,10 +84,10 @@ This rule doesn't report any errors by default. You must configure it with the a
 ## Installation
 ```
 
-#### With `{ h1: { allow: [/^# Introduction$/u] }, h2: { allow: [/^## (?:Overview|Installation)$/u] } }` Option
+#### With `{ h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }` Option
 
-```md [correct.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h1: { allow: [/^# Introduction$/u] }, h2: { allow: [/^## (?:Overview|Installation)$/u] } }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h1: { allow: [/^# Introduction$/] }, h2: { allow: [/^## (?:Overview|Installation)$/] } }] -->
 
 # Introduction
 
@@ -96,10 +96,10 @@ This rule doesn't report any errors by default. You must configure it with the a
 ## Installation
 ```
 
-#### With `{ h1: { disallow: [/^# Draft$/u] } }` Option
+#### With `{ h1: { disallow: [/^# Draft$/] } }` Option
 
-```md [correct.md] eslint-check
-<!-- eslint md/allow-heading: ["error", { h1: { disallow: [/^# Draft$/u] } }] -->
+```md eslint-check
+<!-- eslint md/allow-heading: ["error", { h1: { disallow: [/^# Draft$/] } }] -->
 
 # H1 Heading
 
