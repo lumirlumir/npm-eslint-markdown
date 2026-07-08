@@ -6,8 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'vitest';
-import { ok, strictEqual } from 'node:assert';
+import { assert, describe, it } from 'vitest';
 import getElementsByTagName from './html.js';
 
 // --------------------------------------------------------------------------------
@@ -24,13 +23,13 @@ describe('html', () => {
   it('should parse tag name case-insensitively', () => {
     const elements = getElementsByTagName(html, 'P');
 
-    strictEqual(elements.length, 1);
-    strictEqual(elements[0].tagName, 'p');
+    assert.strictEqual(elements.length, 1);
+    assert.strictEqual(elements[0].tagName, 'p');
   });
 
   it('should have `sourceCodeLocation` property', () => {
     const elements = getElementsByTagName(html, 'p');
 
-    ok(elements[0].sourceCodeLocation);
+    assert.ok(elements[0].sourceCodeLocation);
   });
 });
