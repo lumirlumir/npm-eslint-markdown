@@ -6,8 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'vitest';
-import { match, ok } from 'node:assert';
+import { assert, describe, it } from 'vitest';
 import { RuleTester } from 'eslint';
 import markdown, { type MarkdownRuleDefinitionTypeOptions } from '@eslint/markdown';
 import type { RuleModule } from '../core/types.js';
@@ -67,49 +66,49 @@ export default function ruleTester(
   describe(ruleName, () => {
     describe('meta', () => {
       it('`meta` should exist', () => {
-        ok(meta);
+        assert.ok(meta);
       });
 
       it('`meta.type` should exist', () => {
-        ok(meta?.type);
+        assert.ok(meta?.type);
       });
 
       it('`meta.docs` should exist', () => {
-        ok(meta?.docs);
+        assert.ok(meta?.docs);
       });
 
       it('`meta.docs.description` should exist and follow the convention', () => {
-        ok(meta?.docs?.description);
-        match(meta?.docs?.description, /^(?:Enforce|Require|Disallow) .+[^. ]$/);
+        assert.ok(meta?.docs?.description);
+        assert.match(meta?.docs?.description, /^(?:Enforce|Require|Disallow) .+[^. ]$/);
       });
 
       it('`meta.docs.url` should exist and end with the rule name', () => {
-        ok(meta?.docs?.url);
-        match(meta?.docs?.url, new RegExp(`${ruleName}$`));
+        assert.ok(meta?.docs?.url);
+        assert.match(meta?.docs?.url, new RegExp(`${ruleName}$`));
       });
 
       it('`meta.messages` should exist', () => {
-        ok(meta?.messages);
+        assert.ok(meta?.messages);
       });
 
       it('`meta.messages.messageId` should exist and value should follow the convention', () => {
         // @ts-expect-error -- Required for testing.
         Object.values(meta.messages).forEach(message => {
-          ok(message);
-          match(message, /^[^a-z].*\.$/);
+          assert.ok(message);
+          assert.match(message, /^[^a-z].*\.$/);
         });
       });
 
       it("`meta.language` should exist and be `'markdown'`", () => {
-        ok(meta?.language);
-        match(meta?.language, /^markdown$/);
+        assert.ok(meta?.language);
+        assert.match(meta?.language, /^markdown$/);
       });
 
       it("`meta.dialects` should exist and be `'commonmark'` or `'gfm'`", () => {
-        ok(meta?.dialects);
-        ok(meta?.dialects.length > 0);
+        assert.ok(meta?.dialects);
+        assert.ok(meta?.dialects.length > 0);
         meta?.dialects.forEach(dialect => {
-          match(dialect, /^(?:commonmark|gfm)$/);
+          assert.match(dialect, /^(?:commonmark|gfm)$/);
         });
       });
     });

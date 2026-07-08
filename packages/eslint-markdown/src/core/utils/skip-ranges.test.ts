@@ -10,8 +10,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { describe, it } from 'vitest';
-import { strictEqual } from 'node:assert';
+import { assert, describe, it } from 'vitest';
 import SkipRanges from './skip-ranges.js';
 
 // --------------------------------------------------------------------------------
@@ -35,40 +34,40 @@ describe('skip-ranges', () => {
 
         skipRanges.push([0, 32]);
 
-        strictEqual(skipRanges.includes(0), true);
-        strictEqual(skipRanges.includes(1), true);
-        strictEqual(skipRanges.includes(2), true);
-        strictEqual(skipRanges.includes(3), true);
-        strictEqual(skipRanges.includes(4), true);
-        strictEqual(skipRanges.includes(5), true);
-        strictEqual(skipRanges.includes(6), true);
-        strictEqual(skipRanges.includes(7), true);
-        strictEqual(skipRanges.includes(8), true);
-        strictEqual(skipRanges.includes(9), true);
-        strictEqual(skipRanges.includes(10), true);
-        strictEqual(skipRanges.includes(11), true);
-        strictEqual(skipRanges.includes(12), true);
-        strictEqual(skipRanges.includes(13), true);
-        strictEqual(skipRanges.includes(14), true);
-        strictEqual(skipRanges.includes(15), true);
-        strictEqual(skipRanges.includes(16), true);
-        strictEqual(skipRanges.includes(17), true);
-        strictEqual(skipRanges.includes(18), true);
-        strictEqual(skipRanges.includes(19), true);
-        strictEqual(skipRanges.includes(20), true);
-        strictEqual(skipRanges.includes(21), true);
-        strictEqual(skipRanges.includes(22), true);
-        strictEqual(skipRanges.includes(23), true);
-        strictEqual(skipRanges.includes(24), true);
-        strictEqual(skipRanges.includes(25), true);
-        strictEqual(skipRanges.includes(26), true);
-        strictEqual(skipRanges.includes(27), true);
-        strictEqual(skipRanges.includes(28), true);
-        strictEqual(skipRanges.includes(29), true);
-        strictEqual(skipRanges.includes(30), true);
-        strictEqual(skipRanges.includes(31), true);
-        strictEqual(skipRanges.includes(32), false);
-        strictEqual(skipRanges.includes(33), false);
+        assert.strictEqual(skipRanges.includes(0), true);
+        assert.strictEqual(skipRanges.includes(1), true);
+        assert.strictEqual(skipRanges.includes(2), true);
+        assert.strictEqual(skipRanges.includes(3), true);
+        assert.strictEqual(skipRanges.includes(4), true);
+        assert.strictEqual(skipRanges.includes(5), true);
+        assert.strictEqual(skipRanges.includes(6), true);
+        assert.strictEqual(skipRanges.includes(7), true);
+        assert.strictEqual(skipRanges.includes(8), true);
+        assert.strictEqual(skipRanges.includes(9), true);
+        assert.strictEqual(skipRanges.includes(10), true);
+        assert.strictEqual(skipRanges.includes(11), true);
+        assert.strictEqual(skipRanges.includes(12), true);
+        assert.strictEqual(skipRanges.includes(13), true);
+        assert.strictEqual(skipRanges.includes(14), true);
+        assert.strictEqual(skipRanges.includes(15), true);
+        assert.strictEqual(skipRanges.includes(16), true);
+        assert.strictEqual(skipRanges.includes(17), true);
+        assert.strictEqual(skipRanges.includes(18), true);
+        assert.strictEqual(skipRanges.includes(19), true);
+        assert.strictEqual(skipRanges.includes(20), true);
+        assert.strictEqual(skipRanges.includes(21), true);
+        assert.strictEqual(skipRanges.includes(22), true);
+        assert.strictEqual(skipRanges.includes(23), true);
+        assert.strictEqual(skipRanges.includes(24), true);
+        assert.strictEqual(skipRanges.includes(25), true);
+        assert.strictEqual(skipRanges.includes(26), true);
+        assert.strictEqual(skipRanges.includes(27), true);
+        assert.strictEqual(skipRanges.includes(28), true);
+        assert.strictEqual(skipRanges.includes(29), true);
+        assert.strictEqual(skipRanges.includes(30), true);
+        assert.strictEqual(skipRanges.includes(31), true);
+        assert.strictEqual(skipRanges.includes(32), false);
+        assert.strictEqual(skipRanges.includes(33), false);
       });
     });
 
@@ -78,16 +77,16 @@ describe('skip-ranges', () => {
 
         skipRanges.push([0, 7]);
 
-        strictEqual(skipRanges.includes(0), true);
-        strictEqual(skipRanges.includes(1), true);
-        strictEqual(skipRanges.includes(2), true);
-        strictEqual(skipRanges.includes(3), true);
-        strictEqual(skipRanges.includes(4), true);
-        strictEqual(skipRanges.includes(5), true);
-        strictEqual(skipRanges.includes(6), true);
-        strictEqual(skipRanges.includes(7), false);
-        strictEqual(skipRanges.includes(8), false);
-        strictEqual(skipRanges.includes(9), false);
+        assert.strictEqual(skipRanges.includes(0), true);
+        assert.strictEqual(skipRanges.includes(1), true);
+        assert.strictEqual(skipRanges.includes(2), true);
+        assert.strictEqual(skipRanges.includes(3), true);
+        assert.strictEqual(skipRanges.includes(4), true);
+        assert.strictEqual(skipRanges.includes(5), true);
+        assert.strictEqual(skipRanges.includes(6), true);
+        assert.strictEqual(skipRanges.includes(7), false);
+        assert.strictEqual(skipRanges.includes(8), false);
+        assert.strictEqual(skipRanges.includes(9), false);
       });
     });
 
@@ -97,17 +96,17 @@ describe('skip-ranges', () => {
 
         skipRanges.push([0, 9]);
 
-        strictEqual(skipRanges.includes(0), true);
-        strictEqual(skipRanges.includes(1), true);
-        strictEqual(skipRanges.includes(2), true);
-        strictEqual(skipRanges.includes(3), true);
-        strictEqual(skipRanges.includes(4), true);
-        strictEqual(skipRanges.includes(5), true);
-        strictEqual(skipRanges.includes(6), true);
-        strictEqual(skipRanges.includes(7), true);
-        strictEqual(skipRanges.includes(8), true);
-        strictEqual(skipRanges.includes(9), false);
-        strictEqual(skipRanges.includes(10), false);
+        assert.strictEqual(skipRanges.includes(0), true);
+        assert.strictEqual(skipRanges.includes(1), true);
+        assert.strictEqual(skipRanges.includes(2), true);
+        assert.strictEqual(skipRanges.includes(3), true);
+        assert.strictEqual(skipRanges.includes(4), true);
+        assert.strictEqual(skipRanges.includes(5), true);
+        assert.strictEqual(skipRanges.includes(6), true);
+        assert.strictEqual(skipRanges.includes(7), true);
+        assert.strictEqual(skipRanges.includes(8), true);
+        assert.strictEqual(skipRanges.includes(9), false);
+        assert.strictEqual(skipRanges.includes(10), false);
       });
     });
 
@@ -117,19 +116,19 @@ describe('skip-ranges', () => {
 
         skipRanges.push([0, 11]);
 
-        strictEqual(skipRanges.includes(0), true);
-        strictEqual(skipRanges.includes(1), true);
-        strictEqual(skipRanges.includes(2), true);
-        strictEqual(skipRanges.includes(3), true);
-        strictEqual(skipRanges.includes(4), true);
-        strictEqual(skipRanges.includes(5), true);
-        strictEqual(skipRanges.includes(6), true);
-        strictEqual(skipRanges.includes(7), true);
-        strictEqual(skipRanges.includes(8), true);
-        strictEqual(skipRanges.includes(9), true);
-        strictEqual(skipRanges.includes(10), true);
-        strictEqual(skipRanges.includes(11), false);
-        strictEqual(skipRanges.includes(12), false);
+        assert.strictEqual(skipRanges.includes(0), true);
+        assert.strictEqual(skipRanges.includes(1), true);
+        assert.strictEqual(skipRanges.includes(2), true);
+        assert.strictEqual(skipRanges.includes(3), true);
+        assert.strictEqual(skipRanges.includes(4), true);
+        assert.strictEqual(skipRanges.includes(5), true);
+        assert.strictEqual(skipRanges.includes(6), true);
+        assert.strictEqual(skipRanges.includes(7), true);
+        assert.strictEqual(skipRanges.includes(8), true);
+        assert.strictEqual(skipRanges.includes(9), true);
+        assert.strictEqual(skipRanges.includes(10), true);
+        assert.strictEqual(skipRanges.includes(11), false);
+        assert.strictEqual(skipRanges.includes(12), false);
       });
     });
   });
