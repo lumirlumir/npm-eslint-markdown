@@ -180,6 +180,26 @@ Multiple Lines
         },
       ],
     },
+
+    // Edge cases
+    {
+      name: 'ATX: Headings should not be reported with global allow pattern',
+      code: '# Hello\n# Hello',
+      options: [
+        {
+          h1: { allow: [/^# Hello$/g] },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Headings should not be reported with sticky allow pattern',
+      code: '# Hello\n# Hello',
+      options: [
+        {
+          h1: { allow: [/^# Hello$/y] },
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -636,6 +656,60 @@ Multiple Lines
           endLine: 2,
           endColumn: 9,
           data: { depth: '2', heading: '## World', allow: '' },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Headings should be reported with global disallow pattern',
+      code: '# Hello\n# Hello',
+      options: [
+        {
+          h1: { disallow: [/^# Hello$/g] },
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowHeading',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/g`' },
+        },
+        {
+          messageId: 'disallowHeading',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/g`' },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Headings should be reported with sticky disallow pattern',
+      code: '# Hello\n# Hello',
+      options: [
+        {
+          h1: { disallow: [/^# Hello$/y] },
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowHeading',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/y`' },
+        },
+        {
+          messageId: 'disallowHeading',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/y`' },
         },
       ],
     },

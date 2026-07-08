@@ -26,6 +26,8 @@ type MessageIds = 'allowHeading' | 'disallowHeading';
 // Helper
 // --------------------------------------------------------------------------------
 
+const statefulRegexFlagRegex = /[gy]/u;
+
 const headingOptionsSchema = {
   type: 'object',
   properties: {
@@ -46,6 +48,18 @@ const headingOptionsSchema = {
   },
   additionalProperties: false,
 } as const;
+
+/**
+ * Tests a regex without mutating the state stored in its `lastIndex`.
+ * @param regex Regex to test.
+ * @param text Text to test.
+ * @returns Whether the regex matches the text.
+ */
+function testRegexStateless(regex: RegExp, text: string) {
+  return statefulRegexFlagRegex.test(regex.flags)
+    ? new RegExp(regex).test(text)
+    : regex.test(text);
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -118,7 +132,7 @@ export default {
         const { allow, disallow } = headingMap[depth];
         const headingText = sourceCode.getText(node);
 
-        if (!allow.some(regex => regex.test(headingText))) {
+        if (!allow.some(regex => testRegexStateless(regex, headingText))) {
           context.report({
             node,
             messageId: 'allowHeading',
@@ -130,7 +144,7 @@ export default {
           });
         }
 
-        if (disallow.some(regex => regex.test(headingText))) {
+        if (disallow.some(regex => testRegexStateless(regex, headingText))) {
           context.report({
             node,
             messageId: 'disallowHeading',
