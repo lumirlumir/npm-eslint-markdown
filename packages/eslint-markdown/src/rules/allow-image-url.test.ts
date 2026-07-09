@@ -217,6 +217,26 @@ ruleTester('allow-image-url', rule, {
         },
       ],
     },
+
+    // Edge cases
+    {
+      name: '`allowUrls` should allow repeated image URLs with global pattern',
+      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/^https:\/\/example\.com$/g],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` should allow repeated image URLs with sticky pattern',
+      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/^https:\/\/example\.com$/y],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -535,6 +555,72 @@ ruleTester('allow-image-url', rule, {
           line: 8,
           column: 1,
           endLine: 8,
+          endColumn: 29,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` should report repeated image URLs with global pattern',
+      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/^https:\/\/example\.com$/g],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/g`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 29,
+        },
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/g`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 29,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` should report repeated image URLs with sticky pattern',
+      code: '![Text](https://example.com)\n![Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/^https:\/\/example\.com$/y],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/y`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 29,
+        },
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/y`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
           endColumn: 29,
         },
       ],
