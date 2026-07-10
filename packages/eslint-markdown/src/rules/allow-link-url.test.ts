@@ -226,6 +226,26 @@ ruleTester('allow-link-url', rule, {
         },
       ],
     },
+
+    // Edge cases
+    {
+      name: '`allowUrls` should allow repeated link URLs with global pattern',
+      code: '[Text](https://example.com)\n[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/^https:\/\/example\.com$/g],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` should allow repeated link URLs with sticky pattern',
+      code: '[Text](https://example.com)\n[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/^https:\/\/example\.com$/y],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -580,6 +600,72 @@ ruleTester('allow-link-url', rule, {
           column: 1,
           endLine: 10,
           endColumn: 29,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` should report repeated link URLs with global pattern',
+      code: '[Text](https://example.com)\n[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/^https:\/\/example\.com$/g],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/g`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/g`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` should report repeated link URLs with sticky pattern',
+      code: '[Text](https://example.com)\n[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/^https:\/\/example\.com$/y],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/y`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/^https:\\/\\/example\\.com$/y`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 28,
         },
       ],
     },
