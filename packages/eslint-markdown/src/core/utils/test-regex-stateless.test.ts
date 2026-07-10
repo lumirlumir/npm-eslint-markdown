@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `test-regex-stateless.js`
+ * @fileoverview Test for `test-regex-stateless.ts`
  */
 
 // --------------------------------------------------------------------------------
