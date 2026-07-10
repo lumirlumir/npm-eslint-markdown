@@ -8,9 +8,9 @@
 // --------------------------------------------------------------------------------
 
 import type { Heading } from 'mdast';
+import { testRegexStateless } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
-import { testRegexStateless } from '../core/utils/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
