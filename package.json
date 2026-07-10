@@ -63,7 +63,7 @@
     "lint-staged": "^16.4.0",
     "markdownlint-cli": "^0.48.0",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   }
