@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-double-punctuation.js`.
+ * @fileoverview Test for `no-double-punctuation.ts`.
  * @author lumir(lumirlumir)
  */
 

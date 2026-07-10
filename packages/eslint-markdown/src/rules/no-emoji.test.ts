@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-emoji.js`.
+ * @fileoverview Test for `no-emoji.ts`.
  * @author lumir(lumirlumir)
  */
 

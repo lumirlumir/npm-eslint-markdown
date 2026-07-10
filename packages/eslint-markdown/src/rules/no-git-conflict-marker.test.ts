@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-git-conflict-marker.js`.
+ * @fileoverview Test for `no-git-conflict-marker.ts`.
  * @author lumir(lumirlumir)
  */
 

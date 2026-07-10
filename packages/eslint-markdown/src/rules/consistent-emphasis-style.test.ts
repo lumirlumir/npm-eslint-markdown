@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `consistent-emphasis-style.js`.
+ * @fileoverview Test for `consistent-emphasis-style.ts`.
  * @author lumir(lumirlumir)
  */
 

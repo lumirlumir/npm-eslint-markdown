@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-curly-quote.js`.
+ * @fileoverview Test for `no-curly-quote.ts`.
  * @author lumir(lumirlumir)
  */
 

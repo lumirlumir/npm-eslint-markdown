@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-consecutive-blank-line.js`.
+ * @fileoverview Test for `no-consecutive-blank-line.ts`.
  * @author lumir(lumirlumir)
  * NOTE: All test cases have been verified against `markdownlint`.
  */

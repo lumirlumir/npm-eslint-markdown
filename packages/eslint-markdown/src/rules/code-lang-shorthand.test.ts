@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `code-lang-shorthand.js`.
+ * @fileoverview Test for `code-lang-shorthand.ts`.
  * @author lumir(lumirlumir)
  */
 

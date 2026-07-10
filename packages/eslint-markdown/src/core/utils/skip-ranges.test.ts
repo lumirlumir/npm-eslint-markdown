@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `skip-ranges.js`
+ * @fileoverview Test for `skip-ranges.ts`
  *
  * - The newline character (`\n`) is considered the last character of the current line.
  * - The newline character is always located at the end position (column) of the previous line,

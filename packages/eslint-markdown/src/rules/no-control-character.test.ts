@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-control-character.js`.
+ * @fileoverview Test for `no-control-character.ts`.
  * @author lumir(lumirlumir)
  */
 

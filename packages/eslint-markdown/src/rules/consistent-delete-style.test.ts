@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `consistent-delete-style.js`.
+ * @fileoverview Test for `consistent-delete-style.ts`.
  * @author lumir(lumirlumir)
  */
 

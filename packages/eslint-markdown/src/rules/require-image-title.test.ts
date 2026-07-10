@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `require-image-title.js`.
+ * @fileoverview Test for `require-image-title.ts`.
  * @author lumir(lumirlumir)
  */
 

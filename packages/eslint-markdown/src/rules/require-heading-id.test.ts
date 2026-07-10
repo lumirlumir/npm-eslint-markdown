@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `require-heading-id.js`.
+ * @fileoverview Test for `require-heading-id.ts`.
  * @author lumir(lumirlumir)
  */
 

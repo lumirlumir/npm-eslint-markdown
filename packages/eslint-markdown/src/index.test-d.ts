@@ -1,5 +1,5 @@
 /**
- * @fileoverview Type test for `index.js`.
+ * @fileoverview Type test for `index.ts`.
  */
 
 /* eslint-disable -- Type test */

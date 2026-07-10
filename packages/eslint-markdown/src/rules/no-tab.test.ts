@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-tab.js`.
+ * @fileoverview Test for `no-tab.ts`.
  * @author lumir(lumirlumir)
  */
 

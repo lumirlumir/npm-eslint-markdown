@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `is-blank-line.js`
+ * @fileoverview Test for `is-blank-line.ts`
  */
 
 // --------------------------------------------------------------------------------

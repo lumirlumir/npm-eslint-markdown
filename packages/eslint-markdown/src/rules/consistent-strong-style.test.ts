@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `consistent-strong-style.js`.
+ * @fileoverview Test for `consistent-strong-style.ts`.
  * @author lumir(lumirlumir)
  */
 
