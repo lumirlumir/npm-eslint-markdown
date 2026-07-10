@@ -10,7 +10,7 @@
 import type { Definition } from 'mdast';
 import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
 import type { Position } from 'unist';
-import { getElementsByTagName } from '../core/utils/index.js';
+import { getElementsByTagName, testRegexStateless } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -22,24 +22,6 @@ type RuleOptions = [
   { allowUrls: RegExp[]; disallowUrls: RegExp[]; allowDefinitions: string[] },
 ];
 type MessageIds = 'allowLinkUrl' | 'disallowLinkUrl';
-
-// --------------------------------------------------------------------------------
-// Helper
-// --------------------------------------------------------------------------------
-
-const statefulRegexFlagRegex = /[gy]/u;
-
-/**
- * Tests a regex without mutating the state stored in its `lastIndex`.
- * @param regex Regex to test.
- * @param text Text to test.
- * @returns Whether the regex matches the text.
- */
-function testRegexStateless(regex: RegExp, text: string) {
-  return statefulRegexFlagRegex.test(regex.flags)
-    ? new RegExp(regex).test(text)
-    : regex.test(text);
-}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
