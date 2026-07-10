@@ -24,6 +24,24 @@ type RuleOptions = [
 type MessageIds = 'allowLinkUrl' | 'disallowLinkUrl';
 
 // --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+const statefulRegexFlagRegex = /[gy]/u;
+
+/**
+ * Tests a regex without mutating the state stored in its `lastIndex`.
+ * @param regex Regex to test.
+ * @param text Text to test.
+ * @returns Whether the regex matches the text.
+ */
+function testRegexStateless(regex: RegExp, text: string) {
+  return statefulRegexFlagRegex.test(regex.flags)
+    ? new RegExp(regex).test(text)
+    : regex.test(text);
+}
+
+// --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
 
@@ -159,7 +177,7 @@ export default {
          */
 
         for (const { loc, url } of links) {
-          if (!allowUrls.some(regex => regex.test(url))) {
+          if (!allowUrls.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'allowLinkUrl',
@@ -170,7 +188,7 @@ export default {
             });
           }
 
-          if (disallowUrls.some(regex => regex.test(url))) {
+          if (disallowUrls.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'disallowLinkUrl',
