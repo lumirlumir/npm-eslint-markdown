@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-irregular-dash.js`.
+ * @fileoverview Test for `no-irregular-dash.ts`.
  * @author lumir(lumirlumir)
  */
 

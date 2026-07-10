@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `require-link-title.js`.
+ * @fileoverview Test for `require-link-title.ts`.
  * @author lumir(lumirlumir)
  */
 

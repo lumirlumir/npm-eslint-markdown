@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `html.js`
+ * @fileoverview Test for `html.ts`
  */
 
 // --------------------------------------------------------------------------------

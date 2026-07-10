@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-double-space.js`.
+ * @fileoverview Test for `no-double-space.ts`.
  * @author lumir(lumirlumir)
  */
 

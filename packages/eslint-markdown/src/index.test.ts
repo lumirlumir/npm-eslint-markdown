@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `index.js`.
+ * @fileoverview Test for `index.ts`.
  * @author lumir(lumirlumir)
  */
 

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-irregular-whitespace.js`.
+ * @fileoverview Test for `no-irregular-whitespace.ts`.
  * @author lumir(lumirlumir)
  */
 

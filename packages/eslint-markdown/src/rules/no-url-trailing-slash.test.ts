@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-url-trailing-slash.js`.
+ * @fileoverview Test for `no-url-trailing-slash.ts`.
  * @author lumir(lumirlumir)
  */
 

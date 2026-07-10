@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-bold-paragraph.js`.
+ * @fileoverview Test for `no-bold-paragraph.ts`.
  * @author lumir(lumirlumir)
  */
 

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `escape-string-regexp.js`
+ * @fileoverview Test for `escape-string-regexp.ts`
  * @see https://github.com/sindresorhus/escape-string-regexp/tree/v5.0.0
  */
 

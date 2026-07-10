@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `allow-heading.js`.
+ * @fileoverview Test for `allow-heading.ts`.
  * @author lumir(lumirlumir)
  */
 

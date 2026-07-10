@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `consistent-unordered-list-style.js`.
+ * @fileoverview Test for `consistent-unordered-list-style.ts`.
  * @author hyoban
  */
 

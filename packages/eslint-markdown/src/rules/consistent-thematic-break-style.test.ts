@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `consistent-thematic-break-style.js`.
+ * @fileoverview Test for `consistent-thematic-break-style.ts`.
  * @author lumir(lumirlumir)
  */
 
