@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-irregular-dash.ts`.
+ * @fileoverview Test for `en-capitalization.ts`.
  * @author lumir(lumirlumir)
  */
 
