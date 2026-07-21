@@ -37,6 +37,19 @@ jobs:
           - 10.0.0-rc.0
           - 9.x
           - 9.31.0
+        include:
+          - runner-image: ubuntu-latest
+            node-version: lts/*
+            eslint-version: 9.x
+            eslint-markdown-version: 7.0.0
+          - runner-image: ubuntu-latest
+            node-version: lts/*
+            eslint-version: 9.x
+            eslint-markdown-version: 7.x
+          - runner-image: ubuntu-latest
+            node-version: lts/*
+            eslint-version: 9.x
+            eslint-markdown-version: 8.x
 
     runs-on: ${{ matrix.runner-image }}
 
@@ -55,6 +68,9 @@ jobs:
 
       - name: Install ESLint
         run: npm install --no-audit --no-fund -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown
+
+      - name: Install ESLint Markdown
+        run: npm install --no-audit --no-fund @eslint/markdown@${{ matrix.eslint-markdown-version }} -w packages/eslint-markdown
 
       - name: Build
         run: npm run build --if-present
