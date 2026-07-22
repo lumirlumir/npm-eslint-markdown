@@ -103,4 +103,4 @@ If you intentionally use punctuation at the end of headings, you should disable 
 ## Prior Art
 
 - [`MD026` - Trailing punctuation in heading](https://github.com/DavidAnson/markdownlint/blob/main/doc/md026.md#md026---trailing-punctuation-in-heading)
-- [`remark-lint-no-heading-punctuation`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-heading-punctuation)
+- [`remark-lint-no-heading-punctuation`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-heading-punctuation#remark-lint-no-heading-punctuation)
