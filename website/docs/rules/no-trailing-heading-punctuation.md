@@ -12,7 +12,7 @@ By default, the following punctuation characters are not allowed:
 ```
 
 Question marks (`?` and `？`) are allowed by default.
-Valid HTML entities such as `&copy;` and GitHub emoji codes such as `:smile:` are not reported because their final punctuation characters are required by their syntax.
+The trailing semicolon of HTML entity references such as `&copy;` and the trailing colon of GitHub emoji codes such as `:smile:` are ignored by this rule.
 
 ## Examples
 
