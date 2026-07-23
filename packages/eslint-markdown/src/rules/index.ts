@@ -25,6 +25,7 @@ import noGitConflictMarker from './no-git-conflict-marker.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
 import noTab from './no-tab.js';
+import noTrailingHeadingPunctuation from './no-trailing-heading-punctuation.js';
 import noUrlTrailingSlash from './no-url-trailing-slash.js';
 import requireHeadingId from './require-heading-id.js';
 import requireImageTitle from './require-image-title.js';
@@ -54,6 +55,7 @@ export default {
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
   'no-tab': noTab,
+  'no-trailing-heading-punctuation': noTrailingHeadingPunctuation,
   'no-url-trailing-slash': noUrlTrailingSlash,
   'require-heading-id': requireHeadingId,
   'require-image-title': requireImageTitle,
