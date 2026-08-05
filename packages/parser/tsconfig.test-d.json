@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src/**/*.test-d.ts", "src/**/*.test-d.mts", "src/**/*.test-d.cts"],
+  "exclude": [],
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ],
+  "compilerOptions": {
+    /* Type Checking */
+    "noUnusedLocals": false, // Turning it off since it's a test.
+    "noUnusedParameters": false, // Turning it off since it's a test.
+
+    /* Emit */
+    "noEmit": true,
+
+    /* Projects */
+    "tsBuildInfoFile": "${configDir}/.tsbuildinfo/tsconfig.test-d.tsbuildinfo"
+  }
+}
