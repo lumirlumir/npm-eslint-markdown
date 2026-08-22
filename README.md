@@ -14,7 +14,10 @@
 > If you like this package, please give it a star on [GitHub](https://github.com/lumirlumir/npm-eslint-markdown)!⭐<br/>
 > Your support helps us improve and maintain the project.
 
-Lint your Markdown with ESLint. Additional rules for use with `@eslint/markdown`.🛠️
+Lint your Markdown with ESLint.
+
+- Additional rules for use with `@eslint/markdown`.🛠️
+- A blazing fast Markdown parser for ESLint.⚡
 
 ## Documentation
 
@@ -30,6 +33,18 @@ For full documentation, see the [official documentation of the `eslint-markdown`
 This [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown#readme) plugin does not include any rules that overlap with ESLint's built-in Markdown rules provided by [`@eslint/markdown`](https://github.com/eslint/markdown#readme).
 
 So, we **highly recommend** using the `eslint-markdown` plugin alongside ESLint's built-in Markdown support, `@eslint/markdown`.
+
+## Included Packages
+
+This repository is maintained as a monorepo and includes the following two packages.
+
+### `eslint-markdown` - [Docs](https://eslint-markdown.lumir.page/docs/packages/eslint-markdown) | [Repository](https://github.com/lumirlumir/npm-eslint-markdown/tree/main/packages/eslint-markdown) | [npm](https://www.npmjs.com/package/eslint-markdown)
+
+Lint your Markdown with ESLint. Additional rules for use with `@eslint/markdown`.🛠️
+
+### `@eslint-markdown/parser` - [Docs](https://eslint-markdown.lumir.page/docs/packages/parser) | [Repository](https://github.com/lumirlumir/npm-eslint-markdown/tree/main/packages/parser) | [npm](https://www.npmjs.com/package/@eslint-markdown/parser)
+
+A blazing fast Markdown parser for ESLint.⚡
 
 ## Code of Conduct
 

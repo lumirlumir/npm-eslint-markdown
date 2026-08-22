@@ -222,6 +222,10 @@ export default defineConfig({
               text: 'eslint-markdown',
               link: 'eslint-markdown',
             },
+            {
+              text: '@eslint-markdown/parser',
+              link: 'parser',
+            },
           ],
         },
 
