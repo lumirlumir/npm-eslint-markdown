@@ -15,8 +15,27 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `no-tab` rule.
+ */
 type RuleOptions = [
-  { skipCode: boolean | string[]; skipInlineCode: boolean; tabWidth: number },
+  {
+    /**
+     * `true` allows tabs in all code blocks, while `string[]` allows tabs only in code blocks for the specified languages.
+     * @default true
+     */
+    skipCode: boolean | string[];
+    /**
+     * `true` allows tabs in all inline code.
+     * @default true
+     */
+    skipInlineCode: boolean;
+    /**
+     * Number of spaces to replace each tab with when applying an autofix.
+     * @default 4
+     */
+    tabWidth: number;
+  },
 ];
 type MessageIds = 'noTab';
 

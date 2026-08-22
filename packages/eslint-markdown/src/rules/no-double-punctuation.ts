@@ -14,7 +14,20 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allow: string[] }];
+/**
+ * Options for the `no-double-punctuation` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When `allow` is specified, the listed two-character punctuation patterns are ignored by this rule.
+     *
+     * This is useful when punctuation such as `!!` or `?!` is intentionally used for tone or emphasis instead of being treated as a typo.
+     * @default []
+     */
+    allow: string[];
+  },
+];
 type MessageIds =
   'noDoublePunctuation' | 'suggestReplaceWithLeft' | 'suggestReplaceWithRight';
 

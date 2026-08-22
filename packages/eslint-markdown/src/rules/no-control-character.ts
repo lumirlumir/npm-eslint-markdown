@@ -15,8 +15,29 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `no-control-character` rule.
+ */
 type RuleOptions = [
-  { allow: string[]; skipCode: boolean | string[]; skipInlineCode: boolean },
+  {
+    /**
+     * When specified, specific control characters are allowed if they match one of the characters in this array.
+     *
+     * This is useful for ignoring certain control characters that are intentionally used in the document.
+     * @default []
+     */
+    allow: string[];
+    /**
+     * `true` allows control characters in all code blocks, while `string[]` allows control characters only in code blocks for the specified languages.
+     * @default true
+     */
+    skipCode: boolean | string[];
+    /**
+     * `true` allows control characters in all inline code.
+     * @default true
+     */
+    skipInlineCode: boolean;
+  },
 ];
 type MessageIds = 'noControlCharacter' | 'suggestRemove';
 

@@ -15,8 +15,29 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `no-irregular-dash` rule.
+ */
 type RuleOptions = [
-  { allow: string[]; skipCode: boolean | string[]; skipInlineCode: boolean },
+  {
+    /**
+     * When specified, specific irregular dash characters are allowed if they match one of the characters in this array.
+     *
+     * This is useful for ignoring certain irregular dashes that are intentionally used in the document.
+     * @default []
+     */
+    allow: string[];
+    /**
+     * `true` allows irregular dashes in all code blocks, while `string[]` allows irregular dashes only in code blocks for the specified languages.
+     * @default true
+     */
+    skipCode: boolean | string[];
+    /**
+     * `true` allows irregular dashes in all inline code.
+     * @default true
+     */
+    skipInlineCode: boolean;
+  },
 ];
 type MessageIds = 'noIrregularDash';
 

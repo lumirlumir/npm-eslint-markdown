@@ -17,9 +17,21 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 export interface HeadingOptions {
+  /**
+   * Allowed heading patterns. Only headings matching at least one pattern are allowed.
+   * @default [new RegExp('.*', 'u')]
+   */
   allow: (RegExp | string)[];
+  /**
+   * Disallowed heading patterns. Headings matching any pattern are reported.
+   * @default []
+   */
   disallow: (RegExp | string)[];
 }
+
+/**
+ * Options for the `allow-heading` rule, mapped by heading levels from `h1` to `h6`.
+ */
 type RuleOptions = [Record<`h${Heading['depth']}`, HeadingOptions>];
 type MessageIds = 'allowHeading' | 'disallowHeading';
 

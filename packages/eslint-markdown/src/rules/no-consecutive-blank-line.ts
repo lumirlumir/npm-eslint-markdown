@@ -16,7 +16,23 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ max: number; skipCode: boolean | string[] }];
+/**
+ * Options for the `no-consecutive-blank-line` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * Set the maximum number of consecutive blank lines to allow.
+     * @default 1
+     */
+    max: number;
+    /**
+     * `true` allows consecutive blank lines in all code blocks, while `string[]` allows consecutive blank lines only in code blocks for the specified languages.
+     * @default true
+     */
+    skipCode: boolean | string[];
+  },
+];
 type MessageIds = 'noConsecutiveBlankLine';
 
 // --------------------------------------------------------------------------------

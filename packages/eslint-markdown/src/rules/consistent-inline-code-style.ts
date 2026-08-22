@@ -15,6 +15,9 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `consistent-inline-code-style` rule.
+ */
 type RuleOptions = [];
 type MessageIds = 'style';
 

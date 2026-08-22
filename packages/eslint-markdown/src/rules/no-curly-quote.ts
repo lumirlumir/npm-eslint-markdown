@@ -14,11 +14,30 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `no-curly-quote` rule.
+ */
 type RuleOptions = [
   {
+    /**
+     * When `checkLeftDoubleQuotationMark` is set to `false`, this rule will not check for the left double quotation mark (`“`).
+     * @default true
+     */
     checkLeftDoubleQuotationMark: boolean;
+    /**
+     * When `checkRightDoubleQuotationMark` is set to `false`, this rule will not check for the right double quotation mark (`”`).
+     * @default true
+     */
     checkRightDoubleQuotationMark: boolean;
+    /**
+     * When `checkLeftSingleQuotationMark` is set to `false`, this rule will not check for the left single quotation mark (`‘`).
+     * @default true
+     */
     checkLeftSingleQuotationMark: boolean;
+    /**
+     * When `checkRightSingleQuotationMark` is set to `false`, this rule will not check for the right single quotation mark (`’`).
+     * @default true
+     */
     checkRightSingleQuotationMark: boolean;
   },
 ];

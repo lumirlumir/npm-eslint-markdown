@@ -18,7 +18,27 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ skipHeading: boolean; skipListItem: boolean }];
+/**
+ * Options for the `en-capitalization` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When set to `true`, headings are not checked for capitalization.
+     *
+     * This is useful for documentation styles that intentionally use lowercase headings or for code-like headings.
+     * @default true
+     */
+    skipHeading: boolean;
+    /**
+     * When set to `true`, paragraphs in list items are not checked for capitalization.
+     *
+     * This is helpful for lists that might contain sentence fragments or code examples.
+     * @default true
+     */
+    skipListItem: boolean;
+  },
+];
 type MessageIds = 'enCapitalization';
 
 // --------------------------------------------------------------------------------

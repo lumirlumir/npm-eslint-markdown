@@ -16,6 +16,9 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `no-url-trailing-slash` rule.
+ */
 type RuleOptions = [];
 type MessageIds = 'noUrlTrailingSlash';
 

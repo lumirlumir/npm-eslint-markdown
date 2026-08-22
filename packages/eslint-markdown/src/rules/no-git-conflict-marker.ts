@@ -15,7 +15,18 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ skipCode: boolean | string[] }];
+/**
+ * Options for the `no-git-conflict-marker` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * `true` allows Git conflict markers in all code blocks, while `string[]` allows Git conflict markers only in code blocks for the specified languages.
+     * @default true
+     */
+    skipCode: boolean | string[];
+  },
+];
 type MessageIds = 'noGitConflictMarker';
 
 // --------------------------------------------------------------------------------

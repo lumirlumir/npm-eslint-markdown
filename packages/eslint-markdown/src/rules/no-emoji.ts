@@ -14,7 +14,20 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allow: string[] }];
+/**
+ * Options for the `no-emoji` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When specified, specific emoji sequences are allowed if they match one of the strings in this array.
+     *
+     * This is useful when a document intentionally uses a small set of raw Unicode emojis while still disallowing all others.
+     * @default []
+     */
+    allow: string[];
+  },
+];
 type MessageIds = 'noEmoji';
 
 // --------------------------------------------------------------------------------

@@ -14,7 +14,25 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allow: string[]; override: Record<string, string> }];
+/**
+ * Options for the `code-lang-shorthand` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * An array of code block language identifiers to allow.
+     *
+     * Each value must be the full, unabridged language identifier.
+     * @default []
+     */
+    allow: string[];
+    /**
+     * An object where the **key** is the full, unabridged language identifier and the **value** is the abbreviated form.
+     * @default {}
+     */
+    override: Record<string, string>;
+  },
+];
 type MessageIds = 'codeLangShorthand';
 
 // --------------------------------------------------------------------------------

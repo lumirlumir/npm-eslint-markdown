@@ -18,7 +18,20 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allowDefinitions: string[] }];
+/**
+ * Options for the `require-image-title` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When specified, specific definitions are allowed if they match one of the identifiers in this array.
+     *
+     * This is useful for ignoring definitions that are intentionally left without titles, such as comments or placeholders.
+     * @default ['//']
+     */
+    allowDefinitions: string[];
+  },
+];
 type MessageIds = 'requireImageTitle';
 
 // --------------------------------------------------------------------------------

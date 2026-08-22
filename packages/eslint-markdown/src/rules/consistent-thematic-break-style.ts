@@ -14,7 +14,18 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ style: string }];
+/**
+ * Options for the `consistent-thematic-break-style` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When `style` is set to `'consistent'`, the rule enforces that all thematic breaks in the document use the same style as the first one encountered.
+     * @default 'consistent'
+     */
+    style: string;
+  },
+];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------
