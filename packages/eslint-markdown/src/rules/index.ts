@@ -9,6 +9,7 @@ import codeLangShorthand from './code-lang-shorthand.js';
 import consistentCodeStyle from './consistent-code-style.js';
 import consistentDeleteStyle from './consistent-delete-style.js';
 import consistentEmphasisStyle from './consistent-emphasis-style.js';
+import consistentHeadingStyle from './consistent-heading-style.js';
 import consistentInlineCodeStyle from './consistent-inline-code-style.js';
 import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
@@ -38,6 +39,7 @@ export default {
   'consistent-code-style': consistentCodeStyle,
   'consistent-delete-style': consistentDeleteStyle,
   'consistent-emphasis-style': consistentEmphasisStyle,
+  'consistent-heading-style': consistentHeadingStyle,
   'consistent-inline-code-style': consistentInlineCodeStyle,
   'consistent-strong-style': consistentStrongStyle,
   'consistent-thematic-break-style': consistentThematicBreakStyle,
