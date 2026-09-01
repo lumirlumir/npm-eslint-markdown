@@ -173,8 +173,31 @@ export default {
         }
 
         if (codeStyle !== currentCodeStyle) {
+          const start = sourceCode.getLocFromIndex(nodeStartOffset);
+          let end;
+          if (currentCodeStyle === 'indent') {
+            end = {
+              line: start.line,
+              column: lines[start.line - 1].length + 1,
+            };
+          } else {
+            let openingCodeFenceLength;
+            for (
+              openingCodeFenceLength = 0;
+              sourceCode.text[nodeStartOffset + openingCodeFenceLength] ===
+              sourceCode.text[nodeStartOffset];
+              openingCodeFenceLength++
+            ) {
+              // Count the opening code fence characters.
+            }
+            end = sourceCode.getLocFromIndex(openingCodeFenceLength + nodeStartOffset);
+          }
+
           context.report({
-            node,
+            loc: {
+              start,
+              end,
+            },
 
             messageId: 'style',
 
