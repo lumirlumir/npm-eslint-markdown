@@ -28,6 +28,11 @@ type RuleOptions = [
      */
     allow: string[];
     /**
+     * An object where the **key** is an irregular dash character and the **value** is the string that replaces it.
+     * @default {}
+     */
+    override: Record<string, string>;
+    /**
      * `true` allows irregular dashes in all code blocks, while `string[]` allows irregular dashes only in code blocks for the specified languages.
      * @default true
      */
@@ -45,8 +50,29 @@ type MessageIds = 'noIrregularDash';
 // Helper
 // --------------------------------------------------------------------------------
 
-const irregularDashRegex =
-  /[\u2010\u2011\u2012\u2013\u2014\u2015\u2043\u2212\u23af\u2e3a\u2e3b\u30fc\ufe58\ufe63\uff0d]/gu;
+const irregularDashes = [
+  '\u2010',
+  '\u2011',
+  '\u2012',
+  '\u2013',
+  '\u2014',
+  '\u2015',
+  '\u2043',
+  '\u2212',
+  '\u23af',
+  '\u2e3a',
+  '\u2e3b',
+  '\u30fc',
+  '\ufe58',
+  '\ufe63',
+  '\uff0d',
+] as const;
+
+const irregularDashMap: Readonly<Record<string, string>> = Object.freeze(
+  Object.fromEntries(irregularDashes.map(irregularDash => [irregularDash, '-'])),
+);
+
+const irregularDashRegex = new RegExp(`[${irregularDashes.join('')}]`, 'gu');
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -63,6 +89,8 @@ export default {
       stylistic: false,
     },
 
+    fixable: 'code',
+
     schema: [
       {
         type: 'object',
@@ -73,6 +101,13 @@ export default {
               type: 'string',
             },
             uniqueItems: true,
+          },
+          override: {
+            type: 'object',
+            properties: Object.fromEntries(
+              irregularDashes.map(key => [key, { type: 'string' }]),
+            ),
+            additionalProperties: false,
           },
           skipCode: {
             oneOf: [
@@ -99,6 +134,7 @@ export default {
     defaultOptions: [
       {
         allow: [],
+        override: {},
         skipCode: true,
         skipInlineCode: true,
       },
@@ -115,9 +151,14 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ allow, skipCode, skipInlineCode }] = context.options;
+    const [{ allow, override, skipCode, skipInlineCode }] = context.options;
 
     const skipRanges = new SkipRanges();
+
+    const mergedIrregularDashMap = {
+      ...irregularDashMap,
+      ...override,
+    };
 
     return {
       code(node) {
@@ -155,6 +196,13 @@ export default {
             },
 
             messageId: 'noIrregularDash',
+
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [startOffset, endOffset],
+                mergedIrregularDashMap[irregularDash],
+              );
+            },
           });
         }
       },
