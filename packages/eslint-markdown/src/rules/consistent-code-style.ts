@@ -17,15 +17,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { isBlankLine } from '../core/utils/index.js';
+import { CODE_STYLE, getCodeStyle, isBlankLine } from '../core/utils/index.js';
+import type { CodeStyle } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
-
-type CodeStyle = (typeof CODE_STYLE)[number];
 
 /**
  * Options for the `consistent-code-style` rule.
@@ -50,27 +49,6 @@ type RuleOptions = [
   },
 ];
 type MessageIds = 'style' | 'blankLineAbove' | 'blankLineBelow';
-
-// --------------------------------------------------------------------------------
-// Helper
-// --------------------------------------------------------------------------------
-
-const CODE_STYLE = ['indent', 'fence-backtick', 'fence-tilde'] as const;
-
-/**
- * Get the current code style based on the given text.
- * @param text The text to determine the code style from.
- * @returns The current code style.
- */
-function getCurrentCodeStyle(text: string): CodeStyle {
-  if (text === '`') {
-    return 'fence-backtick';
-  } else if (text === '~') {
-    return 'fence-tilde';
-  } else {
-    return 'indent';
-  }
-}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -166,7 +144,7 @@ export default {
         // ------------------------------------------------------------------------
 
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const currentCodeStyle = getCurrentCodeStyle(sourceCode.text[nodeStartOffset]);
+        const currentCodeStyle = getCodeStyle(sourceCode.text[nodeStartOffset]);
 
         if (codeStyle === null) {
           codeStyle = currentCodeStyle;
