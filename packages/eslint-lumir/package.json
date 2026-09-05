@@ -1,0 +1,63 @@
+{
+  "name": "eslint-lumir",
+  "version": "0.0.0-canary.0",
+  "type": "module",
+  "sideEffects": false,
+  "description": "TODO",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./build/*"
+      ],
+      ".": [
+        "./build/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "build",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "keywords": [
+    "eslint",
+    "lint",
+    "linter",
+    "lumir"
+  ],
+  "author": "lumir <rpfos@naver.com> (https://github.com/lumirlumir)",
+  "funding": "https://github.com/sponsors/lumirlumir",
+  "license": "MIT",
+  "homepage": "https://eslint-markdown.lumir.page",
+  "repository": {
+    "type": "github",
+    "url": "git+https://github.com/lumirlumir/npm-eslint-markdown.git",
+    "directory": "packages/eslint-lumir"
+  },
+  "bugs": {
+    "url": "https://github.com/lumirlumir/npm-eslint-markdown/issues"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsc -b tsconfig.build.json && node ../../scripts/cp.js ../../LICENSE.md LICENSE.md ../../README.md README.md",
+    "test": "npm run test:types && npm run test:unit",
+    "test:types": "tsc -b ./tsconfig.json",
+    "test:unit": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.9"
+  }
+}
