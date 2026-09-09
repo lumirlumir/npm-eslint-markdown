@@ -200,7 +200,7 @@ Examples of **correct** code for this rule:
 
 > Type: `boolean` / Default: `true`
 
-`true` allows Git conflict markers in math blocks.
+`true` allows Git conflict markers in all math blocks.
 
 ::: tip NOTE
 This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
