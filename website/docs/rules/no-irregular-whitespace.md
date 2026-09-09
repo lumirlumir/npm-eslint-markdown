@@ -148,8 +148,8 @@ $$
 ```md eslint-check
 <!-- eslint md/no-irregular-whitespace: ['error', { skipInlineMath: false }] -->
 
-$\u000B - Line Tabulation (\v) - <VT>  <= Here$
-$\u0085 - Next Line - <NEL>  <= Here$
+\u000B - Line Tabulation (\v) - <VT> $$ <= Here
+\u0085 - Next Line - <NEL> $$ <= Here
 ```
 
 ### :white_check_mark: Correct
@@ -243,8 +243,8 @@ $$
 ```md eslint-check
 <!-- eslint md/no-irregular-whitespace: ['error', { skipInlineMath: true }] -->
 
-$\u000B - Line Tabulation (\v) - <VT>  <= Here$
-$\u0085 - Next Line - <NEL>  <= Here$
+\u000B - Line Tabulation (\v) - <VT> $$ <= Here
+\u0085 - Next Line - <NEL> $$ <= Here
 ```
 
 ## Options
