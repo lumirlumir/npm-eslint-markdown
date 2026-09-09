@@ -79,28 +79,28 @@ console.log(\u200b'Hello World');
       ],
     },
     {
-      name: '`skipMath: true` default: math block should be skipped',
+      name: '`skipMath: true` - math block should be skipped',
       code: `$$
-\\int f(x)\\,dx = \\sum a_i\\u2009b_i
+x\u2009y
 $$`,
       languageOptions: {
         math: true,
       },
     },
     {
-      name: '`skipInlineMath: true` default: inline math should be skipped',
-      code: '$f(x)\\u2009dx$',
+      name: '`skipInlineMath: true` - inline math should be skipped',
+      code: '$a\u2009b$',
       languageOptions: {
         math: true,
       },
     },
     {
-      name: '`skipMath: true, skipInlineMath: true` explicit options: math regions should be skipped',
+      name: '`skipMath: true, skipInlineMath: true` - math regions should be skipped',
       code: `$$
-\\int f(x)\\u202Fdx
+x\u202Fy
 $$
 
-$a\\u2009b$`,
+$a\u2009b$`,
       options: [
         {
           skipMath: true,
@@ -112,9 +112,9 @@ $a\\u2009b$`,
       },
     },
     {
-      name: '`skipMath: true, skipInlineMath: false` mixed options: math block is skipped',
+      name: '`skipMath: true, skipInlineMath: false` - math block is skipped',
       code: `$$
-\\int f(x)\\u2009dx
+x\u2009y
 $$`,
       options: [
         {
@@ -127,8 +127,8 @@ $$`,
       },
     },
     {
-      name: '`skipMath: false, skipInlineMath: true` mixed options: inline math is skipped',
-      code: '$f(x)\\u2009dx$',
+      name: '`skipMath: false, skipInlineMath: true` - inline math is skipped',
+      code: '$a\u2009b$',
       options: [
         {
           skipMath: false,
@@ -512,7 +512,7 @@ Foo\u00a0Bar
       ],
     },
     {
-      name: '`skipMath: false` option: math block should not be skipped',
+      name: '`skipMath: false` - math block should not be skipped',
       code: `$$
 x\u2009y
 $$`,
@@ -538,7 +538,7 @@ $$`,
       },
     },
     {
-      name: '`skipInlineMath: false` option: inline math should not be skipped',
+      name: '`skipInlineMath: false` - inline math should not be skipped',
       code: '$x\u202Fy$',
       errors: [
         {
@@ -562,7 +562,7 @@ $$`,
       },
     },
     {
-      name: '`skipMath: false, skipInlineMath: true` options: math block is reported but inline math is skipped',
+      name: '`skipMath: false, skipInlineMath: true` - math block is reported but inline math is skipped',
       code: `$$
 x\u2009y
 $$
@@ -591,7 +591,7 @@ $a\u2009b$`,
       },
     },
     {
-      name: '`skipMath: true, skipInlineMath: false` options: inline math is reported but math block is skipped',
+      name: '`skipMath: true, skipInlineMath: false` - inline math is reported but math block is skipped',
       code: `$$
 x\u2009y
 $$
@@ -620,7 +620,7 @@ $a\u2009b$`,
       },
     },
     {
-      name: '`skipMath: true, skipInlineMath: true` options: whitespace in surrounding prose is reported',
+      name: '`skipMath: true, skipInlineMath: true` - whitespace in surrounding prose is reported',
       code: `Prose\u2009with whitespace
 
 $$
@@ -651,7 +651,7 @@ $a\u2009b$`,
       },
     },
     {
-      name: 'Math parsing disabled: `skipMath: true, skipInlineMath: true` does not exclude delimiters in plain text',
+      name: '`skipMath: true, skipInlineMath: true` - delimiters in plain text are not excluded when math parsing is disabled',
       code: `$$
 x\u2009y
 $$
