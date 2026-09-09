@@ -32,6 +32,15 @@ ruleTester('no-url-trailing-slash', rule, {
     '[](https://example.com?query=string/)',
     '[](https://example.com#?)',
     '[](https://example.com?#)',
+    '[](127.0.0.1:5173/#/)',
+    '[](/#/)',
+    '[](/#/?)',
+    '[](/#/users?page=2)',
+    '[](/users?page=2)',
+    '[](http://127.0.0.1:5173/users?page=2)',
+    '[](http://127.0.0.1:5173#/)',
+    '[](http://127.0.0.1:5173#/?)',
+    '[](http://127.0.0.1:5173#/users?page=2)',
     '[](https://example.com?query=string#)',
     '[](https://example.com/path/to/resource?query=string#)',
     '[](https://example.com/path/to/resource?query=string#fragment)',
@@ -232,6 +241,42 @@ ruleTester('no-url-trailing-slash', rule, {
           column: 1,
           endLine: 1,
           endColumn: 64,
+        },
+      ],
+    },
+    {
+      code: '[](http://127.0.0.1:5173/#/)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 29,
+        },
+      ],
+    },
+    {
+      code: '[](http://127.0.0.1:5173/#/?)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 30,
+        },
+      ],
+    },
+    {
+      code: '[](http://127.0.0.1:5173/#/users?page=2)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 41,
         },
       ],
     },
