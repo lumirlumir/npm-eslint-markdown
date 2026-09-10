@@ -30,6 +30,7 @@ describe('index', () => {
   describe('Basic', () => {
     it('should have correct meta information', () => {
       assert.strictEqual(md.meta.name, 'eslint-markdown');
+      assert.strictEqual(md.meta.namespace, 'md');
       assert.strictEqual(typeof md.meta.version, 'string');
     });
 
@@ -67,6 +68,46 @@ describe('index', () => {
       for (const stylisticConfigRuleName of Object.keys(md.configs.stylistic.rules)) {
         assert.strictEqual(stylisticConfigRuleName.startsWith('md/'), true);
       }
+    });
+  });
+
+  describe('Custom namespaces in extends style configurations', () => {
+    it('should report the custom rule ID when extending the exported plugin', () => {
+      const linter = new Linter();
+      const config = defineConfig([
+        {
+          files: ['**/*.md'],
+          plugins: {
+            custommd: md,
+          },
+          extends: ['custommd/recommended'],
+        },
+      ]);
+      const messages = linter.verify('12  34', config, { filename: 'test.md' });
+
+      assert.strictEqual(messages.length, 1);
+      assert.strictEqual(messages[0].ruleId, 'custommd/no-double-space');
+      assert.strictEqual(messages[0].messageId, 'noDoubleSpace');
+      assert.strictEqual(messages[0].severity, 2);
+    });
+
+    it('should disable the inherited rule through the custom namespace of the exported plugin', () => {
+      const linter = new Linter();
+      const config = defineConfig([
+        {
+          files: ['**/*.md'],
+          plugins: {
+            custommd: md,
+          },
+          extends: ['custommd/recommended'],
+          rules: {
+            'custommd/no-double-space': 'off',
+          },
+        },
+      ]);
+      const messages = linter.verify('12  34', config, { filename: 'test.md' });
+
+      assert.deepStrictEqual(messages, []);
     });
   });
 

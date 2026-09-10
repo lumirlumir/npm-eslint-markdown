@@ -27,6 +27,7 @@ plugin satisfies ESLint.Plugin;
 // #region meta
 
 plugin.meta.name satisfies 'eslint-markdown';
+plugin.meta.namespace satisfies 'md';
 plugin.meta.version satisfies string;
 
 // #endregion meta
