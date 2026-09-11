@@ -99,11 +99,6 @@ export default {
           return;
         }
 
-        // An empty code block has no command to report, and its opening fence may be the only line.
-        if (node.value === '') {
-          return;
-        }
-
         const [nodeStartOffset] = sourceCode.getRange(node);
         const {
           start: { line: nodeStartLine },

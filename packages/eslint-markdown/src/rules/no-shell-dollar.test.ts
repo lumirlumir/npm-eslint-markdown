@@ -53,6 +53,12 @@ ruleTester('no-shell-dollar', rule, {
       code: '```sh\n```',
     },
     {
+      // NOTE: `Code#value` is empty and the opening fence is the last line of the file,
+      // so nothing follows it to read a command from.
+      name: 'Fenced code block without a closing fence and without content',
+      code: '```sh',
+    },
+    {
       name: 'Fenced code block containing blank lines only',
       code: '```sh\n\n\n```',
     },
