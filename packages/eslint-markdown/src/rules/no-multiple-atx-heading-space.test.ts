@@ -57,6 +57,11 @@ ruleTester('no-multiple-atx-heading-space', rule, {
       options: [{ checkClosedHeadings: true }],
     },
     {
+      name: 'Closed ATX heading with one tab before the closing sequence',
+      code: '# Heading\t#',
+      options: [{ checkClosedHeadings: true }],
+    },
+    {
       name: 'should allow one tab after an ATX opening sequence',
       code: '#\tHeading',
     },

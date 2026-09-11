@@ -115,7 +115,7 @@ export default {
         const trailingSpacesMatch = trailingSpacesRegex.exec(text);
 
         if (trailingSpacesMatch) {
-          // A successful match always contains both named capture groups.
+          // A successful match always contains the named capture group.
           const { spaces } = trailingSpacesMatch.groups!;
           const spacesStartOffset = startOffset + trailingSpacesMatch.index;
           const spacesEndOffset = spacesStartOffset + spaces.length;
