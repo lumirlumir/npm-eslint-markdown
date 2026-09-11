@@ -45,6 +45,10 @@ ruleTester('no-shell-dollar', rule, {
       code: '```sh\n$\n```',
     },
     {
+      name: 'Dollar sign followed by a space in the middle of a command',
+      code: '```sh\necho a $ b\n```',
+    },
+    {
       name: 'Dollar sign in the middle of a command',
       code: '```sh\necho $PATH\n```',
     },
