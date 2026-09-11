@@ -32,8 +32,8 @@ type MessageIds = 'noMultipleAtxHeadingSpace';
 // Helper
 // --------------------------------------------------------------------------------
 
-const leadingSpacesRegex = /^(?<hashes>#{1,6})(?<spaces>[ \t]{2,})/u;
-const trailingSpacesRegex = /(?<spaces>[ \t]{2,})(?<hashes>#+)[ \t]*$/u;
+const leadingSpacesRegex = /^#{1,6}(?<spaces>[ \t]{2,})/u;
+const trailingSpacesRegex = /(?<spaces>[ \t]{2,})#+[ \t]*$/u;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -91,9 +91,9 @@ export default {
         const leadingSpacesMatch = leadingSpacesRegex.exec(text);
 
         if (leadingSpacesMatch) {
-          // A successful match always contains both named capture groups.
-          const { hashes, spaces } = leadingSpacesMatch.groups!;
-          const spacesStartOffset = startOffset + hashes.length;
+          // A successful match always contains the named capture group.
+          const { spaces } = leadingSpacesMatch.groups!;
+          const spacesStartOffset = startOffset + node.depth;
           const spacesEndOffset = spacesStartOffset + spaces.length;
 
           context.report({
