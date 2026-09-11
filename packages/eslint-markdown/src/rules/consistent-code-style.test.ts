@@ -390,7 +390,7 @@ code block 2
           messageId: 'style',
           line: 4,
           column: 1,
-          endLine: 6,
+          endLine: 4,
           endColumn: 4,
           data: { style: 'indent' },
         },
@@ -409,7 +409,7 @@ code block 2
           messageId: 'style',
           line: 4,
           column: 1,
-          endLine: 6,
+          endLine: 4,
           endColumn: 4,
           data: { style: 'indent' },
         },
@@ -449,7 +449,7 @@ code block 2
           messageId: 'style',
           line: 6,
           column: 1,
-          endLine: 8,
+          endLine: 6,
           endColumn: 4,
           data: { style: 'fence-backtick' },
         },
@@ -489,7 +489,7 @@ code block 2
           messageId: 'style',
           line: 6,
           column: 1,
-          endLine: 8,
+          endLine: 6,
           endColumn: 4,
           data: { style: 'fence-tilde' },
         },
@@ -513,7 +513,7 @@ code block 2
           messageId: 'style',
           line: 2,
           column: 1,
-          endLine: 4,
+          endLine: 2,
           endColumn: 4,
           data: { style: 'indent' },
         },
@@ -521,8 +521,80 @@ code block 2
           messageId: 'style',
           line: 6,
           column: 1,
-          endLine: 8,
+          endLine: 6,
           endColumn: 4,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+    {
+      name: '`indent` style - fenced code with language and meta',
+      code: `
+\`\`\` js meta
+code block 1
+\`\`\``,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+    {
+      name: '`indent` style - tilde-fenced code with tilde language',
+      code: `
+~~~ ~
+code block 1
+~~~`,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+    {
+      name: '`indent` style - fenced code with an HTML entity language',
+      code: `
+~~~ &amp; meta
+code block 1
+~~~`,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+    {
+      name: '`indent` style - blockquoted fenced code with an HTML entity language',
+      code: `
+> ~~~ &amp; meta
+> code block 1
+> ~~~`,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 6,
           data: { style: 'indent' },
         },
       ],
@@ -551,8 +623,25 @@ code block 2
           messageId: 'style',
           line: 4,
           column: 1,
-          endLine: 6,
+          endLine: 4,
           endColumn: 4,
+          data: { style: 'fence-backtick' },
+        },
+      ],
+    },
+    {
+      name: '`fence-backtick` style - multiline indented code',
+      code: `
+    code block 1
+    code block 2`,
+      options: [{ style: 'fence-backtick' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 17,
           data: { style: 'fence-backtick' },
         },
       ],
@@ -581,7 +670,7 @@ code block 2
           messageId: 'style',
           line: 4,
           column: 1,
-          endLine: 6,
+          endLine: 4,
           endColumn: 4,
           data: { style: 'fence-tilde' },
         },

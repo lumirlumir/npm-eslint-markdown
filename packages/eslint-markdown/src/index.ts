@@ -18,6 +18,7 @@ import pkg from '../package.json' with { type: 'json' };
 const plugin = {
   meta: {
     name: pkg.name as 'eslint-markdown' satisfies string,
+    namespace: 'md',
     version: pkg.version satisfies string,
   },
 

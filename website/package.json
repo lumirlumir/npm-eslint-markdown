@@ -16,7 +16,7 @@
     "@eslint/config-inspector": "^3.4.0",
     "@shikijs/transformers": "^3.20.0",
     "@shikijs/vitepress-twoslash": "^3.20.0",
-    "eslint-markdown": "^0.14.1",
+    "eslint-markdown": "^0.15.0",
     "twoslash-eslint": "^0.3.4",
     "vitepress": "2.0.0-alpha.17",
     "vitepress-plugin-group-icons": "^1.7.6"

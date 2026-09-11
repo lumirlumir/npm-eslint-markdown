@@ -132,6 +132,26 @@ Examples of **incorrect** code for this rule:
 \u0085 - Next Line - <NEL> `` <= Here
 ```
 
+#### With `{ skipMath: false }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { skipMath: false }] -->
+
+$$
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+$$
+```
+
+#### With `{ skipInlineMath: false }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { skipInlineMath: false }] -->
+
+\u000B - Line Tabulation (\v) - <VT> $$ <= Here
+\u0085 - Next Line - <NEL> $$ <= Here
+```
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
@@ -207,6 +227,26 @@ Examples of **correct** code for this rule:
 \u0085 - Next Line - <NEL> `` <= Here
 ```
 
+#### With `{ skipMath: true }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { skipMath: true }] -->
+
+$$
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+$$
+```
+
+#### With `{ skipInlineMath: true }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { skipInlineMath: true }] -->
+
+\u000B - Line Tabulation (\v) - <VT> $$ <= Here
+\u0085 - Next Line - <NEL> $$ <= Here
+```
+
 ## Options
 
 ```js
@@ -214,6 +254,8 @@ Examples of **correct** code for this rule:
   allow: [],
   skipCode: true,
   skipInlineCode: true,
+  skipMath: true,
+  skipInlineMath: true,
 }]
 ```
 
@@ -234,6 +276,26 @@ When specified, specific irregular whitespaces are allowed if they match one of 
 > Type: `boolean` / Default: `true`
 
 `true` allows irregular whitespaces in all inline code.
+
+### `skipMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows irregular whitespaces in all math blocks.
+
+::: tip NOTE
+This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
+:::
+
+### `skipInlineMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows irregular whitespaces in all inline math.
+
+::: tip NOTE
+This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
+:::
 
 ## When Not To Use It
 
