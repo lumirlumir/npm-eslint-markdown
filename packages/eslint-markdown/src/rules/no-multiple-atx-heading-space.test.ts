@@ -89,26 +89,58 @@ Heading  2
       name: 'ATX heading with two spaces after the opening sequence',
       code: '#  Heading',
       output: '# Heading',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 4,
+        },
+      ],
     },
     {
       name: 'ATX heading with multiple spaces after the opening sequence',
       code: '###    Heading',
       output: '### Heading',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 8,
+        },
+      ],
     },
     {
       name: 'Closed ATX heading with multiple spaces after the opening sequence',
       code: '##   Heading ##',
       output: '## Heading ##',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 6,
+        },
+      ],
     },
     {
       name: 'should report multiple spaces before an ATX closing sequence when checked',
       code: '## Heading   ##',
       output: '## Heading ##',
       options: [{ checkClosedHeadings: true }],
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 14,
+        },
+      ],
     },
     {
       name: 'should report multiple spaces on both sides of a closed ATX heading when checked',
@@ -116,67 +148,151 @@ Heading  2
       output: '## Heading ##',
       options: [{ checkClosedHeadings: true }],
       errors: [
-        { messageId: 'noMultipleAtxHeadingSpace' },
-        { messageId: 'noMultipleAtxHeadingSpace' },
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 6,
+        },
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 16,
+        },
       ],
     },
     {
       name: 'Empty closed ATX heading with multiple spaces',
       code: '##  ##',
       output: '## ##',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 5,
+        },
+      ],
     },
     {
       name: 'ATX heading with inline Markdown after multiple spaces',
       code: '#   **bold** `code` [link](https://example.com)',
       output: '# **bold** `code` [link](https://example.com)',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 5,
+        },
+      ],
     },
     {
       name: 'ATX heading with multiple tabs after the opening sequence',
       code: '#\t\tHeading',
       output: '# Heading',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 4,
+        },
+      ],
     },
     {
       name: 'ATX heading with mixed spaces and tabs after the opening sequence',
       code: '# \t\t Heading',
       output: '# Heading',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 6,
+        },
+      ],
     },
     {
       name: 'Closed ATX heading with multiple tabs before the closing sequence',
       code: '# Heading\t\t#',
       output: '# Heading #',
       options: [{ checkClosedHeadings: true }],
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 12,
+        },
+      ],
     },
     {
       name: 'Closed ATX heading with mixed spaces and tabs before the closing sequence',
       code: '# Heading \t #',
       output: '# Heading #',
       options: [{ checkClosedHeadings: true }],
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 13,
+        },
+      ],
     },
     {
       name: 'Closed ATX heading with trailing spaces after the closing sequence',
       code: '# Heading   ##  ',
       output: '# Heading ##  ',
       options: [{ checkClosedHeadings: true }],
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 13,
+        },
+      ],
     },
     {
       name: 'ATX heading with a hash in its content',
       code: '#  Heading # hashtag',
       output: '# Heading # hashtag',
       options: [{ checkClosedHeadings: true }],
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 4,
+        },
+      ],
     },
     {
       name: 'ATX heading with CRLF line endings',
       code: 'Paragraph.\r\n\r\n#  Heading\r\n',
       output: 'Paragraph.\r\n\r\n# Heading\r\n',
-      errors: [{ messageId: 'noMultipleAtxHeadingSpace' }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 3,
+          column: 2,
+          endLine: 3,
+          endColumn: 4,
+        },
+      ],
     },
     {
       name: 'ATX headings nested in block containers',
@@ -191,8 +307,20 @@ Heading  2
 - ## List heading ##
 `,
       errors: [
-        { messageId: 'noMultipleAtxHeadingSpace' },
-        { messageId: 'noMultipleAtxHeadingSpace' },
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 2,
+          column: 4,
+          endLine: 2,
+          endColumn: 6,
+        },
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 4,
+          column: 5,
+          endLine: 4,
+          endColumn: 8,
+        },
       ],
     },
     {
@@ -207,8 +335,49 @@ Heading  2
 `,
       options: [{ checkClosedHeadings: true }],
       errors: [
-        { messageId: 'noMultipleAtxHeadingSpace' },
-        { messageId: 'noMultipleAtxHeadingSpace' },
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 4,
+        },
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 15,
+        },
+      ],
+    },
+    {
+      name: 'Empty ATX heading with multiple spaces',
+      code: '##  ',
+      output: '## ',
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 5,
+        },
+      ],
+    },
+    {
+      name: 'Empty closed ATX heading with multiple spaces when closed headings are checked',
+      code: '##  ##',
+      output: '## ##',
+      options: [{ checkClosedHeadings: true }],
+      errors: [
+        {
+          messageId: 'noMultipleAtxHeadingSpace',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 5,
+        },
       ],
     },
   ],
