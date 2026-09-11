@@ -82,6 +82,8 @@ export default {
 
     return {
       heading(node) {
+        let leadingSpacesStartOffset: number | null = null;
+
         const text = sourceCode.getText(node);
         const [startOffset] = sourceCode.getRange(node);
         const leadingSpacesMatch = leadingSpacesRegex.exec(text);
@@ -89,8 +91,8 @@ export default {
         if (leadingSpacesMatch) {
           // A successful match always contains both named capture groups.
           const { hashes, spaces } = leadingSpacesMatch.groups!;
-
           const spacesStartOffset = startOffset + hashes.length;
+          leadingSpacesStartOffset = spacesStartOffset;
           const spacesEndOffset = spacesStartOffset + spaces.length;
 
           context.report({
@@ -108,6 +110,7 @@ export default {
         }
 
         if (!checkClosedHeadings) return;
+
         const trailingSpacesMatch = trailingSpacesRegex.exec(text);
 
         if (trailingSpacesMatch) {
@@ -115,6 +118,8 @@ export default {
           const { spaces } = trailingSpacesMatch.groups!;
           const spacesStartOffset = startOffset + trailingSpacesMatch.index;
           const spacesEndOffset = spacesStartOffset + spaces.length;
+
+          if (spacesStartOffset === leadingSpacesStartOffset) return;
 
           context.report({
             loc: {
