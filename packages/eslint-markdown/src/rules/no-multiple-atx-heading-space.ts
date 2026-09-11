@@ -19,6 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
+    /**
+     * When `checkClosedHeadings` is set to `true`, this rule also checks for multiple consecutive spaces or tabs before the closing hash characters in closed ATX headings.
+     * @default false
+     */
     checkClosedHeadings: boolean;
   },
 ];
@@ -82,8 +86,6 @@ export default {
 
     return {
       heading(node) {
-        let leadingSpacesStartOffset: number | null = null;
-
         const text = sourceCode.getText(node);
         const [startOffset] = sourceCode.getRange(node);
         const leadingSpacesMatch = leadingSpacesRegex.exec(text);
@@ -92,7 +94,6 @@ export default {
           // A successful match always contains both named capture groups.
           const { hashes, spaces } = leadingSpacesMatch.groups!;
           const spacesStartOffset = startOffset + hashes.length;
-          leadingSpacesStartOffset = spacesStartOffset;
           const spacesEndOffset = spacesStartOffset + spaces.length;
 
           context.report({
@@ -109,7 +110,7 @@ export default {
           });
         }
 
-        if (!checkClosedHeadings) return;
+        if (!checkClosedHeadings || node.children.length === 0) return;
 
         const trailingSpacesMatch = trailingSpacesRegex.exec(text);
 
@@ -118,8 +119,6 @@ export default {
           const { spaces } = trailingSpacesMatch.groups!;
           const spacesStartOffset = startOffset + trailingSpacesMatch.index;
           const spacesEndOffset = spacesStartOffset + spaces.length;
-
-          if (spacesStartOffset === leadingSpacesStartOffset) return;
 
           context.report({
             loc: {
