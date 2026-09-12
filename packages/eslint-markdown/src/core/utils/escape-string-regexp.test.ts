@@ -32,7 +32,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import escapeStringRegexp from './escape-string-regexp.js';
+import { escapeStringRegexp } from './escape-string-regexp.js';
 
 // --------------------------------------------------------------------------------
 // Test

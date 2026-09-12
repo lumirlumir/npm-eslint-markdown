@@ -21,7 +21,7 @@ type SourceRange = AST.Range;
 /**
  * Class to manage skip ranges.
  */
-export default class SkipRanges {
+export class SkipRanges {
   // ------------------------------------------------------------------------------
   // Private Property
   // ------------------------------------------------------------------------------
