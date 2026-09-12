@@ -39,7 +39,7 @@ const HEADING_STYLE = [
  * Matches the closing sequence of a closed ATX heading.
  * @see https://spec.commonmark.org/0.31.2/#atx-headings
  */
-const closingSequenceRegex = /[ \t]#+[ \t]*$/;
+const trailingAtxHeadingHashRegex = /[ \t]#+[ \t]*$/;
 
 /**
  * Matches heading content that may start a block-level construct after conversion to Setext.
@@ -106,7 +106,7 @@ export default {
 
         if (start.line !== end.line /* Multiline Heading */) {
           currentHeadingStyle = 'setext';
-        } else if (closingSequenceRegex.test(sourceCode.getText(node))) {
+        } else if (trailingAtxHeadingHashRegex.test(sourceCode.getText(node))) {
           currentHeadingStyle = 'atx-closed';
         } else {
           currentHeadingStyle = 'atx';

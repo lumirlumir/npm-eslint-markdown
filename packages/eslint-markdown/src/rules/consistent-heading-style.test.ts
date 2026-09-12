@@ -85,8 +85,18 @@ Heading
       options: [{ style: 'atx' }],
     },
     {
-      name: '`atx` style - heading containing an escaped trailing hash is not closed',
+      name: '`atx` style - heading containing an escaped trailing hash is not closed - 1',
       code: '## Heading \\#',
+      options: [{ style: 'atx' }],
+    },
+    {
+      name: '`atx` style - heading containing an escaped trailing hash is not closed - 2',
+      code: '## Heading \\\\#',
+      options: [{ style: 'atx' }],
+    },
+    {
+      name: '`atx` style - heading containing an escaped trailing hash is not closed - 3',
+      code: '## Heading \\\\\\#',
       options: [{ style: 'atx' }],
     },
     {
@@ -108,6 +118,11 @@ Heading
       options: [{ style: 'atx-closed' }],
     },
     {
+      name: '`atx-closed` style - heading with many trailing hashes',
+      code: '## Heading ################',
+      options: [{ style: 'atx-closed' }],
+    },
+    {
       name: '`atx-closed` style - heading containing an escaped trailing hash',
       code: '## Heading \\# ##',
       options: [{ style: 'atx-closed' }],
@@ -126,6 +141,16 @@ H2
     {
       name: '`setext` style - setext heading content may start with a hashtag',
       code: '#hashtag\n========',
+      options: [{ style: 'setext' }],
+    },
+    {
+      name: '`setext` style - setext heading content may start with a hashtag and contain trailing hashes - 1',
+      code: '#hashtag##\n========',
+      options: [{ style: 'setext' }],
+    },
+    {
+      name: '`setext` style - setext heading content may start with a hashtag and contain trailing hashes - 2',
+      code: '#hashtag ##\n========',
       options: [{ style: 'setext' }],
     },
 
