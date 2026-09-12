@@ -57,6 +57,16 @@ console.log(\u2014'Hello World');
       ],
     },
     {
+      name: '`allow` with `override`',
+      code: `1\u20142`,
+      options: [
+        {
+          allow: ['\u2014'],
+          override: { '\u2014': '---' },
+        },
+      ],
+    },
+    {
       name: "`skipCode: ['md']`",
       code: `\`\`\`md
 \u2010\u2011\u2012\u2013\u2014\u2015\u2043\u2212\u23af\u2e3a\u2e3b\u30fc\ufe58\ufe63\uff0d
@@ -64,6 +74,18 @@ console.log(\u2014'Hello World');
       options: [
         {
           skipCode: ['md'],
+        },
+      ],
+    },
+    {
+      name: '`skipCode` with `override`',
+      code: `
+\`\`\`js
+console.log(\u2014'Hello World');
+\`\`\``,
+      options: [
+        {
+          override: { '\u2014': '---' },
         },
       ],
     },
@@ -78,6 +100,15 @@ console.log(\u2014'Hello World');
         },
       ],
     },
+    {
+      name: '`skipInlineCode` with `override`',
+      code: '`\u2014`',
+      options: [
+        {
+          override: { '\u2014': '---' },
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -87,6 +118,9 @@ console.log(\u2014'Hello World');
       code: `
 1\u20102\u20113\u20124\u20135\u20146\u20157\u20438\u22129\u23af0\u2e3a
 1\u2e3b2\u30fc3\ufe584\ufe635\uff0d`,
+      output: `
+1-2-3-4-5-6-7-8-9-0-
+1-2-3-4-5-`,
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -243,6 +277,7 @@ console.log(\u2014'Hello World');
     {
       name: 'Irregular dash in inline code',
       code: '`\u2010`\u2010',
+      output: '`\u2010`-',
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -261,6 +296,7 @@ console.log(\u2014'Hello World');
     {
       name: '`allow`',
       code: `1\u20132\u20143\u2015`,
+      output: `1\u20132\u20143-`,
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -284,6 +320,10 @@ console.log(\u2014'Hello World');
       code: `
 \`\`\`js
 console.log(\u2013'Hello World');
+\`\`\``,
+      output: `
+\`\`\`js
+console.log(-'Hello World');
 \`\`\``,
       errors: [
         {
@@ -310,6 +350,11 @@ Foo\u2010Bar
 \`\`\`
 
     code block with\u2011NBHY`,
+      output: `\`\`\`md
+Foo-Bar
+\`\`\`
+
+    code block with-NBHY`,
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -341,6 +386,7 @@ Foo\u2010Bar
     {
       name: '`skipInlineCode: false`',
       code: "`console.log(\u2014'Hello World')`",
+      output: "`console.log(-'Hello World')`",
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -356,6 +402,96 @@ Foo\u2010Bar
       options: [
         {
           skipInlineCode: false,
+        },
+      ],
+    },
+    {
+      name: '`override`',
+      code: `1\u20142`,
+      output: `1---2`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3,
+          data: {
+            irregularDash: 'U+2014',
+          },
+        },
+      ],
+      options: [
+        {
+          override: { '\u2014': '---' },
+        },
+      ],
+    },
+    {
+      name: '`override` with a partially overridden map',
+      code: `1\u20132\u20143`,
+      output: `1--2-3`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3,
+          data: {
+            irregularDash: 'U+2013',
+          },
+        },
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: {
+            irregularDash: 'U+2014',
+          },
+        },
+      ],
+      options: [
+        {
+          override: { '\u2013': '--' },
+        },
+      ],
+    },
+    {
+      name: '`override` with multiple occurrences',
+      code: `1\u20142\u20143\u2014`,
+      output: `1--2--3--`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3,
+          data: { irregularDash: 'U+2014' },
+        },
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: { irregularDash: 'U+2014' },
+        },
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 7,
+          data: { irregularDash: 'U+2014' },
+        },
+      ],
+      options: [
+        {
+          override: { '\u2014': '--' },
         },
       ],
     },

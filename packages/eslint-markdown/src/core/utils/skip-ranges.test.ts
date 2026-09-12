@@ -11,7 +11,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import SkipRanges from './skip-ranges.js';
+import { SkipRanges } from './skip-ranges.js';
 
 // --------------------------------------------------------------------------------
 // Test

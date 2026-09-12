@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import getElementsByTagName from './html.js';
+import { getElementsByTagName } from './html.js';
 
 // --------------------------------------------------------------------------------
 // Helper
