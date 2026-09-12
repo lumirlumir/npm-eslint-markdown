@@ -751,6 +751,384 @@ H2
     },
 
     {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - h1',
+      code: '# Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 10,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - h2',
+      code: '## Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n-------',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - space after content',
+      code: '# Heading ',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab after content',
+      code: '# Heading\t',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - mixed spaces and tabs after content',
+      code: '# Heading \t ',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - strong emphasis',
+      code: '# **Heading**',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: '**Heading**\n===========',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab after strong emphasis',
+      code: '# **Heading**\t',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: '**Heading**\n===========',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - escaped trailing hash',
+      code: '# Heading \\#',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading \\#\n==========',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab before a CRLF line ending',
+      code: '# Heading\t\r\nParagraph',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======\r\nParagraph',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - extra space after opening hash',
+      code: '#  Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab after opening hash',
+      code: '#\tHeading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 10,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tabs before and after content at depth 2',
+      code: '##\tHeading\t',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n-------',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - after a blank line',
+      code: 'Paragraph\n\n# Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 10,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Paragraph\n\nHeading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - without a preceding blank line',
+      code: 'Paragraph\n# Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Paragraph\nHeading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      name: '2-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h3',
+      code: '### Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '2-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h4',
+      code: '#### Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '2-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h5',
+      code: '##### Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '2-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h6',
+      code: '###### Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+
+    {
       name: '3-1. If `atx-closed` is empty, it can be converted to `atx`. (🔧) - h1',
       code: '# #',
       output: '#',
@@ -1377,6 +1755,384 @@ H2
       ],
     },
 
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - h1',
+      code: '# Heading #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - h2',
+      code: '## Heading ##',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n-------',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - extra space before closing hash',
+      code: '# Heading  #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab before closing hash',
+      code: '# Heading\t#',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - mixed spaces and tabs before closing hash',
+      code: '# Heading \t #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - strong emphasis',
+      code: '# **Heading** #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 16,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: '**Heading**\n===========',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab after strong emphasis',
+      code: '# **Heading**\t#',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 16,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: '**Heading**\n===========',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - escaped trailing hash',
+      code: '# Heading \\# #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading \\#\n==========',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab before a CRLF line ending',
+      code: '# Heading #\t\r\nParagraph',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======\r\nParagraph',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - space after closing hash',
+      code: '# Heading # ',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tab after closing hash',
+      code: '# Heading #\t',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - tabs after opening and closing hashes at depth 2',
+      code: '##\tHeading\t##\t',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n-------',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - after a blank line',
+      code: 'Paragraph\n\n# Heading #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 12,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Paragraph\n\nHeading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡) - without a preceding blank line',
+      code: 'Paragraph\n# Heading #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 12,
+          data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Paragraph\nHeading\n=======',
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      name: '4-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h3',
+      code: '### Heading ###',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 16,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '4-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h4',
+      code: '#### Heading ####',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 18,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '4-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h5',
+      code: '##### Heading #####',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 20,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '4-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌) - h6',
+      code: '###### Heading ######',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 22,
+          data: { style: 'setext' },
+          suggestions: [],
+        },
+      ],
+    },
+
     // option: `style: 'consistent'`
     // TODO: from here
     {
@@ -1451,14 +2207,7 @@ Heading
 ## Heading
 
 ## Heading ##`,
-      output: `Heading
-=======
-
-Heading
--------
-
-Heading
--------`,
+      output: null,
       errors: [
         {
           messageId: 'style',
@@ -1467,6 +2216,12 @@ Heading
           endLine: 4,
           endColumn: 11,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======\n\nHeading\n-------\n\n## Heading ##',
+            },
+          ],
         },
         {
           messageId: 'style',
@@ -1475,6 +2230,12 @@ Heading
           endLine: 6,
           endColumn: 14,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'Heading\n=======\n\n## Heading\n\nHeading\n-------',
+            },
+          ],
         },
       ],
     },
@@ -1698,21 +2459,14 @@ Heading
 
     // option: `style: 'setext'`
     {
-      name: '`setext` style - converts ATX H1 and H2 headings',
+      name: '`setext` style - suggests converting ATX H1 and H2 headings',
       code: `# Heading
 
 ## Heading ##
 
 Heading
 -------`,
-      output: `Heading
-=======
-
-Heading
--------
-
-Heading
--------`,
+      output: null,
       options: [{ style: 'setext' }],
       errors: [
         {
@@ -1722,6 +2476,12 @@ Heading
           endLine: 1,
           endColumn: 10,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'Heading\n=======\n\n## Heading ##\n\nHeading\n-------',
+            },
+          ],
         },
         {
           messageId: 'style',
@@ -1730,6 +2490,12 @@ Heading
           endLine: 3,
           endColumn: 14,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: '# Heading\n\nHeading\n-------\n\nHeading\n-------',
+            },
+          ],
         },
       ],
     },
@@ -1752,7 +2518,7 @@ Heading
     {
       name: '`setext` style - heading content starting with a number sign is not an ATX heading on its own line',
       code: '# #hashtag',
-      output: '#hashtag\n========',
+      output: null,
       options: [{ style: 'setext' }],
       errors: [
         {
@@ -1762,66 +2528,19 @@ Heading
           endLine: 1,
           endColumn: 11,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: '#hashtag\n========',
+            },
+          ],
         },
       ],
     },
     {
-      name: '`setext` style - converts a heading that follows a blank line',
-      code: `Paragraph
-
-# Heading`,
-      output: `Paragraph
-
-Heading
-=======`,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 3,
-          column: 1,
-          endLine: 3,
-          endColumn: 10,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - does not fix a heading without a preceding blank line',
-      code: 'Paragraph\n# Heading',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 10,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - does not fix a nested heading',
-      code: '> # Heading',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 3,
-          endLine: 1,
-          endColumn: 12,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - preserves CRLF line endings',
+      name: '`setext` style - suggests inserting an LF underline before existing CRLF line endings',
       code: '# H1\r\n\r\nParagraph',
-      output: 'H1\r\n==\r\n\r\nParagraph',
+      output: null,
       options: [{ style: 'setext' }],
       errors: [
         {
@@ -1831,67 +2550,21 @@ Heading
           endLine: 1,
           endColumn: 5,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'H1\n==\r\n\r\nParagraph',
+            },
+          ],
         },
       ],
     },
     {
-      name: '`setext` style - does not fix heading content starting with an unordered list marker',
-      code: '# - Heading',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 12,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - does not fix heading content starting with a blockquote marker',
-      code: '# > Heading',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 12,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - does not fix heading content starting with an ordered list marker',
-      code: '# 1. Heading',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 13,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - converts marker-like content without separating whitespace',
+      name: '`setext` style - suggests converting marker-like content without separating whitespace',
       code: `# -Heading
 
 # 1.Heading`,
-      output: `-Heading
-========
-
-1.Heading
-=========`,
+      output: null,
       options: [{ style: 'setext' }],
       errors: [
         {
@@ -1901,6 +2574,12 @@ Heading
           endLine: 1,
           endColumn: 11,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: '-Heading\n========\n\n# 1.Heading',
+            },
+          ],
         },
         {
           messageId: 'style',
@@ -1909,6 +2588,12 @@ Heading
           endLine: 3,
           endColumn: 12,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: '# -Heading\n\n1.Heading\n=========',
+            },
+          ],
         },
       ],
     },
@@ -1923,15 +2608,7 @@ Heading
 ### H3 ###
 
 #### H4`,
-      output: `H1
-==
-
-H2
---
-
-### H3
-
-#### H4`,
+      output: '# H1\n\n## H2\n\n### H3\n\n#### H4',
       options: [{ style: 'setext-with-atx' }],
       errors: [
         {
@@ -1941,6 +2618,12 @@ H2
           endLine: 1,
           endColumn: 5,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: 'H1\n==\n\n## H2\n\n### H3 ###\n\n#### H4',
+            },
+          ],
         },
         {
           messageId: 'style',
@@ -1949,6 +2632,12 @@ H2
           endLine: 3,
           endColumn: 6,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestAtxToSetext',
+              output: '# H1\n\nH2\n--\n\n### H3 ###\n\n#### H4',
+            },
+          ],
         },
         {
           messageId: 'style',
@@ -1971,15 +2660,7 @@ H2
 ### H3
 
 #### H4 ####`,
-      output: `H1
-==
-
-H2
---
-
-### H3 ###
-
-#### H4 ####`,
+      output: '# H1 #\n\n## H2 ##\n\n### H3 ###\n\n#### H4 ####',
       options: [{ style: 'setext-with-atx-closed' }],
       errors: [
         {
@@ -1989,6 +2670,12 @@ H2
           endLine: 1,
           endColumn: 7,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: 'H1\n==\n\n## H2 ##\n\n### H3\n\n#### H4 ####',
+            },
+          ],
         },
         {
           messageId: 'style',
@@ -1997,6 +2684,12 @@ H2
           endLine: 3,
           endColumn: 9,
           data: { style: 'setext' },
+          suggestions: [
+            {
+              messageId: 'suggestATXClosedToSetext',
+              output: '# H1 #\n\nH2\n--\n\n### H3\n\n#### H4 ####',
+            },
+          ],
         },
         {
           messageId: 'style',
