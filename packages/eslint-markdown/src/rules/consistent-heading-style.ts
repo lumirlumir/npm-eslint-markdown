@@ -272,19 +272,16 @@ export default {
         } else if (currentHeadingStyle === 'atx-closed') {
           if (expectedHeadingStyle === 'atx') {
             if (node.children.length === 0) {
-              reportStyle(node, function* fix(fixer) {
-                yield fixer.removeRange([
-                  nodeStartOffset + node.depth,
-                  nodeEndOffset,
-                ]);
-              });
+              reportStyle(node, fixer =>
+                fixer.removeRange([nodeStartOffset + node.depth, nodeEndOffset]),
+              );
             } else {
-              reportStyle(node, function* fix(fixer) {
+              reportStyle(node, fixer => {
                 const [, lastChildNodeEndOffset] = sourceCode.getRange(
                   node.children[node.children.length - 1],
                 );
 
-                yield fixer.removeRange([lastChildNodeEndOffset, nodeEndOffset]);
+                return fixer.removeRange([lastChildNodeEndOffset, nodeEndOffset]);
               });
             }
           } else if (expectedHeadingStyle === 'setext') {
