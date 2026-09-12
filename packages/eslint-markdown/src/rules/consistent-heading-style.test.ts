@@ -2133,8 +2133,836 @@ H2
       ],
     },
 
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - h1',
+      code: 'Heading\n=======',
+      output: '# Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - h2',
+      code: 'Heading\n-------',
+      output: '## Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - space after content',
+      code: 'Heading \n=======',
+      output: '# Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - tab after content',
+      code: 'Heading\t\n=======',
+      output: '# Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - mixed spaces and tabs after content',
+      code: 'Heading \t \n=======',
+      output: '# Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - strong emphasis',
+      code: '**Heading**\n===========',
+      output: '# **Heading**',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 12,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - tab after strong emphasis',
+      code: '**Heading**\t\n===========',
+      output: '# **Heading**',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 12,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - escaped trailing hash',
+      code: 'Heading \\#\n==========',
+      output: '# Heading \\#',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 11,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - unescaped trailing hashes',
+      code: 'Heading ##\n==========',
+      output: '# Heading \\##',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 11,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - strong emphasis before trailing hashes',
+      code: '**Heading** ##\n==============',
+      output: '# **Heading** \\##',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 15,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - inside a blockquote',
+      code: '> Heading\n> =======',
+      output: '> # Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - tab after a blockquote marker',
+      code: '>\tHeading\n> =======',
+      output: '>\t# Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - inside a list item',
+      code: '- Heading\n  =======',
+      output: '- # Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - tab before a CRLF line ending',
+      code: 'Heading\t\r\n=======\r\nParagraph',
+      output: '# Heading\r\nParagraph',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - spaces around the underline',
+      code: 'Heading\n  ===  ',
+      output: '# Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - mixed inline Markdown',
+      code: '**bold** `code` [link](https://example.com) &copy; <span>HTML</span> 😀\n================================================================================',
+      output: '# **bold** `code` [link](https://example.com) &copy; <span>HTML</span> 😀',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 81,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - one leading space',
+      code: ' Heading\n=======',
+      output: ' # Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - two leading spaces',
+      code: '  Heading\n=======',
+      output: '  # Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - three leading spaces at depth 2',
+      code: '   Heading\n-------',
+      output: '   ## Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - inside a blockquote at depth 2',
+      code: '> Heading\n> -------',
+      output: '> ## Heading',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - unescaped trailing hash',
+      code: 'hashtag #\n===',
+      output: '# hashtag \\#',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - escaped hashes before an unescaped trailing hash',
+      code: 'Heading \\## hashtag #\n===',
+      output: '# Heading \\## hashtag \\#',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '5-2-1. If it is single-line, it can be converted to `atx`. (🔧) - preserves a preceding link definition',
+      code: '[id]: /url\n[Heading][id]\n=============',
+      output: '[id]: /url\n# [Heading][id]',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 14,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+
+    {
+      name: '5-2-2. If it is multiline, it cannot be converted to `atx`. (❌) - h2',
+      code: 'First line\nsecond line\n-----------',
+      output: null,
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 12,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - h1',
+      code: 'Heading\n=======',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - h2',
+      code: 'Heading\n-------',
+      output: '## Heading ##',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - space after content',
+      code: 'Heading \n=======',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - tab after content',
+      code: 'Heading\t\n=======',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - mixed spaces and tabs after content',
+      code: 'Heading \t \n=======',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - strong emphasis',
+      code: '**Heading**\n===========',
+      output: '# **Heading** #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 12,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - tab after strong emphasis',
+      code: '**Heading**\t\n===========',
+      output: '# **Heading** #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 12,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - escaped trailing hash',
+      code: 'Heading \\#\n==========',
+      output: '# Heading \\# #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 11,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - unescaped trailing hashes',
+      code: 'Heading ##\n==========',
+      output: '# Heading ## #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 11,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - inside a blockquote',
+      code: '> Heading\n> =======',
+      output: '> # Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - tab after a blockquote marker',
+      code: '>\tHeading\n> =======',
+      output: '>\t# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - inside a list item',
+      code: '- Heading\n  =======',
+      output: '- # Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - tab before a CRLF line ending',
+      code: 'Heading\t\r\n=======\r\nParagraph',
+      output: '# Heading #\r\nParagraph',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - spaces around the underline',
+      code: 'Heading\n  ===  ',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - mixed inline Markdown',
+      code: '**bold** `code` [link](https://example.com) &copy; <span>HTML</span> 😀\n===',
+      output:
+        '# **bold** `code` [link](https://example.com) &copy; <span>HTML</span> 😀 #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - one leading space',
+      code: ' Heading\n=======',
+      output: ' # Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 2,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - two leading spaces',
+      code: '  Heading\n=======',
+      output: '  # Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - three leading spaces at depth 2',
+      code: '   Heading\n-------',
+      output: '   ## Heading ##',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 4,
+          endLine: 2,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧) - preserves a preceding link definition',
+      code: '[id]: /url\n[Heading][id]\n=============',
+      output: '[id]: /url\n# [Heading][id] #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 14,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - h1',
+      code: 'First line\nsecond line\n=======',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - h2',
+      code: 'First line\nsecond line\n-------',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - strong emphasis spanning multiple lines',
+      code: '**First\nsecond**\n=======',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - inline code spanning multiple lines',
+      code: '`First\nsecond`\n-------',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - different inline nodes on separate lines',
+      code: '**First**\n*second*\n=======',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - inside a blockquote',
+      code: '> First\n> second\n> -------',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 3,
+          endColumn: 10,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - inside a list item',
+      code: '- First\n  second\n  -------',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 3,
+          endColumn: 10,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+    {
+      name: '6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌) - tab and CRLF line endings',
+      code: 'First line\t\r\nsecond line\r\n=======\r\nParagraph',
+      output: null,
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+          data: { style: 'atx-closed' },
+          suggestions: [],
+        },
+      ],
+    },
+
     // option: `style: 'consistent'`
-    // TODO: from here
     {
       name: '`consistent` style - uses the first ATX heading',
       code: `# Heading
@@ -2294,22 +3122,6 @@ Heading
       ],
     },
     {
-      name: '`atx` style - does not fix a multiline Setext heading',
-      code: 'First line\nsecond line\n-----------',
-      output: null,
-      options: [{ style: 'atx' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 3,
-          endColumn: 12,
-          data: { style: 'atx' },
-        },
-      ],
-    },
-    {
       name: '`atx` style - preserves inline Markdown',
       code: '## Heading *emphasis* ##',
       output: '## Heading *emphasis*',
@@ -2326,38 +3138,6 @@ Heading
       ],
     },
     {
-      name: '`atx` style - preserves mixed inline Markdown when converting a Setext heading',
-      code: '**bold** `code` [link](https://example.com) &copy; <span>HTML</span> 😀\n================================================================================',
-      output: '# **bold** `code` [link](https://example.com) &copy; <span>HTML</span> 😀',
-      options: [{ style: 'atx' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 2,
-          endColumn: 81,
-          data: { style: 'atx' },
-        },
-      ],
-    },
-    {
-      name: '`atx` style - converts a Setext heading nested in a blockquote',
-      code: '> Heading\n> -------',
-      output: '> ## Heading',
-      options: [{ style: 'atx' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 3,
-          endLine: 2,
-          endColumn: 10,
-          data: { style: 'atx' },
-        },
-      ],
-    },
-    {
       name: '`atx` style - removes a closing sequence surrounded by tabs',
       code: '##\tHeading\t##\t',
       output: '##\tHeading',
@@ -2369,38 +3149,6 @@ Heading
           column: 1,
           endLine: 1,
           endColumn: 15,
-          data: { style: 'atx' },
-        },
-      ],
-    },
-    {
-      name: '`atx` style - escapes a trailing hash when converting a Setext heading',
-      code: 'hashtag #\n===',
-      output: '# hashtag \\#',
-      options: [{ style: 'atx' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 2,
-          endColumn: 4,
-          data: { style: 'atx' },
-        },
-      ],
-    },
-    {
-      name: '`atx` style - escapes a trailing hash when converting a Setext heading',
-      code: 'Heading \\## hashtag #\n===',
-      output: '# Heading \\## hashtag \\#',
-      options: [{ style: 'atx' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 2,
-          endColumn: 4,
           data: { style: 'atx' },
         },
       ],
@@ -2436,22 +3184,6 @@ Heading
           column: 1,
           endLine: 6,
           endColumn: 8,
-          data: { style: 'atx-closed' },
-        },
-      ],
-    },
-    {
-      name: '`atx-closed` style - preserves a trailing hash when converting a Setext heading',
-      code: 'hashtag #\n===',
-      output: '# hashtag # #',
-      options: [{ style: 'atx-closed' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 2,
-          endColumn: 4,
           data: { style: 'atx-closed' },
         },
       ],
@@ -2532,66 +3264,6 @@ Heading
             {
               messageId: 'suggestAtxToSetext',
               output: '#hashtag\n========',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: '`setext` style - suggests inserting an LF underline before existing CRLF line endings',
-      code: '# H1\r\n\r\nParagraph',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 5,
-          data: { style: 'setext' },
-          suggestions: [
-            {
-              messageId: 'suggestAtxToSetext',
-              output: 'H1\n==\r\n\r\nParagraph',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: '`setext` style - suggests converting marker-like content without separating whitespace',
-      code: `# -Heading
-
-# 1.Heading`,
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 11,
-          data: { style: 'setext' },
-          suggestions: [
-            {
-              messageId: 'suggestAtxToSetext',
-              output: '-Heading\n========\n\n# 1.Heading',
-            },
-          ],
-        },
-        {
-          messageId: 'style',
-          line: 3,
-          column: 1,
-          endLine: 3,
-          endColumn: 12,
-          data: { style: 'setext' },
-          suggestions: [
-            {
-              messageId: 'suggestAtxToSetext',
-              output: '# -Heading\n\n1.Heading\n=========',
             },
           ],
         },

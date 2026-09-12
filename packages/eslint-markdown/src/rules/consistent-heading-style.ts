@@ -310,47 +310,55 @@ export default {
           const firstChildNode = node.children[0];
           const lastChildNode = node.children[node.children.length - 1];
 
-          const [contentStartOffset] = sourceCode.getRange(firstChildNode);
-          const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
-
-          const headingContent = sourceCode.text.slice(
-            contentStartOffset,
-            contentEndOffset,
-          );
-
           const { start } = sourceCode.getLoc(firstChildNode);
           const { end } = sourceCode.getLoc(lastChildNode);
 
-          const headingMarker = '#'.repeat(node.depth);
-
           if (expectedHeadingStyle === 'atx') {
-            // Prevent trailing hashes from becoming an ATX closing sequence.
-            const escapedHeadingContent = headingContent.replace(
-              /(?<=[ \t])(?=#+[ \t]*$)/u,
-              '\\',
-            );
+            if (start.line === end.line /* Singleline Heading */) {
+              reportStyle(node, function* fix(fixer) {
+                const [lastChildNodeStartOffset, lastChildNodeEndOffset] =
+                  sourceCode.getRange(lastChildNode);
 
-            reportStyle(node, fixer => {
-              if (start.line === end.line /* Singleline Heading */) {
-                return fixer.replaceTextRange(
-                  [nodeStartOffset, nodeEndOffset],
-                  `${headingMarker} ${escapedHeadingContent}`,
+                // Prevent trailing hashes from becoming an ATX closing sequence.
+                const match = trailingAtxHeadingHashRegex.exec(
+                  sourceCode.getText(lastChildNode),
                 );
-              } else /* Multiline Heading */ {
-                return null;
-              }
-            });
+
+                if (match) {
+                  yield fixer.insertTextBeforeRange(
+                    [lastChildNodeStartOffset + match.index + 1, lastChildNodeEndOffset],
+                    '\\',
+                  );
+                }
+
+                yield fixer.insertTextBefore(
+                  firstChildNode,
+                  `${'#'.repeat(node.depth)} `,
+                );
+
+                yield fixer.removeRange([lastChildNodeEndOffset, nodeEndOffset]);
+              });
+            } else /* Multiline Heading */ {
+              reportStyle(node);
+            }
           } else if (expectedHeadingStyle === 'atx-closed') {
-            reportStyle(node, fixer => {
-              if (start.line === end.line /* Singleline Heading */) {
-                return fixer.replaceTextRange(
-                  [nodeStartOffset, nodeEndOffset],
-                  `${headingMarker} ${headingContent} ${headingMarker}`,
+            if (start.line === end.line /* Singleline Heading */) {
+              reportStyle(node, function* fix(fixer) {
+                const [, lastChildNodeEndOffset] = sourceCode.getRange(lastChildNode);
+
+                yield fixer.insertTextBefore(
+                  firstChildNode,
+                  `${'#'.repeat(node.depth)} `,
                 );
-              } else /* Multiline Heading */ {
-                return null;
-              }
-            });
+
+                yield fixer.replaceTextRange(
+                  [lastChildNodeEndOffset, nodeEndOffset],
+                  ` ${'#'.repeat(node.depth)}`,
+                );
+              });
+            } else /* Multiline Heading */ {
+              reportStyle(node);
+            }
           }
         }
       },
