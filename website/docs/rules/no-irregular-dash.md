@@ -57,6 +57,15 @@ Examples of **incorrect** code for this rule:
 \uFF0D - Fullwidth Hyphen-Minus - <FWHYPHMNUS> － <= Here
 ```
 
+#### With `{ override: { '\u2013': '--', '\u2014': '---' } }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { override: { '\u2013': '--', '\u2014': '---' } }] -->
+
+\u2013 - En Dash - <ENDASH> – <= Here
+\u2014 - Em Dash - <EMDASH> — <= Here
+```
+
 #### With `{ skipCode: false }` Option
 
 `````md eslint-check
@@ -184,6 +193,7 @@ Examples of **correct** code for this rule:
 ```js
 'md/no-irregular-dash': ['error', {
   allow: [],
+  override: {},
   skipCode: true,
   skipInlineCode: true,
 }]
@@ -194,6 +204,31 @@ Examples of **correct** code for this rule:
 > Type: `string[]` / Default: `[]`
 
 When specified, specific irregular dash characters are allowed if they match one of the characters in this array. This is useful for ignoring certain irregular dashes that are intentionally used in the document.
+
+### `override`
+
+> Type: `Record<string, string>` / Default: `{}`
+
+An object where the **key** is an irregular dash character and the **value** is the string that replaces it. Only the characters listed in [Rule Details](#rule-details) can be used as keys.
+
+#### Overriding a default replacement
+
+For example, to replace an en dash with `--` and an em dash with `---`:
+
+```js
+'md/no-irregular-dash': ['error', {
+  override: {
+    '\u2013': '--',
+    '\u2014': '---',
+  },
+}]
+```
+
+::: warning Fixing can change the Markdown structure
+
+If a dash stands alone on a line, the fixed line can be parsed differently. For example, `–` below a paragraph becomes a [Setext heading](https://spec.commonmark.org/0.31.2/#setext-headings) underline, and with `'\u2014': '---'`, `—` on its own line becomes a [thematic break](https://spec.commonmark.org/0.31.2/#thematic-breaks).
+
+:::
 
 ### `skipCode`
 
@@ -206,6 +241,10 @@ When specified, specific irregular dash characters are allowed if they match one
 > Type: `boolean` / Default: `true`
 
 `true` allows irregular dashes in all inline code.
+
+## Fix
+
+This rule fixes the irregular dashes by replacing them with the ASCII hyphen-minus (`-`), or with the value configured through the [`override`](#override) option.
 
 ## When Not To Use It
 
