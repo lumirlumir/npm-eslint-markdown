@@ -66,8 +66,11 @@ export default {
   meta: {
     type: 'layout',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Enforce consistent unordered list style',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('consistent-unordered-list-style'),
       recommended: false,
       stylistic: true,
@@ -96,10 +99,6 @@ export default {
     messages: {
       style: 'Unordered list style should be `{{ style }}`.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

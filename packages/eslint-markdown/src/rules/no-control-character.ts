@@ -56,8 +56,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Disallow control character',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('no-control-character'),
       recommended: true,
       stylistic: false,
@@ -110,10 +113,6 @@ export default {
       noControlCharacter: 'Control character `{{ controlCharacter }}` is not allowed.',
       suggestRemove: 'Remove control character `{{ controlCharacter }}`.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

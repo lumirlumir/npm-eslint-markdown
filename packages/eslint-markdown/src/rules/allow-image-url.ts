@@ -60,8 +60,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Enforce the use of allowed or disallowed URLs for images',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('allow-image-url'),
       recommended: false,
       stylistic: false,
@@ -119,10 +122,6 @@ export default {
       emptyAllowImageUrl:
         'The URL `{{ url }}` is not allowed because the list of allowed URLs is empty.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

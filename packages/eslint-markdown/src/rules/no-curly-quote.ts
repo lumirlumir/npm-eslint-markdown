@@ -62,8 +62,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('no-curly-quote'),
       recommended: true,
       stylistic: false,
@@ -105,10 +108,6 @@ export default {
       noCurlyQuote:
         'Curly quotes(`“`, `”`, `‘` or `’`) are not allowed. Use straight quotes(`"` or `\'`) instead.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

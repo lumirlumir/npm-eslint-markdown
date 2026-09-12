@@ -347,8 +347,8 @@ export default defineConfig({
   ${(rule.meta.docs.stylistic ?? false) ? '<code class="rule-emoji">🎨 Stylistic</code>' : ''}
   ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
   ${(rule.meta.hasSuggestions ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
-  ${(rule.meta.dialects.includes('commonmark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
-  ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
+  ${(rule.meta.docs.dialects.includes('CommonMark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
+  ${(rule.meta.docs.dialects.includes('GFM') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>
 <p>
   <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.ts">Rule Source</a></code>
@@ -366,7 +366,8 @@ export default defineConfig({
 </p>
 
 ${
-  !rule.meta.dialects.includes('commonmark') && rule.meta.dialects.includes('gfm')
+  !rule.meta.docs.dialects.includes('CommonMark') &&
+  rule.meta.docs.dialects.includes('GFM')
     ? '<div class="caution custom-block github-alert" bis_skin_checked="1"><p class="custom-block-title">GFM Only</p><p></p><p>This rule applies only when GFM (GitHub Flavored Markdown) is enabled by setting the <code>language</code> mode to <code>markdown/gfm</code>.</p></div>'
     : ''
 }

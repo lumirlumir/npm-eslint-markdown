@@ -49,8 +49,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Disallow git conflict markers',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('no-git-conflict-marker'),
       recommended: true,
       stylistic: false,
@@ -95,10 +98,6 @@ export default {
       noGitConflictMarker:
         'Git conflict marker `{{ gitConflictMarker }}` is not allowed.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

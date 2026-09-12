@@ -73,6 +73,18 @@ export default function ruleTester(
         assert.ok(meta?.type);
       });
 
+      it('`meta.languages` should list the supported Markdown language identifiers', () => {
+        assert.ok(meta?.languages);
+        assert.ok(meta.languages.length > 0);
+        meta.languages.forEach(language => {
+          assert.match(language, /^markdown\/(?:commonmark|gfm)$/);
+        });
+        assert.deepStrictEqual(
+          meta.languages,
+          meta.docs?.dialects.map(dialect => `markdown/${dialect.toLowerCase()}`),
+        );
+      });
+
       it('`meta.docs` should exist', () => {
         assert.ok(meta?.docs);
       });
@@ -80,6 +92,14 @@ export default function ruleTester(
       it('`meta.docs.description` should exist and follow the convention', () => {
         assert.ok(meta?.docs?.description);
         assert.match(meta?.docs?.description, /^(?:Enforce|Require|Disallow) .+[^. ]$/);
+      });
+
+      it("`meta.docs.dialects` should exist and be `'CommonMark'` or `'GFM'`", () => {
+        assert.ok(meta?.docs?.dialects);
+        assert.ok(meta.docs.dialects.length > 0);
+        meta.docs.dialects.forEach(dialect => {
+          assert.match(dialect, /^(?:CommonMark|GFM)$/);
+        });
       });
 
       it('`meta.docs.url` should exist and end with the rule name', () => {
@@ -99,28 +119,20 @@ export default function ruleTester(
         });
       });
 
-      it("`meta.language` should exist and be `'markdown'`", () => {
-        assert.ok(meta?.language);
-        assert.match(meta?.language, /^markdown$/);
-      });
-
-      it("`meta.dialects` should exist and be `'commonmark'` or `'gfm'`", () => {
-        assert.ok(meta?.dialects);
-        assert.ok(meta?.dialects.length > 0);
-        meta?.dialects.forEach(dialect => {
-          assert.match(dialect, /^(?:commonmark|gfm)$/);
-        });
+      it('should omit legacy `meta.language` and `meta.dialects` properties', () => {
+        assert.notProperty(meta, 'language');
+        assert.notProperty(meta, 'dialects');
       });
     });
 
     describe('rule', () => {
-      if (meta?.dialects?.includes('commonmark')) {
+      if (meta?.languages.includes('markdown/commonmark')) {
         describe('commonmark', () => {
           ruleTesterCommonmark.run(ruleName, rule, tests);
         });
       }
 
-      if (meta?.dialects?.includes('gfm')) {
+      if (meta?.languages.includes('markdown/gfm')) {
         describe('gfm', () => {
           ruleTesterGfm.run(ruleName, rule, tests);
         });

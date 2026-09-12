@@ -44,8 +44,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Disallow emojis in text',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('no-emoji'),
       recommended: false,
       stylistic: false,
@@ -76,10 +79,6 @@ export default {
     messages: {
       noEmoji: 'Emojis are not allowed.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

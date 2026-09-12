@@ -57,8 +57,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Enforce the use of capital letters at the beginning of sentences',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('en-capitalization'),
       recommended: false,
       stylistic: false,
@@ -91,10 +94,6 @@ export default {
     messages: {
       enCapitalization: '`{{ lowercase }}` should be capitalized.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

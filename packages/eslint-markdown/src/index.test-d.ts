@@ -39,7 +39,13 @@ plugin.meta.version satisfies string;
 type RuleName = keyof typeof plugin.rules;
 
 ({}) as (typeof plugin.rules)[RuleName]['meta']['type'] satisfies 'problem' | 'layout';
+({}) as (typeof plugin.rules)[RuleName]['meta']['languages'] satisfies (
+  'markdown/commonmark' | 'markdown/gfm'
+)[];
 ({}) as (typeof plugin.rules)[RuleName]['meta']['docs']['description'] satisfies `${'Enforce' | 'Require' | 'Disallow'} ${string}`;
+({}) as (typeof plugin.rules)[RuleName]['meta']['docs']['dialects'] satisfies (
+  'CommonMark' | 'GFM'
+)[];
 ({}) as (typeof plugin.rules)[RuleName]['meta']['docs']['url'] satisfies string;
 ({}) as (typeof plugin.rules)[RuleName]['meta']['docs']['recommended'] satisfies boolean;
 ({}) as (typeof plugin.rules)[RuleName]['meta']['docs']['stylistic'] satisfies boolean;

@@ -55,8 +55,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Enforce the use of heading IDs',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('require-heading-id'),
       recommended: false,
       stylistic: false,
@@ -103,10 +106,6 @@ export default {
       headingIdNever:
         'Headings should not have an ID attribute. Remove the `{{ headingId }}`.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

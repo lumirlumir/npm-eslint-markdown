@@ -66,8 +66,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Disallow irregular whitespace',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('no-irregular-whitespace'),
       recommended: true,
       stylistic: false,
@@ -126,10 +129,6 @@ export default {
       noIrregularWhitespace:
         'Irregular whitespace `{{ irregularWhitespace }}` is not allowed.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

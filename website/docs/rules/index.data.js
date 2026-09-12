@@ -38,8 +38,8 @@ const ruleMetas = Object.keys(rules).map(
       stylistic: rules[rule].meta.docs.stylistic ?? false,
       fixable: rules[rule].meta.fixable ?? false,
       suggestion: rules[rule].meta.hasSuggestions ?? false,
-      commonmark: rules[rule].meta.dialects.includes('commonmark') ?? false,
-      gfm: rules[rule].meta.dialects.includes('gfm') ?? false,
+      commonmark: rules[rule].meta.docs.dialects.includes('CommonMark') ?? false,
+      gfm: rules[rule].meta.docs.dialects.includes('GFM') ?? false,
     }),
 );
 

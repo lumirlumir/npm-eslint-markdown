@@ -49,8 +49,11 @@ export default {
   meta: {
     type: 'problem',
 
+    languages: ['markdown/commonmark', 'markdown/gfm'],
+
     docs: {
       description: 'Disallow double consecutive punctuation in text',
+      dialects: ['CommonMark', 'GFM'],
       url: URL_RULE_DOCS('no-double-punctuation'),
       recommended: false,
       stylistic: false,
@@ -92,10 +95,6 @@ export default {
       suggestReplaceWithRight:
         'Replace `{{ punctuation }}` with the right punctuation mark `{{ rightPunctuation }}`.',
     },
-
-    language: 'markdown',
-
-    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {
