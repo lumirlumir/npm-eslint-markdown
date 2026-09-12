@@ -105,7 +105,7 @@ export default {
           override: {
             type: 'object',
             properties: Object.fromEntries(
-              irregularDashes.map(key => [key, { type: 'string' }]),
+              irregularDashes.map(irregularDash => [irregularDash, { type: 'string' }]),
             ),
             additionalProperties: false,
           },
