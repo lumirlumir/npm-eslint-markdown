@@ -257,6 +257,26 @@ export default defineConfig([
 
 :::
 
+### Custom Plugin Namespaces
+
+You can register `eslint-markdown` under a name other than `md`. When you use a string in `extends`, `defineConfig()` maps the inherited rule IDs to that name, so use the same prefix when overriding rules.
+
+```js [eslint.config.mjs]
+import { defineConfig } from 'eslint/config';
+import md from 'eslint-markdown';
+
+export default defineConfig([
+  {
+    files: ['**/*.md'],
+    plugins: { custommd: md },
+    extends: ['custommd/recommended'],
+    rules: {
+      'custommd/no-double-space': 'off',
+    },
+  },
+]);
+```
+
 ## Configurations
 
 ### `recommended`

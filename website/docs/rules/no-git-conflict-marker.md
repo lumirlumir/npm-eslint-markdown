@@ -85,6 +85,24 @@ Examples of **incorrect** code for this rule:
   ## Next Section
   ````
 
+#### With `{ skipMath: false }` Option
+
+  ```md eslint-check
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipMath: false }] -->
+
+  # My Document
+
+  $$
+  <<<<<<< HEAD
+  x = 1
+  =======
+  x = 2
+  >>>>>>> branch-name
+  $$
+
+  ## Next Section
+  ```
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
@@ -145,11 +163,30 @@ Examples of **correct** code for this rule:
   ## Next Section
   ````  
 
+#### With `{ skipMath: true }` Option
+
+  ```md eslint-check
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipMath: true }] -->
+
+  # My Document
+
+  $$
+  <<<<<<< HEAD
+  x = 1
+  =======
+  x = 2
+  >>>>>>> branch-name
+  $$
+
+  ## Next Section
+  ```
+
 ## Options
 
 ```js
 'md/no-git-conflict-marker': ['error', {
   skipCode: true,
+  skipMath: true,
 }]
 ```
 
@@ -158,6 +195,16 @@ Examples of **correct** code for this rule:
 > Type: `boolean | string[]` / Default: `true`
 
 `true` allows Git conflict markers in all code blocks, while `string[]` allows Git conflict markers only in code blocks for the specified languages.
+
+### `skipMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows Git conflict markers in all math blocks.
+
+::: tip NOTE
+This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
+:::
 
 ## Fix
 

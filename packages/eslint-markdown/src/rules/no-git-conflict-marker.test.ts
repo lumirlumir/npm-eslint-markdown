@@ -111,6 +111,79 @@ ruleTester('no-git-conflict-marker', rule, {
         },
       ],
     },
+    {
+      name: '`skipMath: true` default: math block should be skipped (`>`)',
+      code: `$$
+>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
+$$`,
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true` default: math block should be skipped (`=`)',
+      code: `$$
+=======
+$$`,
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true` default: math block should be skipped (`<`)',
+      code: `$$
+<<<<<<< HEAD
+$$`,
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true` explicit option: math block should be skipped',
+      code: `$$
+<<<<<<< HEAD
+=======
+>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
+$$`,
+      options: [
+        {
+          skipMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipCode: false` options: math block should be skipped',
+      code: `$$
+<<<<<<< HEAD
+$$`,
+      options: [
+        {
+          skipCode: false,
+          skipMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false, skipCode: true` options: code block should be skipped',
+      code: `\`\`\`md
+<<<<<<< HEAD
+\`\`\``,
+      options: [
+        {
+          skipCode: true,
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
   ],
 
   invalid: [
@@ -410,6 +483,217 @@ ruleTester('no-git-conflict-marker', rule, {
       options: [
         {
           skipCode: ['js', 'ts'],
+        },
+      ],
+    },
+    {
+      name: '`skipMath: false` option: math block should not be skipped (`<`)',
+      code: `$$
+<<<<<<< HEAD
+$$`,
+      output: `$$
+$$`,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false` option: math block should not be skipped (`=`)',
+      code: `$$
+=======
+$$`,
+      output: `$$
+$$`,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '=======',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false` option: math block should not be skipped (`>`)',
+      code: `$$
+>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
+$$`,
+      output: `$$
+$$`,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: 'Markers outside math blocks should still be reported when math parsing is enabled',
+      code: `$$
+x = 1
+$$
+<<<<<<< HEAD
+outside`,
+      output: `$$
+x = 1
+$$
+outside`,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false, skipCode: true` options: code block is skipped but math block is reported',
+      code: `\`\`\`md
+<<<<<<< HEAD
+\`\`\`
+$$
+<<<<<<< HEAD
+$$`,
+      output: `\`\`\`md
+<<<<<<< HEAD
+\`\`\`
+$$
+$$`,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+      options: [
+        {
+          skipCode: true,
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipCode: false` options: math block is skipped but code block is reported',
+      code: `$$
+<<<<<<< HEAD
+$$
+\`\`\`md
+<<<<<<< HEAD
+\`\`\``,
+      output: `$$
+<<<<<<< HEAD
+$$
+\`\`\`md
+\`\`\``,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+      options: [
+        {
+          skipCode: false,
+          skipMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: 'Math parsing disabled: `skipMath: true` does not exclude text enclosed in math delimiters',
+      code: `$$
+<<<<<<< HEAD
+$$`,
+      output: `$$
+$$`,
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
         },
       ],
     },

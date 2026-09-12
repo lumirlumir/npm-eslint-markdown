@@ -41,6 +41,7 @@ This section is currently under construction and will be updated soon.
 | `markdownlint` | `eslint-markdown` or `@eslint/markdown` |
 | :------------- | :-------------------------------------- |
 | [`MD001` - Heading levels should only increment by one level at a time](https://github.com/DavidAnson/markdownlint/blob/main/doc/md001.md#md001---heading-levels-should-only-increment-by-one-level-at-a-time) :white_check_mark: | [`markdown/heading-increment`](https://github.com/eslint/markdown/blob/main/docs/rules/heading-increment.md#heading-increment) |
+| [`MD003` - Heading style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md003.md#md003---heading-style) :white_check_mark: | [`md/consistent-heading-style`](../rules/consistent-heading-style.md) |
 | [`MD004` - Unordered list style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md004.md#md004---unordered-list-style) :white_check_mark: | [`md/consistent-unordered-list-style`](../rules/consistent-unordered-list-style.md) |
 | [`MD010` - Hard tabs](https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md#md010---hard-tabs) :white_check_mark: | [`md/no-tab`](../rules/no-tab.md) |
 | [`MD012` - Multiple consecutive blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md012.md#md012---multiple-consecutive-blank-lines) :white_check_mark: | [`md/no-consecutive-blank-line`](../rules/no-consecutive-blank-line.md) |
@@ -70,6 +71,7 @@ This section is currently under construction and will be updated soon.
 | :------------ | :-------------------------------------- |
 | [`remark-lint-code-block-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-code-block-style#remark-lint-code-block-style) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`remark-lint-emphasis-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-emphasis-marker#remark-lint-emphasis-marker) :white_check_mark: | [`md/consistent-emphasis-style`](../rules/consistent-emphasis-style.md) |
+| [`remark-lint-heading-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-heading-style#remark-lint-heading-style) :warning: | [`md/consistent-heading-style`](../rules/consistent-heading-style.md) |
 | [`remark-lint-fenced-code-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-fenced-code-marker#remark-lint-fenced-code-marker) :warning: | [`md/consistent-code-style`](../rules/consistent-code-style.md) |
 | [`remark-lint-no-consecutive-blank-lines`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-consecutive-blank-lines#remark-lint-no-consecutive-blank-lines) :white_check_mark: | [`md/no-consecutive-blank-line`](../rules/no-consecutive-blank-line.md) |
 | [`remark-lint-no-heading-punctuation`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-heading-punctuation#remark-lint-no-heading-punctuation) :warning: | [`md/no-trailing-heading-punctuation`](../rules/no-trailing-heading-punctuation.md) |

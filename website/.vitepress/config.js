@@ -297,7 +297,14 @@ export default defineConfig({
         errorRendering: 'hover',
         explicitTrigger: /\beslint-check\b/,
         twoslasher: createTwoslasher({
-          eslintConfig: [md.configs.base],
+          eslintConfig: [
+            md.configs.base,
+            {
+              languageOptions: {
+                math: true,
+              },
+            },
+          ],
         }),
       }),
     ],
