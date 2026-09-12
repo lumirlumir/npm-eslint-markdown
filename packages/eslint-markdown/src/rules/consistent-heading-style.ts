@@ -211,6 +211,7 @@ export default {
 
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
 
+        // The final style checks are exhaustive after matching styles return early.
         if (currentHeadingStyle === 'atx') {
           if (expectedHeadingStyle === 'atx-closed') {
             if (node.children.length === 0) {
@@ -234,7 +235,9 @@ export default {
                 yield fixer.insertTextAfter(node, '#'.repeat(node.depth));
               });
             }
+            /* v8 ignore start */
           } else if (expectedHeadingStyle === 'setext') {
+            /* v8 ignore stop */
             if (node.children.length === 0) {
               // Empty ATX headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
@@ -278,7 +281,9 @@ export default {
                 return fixer.removeRange([lastChildNodeEndOffset, nodeEndOffset]);
               });
             }
+            /* v8 ignore start */
           } else if (expectedHeadingStyle === 'setext') {
+            /* v8 ignore stop */
             if (node.children.length === 0) {
               // Empty ATX Closed headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
@@ -307,7 +312,9 @@ export default {
               reportStyle(node);
             }
           }
+          /* v8 ignore start */
         } else if (currentHeadingStyle === 'setext') {
+          /* v8 ignore stop */
           const firstChildNode = node.children[0];
           const lastChildNode = node.children[node.children.length - 1];
 
@@ -342,7 +349,9 @@ export default {
             } else /* Multiline Heading */ {
               reportStyle(node);
             }
+            /* v8 ignore start */
           } else if (expectedHeadingStyle === 'atx-closed') {
+            /* v8 ignore stop */
             if (start.line === end.line /* Singleline Heading */) {
               reportStyle(node, function* fix(fixer) {
                 const [, lastChildNodeEndOffset] = sourceCode.getRange(lastChildNode);
