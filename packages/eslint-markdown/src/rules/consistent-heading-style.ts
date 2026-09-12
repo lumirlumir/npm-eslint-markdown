@@ -8,6 +8,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import type { Heading } from 'mdast';
 import { isBlankLine } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
@@ -99,6 +100,23 @@ export default {
     let currentHeadingStyle: 'atx' | 'atx-closed' | 'setext' | null = null;
     let expectedHeadingStyle: 'atx' | 'atx-closed' | 'setext' | null = null;
 
+    function reportStyle(
+      node: Heading,
+      fix: NonNullable<Parameters<typeof context.report>[0]['fix']> | null = null,
+    ) {
+      context.report({
+        node,
+
+        messageId: 'style',
+
+        data: {
+          style: expectedHeadingStyle,
+        },
+
+        fix,
+      });
+    }
+
     return {
       // The `heading` selector is more general, so it is visited before the other `heading[xxx]` selectors.
       heading(node) {
@@ -140,27 +158,8 @@ export default {
 
       'heading:exit'(node) {
         if (currentHeadingStyle === expectedHeadingStyle) {
+          // Early return if the current heading style matches the expected heading style.
           return;
-        }
-
-        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const firstChildNode = node.children[0];
-        const lastChildNode = node.children[node.children.length - 1];
-
-        function reportStyle(
-          fix: NonNullable<Parameters<typeof context.report>[0]['fix']> | null = null,
-        ) {
-          context.report({
-            node,
-
-            messageId: 'style',
-
-            data: {
-              style: expectedHeadingStyle,
-            },
-
-            fix,
-          });
         }
 
         /*
@@ -200,7 +199,9 @@ export default {
 
         if (currentHeadingStyle === 'atx') {
           if (expectedHeadingStyle === 'atx-closed') {
-            reportStyle(fixer =>
+            const [, nodeEndOffset] = sourceCode.getRange(node);
+
+            reportStyle(node, fixer =>
               fixer.replaceTextRange(
                 [nodeEndOffset, nodeEndOffset],
                 ` ${'#'.repeat(node.depth)}`,
@@ -210,8 +211,12 @@ export default {
             if (node.children.length === 0) {
               // Empty ATX headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
-              reportStyle();
+              reportStyle(node);
             } else {
+              const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+              const firstChildNode = node.children[0];
+              const lastChildNode = node.children[node.children.length - 1];
+
               const [contentStartOffset] = sourceCode.getRange(firstChildNode);
               const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
 
@@ -239,33 +244,40 @@ export default {
                 )}`;
 
                 // Report every mismatch even when no semantics-preserving fix is available.
-                reportStyle(fixer =>
+                reportStyle(node, fixer =>
                   fixer.replaceTextRange(
                     [nodeStartOffset, nodeEndOffset],
                     replacementText,
                   ),
                 );
               } else {
-                reportStyle();
+                reportStyle(node);
               }
             }
           }
         } else if (currentHeadingStyle === 'atx-closed') {
           if (expectedHeadingStyle === 'atx') {
+            const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+            const lastChildNode = node.children[node.children.length - 1];
+
             // An empty closed heading has no child, so remove everything after its opening sequence.
             const closingStartOffset = lastChildNode
               ? sourceCode.getRange(lastChildNode)[1]
               : nodeStartOffset + node.depth;
 
-            reportStyle(fixer =>
+            reportStyle(node, fixer =>
               fixer.replaceTextRange([closingStartOffset, nodeEndOffset], ''),
             );
           } else if (expectedHeadingStyle === 'setext') {
             if (node.children.length === 0) {
               // Empty ATX Closed headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
-              reportStyle();
+              reportStyle(node);
             } else {
+              const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+              const firstChildNode = node.children[0];
+              const lastChildNode = node.children[node.children.length - 1];
+
               const [contentStartOffset] = sourceCode.getRange(firstChildNode);
               const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
 
@@ -293,18 +305,22 @@ export default {
                 )}`;
 
                 // Report every mismatch even when no semantics-preserving fix is available.
-                reportStyle(fixer =>
+                reportStyle(node, fixer =>
                   fixer.replaceTextRange(
                     [nodeStartOffset, nodeEndOffset],
                     replacementText,
                   ),
                 );
               } else {
-                reportStyle();
+                reportStyle(node);
               }
             }
           }
         } else if (currentHeadingStyle === 'setext') {
+          const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+          const firstChildNode = node.children[0];
+          const lastChildNode = node.children[node.children.length - 1];
+
           const [contentStartOffset] = sourceCode.getRange(firstChildNode);
           const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
 
@@ -325,7 +341,7 @@ export default {
               '\\',
             );
 
-            reportStyle(fixer => {
+            reportStyle(node, fixer => {
               if (start.line === end.line /* Singleline Heading */) {
                 return fixer.replaceTextRange(
                   [nodeStartOffset, nodeEndOffset],
@@ -336,7 +352,7 @@ export default {
               }
             });
           } else if (expectedHeadingStyle === 'atx-closed') {
-            reportStyle(fixer => {
+            reportStyle(node, fixer => {
               if (start.line === end.line /* Singleline Heading */) {
                 return fixer.replaceTextRange(
                   [nodeStartOffset, nodeEndOffset],

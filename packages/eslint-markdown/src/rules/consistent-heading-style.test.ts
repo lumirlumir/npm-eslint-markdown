@@ -186,7 +186,106 @@ H2
   ],
 
   invalid: [
+    // Possible fix combinations
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - h1',
+      code: '#',
+      output: '# #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - h2',
+      code: '##',
+      output: '## ##',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - h3',
+      code: '###',
+      output: '### ###',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - h4',
+      code: '####',
+      output: '#### ####',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 5,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - h5',
+      code: '#####',
+      output: '##### #####',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 6,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - h6',
+      code: '######',
+      output: '###### ######',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 7,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+
     // option: `style: 'consistent'`
+    // TODO: from here
     {
       name: '`consistent` style - uses the first ATX heading',
       code: `# Heading
@@ -499,22 +598,6 @@ Heading
           column: 1,
           endLine: 6,
           endColumn: 8,
-          data: { style: 'atx-closed' },
-        },
-      ],
-    },
-    {
-      name: '`atx-closed` style - converts an empty ATX heading',
-      code: '##',
-      output: '## ##',
-      options: [{ style: 'atx-closed' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 3,
           data: { style: 'atx-closed' },
         },
       ],
