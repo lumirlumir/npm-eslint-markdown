@@ -315,6 +315,311 @@ H2
         },
       ],
     },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - mixed spaces and tabs after hash',
+      code: '# \t ',
+      output: '# \t #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 5,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - inside a blockquote',
+      code: '> #',
+      output: '> # #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - space after hash inside a blockquote',
+      code: '> # ',
+      output: '> # #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 5,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - tab before a CRLF line ending',
+      code: '#\t\r\nParagraph',
+      output: '#\t#\r\nParagraph',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - h1',
+      code: '# Heading',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 10,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - h2',
+      code: '## Heading',
+      output: '## Heading ##',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - h3',
+      code: '### Heading',
+      output: '### Heading ###',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - h4',
+      code: '#### Heading',
+      output: '#### Heading ####',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - h5',
+      code: '##### Heading',
+      output: '##### Heading #####',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - h6',
+      code: '###### Heading',
+      output: '###### Heading ######',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - space after content',
+      code: '# Heading ',
+      output: '# Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - tab after content',
+      code: '# Heading\t',
+      output: '# Heading\t#',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - mixed spaces and tabs after content',
+      code: '# Heading \t ',
+      output: '# Heading \t #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - strong emphasis without trailing whitespace',
+      code: '# **Heading**',
+      output: '# **Heading** #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - tab after strong emphasis',
+      code: '# **Heading**\t',
+      output: '# **Heading**\t#',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - escaped trailing hash',
+      code: '# Heading \\#',
+      output: '# Heading \\# #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - inside a blockquote',
+      code: '> # Heading',
+      output: '> # Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - space after content inside a blockquote',
+      code: '> # Heading ',
+      output: '> # Heading #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 13,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧) - tab before a CRLF line ending',
+      code: '# Heading\t\r\nParagraph',
+      output: '# Heading\t#\r\nParagraph',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 11,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
 
     // option: `style: 'consistent'`
     // TODO: from here

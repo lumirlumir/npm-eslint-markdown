@@ -210,12 +210,17 @@ export default {
                 yield fixer.insertTextAfter(node, '#'.repeat(node.depth));
               });
             } else {
-              reportStyle(node, fixer =>
-                fixer.replaceTextRange(
-                  [nodeEndOffset, nodeEndOffset],
-                  ` ${'#'.repeat(node.depth)}`,
-                ),
-              );
+              reportStyle(node, function* fix(fixer) {
+                const [, lastChildNodeEndOffset] = sourceCode.getRange(
+                  node.children[node.children.length - 1],
+                );
+
+                if (lastChildNodeEndOffset === nodeEndOffset) {
+                  yield fixer.insertTextAfter(node, ' ');
+                }
+
+                yield fixer.insertTextAfter(node, '#'.repeat(node.depth));
+              });
             }
           } else if (expectedHeadingStyle === 'setext') {
             if (node.children.length === 0) {
@@ -266,16 +271,22 @@ export default {
           }
         } else if (currentHeadingStyle === 'atx-closed') {
           if (expectedHeadingStyle === 'atx') {
-            const lastChildNode = node.children[node.children.length - 1];
+            if (node.children.length === 0) {
+              reportStyle(node, function* fix(fixer) {
+                yield fixer.removeRange([
+                  nodeStartOffset + node.depth,
+                  nodeEndOffset,
+                ]);
+              });
+            } else {
+              reportStyle(node, function* fix(fixer) {
+                const [, lastChildNodeEndOffset] = sourceCode.getRange(
+                  node.children[node.children.length - 1],
+                );
 
-            // An empty closed heading has no child, so remove everything after its opening sequence.
-            const closingStartOffset = lastChildNode
-              ? sourceCode.getRange(lastChildNode)[1]
-              : nodeStartOffset + node.depth;
-
-            reportStyle(node, fixer =>
-              fixer.replaceTextRange([closingStartOffset, nodeEndOffset], ''),
-            );
+                yield fixer.removeRange([lastChildNodeEndOffset, nodeEndOffset]);
+              });
+            }
           } else if (expectedHeadingStyle === 'setext') {
             if (node.children.length === 0) {
               // Empty ATX Closed headings cannot be converted to Setext headings,
