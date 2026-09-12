@@ -9,7 +9,6 @@
 // --------------------------------------------------------------------------------
 
 import type { Heading } from 'mdast';
-import { isBlankLine } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -19,7 +18,7 @@ import type { RuleModule } from '../core/types.js';
 
 type HeadingStyle = (typeof HEADING_STYLE)[number];
 type RuleOptions = [{ style: HeadingStyle }];
-type MessageIds = 'style';
+type MessageIds = 'style' | 'suggestAtxToSetext' | 'suggestATXClosedToSetext';
 
 // --------------------------------------------------------------------------------
 // Helper
@@ -43,10 +42,13 @@ const HEADING_STYLE = [
 const trailingAtxHeadingHashRegex = /[ \t]#+[ \t]*$/;
 
 /**
- * Matches heading content that may start a block-level construct after conversion to Setext.
- * @see https://spec.commonmark.org/0.31.2/#blocks-and-inlines
+ * Returns the setext marker for the given heading depth.
+ * @param depth The depth of the heading (`1` or `2`).
+ * @returns The setext marker for the given heading depth.
  */
-const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
+function getSetextMarker(depth: Heading['depth']): string {
+  return depth === 1 ? '=' : '-';
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -64,6 +66,8 @@ export default {
     },
 
     fixable: 'code',
+
+    hasSuggestions: true,
 
     schema: [
       {
@@ -85,6 +89,8 @@ export default {
 
     messages: {
       style: 'Heading style should be `{{ style }}`.',
+      suggestAtxToSetext: 'Replace ATX heading with a Setext heading.',
+      suggestATXClosedToSetext: 'Replace ATX closed heading with a Setext heading.',
     },
 
     language: 'markdown',
@@ -103,6 +109,7 @@ export default {
     function reportStyle(
       node: Heading,
       fix: NonNullable<Parameters<typeof context.report>[0]['fix']> | null = null,
+      ...suggest: NonNullable<Parameters<typeof context.report>[0]['suggest']>
     ) {
       context.report({
         node,
@@ -114,6 +121,8 @@ export default {
         },
 
         fix,
+
+        suggest,
       });
     }
 
@@ -176,6 +185,7 @@ export default {
          *   2-1. If `atx` is empty, it cannot be converted to `setext`. (❌)
          *   2-2. If `atx` is not empty:
          *     2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡)
+         *            Some edge cases are unsafe: `# > Heading`, `# - Heading`, and `# 1. Heading`.
          *     2-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌)
          * 3. Converting `atx-closed` to `atx`.
          *   3-1. If `atx-closed` is empty, it can be converted to `atx`. (🔧)
@@ -184,6 +194,7 @@ export default {
          *   4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌)
          *   4-2. If `atx-closed` is not empty:
          *     4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡)
+         *            Some edge cases are unsafe: `# > Heading #`, `# - Heading #`, and `# 1. Heading #`.
          *     4-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌)
          * 5. Converting `setext` to `atx`.
          *   5-1. Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
@@ -227,46 +238,28 @@ export default {
               // Empty ATX headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
               reportStyle(node);
+            } else if (node.depth <= SETEXT_MAX_DEPTH) {
+              reportStyle(node, null, {
+                messageId: 'suggestAtxToSetext',
+
+                *fix(fixer) {
+                  const [firstChildNodeStartOffset] = sourceCode.getRange(
+                    node.children[0],
+                  );
+                  const [, lastChildNodeEndOffset] = sourceCode.getRange(
+                    node.children[node.children.length - 1],
+                  );
+
+                  yield fixer.removeRange([nodeStartOffset, firstChildNodeStartOffset]);
+
+                  yield fixer.replaceTextRange(
+                    [lastChildNodeEndOffset, nodeEndOffset],
+                    `\n${getSetextMarker(node.depth).repeat(lastChildNodeEndOffset - firstChildNodeStartOffset)}`,
+                  );
+                },
+              });
             } else {
-              const firstChildNode = node.children[0];
-              const lastChildNode = node.children[node.children.length - 1];
-
-              const [contentStartOffset] = sourceCode.getRange(firstChildNode);
-              const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
-
-              const headingContent = sourceCode.text.slice(
-                contentStartOffset,
-                contentEndOffset,
-              );
-
-              if (
-                !potentialBlockStartRegex.test(headingContent) &&
-                node.depth <= SETEXT_MAX_DEPTH &&
-                sourceCode.getParent(node)?.type === 'root' &&
-                // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
-                // Treat a missing preceding line at the start of the document as blank.
-                isBlankLine(
-                  sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
-                )
-              ) {
-                const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
-
-                const underlineMarker = node.depth === 1 ? '=' : '-';
-
-                const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
-                  headingContent.length,
-                )}`;
-
-                // Report every mismatch even when no semantics-preserving fix is available.
-                reportStyle(node, fixer =>
-                  fixer.replaceTextRange(
-                    [nodeStartOffset, nodeEndOffset],
-                    replacementText,
-                  ),
-                );
-              } else {
-                reportStyle(node);
-              }
+              reportStyle(node);
             }
           }
         } else if (currentHeadingStyle === 'atx-closed') {
@@ -289,46 +282,28 @@ export default {
               // Empty ATX Closed headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
               reportStyle(node);
+            } else if (node.depth <= SETEXT_MAX_DEPTH) {
+              reportStyle(node, null, {
+                messageId: 'suggestATXClosedToSetext',
+
+                *fix(fixer) {
+                  const [firstChildNodeStartOffset] = sourceCode.getRange(
+                    node.children[0],
+                  );
+                  const [, lastChildNodeEndOffset] = sourceCode.getRange(
+                    node.children[node.children.length - 1],
+                  );
+
+                  yield fixer.removeRange([nodeStartOffset, firstChildNodeStartOffset]);
+
+                  yield fixer.replaceTextRange(
+                    [lastChildNodeEndOffset, nodeEndOffset],
+                    `\n${getSetextMarker(node.depth).repeat(lastChildNodeEndOffset - firstChildNodeStartOffset)}`,
+                  );
+                },
+              });
             } else {
-              const firstChildNode = node.children[0];
-              const lastChildNode = node.children[node.children.length - 1];
-
-              const [contentStartOffset] = sourceCode.getRange(firstChildNode);
-              const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
-
-              const headingContent = sourceCode.text.slice(
-                contentStartOffset,
-                contentEndOffset,
-              );
-
-              if (
-                !potentialBlockStartRegex.test(headingContent) &&
-                node.depth <= SETEXT_MAX_DEPTH &&
-                sourceCode.getParent(node)?.type === 'root' &&
-                // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
-                // Treat a missing preceding line at the start of the document as blank.
-                isBlankLine(
-                  sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
-                )
-              ) {
-                const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
-
-                const underlineMarker = node.depth === 1 ? '=' : '-';
-
-                const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
-                  headingContent.length,
-                )}`;
-
-                // Report every mismatch even when no semantics-preserving fix is available.
-                reportStyle(node, fixer =>
-                  fixer.replaceTextRange(
-                    [nodeStartOffset, nodeEndOffset],
-                    replacementText,
-                  ),
-                );
-              } else {
-                reportStyle(node);
-              }
+              reportStyle(node);
             }
           }
         } else if (currentHeadingStyle === 'setext') {
