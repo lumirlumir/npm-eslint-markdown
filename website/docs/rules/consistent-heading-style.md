@@ -202,7 +202,9 @@ The other values enforce the following styles:
 
 This rule fixes headings by converting them to the configured style when the conversion preserves their Markdown structure.
 
-Some reported headings are not fixed. This includes level 3 through 6 headings when using the `setext` style, empty headings or nested ATX headings that would need to become Setext, and multiline Setext headings that would need to become ATX.
+## Suggestion
+
+This rule provides suggestions for converting ATX and closed ATX headings to Setext when possible. Review the suggested changes before applying them, as they may affect how the Markdown is interpreted.
 
 ## Prior Art
 
