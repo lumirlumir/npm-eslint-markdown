@@ -622,6 +622,135 @@ H2
     },
 
     {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - h1',
+      code: '#',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - h2',
+      code: '##',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - h3',
+      code: '###',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - h4',
+      code: '####',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 5,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - h5',
+      code: '#####',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 6,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - h6',
+      code: '######',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 7,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - space after hash',
+      code: '# ',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '2-1. If `atx` is empty, it cannot be converted to `setext`. (❌) - tab after hash',
+      code: '#\t',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+
+    {
       name: '3-1. If `atx-closed` is empty, it can be converted to `atx`. (🔧) - h1',
       code: '# #',
       output: '#',
@@ -1119,6 +1248,135 @@ H2
       ],
     },
 
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - h1',
+      code: '# #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - h2',
+      code: '## ##',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 6,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - h3',
+      code: '### ###',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - h4',
+      code: '#### ####',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 10,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - h5',
+      code: '##### #####',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 12,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - h6',
+      code: '###### ######',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 14,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - extra space before closing hash',
+      code: '#  #',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 5,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌) - tab before closing hash',
+      code: '#\t#',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+
     // option: `style: 'consistent'`
     // TODO: from here
     {
@@ -1556,22 +1814,6 @@ Heading
           column: 3,
           endLine: 1,
           endColumn: 12,
-          data: { style: 'setext' },
-        },
-      ],
-    },
-    {
-      name: '`setext` style - does not fix an empty ATX heading',
-      code: '#',
-      output: null,
-      options: [{ style: 'setext' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 2,
           data: { style: 'setext' },
         },
       ],
