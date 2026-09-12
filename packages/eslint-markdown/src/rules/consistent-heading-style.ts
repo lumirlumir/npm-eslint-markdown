@@ -197,23 +197,32 @@ export default {
          *     6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌)
          */
 
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+
         if (currentHeadingStyle === 'atx') {
           if (expectedHeadingStyle === 'atx-closed') {
-            const [, nodeEndOffset] = sourceCode.getRange(node);
+            if (node.children.length === 0) {
+              reportStyle(node, function* fix(fixer) {
+                if (nodeStartOffset + node.depth === nodeEndOffset) {
+                  yield fixer.insertTextAfter(node, ' ');
+                }
 
-            reportStyle(node, fixer =>
-              fixer.replaceTextRange(
-                [nodeEndOffset, nodeEndOffset],
-                ` ${'#'.repeat(node.depth)}`,
-              ),
-            );
+                yield fixer.insertTextAfter(node, '#'.repeat(node.depth));
+              });
+            } else {
+              reportStyle(node, fixer =>
+                fixer.replaceTextRange(
+                  [nodeEndOffset, nodeEndOffset],
+                  ` ${'#'.repeat(node.depth)}`,
+                ),
+              );
+            }
           } else if (expectedHeadingStyle === 'setext') {
             if (node.children.length === 0) {
               // Empty ATX headings cannot be converted to Setext headings,
               // so report the mismatch without a fix.
               reportStyle(node);
             } else {
-              const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
               const firstChildNode = node.children[0];
               const lastChildNode = node.children[node.children.length - 1];
 
@@ -257,7 +266,6 @@ export default {
           }
         } else if (currentHeadingStyle === 'atx-closed') {
           if (expectedHeadingStyle === 'atx') {
-            const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
             const lastChildNode = node.children[node.children.length - 1];
 
             // An empty closed heading has no child, so remove everything after its opening sequence.
@@ -274,7 +282,6 @@ export default {
               // so report the mismatch without a fix.
               reportStyle(node);
             } else {
-              const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
               const firstChildNode = node.children[0];
               const lastChildNode = node.children[node.children.length - 1];
 
@@ -317,7 +324,6 @@ export default {
             }
           }
         } else if (currentHeadingStyle === 'setext') {
-          const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
           const firstChildNode = node.children[0];
           const lastChildNode = node.children[node.children.length - 1];
 

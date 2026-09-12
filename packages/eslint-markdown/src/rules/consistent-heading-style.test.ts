@@ -283,6 +283,38 @@ H2
         },
       ],
     },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - space after hash',
+      code: '# ',
+      output: '# #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
+    {
+      name: '1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧) - tab after hash',
+      code: '#\t',
+      output: '#\t#',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
 
     // option: `style: 'consistent'`
     // TODO: from here
