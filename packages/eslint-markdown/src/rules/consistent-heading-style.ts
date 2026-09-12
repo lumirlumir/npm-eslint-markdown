@@ -1,6 +1,7 @@
 /**
  * @fileoverview Rule to enforce consistent heading style.
  * @author Ga eun Lee(tooth-is-silver)
+ * @author lumir(lumirlumir)
  * @see https://github.com/DavidAnson/markdownlint/blob/v0.41.1/lib/md003.mjs
  */
 

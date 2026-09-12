@@ -1,6 +1,7 @@
 /**
  * @fileoverview Test for `consistent-heading-style.ts`.
  * @author Ga eun Lee(tooth-is-silver)
+ * @author lumir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
