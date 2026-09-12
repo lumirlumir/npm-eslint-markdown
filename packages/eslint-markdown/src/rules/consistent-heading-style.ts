@@ -19,7 +19,7 @@ import type { RuleModule } from '../core/types.js';
 
 type HeadingStyle = (typeof HEADING_STYLE)[number];
 type RuleOptions = [{ style: HeadingStyle }];
-type MessageIds = 'style' | 'suggestAtxToSetext' | 'suggestATXClosedToSetext';
+type MessageIds = 'style' | 'suggestAtxToSetext' | 'suggestAtxClosedToSetext';
 
 // --------------------------------------------------------------------------------
 // Helper
@@ -91,7 +91,7 @@ export default {
     messages: {
       style: 'Heading style should be `{{ style }}`.',
       suggestAtxToSetext: 'Replace ATX heading with a Setext heading.',
-      suggestATXClosedToSetext: 'Replace ATX closed heading with a Setext heading.',
+      suggestAtxClosedToSetext: 'Replace ATX closed heading with a Setext heading.',
     },
 
     language: 'markdown',
@@ -285,7 +285,7 @@ export default {
               reportStyle(node);
             } else if (node.depth <= SETEXT_MAX_DEPTH) {
               reportStyle(node, null, {
-                messageId: 'suggestATXClosedToSetext',
+                messageId: 'suggestAtxClosedToSetext',
 
                 *fix(fixer) {
                   const [firstChildNodeStartOffset] = sourceCode.getRange(

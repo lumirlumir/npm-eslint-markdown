@@ -1771,7 +1771,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======',
             },
           ],
@@ -1793,7 +1793,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n-------',
             },
           ],
@@ -1815,7 +1815,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======',
             },
           ],
@@ -1837,7 +1837,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======',
             },
           ],
@@ -1859,7 +1859,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======',
             },
           ],
@@ -1881,7 +1881,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: '**Heading**\n===========',
             },
           ],
@@ -1903,7 +1903,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: '**Heading**\n===========',
             },
           ],
@@ -1925,7 +1925,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading \\#\n==========',
             },
           ],
@@ -1947,7 +1947,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======\r\nParagraph',
             },
           ],
@@ -1969,7 +1969,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======',
             },
           ],
@@ -1991,7 +1991,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======',
             },
           ],
@@ -2013,7 +2013,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n-------',
             },
           ],
@@ -2035,7 +2035,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Paragraph\n\nHeading\n=======',
             },
           ],
@@ -2057,7 +2057,7 @@ H2
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Paragraph\nHeading\n=======',
             },
           ],
@@ -3061,7 +3061,7 @@ Heading
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'Heading\n=======\n\n## Heading\n\nHeading\n-------',
             },
           ],
@@ -3225,7 +3225,7 @@ Heading
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: '# Heading\n\nHeading\n-------\n\nHeading\n-------',
             },
           ],
@@ -3345,7 +3345,7 @@ Heading
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: 'H1\n==\n\n## H2 ##\n\n### H3\n\n#### H4 ####',
             },
           ],
@@ -3359,7 +3359,7 @@ Heading
           data: { style: 'setext' },
           suggestions: [
             {
-              messageId: 'suggestATXClosedToSetext',
+              messageId: 'suggestAtxClosedToSetext',
               output: '# H1 #\n\nH2\n--\n\n### H3\n\n#### H4 ####',
             },
           ],
