@@ -19,7 +19,7 @@ import type { DefaultTreeAdapterTypes } from 'parse5';
  * @param tagName The tag name to search for (case-insensitive).
  * @returns Matched elements.
  */
-export default function getElementsByTagName(
+export function getElementsByTagName(
   html: string,
   tagName: string,
 ): (DefaultTreeAdapterTypes.Element | DefaultTreeAdapterTypes.Template)[] {
