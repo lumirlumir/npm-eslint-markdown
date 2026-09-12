@@ -3,11 +3,11 @@
 
 ## Rule Details
 
-This rule enforces a consistent heading style in Markdown files.
+This rule enforces a single, consistent style for headings in Markdown files. Consistent formatting makes it easier to understand a document, and mixing different heading styles can reduce readability.
 
-Markdown supports ATX headings, closed ATX headings, and Setext headings. While all three styles are valid, mixing them can reduce readability. This rule either follows the style of the first heading in the document or enforces a configured style.
+A heading can use ATX syntax (`## Heading`), closed ATX syntax (`## Heading ##`), or Setext syntax (an underline of `=` or `-` characters). By default, this rule enforces that all headings use the same style as the first one encountered.
 
-Setext headings can represent only level 1 and level 2 headings. The `setext-with-atx` and `setext-with-atx-closed` styles use Setext for levels 1 and 2 and an ATX style for levels 3 through 6.
+Setext headings support only levels 1 and 2. The `setext-with-atx` and `setext-with-atx-closed` styles combine Setext headings at levels 1 and 2 with ATX or closed ATX headings at levels 3 through 6.
 
 ## Examples
 
@@ -188,23 +188,23 @@ Level 2 heading
 
 > Type: `'consistent' | 'atx' | 'atx-closed' | 'setext' | 'setext-with-atx' | 'setext-with-atx-closed'` / Default: `'consistent'`
 
-When `style` is set to `'consistent'`, the rule enforces that all headings use the same style as the first heading in the document.
+When `style` is set to `'consistent'`, the rule enforces that all headings in the document use the same style as the first one encountered.
 
-The other values enforce the following styles:
+You can also specify a particular style by setting `style` to one of the following values:
 
-- `'atx'`: ATX headings at every level, such as `## Heading`.
-- `'atx-closed'`: closed ATX headings at every level, such as `## Heading ##`.
-- `'setext'`: Setext headings at every supported level. Level 3 through 6 headings are reported because Setext cannot represent them.
-- `'setext-with-atx'`: Setext headings at levels 1 and 2, and ATX headings at levels 3 through 6.
-- `'setext-with-atx-closed'`: Setext headings at levels 1 and 2, and closed ATX headings at levels 3 through 6.
+- `'atx'`: Require ATX headings at every level, such as `## Heading`.
+- `'atx-closed'`: Require closed ATX headings at every level, such as `## Heading ##`.
+- `'setext'`: Require Setext headings at levels 1 and 2. Headings at levels 3 through 6 are reported because Setext does not support those levels.
+- `'setext-with-atx'`: Require Setext headings at levels 1 and 2, and ATX headings at levels 3 through 6.
+- `'setext-with-atx-closed'`: Require Setext headings at levels 1 and 2, and closed ATX headings at levels 3 through 6.
 
 ## Fix
 
-This rule fixes headings by converting them to the configured style when the conversion preserves their Markdown structure.
+This rule fixes the headings by converting them to the configured style when possible.
 
 ## Suggestion
 
-This rule provides suggestions for converting ATX and closed ATX headings to Setext when possible. Review the suggested changes before applying them, as they may affect how the Markdown is interpreted.
+This rule provides suggestions for converting ATX and closed ATX headings to Setext headings when possible. Review each suggestion before applying it, as the conversion may change how the Markdown is interpreted.
 
 ## Prior Art
 
