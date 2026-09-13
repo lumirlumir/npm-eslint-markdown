@@ -22,12 +22,12 @@ type OrderedListStyle = (typeof ORDERED_LIST_STYLE)[number];
 type RuleOptions = [
   {
     /**
-     * When `style` is set to `'one_or_ordered'`, the rule allows either the `'one'` or `'ordered'` style based on the first two list item prefixes.
+     * When `style` is set to `'one-or-ordered'`, the rule allows either the `'one'` or `'ordered'` style based on the first two list item prefixes.
      *
      * You can also specify `'one'` to require every prefix to be `1`, `'ordered'` to require prefixes to increase sequentially, starting from `1` or from `0` when the list has two or more items, or `'zero'` to require every prefix to be `0`.
-     * @default 'one_or_ordered'
+     * @default 'one-or-ordered'
      */
-    style: 'one_or_ordered' | OrderedListStyle;
+    style: 'one-or-ordered' | OrderedListStyle;
   },
 ];
 type MessageIds = 'style';
@@ -64,7 +64,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: ['one_or_ordered', ...ORDERED_LIST_STYLE],
+            enum: ['one-or-ordered', ...ORDERED_LIST_STYLE],
           },
         },
         additionalProperties: false,
@@ -73,7 +73,7 @@ export default {
 
     defaultOptions: [
       {
-        style: 'one_or_ordered',
+        style: 'one-or-ordered',
       },
     ],
 
@@ -124,7 +124,7 @@ export default {
         }
 
         let listStyle: OrderedListStyle | null =
-          style === 'one_or_ordered' ? null : style;
+          style === 'one-or-ordered' ? null : style;
 
         if (listStyle === null) {
           listStyle = incrementing ? 'ordered' : 'one';
