@@ -36,6 +36,7 @@ export default function recommended(plugin: ESLint.Plugin) {
       'md/no-git-conflict-marker': 'error',
       'md/no-irregular-dash': 'error',
       'md/no-irregular-whitespace': 'error',
+      'md/no-multiple-atx-heading-space': 'error',
     },
   } as const satisfies Linter.Config;
 }
