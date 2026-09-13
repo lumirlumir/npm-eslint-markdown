@@ -5,9 +5,9 @@
 
 This rule disallows multiple consecutive spaces or tabs after the opening hash characters (`#`) of ATX headings.
 
-By default, the rule checks the whitespace after the opening hash characters. Set `checkClosedHeadings` to `true` to also check the whitespace before the closing hash characters in closed ATX headings.
+By default, the rule checks the whitespace after the opening hash characters. Set `checkClosedHeading` to `true` to also check the whitespace before the closing hash characters in closed ATX headings.
 
-This rule does not enforce missing spaces. Use [`markdown/no-missing-atx-heading-space`](https://github.com/eslint/markdown/blob/main/docs/rules/no-missing-atx-heading-space.md) to check missing spaces, and enable its `checkClosedHeadings` option to check closed ATX headings.
+This rule does not enforce missing spaces. Use [`markdown/no-missing-atx-heading-space`](https://github.com/eslint/markdown/blob/main/docs/rules/no-missing-atx-heading-space.md) to check missing spaces, and enable its `checkClosedHeading` option to check closed ATX headings.
 
 ## Examples
 
@@ -27,10 +27,10 @@ Examples of **incorrect** code for this rule:
 #  Closed ATX heading #
 ```
 
-#### With `{ checkClosedHeadings: true }` Option
+#### With `{ checkClosedHeading: true }` Option
 
 ```md eslint-check
-<!-- eslint md/no-multiple-atx-heading-space: ['error', { checkClosedHeadings: true }] -->
+<!-- eslint md/no-multiple-atx-heading-space: ['error', { checkClosedHeading: true }] -->
 
 # Closed ATX heading  #
 
@@ -58,10 +58,10 @@ Setext heading
 ---------------
 ```
 
-#### With `{ checkClosedHeadings: true }` Option
+#### With `{ checkClosedHeading: true }` Option
 
 ```md eslint-check
-<!-- eslint md/no-multiple-atx-heading-space: ['error', { checkClosedHeadings: true }] -->
+<!-- eslint md/no-multiple-atx-heading-space: ['error', { checkClosedHeading: true }] -->
 
 # Closed ATX heading #
 
@@ -75,21 +75,21 @@ Setext heading
 
 ```js
 'md/no-multiple-atx-heading-space': ['error', {
-  checkClosedHeadings: false,
+  checkClosedHeading: false,
 }]
 ```
 
-### `checkClosedHeadings`
+### `checkClosedHeading`
 
 > Type: `boolean` / Default: `false`
 
-When `checkClosedHeadings` is set to `true`, this rule also checks for multiple consecutive spaces or tabs before the closing hash characters in closed ATX headings.
+When `checkClosedHeading` is set to `true`, this rule also checks for multiple consecutive spaces or tabs before the closing hash characters in closed ATX headings.
 
 ## Fix
 
 This rule fixes multiple consecutive spaces or tabs by replacing them with a single space.
 
-For example, `#  Heading 1` is fixed to `# Heading 1`. With `checkClosedHeadings` enabled, `##  Heading 2  ##` is fixed to `## Heading 2 ##`.
+For example, `#  Heading 1` is fixed to `# Heading 1`. With `checkClosedHeading` enabled, `##  Heading 2  ##` is fixed to `## Heading 2 ##`.
 
 ## When Not To Use It
 
