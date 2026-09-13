@@ -26,7 +26,7 @@ type RuleOptions = [
      */
     skipCode: boolean | string[];
     /**
-     * `true` allows Git conflict markers in math blocks.
+     * `true` allows Git conflict markers in all math blocks.
      * @default true
      */
     skipMath: boolean;

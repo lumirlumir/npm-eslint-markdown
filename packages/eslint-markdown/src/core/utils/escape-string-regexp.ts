@@ -40,7 +40,7 @@
  * @returns An escaped string.
  * @example
  * ```js
- * import escapeStringRegexp from 'path/to/escape-string-regexp.js';
+ * import { escapeStringRegexp } from 'path/to/escape-string-regexp.js';
  *
  * const escapedString = escapeStringRegexp('How much $ for a 🦄?');
  * //=> 'How much \\$ for a 🦄\\?'
@@ -48,7 +48,7 @@
  * new RegExp(escapedString);
  * ```
  */
-export default function escapeStringRegexp(string: string): string {
+export function escapeStringRegexp(string: string): string {
   // Escape characters with special meaning either inside or outside character sets.
   // Use a simple backslash escape when it's always valid, and a `\xnn` escape
   // when the simpler form would be disallowed by Unicode patterns' stricter grammar.
