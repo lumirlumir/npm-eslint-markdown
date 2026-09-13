@@ -63,8 +63,8 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const markdown = require('@eslint/markdown');
-const md = require('eslint-markdown'); // [!code ++]
+const markdown = require('@eslint/markdown').default;
+const md = require('eslint-markdown').default; // [!code ++]
 
 module.exports = defineConfig([
   {
@@ -129,8 +129,8 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const markdown = require('@eslint/markdown');
-const md = require('eslint-markdown'); // [!code ++]
+const markdown = require('@eslint/markdown').default;
+const md = require('eslint-markdown').default; // [!code ++]
 
 module.exports = defineConfig([
   markdown.configs.recommended,
@@ -183,7 +183,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown'); // [!code ++]
+const md = require('eslint-markdown').default; // [!code ++]
 
 module.exports = defineConfig([
   {
@@ -233,7 +233,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown'); // [!code ++]
+const md = require('eslint-markdown').default; // [!code ++]
 
 module.exports = defineConfig([
   md.configs.recommended, // [!code ++]
@@ -314,7 +314,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   {
@@ -366,7 +366,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   md.configs.recommended,
@@ -429,7 +429,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   {
@@ -481,7 +481,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   md.configs.stylistic,
@@ -543,7 +543,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   {
@@ -604,7 +604,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   md.configs.base,
@@ -676,7 +676,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   {
@@ -717,7 +717,7 @@ export default defineConfig([
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
-const md = require('eslint-markdown');
+const md = require('eslint-markdown').default;
 
 module.exports = defineConfig([
   md.configs.all,
