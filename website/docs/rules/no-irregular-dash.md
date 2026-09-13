@@ -118,6 +118,24 @@ Examples of **incorrect** code for this rule:
 \u2011 - Non-Breaking Hyphen - <NBHY> `‑` <= Here
 ```
 
+#### With `{ skipMath: false }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipMath: false }] -->
+
+$$
+\u2212 - Minus Sign - <MINUS> − <= Here
+$$
+```
+
+#### With `{ skipInlineMath: false }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipInlineMath: false }] -->
+
+\u2212 - Minus Sign - <MINUS> $−$ <= Here
+```
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
@@ -188,6 +206,24 @@ Examples of **correct** code for this rule:
 \u2011 - Non-Breaking Hyphen - <NBHY> `‑` <= Here
 ```
 
+#### With `{ skipMath: true }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipMath: true }] -->
+
+$$
+\u2212 - Minus Sign - <MINUS> − <= Here
+$$
+```
+
+#### With `{ skipInlineMath: true }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { skipInlineMath: true }] -->
+
+\u2212 - Minus Sign - <MINUS> $−$ <= Here
+```
+
 ## Options
 
 ```js
@@ -196,6 +232,8 @@ Examples of **correct** code for this rule:
   override: {},
   skipCode: true,
   skipInlineCode: true,
+  skipMath: true,
+  skipInlineMath: true,
 }]
 ```
 
@@ -241,6 +279,38 @@ If a dash stands alone on a line, the fixed line can be parsed differently. For 
 > Type: `boolean` / Default: `true`
 
 `true` allows irregular dashes in all inline code.
+
+### `skipMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows irregular dashes in all math blocks.
+
+::: tip NOTE
+This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
+:::
+
+### `skipInlineMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows irregular dashes in all inline math.
+
+::: tip NOTE
+This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
+:::
+
+::: warning Behavior change
+With math parsing enabled, irregular dashes inside math blocks and inline math are skipped by default. Set both options to `false` to preserve the previous behavior:
+
+```js
+'md/no-irregular-dash': ['error', {
+  skipMath: false,
+  skipInlineMath: false,
+}]
+```
+
+:::
 
 ## Fix
 

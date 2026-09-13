@@ -42,6 +42,16 @@ type RuleOptions = [
      * @default true
      */
     skipInlineCode: boolean;
+    /**
+     * `true` allows irregular dashes in all math blocks.
+     * @default true
+     */
+    skipMath: boolean;
+    /**
+     * `true` allows irregular dashes in all inline math.
+     * @default true
+     */
+    skipInlineMath: boolean;
   },
 ];
 type MessageIds = 'noIrregularDash';
@@ -126,6 +136,12 @@ export default {
           skipInlineCode: {
             type: 'boolean',
           },
+          skipMath: {
+            type: 'boolean',
+          },
+          skipInlineMath: {
+            type: 'boolean',
+          },
         },
         additionalProperties: false,
       },
@@ -137,6 +153,8 @@ export default {
         override: {},
         skipCode: true,
         skipInlineCode: true,
+        skipMath: true,
+        skipInlineMath: true,
       },
     ],
 
@@ -151,7 +169,8 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ allow, override, skipCode, skipInlineCode }] = context.options;
+    const [{ allow, override, skipCode, skipInlineCode, skipMath, skipInlineMath }] =
+      context.options;
 
     const skipRanges = new SkipRanges();
 
@@ -170,6 +189,14 @@ export default {
 
       inlineCode(node) {
         if (skipInlineCode) skipRanges.push(sourceCode.getRange(node)); // Store range information of `InlineCode`.
+      },
+
+      math(node) {
+        if (skipMath) skipRanges.push(sourceCode.getRange(node)); // Store range information of `Math`.
+      },
+
+      inlineMath(node) {
+        if (skipInlineMath) skipRanges.push(sourceCode.getRange(node)); // Store range information of `InlineMath`.
       },
 
       'root:exit'() {
