@@ -20,10 +20,10 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * When `checkClosedHeadings` is set to `true`, this rule also checks for multiple consecutive spaces or tabs before the closing hash characters in closed ATX headings.
+     * When `checkClosedHeading` is set to `true`, this rule also checks for multiple consecutive spaces or tabs before the closing hash characters in closed ATX headings.
      * @default false
      */
-    checkClosedHeadings: boolean;
+    checkClosedHeading: boolean;
   },
 ];
 type MessageIds = 'noMultipleAtxHeadingSpace';
@@ -46,8 +46,8 @@ export default {
     docs: {
       description: 'Disallow multiple spaces after ATX heading markers',
       url: URL_RULE_DOCS('no-multiple-atx-heading-space'),
-      recommended: true,
-      stylistic: false,
+      recommended: false,
+      stylistic: true,
     },
 
     fixable: 'whitespace',
@@ -56,7 +56,7 @@ export default {
       {
         type: 'object',
         properties: {
-          checkClosedHeadings: {
+          checkClosedHeading: {
             type: 'boolean',
           },
         },
@@ -66,7 +66,7 @@ export default {
 
     defaultOptions: [
       {
-        checkClosedHeadings: false,
+        checkClosedHeading: false,
       },
     ],
 
@@ -82,7 +82,7 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ checkClosedHeadings }] = context.options;
+    const [{ checkClosedHeading }] = context.options;
 
     return {
       heading(node) {
@@ -110,7 +110,7 @@ export default {
           });
         }
 
-        if (!checkClosedHeadings || node.children.length === 0) return;
+        if (!checkClosedHeading || node.children.length === 0) return;
 
         const trailingSpacesMatch = trailingSpacesRegex.exec(text);
 
