@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import getCodeStyle from './get-code-style.js';
+import { getCodeStyle } from './get-code-style.js';
 
 // --------------------------------------------------------------------------------
 // Test

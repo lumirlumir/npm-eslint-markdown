@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import normalizeRegexPattern from './normalize-regex-pattern.js';
+import { normalizeRegexPattern } from './normalize-regex-pattern.js';
 
 // --------------------------------------------------------------------------------
 // Test

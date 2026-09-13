@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import isBlankLine from './is-blank-line.js';
+import { isBlankLine } from './is-blank-line.js';
 
 // --------------------------------------------------------------------------------
 // Test

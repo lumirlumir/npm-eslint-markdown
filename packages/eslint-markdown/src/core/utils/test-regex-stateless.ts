@@ -18,7 +18,7 @@ const statefulRegexFlagRegex = /[gy]/u;
  * @param text Text to test.
  * @returns Whether the regex matches the text.
  */
-export default function testRegexStateless(regex: RegExp, text: string) {
+export function testRegexStateless(regex: RegExp, text: string) {
   return statefulRegexFlagRegex.test(regex.flags)
     ? new RegExp(regex).test(text)
     : regex.test(text);

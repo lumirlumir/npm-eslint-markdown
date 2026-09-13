@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { assert, describe, it } from 'vitest';
-import testRegexStateless from './test-regex-stateless.js';
+import { testRegexStateless } from './test-regex-stateless.js';
 
 // --------------------------------------------------------------------------------
 // Test

@@ -29,7 +29,7 @@ export const CODE_STYLE = ['indent', 'fence-backtick', 'fence-tilde'] as const;
  * @param str Text starting at the beginning of a `Code` node.
  * @returns The code style.
  */
-export default function getCodeStyle(str: string): CodeStyle {
+export function getCodeStyle(str: string): CodeStyle {
   const firstChar = str[0];
 
   if (firstChar === backtickChar) {

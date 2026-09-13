@@ -21,7 +21,7 @@ const blockquoteChar = '>';
  * @param blockquoteDepth The depth of blockquotes. Default is `-1`.
  * @returns `true` if the line is blank. `false` otherwise.
  */
-export default function isBlankLine(str: string, blockquoteDepth = -1): boolean {
+export function isBlankLine(str: string, blockquoteDepth = -1): boolean {
   // `.length` is cached for performance.
   const strLength = str.length;
   let remainingBlockquotes = blockquoteDepth + 1;
