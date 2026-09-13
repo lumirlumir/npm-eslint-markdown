@@ -219,6 +219,10 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
+              text: 'eslint-lumir',
+              link: 'eslint-lumir',
+            },
+            {
               text: 'eslint-markdown',
               link: 'eslint-markdown',
             },
